@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=11">
+  <link rel="stylesheet" href="css/style.css?v=12">
 </head>
 <body>
   <div class="app">
@@ -27,13 +27,10 @@
       <a class="logo" href="#/home" aria-label="Scoop, accueil">
         <span class="logo-mark">S</span><span class="logo-text">scoop<span class="logo-dot">.</span></span>
       </a>
-      <a class="nav-link" data-nav="home" href="#/home"><span class="ni">🏠</span><span>Parcours</span></a>
-      <a class="nav-link" data-nav="feed" href="#/feed"><span class="ni">🎬</span><span>Le fil</span></a>
-      <a class="nav-link" data-nav="day" href="#/day"><span class="ni">📰</span><span>Le brief</span></a>
-      <a class="nav-link" data-nav="culture" href="#/culture"><span class="ni">🧠</span><span>Culture</span></a>
-      <a class="nav-link" data-nav="prepa" href="#/prepa"><span class="ni">🎯</span><span>Prépa</span></a>
-      <a class="nav-link" data-nav="review" href="#/review"><span class="ni">🔁</span><span>À revoir</span><span class="nav-badge" id="review-badge" hidden></span></a>
-      <a class="nav-link nav-desk" data-nav="archive" href="#/archive"><span class="ni">🗂️</span><span>Archives</span></a>
+      <a class="nav-link" data-nav="home" href="#/home"><span class="ni">🏠</span><span>Accueil</span></a>
+      <a class="nav-link" data-nav="feed" href="#/feed"><span class="ni">🎬</span><span>Fil</span></a>
+      <a class="nav-link" data-nav="day" href="#/day"><span class="ni">📰</span><span>Actu</span></a>
+      <a class="nav-link" data-nav="learn" href="#/learn"><span class="ni">🎓</span><span>Apprendre</span><span class="nav-badge" id="review-badge" hidden></span></a>
       <a class="nav-link" data-nav="profile" href="#/profile"><span class="ni">👤</span><span>Profil</span></a>
     </nav>
 
@@ -54,6 +51,7 @@
       <button class="icon-btn" id="lesson-close" aria-label="Quitter la leçon">✕</button>
       <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100"><i id="progress-fill"></i></div>
       <span class="combo" id="combo" hidden></span>
+      <button class="mode-toggle" id="mode-toggle" aria-pressed="false" aria-label="Basculer entre réponses à choix et réponses libres">☑️ <span>Choix</span></button>
     </header>
     <div class="lesson-body"><div id="ex" class="ex"></div></div>
     <footer class="checkbar" id="checkbar">
@@ -68,6 +66,7 @@
         </div>
         <div class="checkbar-actions">
           <button class="btn ghost" id="skip">Je ne sais pas</button>
+          <button class="btn ghost" id="override" hidden>✓ J'avais juste</button>
           <button class="btn primary" id="check" disabled>Valider</button>
         </div>
       </div>
@@ -103,9 +102,9 @@
     }, 6000);
   </script>
   <!-- ?v= : à incrémenter quand on modifie ces fichiers (évite le mélange ancienne/nouvelle version) -->
-  <script src="data/units.js?v=11"></script>
-  <script src="data/culture.js?v=11"></script>
-  <script src="data/prepa.js?v=11"></script>
-  <script src="js/app.js?v=11"></script>
+  <script src="data/units.js?v=12"></script>
+  <script src="data/culture.js?v=12"></script>
+  <script src="data/prepa.js?v=12"></script>
+  <script src="js/app.js?v=12"></script>
 </body>
 </html>

@@ -27,7 +27,7 @@
   const DEFAULT = {
     xp: 0, streak: 0, best: 0, last: null, daily: {}, lessons: {}, review: [], saved: [], prepa: {},
     stats: { answered: 0, correct: 0, lessons: 0 },
-    settings: { name: '', goal: 50, exam: '', sound: true, theme: 'auto' }
+    settings: { name: '', goal: 50, exam: '', sound: true, theme: 'auto', freeText: false }
   };
   const clone = o => JSON.parse(JSON.stringify(o));
   function merge(a, b) {
@@ -283,9 +283,49 @@
       html += `<div class="hero"><div class="kicker">Édition du jour</div><h1>Pas encore d'édition</h1><p class="muted">Lance la mise à jour quotidienne (voir README) pour générer la première édition. En attendant, le parcours concours est disponible ci-dessous.</p></div>`;
     }
 
-    html += `<h2 class="section-title">Parcours concours</h2><p class="section-sub">Institutions, médias, droit, écriture, langue : les fondamentaux des concours d'écoles de journalisme. Pour l'histoire, les arts et les idées, va dans l'onglet <a href="#/culture">Culture G</a>.</p>`;
-    html += unitsPath(UNITS);
+    // Tableau de bord « Continuer » : la suite logique, sans avoir à chercher dans les onglets
+    const nxt = nextLesson(UNITS), nxtC = nextLesson(CULTURE), rv = S.review.length;
+    let exam = '';
+    if (S.settings.exam && DATE_RE.test(S.settings.exam)) { const d = Math.round((parseYmd(S.settings.exam) - parseYmd(TODAY)) / 864e5); if (d >= 0) exam = `J-${d}`; }
+    html += `<h2 class="section-title">Continuer</h2>
+      <div class="dash">
+        ${nxt ? `<button class="dash-card" data-start="${nxt.key}" style="--u:${esc(nxt.unit.color)}"><span class="dash-ico">${esc(nxt.lesson.icon || nxt.unit.icon)}</span><span class="dash-txt"><small>Parcours concours · ${esc(nxt.unit.title)}</small><b>${esc(nxt.lesson.title)}</b></span><span class="dash-go">▶</span></button>` : ''}
+        ${nxtC ? `<button class="dash-card" data-start="${nxtC.key}" style="--u:${esc(nxtC.unit.color)}"><span class="dash-ico">${esc(nxtC.lesson.icon || nxtC.unit.icon)}</span><span class="dash-txt"><small>Culture G · ${esc(nxtC.unit.title)}</small><b>${esc(nxtC.lesson.title)}</b></span><span class="dash-go">▶</span></button>` : ''}
+        ${rv ? `<button class="dash-card" data-start="review" style="--u:#3A86FF"><span class="dash-ico">🔁</span><span class="dash-txt"><small>À revoir</small><b>${rv} question${rv > 1 ? 's' : ''} ratée${rv > 1 ? 's' : ''}</b></span><span class="dash-go">▶</span></button>` : ''}
+      </div>
+      <div class="dash-mini">
+        <button class="dash-chip" data-start="cgmix">⚡ Quiz éclair</button>
+        <button class="dash-chip" data-start="oral">🎤 Simulateur d'oral</button>
+        <a class="dash-chip" href="#/learn/prepa">🎯 Prépa${exam ? ` · ${exam}` : ''}</a>
+        <a class="dash-chip" href="#/learn">🎓 Tout le parcours</a>
+      </div>`;
     return html;
+  }
+
+  // Prochaine leçon à faire dans une liste d'unités (la première non terminée et débloquée)
+  function nextLesson(units) {
+    for (const u of units) for (let i = 0; i < u.lessons.length; i++) {
+      const key = `unit:${u.id}:${i}`;
+      if (!lessonState(key) && (i === 0 || lessonState(`unit:${u.id}:${i - 1}`))) return { key, unit: u, lesson: u.lessons[i] };
+    }
+    return null;
+  }
+
+  // ---------- Onglet « Apprendre » : Concours, Culture G, Prépa, À revoir ----------
+  function viewLearn(sub, arg) {
+    const rv = S.review.length;
+    const tabs = [['concours', '🧭', 'Concours'], ['culture', '🧠', 'Culture G'], ['prepa', '🎯', 'Prépa'], ['revoir', '🔁', `À revoir${rv ? ` · ${rv}` : ''}`]];
+    sub = tabs.some(t => t[0] === sub) ? sub : 'concours';
+    try { localStorage.setItem('scoop.learnTab', sub); } catch (e) { /* ignore */ }
+    let body;
+    if (sub === 'culture') body = viewCulture();
+    else if (sub === 'prepa') body = viewPrepa(arg);
+    else if (sub === 'revoir') body = viewReview();
+    else body = `<div class="kicker">Parcours concours</div>
+      <h1 style="font-size:34px;margin:8px 0 6px">Les fondamentaux</h1>
+      <p class="muted">Institutions, Europe et monde, médias, déontologie, écriture, langue, économie : ce que les concours attendent de toi. Les leçons se débloquent dans l'ordre.</p>
+      ${unitsPath(UNITS)}`;
+    return `<nav class="l-tabs" aria-label="Rubriques d'apprentissage">${tabs.map(([id, ico, label]) => `<a class="l-tab ${id === sub ? 'on' : ''}" href="#/learn/${id}">${ico} ${esc(label)}</a>`).join('')}</nav>${body}`;
   }
 
   // Parcours d'unités en chemin (réutilisé par le parcours concours et la Culture G)
@@ -342,7 +382,7 @@
     let html = `<div class="kicker">Prépa concours</div>
       <h1 style="font-size:34px;margin:8px 0 6px">Objectif admission</h1>
       <p class="muted">Les écoles, les épreuves, l'oral et le métier : tout ce qu'il faut pour maximiser tes chances. Infos vérifiées le ${esc(PREPA.updated)}, avec les sources à chaque bloc.</p>
-      <nav class="p-tabs" aria-label="Rubriques de la prépa">${PREPA_TABS.map(([id, ico, label]) => `<a class="p-tab ${id === tab ? 'on' : ''}" href="#/prepa/${id}">${ico} ${label}</a>`).join('')}</nav>`;
+      <nav class="p-tabs" aria-label="Rubriques de la prépa">${PREPA_TABS.map(([id, ico, label]) => `<a class="p-tab ${id === tab ? 'on' : ''}" href="#/learn/prepa/${id}">${ico} ${label}</a>`).join('')}</nav>`;
 
     if (tab === 'plan') {
       let exam = '';
@@ -356,8 +396,8 @@
         </div>
         <div class="p-quick">
           <button class="p-qbtn" data-start="oral"><span>🎤</span><b>Simulateur d'oral</b><small>5 questions de jury</small></button>
-          <a class="p-qbtn" href="#/prepa/ecoles"><span>🏫</span><b>Les 16 écoles</b><small>dates, frais, épreuves</small></a>
-          <a class="p-qbtn" href="#/prepa/quiz"><span>🧠</span><b>Quiz prépa</b><small>écoles, métier, méthode</small></a>
+          <a class="p-qbtn" href="#/learn/prepa/ecoles"><span>🏫</span><b>Les 16 écoles</b><small>dates, frais, épreuves</small></a>
+          <a class="p-qbtn" href="#/learn/prepa/quiz"><span>🧠</span><b>Quiz prépa</b><small>écoles, métier, méthode</small></a>
         </div>
         <h2 class="section-title" style="font-size:22px">Mon plan de prépa</h2>
         <p class="section-sub">Coche au fur et à mesure : c'est enregistré sur ton appareil.</p>
@@ -430,7 +470,7 @@
       <div class="kicker">Édition du ${esc(frDate(date, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }))}</div>
       <h1>${esc(day.title)}</h1>
       ${day.intro ? `<p class="lede">${rich(day.intro)}</p>` : ''}
-      <p style="margin-top:12px"><a class="btn small ghost" href="#/archive">🗂️ Toutes les éditions</a></p>
+      <p style="margin-top:12px"><button class="btn small ghost" data-scroll="archives">🗂️ Éditions précédentes et infos gardées ↓</button></p>
       ${wordCard(day.word)}
       <h2 class="section-title">Les ${day.stories.length} infos à connaître</h2>
       <div class="stories">${day.stories.map(s => `
@@ -445,7 +485,8 @@
       ${day.memo && day.memo.length ? `<div class="card memo"><div class="kicker">À retenir</div><ul>${day.memo.map(m => `<li>${rich(m)}</li>`).join('')}</ul></div>` : ''}
       <h2 class="section-title">Teste-toi</h2>
       ${lessonCards(date, day)}
-    </article>`;
+    </article>
+    <section id="archives" class="actu-archives">${viewArchive()}</section>`;
   }
 
   function viewReview() {
@@ -490,7 +531,7 @@
     return `<div class="kicker">Profil</div>
       <h1 style="font-size:34px;margin:8px 0 4px">${esc(S.settings.name || 'Futur·e journaliste')}</h1>
       <p class="muted">${esc(lv.name)} · niveau ${lv.n} · ${S.xp} XP</p>
-      <p style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn small ghost" href="#/archive">🗂️ Archives et infos gardées</a><a class="btn small ghost" href="#/prepa">🎯 Ma prépa</a></p>
+      <p style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap"><a class="btn small ghost" href="#/archive">🗂️ Archives et infos gardées</a><a class="btn small ghost" href="#/learn/prepa">🎯 Ma prépa</a></p>
 
       <div class="grid2" style="margin-top:20px">
         <div class="card"><div class="big-num">🔥 ${streakNow()}</div><div class="muted" style="font-size:13px">jours d'affilée (record : ${S.best})</div></div>
@@ -512,6 +553,7 @@
         <div class="form-row"><label for="f-theme">Thème</label>
           <select id="f-theme">${[['auto', 'Automatique'], ['light', 'Clair'], ['dark', 'Sombre']].map(([v, l]) => `<option value="${v}" ${S.settings.theme === v ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
         <label class="toggle"><span style="font-weight:700;font-size:14px">Effets sonores</span><input id="f-sound" type="checkbox" ${S.settings.sound ? 'checked' : ''}></label>
+        <label class="toggle" style="margin-top:14px"><span><span style="font-weight:700;font-size:14px">⌨️ Mode réponse libre</span><br><small class="muted">Tu tapes la réponse au lieu de choisir parmi des propositions. Aussi activable pendant un quiz (bouton en haut).</small></span><input id="f-free" type="checkbox" ${S.settings.freeText ? 'checked' : ''}></label>
       </div>
 
       <h2 class="section-title" style="font-size:22px">Ma progression</h2>
@@ -531,6 +573,7 @@
     $('#f-goal').onchange = e => { S.settings.goal = +e.target.value; upd(); };
     $('#f-theme').onchange = e => { S.settings.theme = e.target.value; applyTheme(); upd(); };
     $('#f-sound').onchange = e => { S.settings.sound = e.target.checked; upd(); };
+    $('#f-free').onchange = e => { S.settings.freeText = e.target.checked; upd(); };
     $('#b-export').onclick = () => {
       const a = document.createElement('a');
       a.href = URL.createObjectURL(new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' }));
@@ -547,9 +590,15 @@
   // ---------- Routeur ----------
   async function route() {
     const parts = (location.hash || '#/home').slice(2).split('/');
-    const view = parts[0] || 'home', arg = parts[1];
+    let view = parts[0] || 'home', arg = parts[1], arg2 = parts[2];
+    // anciens liens (avant la navigation à 5 onglets) → onglet « Apprendre »
+    if (view === 'culture') { view = 'learn'; arg = 'culture'; }
+    else if (view === 'prepa') { view = 'learn'; arg2 = arg; arg = 'prepa'; }
+    else if (view === 'review') { view = 'learn'; arg = 'revoir'; }
+    if (view === 'learn' && !arg) { try { arg = localStorage.getItem('scoop.learnTab') || 'concours'; } catch (e) { arg = 'concours'; } }
     if (view !== 'feed' && F) closeFeed();
-    $$('.nav-link').forEach(a => a.classList.toggle('active', a.dataset.nav === view));
+    const navKey = view === 'archive' ? 'day' : view;
+    $$('.nav-link').forEach(a => a.classList.toggle('active', a.dataset.nav === navKey));
     if (view === 'feed') {
       // le fil s'ouvre par-dessus l'accueil ; le bouton « retour » du téléphone le referme
       if (!$('#view').innerHTML.trim() || !$('.hero, .unit', $('#view'))) { $('#view').innerHTML = viewHome(); window.__scoopReady = true; }
@@ -561,9 +610,7 @@
     let html;
     switch (view) {
       case 'day': html = await viewDay(arg); break;
-      case 'review': html = viewReview(); break;
-      case 'culture': html = viewCulture(); break;
-      case 'prepa': html = viewPrepa(arg); break;
+      case 'learn': html = viewLearn(arg, arg2); break;
       case 'archive': html = viewArchive(); break;
       case 'profile': html = viewProfile(); break;
       default: html = viewHome();
@@ -594,6 +641,8 @@
     if (s && !s.disabled) { e.preventDefault(); startLesson(s.dataset.start); return; }
     const g = e.target.closest('[data-guide]');
     if (g) { openGuide(g.dataset.guide); return; }
+    const sc = e.target.closest('[data-scroll]');
+    if (sc) { const t = document.getElementById(sc.dataset.scroll); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
     const pc = e.target.closest('[data-pcheck]');
     if (pc) {
       S.prepa = S.prepa || {}; S.prepa.checks = S.prepa.checks || {};
@@ -622,6 +671,9 @@
     L = { cfg, queue: items, pos: 0, total: items.length, resolved: 0, firstOk: 0, xp: 0, combo: 0, maxCombo: 0, t0: Date.now(), state: 'answer', check: null };
     document.body.classList.add('in-lesson');
     $('#lesson').hidden = false;
+    refreshModeToggle();
+    // le bouton Texte/Choix n'a de sens que s'il y a des QCM dans la leçon
+    $('#mode-toggle').hidden = !cfg.exercises.some(ex => ex.t === 'qcm');
     $('#lesson').style.setProperty('--u', cfg.color);
     if (document.activeElement) document.activeElement.blur();
     showEx();
@@ -658,6 +710,7 @@
     else if (mode === 'ko') { btn.textContent = 'Continuer'; btn.disabled = false; btn.className = 'btn danger'; }
     else if (mode === 'info') { btn.textContent = 'Continuer'; btn.disabled = false; btn.className = 'btn green'; }
     else if (mode === 'end') { btn.textContent = 'Continuer'; btn.disabled = false; btn.className = 'btn primary'; }
+    $('#override').hidden = true; L && (L.overrideCtx = null);
   }
 
   function showEx() {
@@ -678,7 +731,7 @@
     $('.lesson-body').scrollTop = 0;
   }
 
-  function grade(it, ok, sol) {
+  function grade(it, ok, sol, free) {
     S.stats.answered++;
     const expl = it.ex.x ? rich(it.ex.x) : '';
     if (ok) {
@@ -701,10 +754,45 @@
       } else L.resolved++;
       sfx.ko();
       setBar('ko', 'Pas tout à fait…', sol ? rich(sol) : '', expl, '✕');
+      // réponse libre jugée fausse : tu peux la compter juste si c'était la bonne, mal formulée
+      if (free) { L.overrideCtx = { it }; $('#override').hidden = false; }
     }
     L.state = 'feedback';
     $('#ex').classList.add('locked');
     updateProgress();
+  }
+
+  // « J'avais juste » : annule l'échec d'une réponse libre (2e chance retirée, sortie de « À revoir »)
+  function overrideAnswer() {
+    const c = L && L.overrideCtx; if (!c || L.state !== 'feedback') return;
+    const it = c.it;
+    if (!it.retry) {
+      const qi = L.queue.findIndex((q, i) => i > L.pos && q.id === it.id && q.retry);
+      if (qi > -1) L.queue.splice(qi, 1);
+      L.firstOk++; L.resolved++;
+    }
+    S.review = S.review.filter(r => r.id !== it.id);
+    S.stats.correct++;
+    L.combo++; L.maxCombo = Math.max(L.maxCombo, L.combo);
+    L.xp += it.retry ? 5 : 10;
+    sfx.ok();
+    setBar('ok', 'Compté juste 👍', '', it.ex.x ? rich(it.ex.x) : '', '✓');
+    L.state = 'feedback';
+    updateProgress(); save();
+  }
+
+  // Bascule « réponse libre » ↔ « choix », à tout moment (s'applique tout de suite à la question en cours)
+  function toggleFreeMode() {
+    S.settings.freeText = !S.settings.freeText; save();
+    refreshModeToggle();
+    if (L && L.state === 'answer' && L.queue[L.pos] && L.queue[L.pos].ex.t === 'qcm') showEx();
+  }
+  function refreshModeToggle() {
+    const b = $('#mode-toggle'); if (!b) return;
+    const on = !!S.settings.freeText;
+    b.setAttribute('aria-pressed', on);
+    b.innerHTML = on ? '⌨️ <span>Texte</span>' : '☑️ <span>Choix</span>';
+    b.title = on ? 'Mode réponse libre activé : touche pour revenir aux choix' : 'Mode choix : touche pour répondre en tapant';
   }
 
   function onCheck() {
@@ -719,7 +807,7 @@
         $('#fb-icon').style.background = 'var(--card)';
         return;
       }
-      grade(it, r.ok, r.sol);
+      grade(it, r.ok, r.sol, r.free);
     } else if (L.state === 'self') {
       const n = L.self.count(), tot = L.self.total;
       S.stats.answered++;
@@ -792,6 +880,8 @@
   }
 
   $('#check').addEventListener('click', onCheck);
+  $('#override').addEventListener('click', overrideAnswer);
+  $('#mode-toggle').addEventListener('click', toggleFreeMode);
   $('#skip').addEventListener('click', onSkip);
   $('#lesson-close').addEventListener('click', () => closeLesson(false));
   document.addEventListener('keydown', e => {
@@ -844,8 +934,56 @@
     };
   }
 
+  // ---------- Mode réponse libre : correction tolérante ----------
+  function lev(a, b) {
+    if (a === b) return 0; if (!a.length) return b.length; if (!b.length) return a.length;
+    let prev = Array.from({ length: b.length + 1 }, (_, j) => j);
+    for (let i = 1; i <= a.length; i++) {
+      const cur = [i];
+      for (let j = 1; j <= b.length; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      prev = cur;
+    }
+    return prev[b.length];
+  }
+  const simil = (a, b) => 1 - lev(a, b) / Math.max(a.length, b.length, 1);
+  const FREE_STOP = new Set('le la les un une des du de au aux et ou en dans sur pour par avec sans sous son sa ses leur leurs qui que dont est sont plus pas'.split(' '));
+  function answerOk(user, expected) {
+    const u = norm(user), x = norm(expected);
+    if (!u) return false;
+    if (u === x) return true;
+    // les nombres (dates, chiffres) doivent être exacts
+    const dx = x.match(/\d+/g) || [], du = u.match(/\d+/g) || [];
+    if (dx.length && !dx.every(d => du.includes(d))) return false;
+    if (simil(u, x) >= 0.8) return true;                       // faute de frappe sur l'ensemble
+    const keyX = x.split(' ').filter(w => (w.length >= 4 || /\d/.test(w)) && !FREE_STOP.has(w));
+    const wordsU = u.split(' ');
+    const hit = w => wordsU.some(v => v === w || (w.length >= 5 && v.length >= 4 && simil(v, w) >= 0.75));
+    const hits = keyX.filter(hit);
+    if (keyX.length && hits.length / keyX.length >= 0.6) return true; // l'essentiel des mots-clés
+    // nom propre : le nom de famille suffit (« Lecornu » pour « Sébastien Lecornu »)
+    const words = expected.trim().split(/\s+/);
+    if (words.length >= 2 && words.length <= 3 && words.every(w => /^[A-ZÀ-Ý]/.test(w))) return hit(norm(words[words.length - 1]));
+    return false;
+  }
+  function qcmFree(ex, el, ready) {
+    const expected = ex.c[ex.a];
+    el.innerHTML = `<div class="ex-type">⌨️ Réponse libre</div><h2 class="ex-q">${rich(ex.q)}</h2>
+      <input class="text-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tape ta réponse…" aria-label="Ta réponse">
+      <p class="hint">💡 Pas besoin du mot pour mot : accents, majuscules et petites fautes sont tolérés. Pour un nom, le nom de famille suffit.</p>`;
+    const inp = $('input', el);
+    inp.addEventListener('input', () => ready(inp.value.trim().length > 0));
+    setTimeout(() => inp.focus(), 60);
+    return () => {
+      const v = inp.value.trim(); if (!v) return null;
+      const ok = answerOk(v, expected);
+      inp.classList.add(ok ? 'right' : 'wrong'); inp.disabled = true;
+      if (ok && norm(v) !== norm(expected)) el.insertAdjacentHTML('beforeend', `<p class="hint">Réponse complète : <b>${rich(expected)}</b></p>`);
+      return { ok, sol: ok ? '' : `Réponse attendue : ${expected}`, free: true };
+    };
+  }
+
   const RENDER = {
-    qcm: (ex, el, ready) => qcmCore(ex, el, ready),
+    qcm: (ex, el, ready) => S.settings.freeText ? qcmFree(ex, el, ready) : qcmCore(ex, el, ready),
 
     vf: (ex, el, ready) => qcmCore({ q: ex.q, c: ['Vrai', 'Faux'], a: ex.a ? 0 : 1 }, el, ready, { noShuffle: true, statement: true, two: true, label: 'Vrai ou faux' }),
 
@@ -1082,16 +1220,26 @@
       return `<section class="fcard f-video ${st ? 'f-merged' : ''}" data-k="${k}" data-vid="${esc(v.id)}" ${st ? `style="--c:${esc(it.color)}"` : ''}>
         <div class="f-player"><img src="${ytThumb(v.id)}" alt="" loading="lazy"><div class="f-play" aria-hidden="true">▶</div>
           <!-- Calque tactile : garde le swipe vertical actif (sur iPhone, le lecteur YouTube « avale » les gestes) -->
-          <button class="f-tap" data-tap aria-label="Mettre en pause ou relancer la vidéo"><span class="f-tapicon" aria-hidden="true"></span></button>
+          <button class="f-tap" data-tap aria-label="Mettre en pause ou relancer la vidéo (double-tap à gauche ou à droite : reculer ou avancer de 5 secondes)"><span class="f-tapicon" aria-hidden="true"></span></button>
+          <span class="f-ripple" aria-hidden="true"></span>
         </div>
         <div class="f-meta">
+          <!-- Commandes du lecteur : lecture, barre de progression à faire glisser, son, commandes YouTube -->
+          <div class="f-ctrl">
+            <button class="f-pp" data-pp aria-label="Lecture ou pause">⏸</button>
+            <span class="f-time" data-cur>0:00</span>
+            <input class="f-seek" type="range" min="0" max="60" step="0.1" value="0" data-seek aria-label="Se déplacer dans la vidéo">
+            <span class="f-time" data-dur>–:––</span>
+            <button class="f-sound" data-sound aria-label="Activer ou couper le son">${F && F.sound ? '🔊' : '🔇'}</button>
+            <button class="f-native" data-native aria-pressed="false" aria-label="Utiliser les commandes du lecteur YouTube">🎛️</button>
+          </div>
           <div class="f-meta-top"><span class="f-chan">▶ ${esc(v.source)}</span>
-            <span class="f-tools"><button class="f-sound" data-sound aria-label="Activer ou couper le son">${F && F.sound ? '🔊 Son' : '🔇 Son'}</button><a class="f-yt" href="https://www.youtube.com/shorts/${esc(v.id)}" target="_blank" rel="noopener">YouTube ↗</a></span></div>
+            <span class="f-tools"><a class="f-yt" href="https://www.youtube.com/shorts/${esc(v.id)}" target="_blank" rel="noopener">YouTube ↗</a></span></div>
           ${st ? `<h3 class="f-headline">${esc(st.title)}</h3>
             <div class="f-row"><button class="f-ess" data-sheet>📰 L'essentiel ${srcList.length >= 2 ? `· ✓ ${srcList.length} sources` : ''}</button>
             <button class="f-mini ${sv ? 'on' : ''}" data-save="${it.story}" aria-pressed="${sv}" aria-label="Garder cette info"><span>🔖</span><small>${sv ? 'Gardée' : 'Garder'}</small></button></div>`
           : `<h3>${esc(v.title)}</h3>`}
-          <div class="f-swipe">Touche la vidéo : pause · swipe ↑ pour continuer</div>
+          <div class="f-swipe">Touche : pause · double-tap ◀ ▶ : ±5 s · swipe ↑ : suite</div>
         </div>
         ${st ? `<div class="f-sheet" hidden>
           <div class="f-sheet-head"><span class="f-tag">${esc(st.tag)}</span><button class="f-sheet-x" data-sheet aria-label="Fermer">✕</button></div>
@@ -1191,23 +1339,55 @@
       card.dataset.state = s;
       if (+s === 1) card.classList.remove('paused', 'needs-tap', 'sound-loading');   // en lecture
       if (+s === 2) card.classList.add('paused');                  // en pause
+      const pp = $('[data-pp]', card); if (pp) pp.textContent = +s === 1 ? '⏸' : '▶';
     };
     if (d.event === 'onStateChange') setState(info);
     if ((d.event === 'infoDelivery' || d.event === 'initialDelivery') && info && typeof info === 'object') {
       if ('playerState' in info) setState(info.playerState);
-      if ('currentTime' in info) card.dataset.time = info.currentTime;
+      if ('duration' in info && info.duration > 0) card.dataset.dur = info.duration;
+      if ('currentTime' in info) { card.dataset.time = info.currentTime; updateSeek(card); }
       if ('muted' in info) {
         card.dataset.muted = info.muted ? '1' : '0';
         // son changé depuis le bouton haut-parleur de YouTube : notre bouton 🔊 suit
         const active = card.dataset.k === String(F.active), soundNow = !info.muted;
         if (active && card.dataset.state === '1' && soundNow !== F.sound) {
           F.sound = soundNow; feedSoundPref = soundNow;
-          $$('[data-sound]', $('#f-track')).forEach(b => { b.textContent = soundNow ? '🔊 Son' : '🔇 Son'; });
+          $$('[data-sound]', $('#f-track')).forEach(b => { b.textContent = soundNow ? '🔊' : '🔇'; });
           if (soundNow) card.classList.remove('needs-tap', 'sound-blocked');
         }
       }
     }
   });
+
+  // ---------- Commandes du lecteur ----------
+  const mmss = s => { s = Math.max(0, Math.floor(+s || 0)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+  // met à jour la barre de progression (sauf pendant que tu la fais glisser)
+  function updateSeek(card) {
+    const seek = $('[data-seek]', card); if (!seek || card._dragging) return;
+    const dur = +card.dataset.dur || 0, cur = +card.dataset.time || 0;
+    if (dur > 0) { seek.max = dur; $('[data-dur]', card).textContent = mmss(dur); }
+    seek.value = cur;
+    $('[data-cur]', card).textContent = mmss(cur);
+    seek.style.setProperty('--p', `${dur > 0 ? Math.min(100, cur / dur * 100) : 0}%`);
+  }
+  function seekTo(card, sec) {
+    const dur = +card.dataset.dur || Infinity;
+    sec = Math.max(0, Math.min(sec, dur - 0.5));
+    ytCmd(card, 'seekTo', [sec, true]);
+    card.dataset.time = sec; card._dragging = false; updateSeek(card);
+  }
+  function togglePlay(card) {
+    if (!card || !card.classList.contains('playing')) return;
+    const isPlaying = card.dataset.state ? card.dataset.state === '1' : !card.classList.contains('paused');
+    card.classList.toggle('paused', isPlaying);
+    const pp = $('[data-pp]', card); if (pp) pp.textContent = isPlaying ? '▶' : '⏸';
+    ytCmd(card, isPlaying ? 'pauseVideo' : 'playVideo');
+  }
+  function ripple(card, txt, side) {
+    const r = $('.f-ripple', card); if (!r) return;
+    r.textContent = txt; r.className = `f-ripple show ${side < 0 ? 'left' : 'right'}`;
+    clearTimeout(r._t); r._t = setTimeout(() => { r.className = 'f-ripple'; }, 650);
+  }
 
   // Active le son sans mettre la vidéo en pause
   function soundOn(card) {
@@ -1334,20 +1514,48 @@
   }
 
   $('#f-close').addEventListener('click', () => { location.hash = '#/home'; });
+  // barre de progression : on suit le doigt, puis on saute à la position au relâchement
+  $('#f-track').addEventListener('input', e => {
+    const s = e.target.closest('[data-seek]'); if (!s) return;
+    const card = s.closest('.f-video'); card._dragging = true;
+    $('[data-cur]', card).textContent = mmss(s.value);
+    s.style.setProperty('--p', `${+s.max > 0 ? s.value / s.max * 100 : 0}%`);
+  });
+  $('#f-track').addEventListener('change', e => {
+    const s = e.target.closest('[data-seek]'); if (!s) return;
+    seekTo(s.closest('.f-video'), +s.value);
+  });
   $('#f-track').addEventListener('click', e => {
     const tap = e.target.closest('[data-tap]');
-    if (tap) { // pause / lecture
+    if (tap) { // toucher : pause / lecture · double-tap sur un côté : -5 s / +5 s
       const card = tap.closest('.f-video'); if (!card || !card.classList.contains('playing')) return;
-      // on se fie à l'état réel du lecteur quand on le connaît
-      const isPlaying = card.dataset.state ? card.dataset.state === '1' : !card.classList.contains('paused');
-      card.classList.toggle('paused', isPlaying);
-      ytCmd(card, isPlaying ? 'pauseVideo' : 'playVideo');
+      const rect = tap.getBoundingClientRect(), x = e.clientX - rect.left, now = Date.now();
+      const side = x < rect.width / 3 ? -1 : x > rect.width * 2 / 3 ? 1 : 0;
+      const last = F.lastTap;
+      if (side && last && last.k === card.dataset.k && last.side === side && now - last.t < 320) {
+        clearTimeout(F.tapTimer); F.lastTap = null;
+        seekTo(card, (+card.dataset.time || 0) + side * 5);
+        ripple(card, side < 0 ? '⏪ 5 s' : '5 s ⏩', side);
+        return;
+      }
+      F.lastTap = { t: now, side, k: card.dataset.k };
+      clearTimeout(F.tapTimer);
+      // sur les côtés, on attend un éventuel 2e toucher avant de mettre en pause
+      F.tapTimer = setTimeout(() => togglePlay(card), side ? 300 : 0);
+      return;
+    }
+    const pp = e.target.closest('[data-pp]');
+    if (pp) { togglePlay(pp.closest('.f-video')); return; }
+    const nat = e.target.closest('[data-native]');
+    if (nat) { // libère le lecteur YouTube : toutes ses commandes deviennent touchables
+      const card = nat.closest('.f-video'), on = !card.classList.contains('native');
+      card.classList.toggle('native', on); nat.setAttribute('aria-pressed', on);
       return;
     }
     const snd = e.target.closest('[data-sound]');
     if (snd) { // son activé / coupé, mémorisé pour les vidéos suivantes
       F.sound = !F.sound; feedSoundPref = F.sound;
-      $$('[data-sound]', $('#f-track')).forEach(b => { b.textContent = F.sound ? '🔊 Son' : '🔇 Son'; });
+      $$('[data-sound]', $('#f-track')).forEach(b => { b.textContent = F.sound ? '🔊' : '🔇'; });
       const card = snd.closest('.f-video');
       if (card) card.classList.remove('sound-blocked');
       if (F.sound) soundOn(card);

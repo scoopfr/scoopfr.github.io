@@ -428,6 +428,35 @@ p { margin: 0; }
   .fcard { border-left: 1px solid #1d1d22; border-right: 1px solid #1d1d22; }
 }
 
+/* ---------- Bascule « Texte / Choix » dans une leçon ---------- */
+.mode-toggle { flex: none; border: 2px solid var(--line); border-radius: 999px; padding: 6px 11px; background: var(--card); color: var(--ink); font: 800 13px var(--sans); cursor: pointer; white-space: nowrap; }
+.mode-toggle[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.checkbar.ko #override { display: inline-flex; }
+#override[hidden] { display: none !important; }
+
+/* ---------- Onglet Apprendre (sous-onglets) ---------- */
+.l-tabs { position: sticky; top: 0; z-index: 5; display: flex; gap: 6px; overflow-x: auto; margin: -6px -4px 18px; padding: 8px 4px; background: var(--paper); scrollbar-width: none; }
+.l-tabs::-webkit-scrollbar { display: none; }
+.l-tab { flex: none; padding: 9px 14px; border-radius: 999px; border: 2px solid var(--line); background: var(--card); text-decoration: none; font-weight: 800; font-size: 14px; white-space: nowrap; }
+.l-tab.on { background: var(--red); border-color: var(--red); color: #fff; }
+@media (max-width: 1180px) { .l-tabs { top: 57px; } }
+.is-standalone .l-tabs { top: calc(57px + env(safe-area-inset-top)); }
+@media (min-width: 1181px) { .l-tabs { top: 0; } }
+
+/* ---------- Accueil : tableau de bord « Continuer » ---------- */
+.dash { display: grid; gap: 10px; }
+.dash-card { display: flex; align-items: center; gap: 14px; width: 100%; padding: 12px 14px; border-radius: 16px; border: 2px solid var(--line); border-left: 6px solid var(--u, var(--red)); border-bottom-width: 4px; background: var(--card); cursor: pointer; text-align: left; font: inherit; color: inherit; }
+.dash-card:hover { border-color: var(--line-2); border-left-color: var(--u, var(--red)); }
+.dash-ico { font-size: 26px; flex: none; }
+.dash-txt { flex: 1; min-width: 0; display: grid; }
+.dash-txt small { font-size: 12px; color: var(--muted); font-weight: 700; }
+.dash-txt b { font-size: 16px; }
+.dash-go { width: 36px; height: 36px; flex: none; border-radius: 50%; display: grid; place-items: center; background: var(--u, var(--red)); color: #fff; font-size: 14px; }
+.dash-mini { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.dash-chip { padding: 9px 13px; border-radius: 999px; border: 2px solid var(--line); background: var(--card); font: 700 14px var(--sans); color: inherit; text-decoration: none; cursor: pointer; }
+.dash-chip:hover { border-color: var(--line-2); }
+.actu-archives { margin-top: 44px; padding-top: 24px; border-top: 2px dashed var(--line-2); }
+
 /* ---------- Culture G ---------- */
 .cg-quick { display: flex; align-items: center; gap: 14px; width: 100%; margin: 20px 0 6px; padding: 14px 16px; border-radius: 18px; border: 0; cursor: pointer; text-align: left; color: #fff; font: inherit; background: linear-gradient(120deg, #9D4EDD, #4361EE); box-shadow: 0 5px 0 #5a2d8a; transition: transform .08s; }
 .cg-quick:hover { transform: translateY(-2px); }
@@ -553,6 +582,24 @@ p { margin: 0; }
 .f-video.needs-tap .f-player::after { content: "🔊 Touche le haut-parleur (en haut de la vidéo) ou ▶ pour avoir le son"; top: auto; bottom: 10px; }
 .f-video.sound-blocked:not(.needs-tap) .f-player::after { content: "Son bloqué par ton navigateur : touche 🔊 Son"; }
 .f-sound { border: 0; border-radius: 999px; padding: 5px 10px; background: rgba(255,255,255,.14); color: #fff; font: 700 13px var(--sans); cursor: pointer; }
+
+/* ---------- Commandes du lecteur vidéo ---------- */
+.f-ctrl { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.f-ctrl button { flex: none; border: 0; border-radius: 10px; width: 36px; height: 34px; background: rgba(255,255,255,.14); color: #fff; font-size: 16px; cursor: pointer; display: grid; place-items: center; padding: 0; }
+.f-ctrl button[aria-pressed="true"] { background: var(--yellow); color: #1B1B1F; }
+.f-time { flex: none; font: 700 12px/1 var(--sans); color: rgba(255,255,255,.8); font-variant-numeric: tabular-nums; min-width: 30px; text-align: center; }
+.f-seek { flex: 1; min-width: 60px; height: 30px; margin: 0; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; --p: 0%; touch-action: pan-x; }
+.f-seek::-webkit-slider-runnable-track { height: 5px; border-radius: 5px; background: linear-gradient(90deg, #fff var(--p), rgba(255,255,255,.25) var(--p)); }
+.f-seek::-moz-range-track { height: 5px; border-radius: 5px; background: rgba(255,255,255,.25); }
+.f-seek::-moz-range-progress { height: 5px; border-radius: 5px; background: #fff; }
+.f-seek::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; margin-top: -5.5px; border-radius: 50%; background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,.5); }
+.f-seek::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: #fff; }
+.f-ripple { position: absolute; top: 50%; z-index: 3; transform: translateY(-50%); padding: 10px 14px; border-radius: 999px; background: rgba(0,0,0,.6); color: #fff; font: 800 15px var(--sans); opacity: 0; pointer-events: none; transition: opacity .15s; }
+.f-ripple.left { left: 14px; } .f-ripple.right { right: 14px; }
+.f-ripple.show { opacity: 1; }
+/* Mode « commandes YouTube » : notre calque s'efface, le lecteur complet devient touchable */
+.f-video.native .f-tap { pointer-events: none; }
+.f-video.native .f-player { outline: 3px solid var(--yellow); outline-offset: -3px; }
 
 /* ---------- Carte fusionnée « vidéo + l'essentiel » ---------- */
 .f-merged .f-meta { border-top: 3px solid var(--c, var(--red)); }
