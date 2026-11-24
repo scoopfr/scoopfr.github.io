@@ -245,11 +245,46 @@
     return String(s.source || '').split(',').map(n => n.trim()).filter(Boolean).map((name, i) => ({ name, url: i === 0 ? s.link : '' }));
   }
   function sourcesBlock(s) {
-    const list = storySources(s), ok = list.length >= 2;
+    const list = storySources(s), ok = list.length >= 2, prim = primarySources(s);
     return `<div class="story-foot">
       <span class="verif ${ok ? 'ok' : ''}">${ok ? `✓ Recoupé par ${list.length} sources` : 'Source unique'}</span>
+      ${prim.length ? '<span class="verif prim-ok">📜 Source primaire</span>' : ''}
       ${list.map(x => x.url && /^https?:\/\//.test(x.url) ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)} ↗</a>` : `<span>${esc(x.name)}</span>`).join('')}
-    </div>`;
+    </div>${primaryBlock(s, prim)}`;
+  }
+
+  // ---------- Sources primaires ----------
+  // Primaire = document ou institution d'origine (texte de loi, décision, communiqué, rapport, données).
+  // 1) celles que l'édition indique (`primary: [{ name, url }]`) ; 2) celles repérées automatiquement :
+  // un lien de `sources` qui pointe vers un site officiel est lui-même une source primaire.
+  const OFFICIAL = /(^|\.)(gouv\.fr|gov|gov\.uk|europa\.eu|un\.org|who\.int|imf\.org|worldbank\.org|oecd\.org|insee\.fr|banque-france\.fr|elysee\.fr|assemblee-nationale\.fr|senat\.fr|conseil-constitutionnel\.fr|conseil-etat\.fr|courdecassation\.fr|ccomptes\.fr|cnil\.fr|arcom\.fr|ipcc\.ch|unfccc\.int|icc-cpi\.int|icj-cij\.org|echr\.coe\.int|nato\.int)$/i;
+  const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return ''; } };
+  function primarySources(s) {
+    const out = [], seen = new Set();
+    const add = (x, auto) => { if (x && x.url && /^https?:\/\//.test(x.url) && !seen.has(x.url)) { seen.add(x.url); out.push({ name: x.name || hostOf(x.url), url: x.url, auto }); } };
+    (Array.isArray(s.primary) ? s.primary : []).forEach(x => add(x, false));
+    storySources(s).filter(x => OFFICIAL.test(hostOf(x.url))).forEach(x => add(x, true));
+    return out;
+  }
+  // Pistes : portails officiels selon la rubrique (à vérifier : ce ne sont pas des liens vers le document exact)
+  const TRAIL = {
+    'Politique': [['Légifrance', 'https://www.legifrance.gouv.fr/'], ['Assemblée nationale', 'https://www.assemblee-nationale.fr/'], ['Sénat', 'https://www.senat.fr/'], ['Élysée', 'https://www.elysee.fr/']],
+    'Justice': [['Légifrance', 'https://www.legifrance.gouv.fr/'], ['Cour de cassation', 'https://www.courdecassation.fr/'], ['Conseil constitutionnel', 'https://www.conseil-constitutionnel.fr/'], ['Conseil d\'État', 'https://www.conseil-etat.fr/']],
+    'Économie': [['INSEE', 'https://www.insee.fr/'], ['Banque de France', 'https://www.banque-france.fr/'], ['Cour des comptes', 'https://www.ccomptes.fr/'], ['Eurostat', 'https://ec.europa.eu/eurostat']],
+    'Europe': [['Commission européenne : presse', 'https://ec.europa.eu/commission/presscorner/'], ['Parlement européen', 'https://www.europarl.europa.eu/'], ['Conseil de l\'UE', 'https://www.consilium.europa.eu/'], ['EUR-Lex', 'https://eur-lex.europa.eu/']],
+    'Monde': [['ONU', 'https://www.un.org/fr/'], ['Actualités de l\'ONU', 'https://news.un.org/fr/'], ['Cour pénale internationale', 'https://www.icc-cpi.int/'], ['Cour internationale de justice', 'https://www.icj-cij.org/']],
+    'Climat': [['GIEC', 'https://www.ipcc.ch/'], ['Convention climat de l\'ONU', 'https://unfccc.int/'], ['Copernicus', 'https://climate.copernicus.eu/']],
+    'Médias': [['Arcom', 'https://www.arcom.fr/'], ['Reporters sans frontières', 'https://rsf.org/fr'], ['Reuters Institute', 'https://reutersinstitute.politics.ox.ac.uk/']],
+    'Société': [['INSEE', 'https://www.insee.fr/'], ['Défenseur des droits', 'https://www.defenseurdesdroits.fr/'], ['data.gouv.fr', 'https://www.data.gouv.fr/']],
+    'Culture': [['Ministère de la Culture', 'https://www.culture.gouv.fr/'], ['data.gouv.fr', 'https://www.data.gouv.fr/']]
+  };
+  function primaryBlock(s, prim) {
+    const trail = TRAIL[s.tag] || [['data.gouv.fr', 'https://www.data.gouv.fr/']];
+    const q = encodeURIComponent(`${s.title} communiqué OR rapport OR décision officielle`);
+    return `<details class="prim" ${prim.length ? 'open' : ''}><summary>📜 ${prim.length ? 'Source primaire' : 'Remonter à la source primaire'}</summary>
+      ${prim.length ? `<ul class="prim-list">${prim.map(x => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)} ↗</a>${x.auto ? ' <small>(site officiel, repéré automatiquement)</small>' : ''}</li>`).join('')}</ul>` : '<p class="prim-note">Aucun document d\'origine n\'est lié à cette info dans l\'édition. Pistes pour le retrouver :</p>'}
+      <div class="prim-trail">${trail.map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>`).join('')}<a href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">🔎 Chercher le texte officiel</a></div>
+      <p class="prim-note">Les portails ci-dessus sont des pistes : vérifie que le document correspond bien à l'info.</p></details>`;
   }
   const wordCard = w => w ? `<div class="word"><div class="kicker">Le mot du jour</div><h3>${esc(w.term)}</h3><p>${rich(w.def)}</p></div>` : '';
 
@@ -1320,6 +1355,7 @@
           <h2>${esc(s.title)}</h2>
           <p>${rich(s.text)}</p>
           ${s.why ? `<div class="f-why">🎯 ${rich(s.why)}</div>` : ''}
+          ${(() => { const p = primarySources(s); return p.length ? `<div class="f-src f-prim">📜 Source primaire : ${p.map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)} ↗</a>`).join(' · ')}</div>` : ''; })()}
           <div class="f-src">${(() => { const l = storySources(s); return l.length >= 2 ? `✓ Recoupé par ${l.length} sources : ${l.map(x => esc(x.name)).join(' · ')}` : `Source : ${esc(l.map(x => x.name).join(', '))}`; })()}</div>
         </div>
         <div class="f-rail">

@@ -138,6 +138,21 @@ window.SCOOP_PREPA = {
       ]
     },
     {
+      id: 'primaires', icon: '📜', title: 'Remonter aux sources primaires',
+      points: [
+        'Une **source primaire** est le document ou le témoin d\'origine : une décision de justice, un texte de loi, un communiqué, un rapport officiel, un jeu de données, un discours intégral. Un article qui en parle est une **source secondaire**.',
+        'Pourquoi c\'est un réflexe de journaliste : on **vérifie** ce que dit réellement le texte, on évite le jeu du téléphone (chiffres déformés, citations tronquées) et on peut **citer** précisément.',
+        'Où chercher : **Légifrance** et le **Journal officiel** (lois, décrets), les sites de la **Cour de cassation**, du **Conseil constitutionnel** et du **Conseil d\'État** (décisions), l\'**INSEE** et **data.gouv.fr** (chiffres), **EUR-Lex** et le site de la Commission européenne (textes de l\'UE), l\'**ONU** et ses agences (rapports).',
+        'Dans l\'édition Scoop, une info affiche **📜 Source primaire** quand l\'un de ses liens pointe vers un site officiel, et propose des **pistes** vers les portails officiels de sa rubrique. Ce sont des pistes à vérifier, pas des liens garantis.',
+        'À l\'oral, c\'est un bon réflexe à citer : « Pour cette info, j\'ai regardé le communiqué du ministère plutôt que seulement les articles. » Précise toujours **qui parle** : le texte officiel dit ce qu\'une institution veut dire, pas forcément toute la réalité.'
+      ],
+      sources: [
+        { name: 'Légifrance', url: 'https://www.legifrance.gouv.fr/' },
+        { name: 'data.gouv.fr', url: 'https://www.data.gouv.fr/' },
+        { name: 'EUR-Lex', url: 'https://eur-lex.europa.eu/' }
+      ]
+    },
+    {
       id: 'anglais', icon: '🗣️', title: 'L\'anglais',
       points: [
         'Beaucoup d\'écoles évaluent l\'anglais, à l\'écrit (compréhension, résumé) ou à l\'oral. Un **bon niveau** fait partie des qualités attendues.',

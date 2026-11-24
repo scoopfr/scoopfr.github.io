@@ -25,6 +25,7 @@ Trois règles passent avant tout le reste :
    - `word` : un « mot du jour » (notion d'institutions, d'économie, de droit ou de médias liée à l'actu), défini en 2 ou 3 phrases.
    - `stories[]` : `{ tag, title, text, why?, sources: [{ name, url }, { name, url }, …] }`.
      - `sources` contient **au moins 2 rédactions différentes** : deux rubriques du même journal ne comptent que pour une source. Chaque `url` vient de `news-today.txt`. Une dépêche du flux « Le Figaro Flash » se cite `{ name: 'AFP (via Le Figaro)', url }`.
+     - `primary` (facultatif) : `[{ name, url }]`, la **source primaire** de l'info (communiqué officiel, décision de justice, texte de loi, rapport, jeu de données). **N'en mets que si l'URL figure dans `news-today.txt` ou dans un article que tu as réellement ouvert, jamais de mémoire ni d'URL devinée.** Si tu n'en as pas, omets le champ : l'application repère déjà seule les liens de `sources` qui pointent vers un site officiel (gouv.fr, europa.eu, un.org…) et propose des pistes par rubrique. Ne dépense pas de crédits à en chercher.
      - `text` fait 3 à 5 phrases factuelles, limitées aux éléments **communs aux sources**.
      - `why` relie l'info à une notion de concours, et c'est l'endroit où écrire le savoir de contexte utilisé dans les questions.
      - `tag` prend l'une des valeurs Politique, Monde, Europe, Économie, Climat, Médias, Justice, Société ou Culture.

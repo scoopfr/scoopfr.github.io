@@ -46,6 +46,11 @@
       const bases = new Set(src.map(x => mediaBase(x && x.name)));
       if (bases.size < 2) E(`${where} : recoupement insuffisant (${bases.size} rédaction${bases.size > 1 ? 's' : ''} ; il en faut au moins 2 différentes dans « sources »)`);
       src.forEach(x => { if (!x || !x.name || !/^https?:\/\//.test(x.url || '')) E(`${where} : chaque source doit avoir un nom et une URL`); });
+      // sources primaires (facultatives) : documents ou institutions d'origine, avec une URL valide
+      if (s.primary !== undefined) {
+        if (!Array.isArray(s.primary)) E(`${where} : « primary » doit être une liste`);
+        else s.primary.forEach(x => { if (!x || !x.name || !/^https?:\/\//.test(x.url || '')) E(`${where} : chaque source primaire doit avoir un nom et une URL`); });
+      }
     });
 
     // Corpus du brief
