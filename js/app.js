@@ -253,6 +253,7 @@
   }
   const wordCard = w => w ? `<div class="word"><div class="kicker">Le mot du jour</div><h3>${esc(w.term)}</h3><p>${rich(w.def)}</p></div>` : '';
 
+  const CREDIT = `<p class="credit">conçu par <b>by.naufrage</b></p>`;
   function viewHome() {
     let html = '';
     const day = CURRENT && DAYS[CURRENT];
@@ -299,7 +300,7 @@
         <a class="dash-chip" href="#/learn/prepa">🎯 Prépa${exam ? ` · ${exam}` : ''}</a>
         <a class="dash-chip" href="#/learn">🎓 Tout le parcours</a>
       </div>`;
-    return html;
+    return html + CREDIT;
   }
 
   // ---------- Mises à jour de la journée (toutes les 3 h) ----------
@@ -580,7 +581,7 @@
           <label class="btn small ghost" for="b-import">⬆ Importer</label><input id="b-import" type="file" accept="application/json" hidden>
           <button class="btn small danger" id="b-reset">Réinitialiser</button>
         </div>
-      </div>`;
+      </div>` + CREDIT;
   }
   function bindProfile() {
     const upd = () => { save(); renderChrome(); };
