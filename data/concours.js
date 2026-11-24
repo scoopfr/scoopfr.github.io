@@ -39,7 +39,8 @@ window.SCOOP_CONCOURS = {
     'IJBA':       { open: '01-12', close: '03-02', fee: 75,  entry: 'b3',  region: 'naq',  dossier: false },
     'IPJ':        { open: '12-15', close: '02-23', fee: 256, entry: 'b3',  region: 'idf',  dossier: false },
     'IUT Lannion':{ open: '01-19', close: '03-12', fee: 0,   entry: 'bac', region: 'bre',  dossier: true, platform: 'Parcoursup' },
-    'Sciences Po':{ open: '',      close: '01-11', fee: 150, entry: 'b3',  region: 'idf',  dossier: true },
+    'Sciences Po':{ open: '',      close: '01-08', fee: 150, entry: 'b3',  region: 'idf',  dossier: true, confirmed: true,
+                    note: 'Dates rentrée 2027 publiées par l\'école : dossier créé avant le 16 décembre 2026, validé avant le 8 janvier 2027 ; entretiens fin avril.' },
     'Metz':       { open: '02-17', close: '03-16', fee: 0,   entry: 'b3',  region: 'ge',   dossier: true, platform: 'Mon Master' }
   },
 

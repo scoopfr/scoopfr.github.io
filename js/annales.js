@@ -35,6 +35,8 @@
     return out;
   }
 
+  ctx.helpers = { keyFacts, firstSentence, clip, sentences, plain, nz };   // réutilisés par js/ecriture.js
+
   // ---------- leçons ----------
   const COL = '#9D4EDD';
   const todayStories = () => { const d = ctx.currentDay(); return d ? d.stories.slice(0, 12) : []; };
@@ -145,6 +147,24 @@
 
   // ---------- onglet « Annales » ----------
   const link = s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a>`;
+  // Démarches école par école : ce qui est public, les dates, et ce que tu fais, dans l'ordre
+  function schoolsBlock() {
+    const G = A.schoolsGuide || [];
+    if (!G.length) return '';
+    const names = Object.fromEntries((ctx.PREPA.schools || []).map(s => [s.short, s]));
+    const urgent = G.filter(g => g.urgent);
+    const card = g => { const s = names[g.short] || {}; return `<details class="card p-guide an-school" ${g.urgent ? 'open' : ''}>
+      <summary><span class="p-gico">🏫</span>${esc(g.short)}${s.city ? ` <small class="muted">· ${esc(s.city)}</small>` : ''}${g.urgent ? ' <span class="an-daily">à faire maintenant</span>' : ''}${g.verified ? '' : ' <small class="muted">· liens à vérifier</small>'}</summary>
+      <p class="an-line"><b>📄 Annales :</b> ${rich(g.annales)}</p>
+      <p class="an-line"><b>📅 Dates :</b> ${rich(g.dates)}</p>
+      <div class="an-todo"><b>✅ Tu fais :</b><ol>${g.todo.map(t => `<li>${rich(t)}</li>`).join('')}</ol></div>
+      <div class="an-links">${g.links.map(l => `<a class="btn small ghost" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.name)} ↗</a>`).join('')}</div></details>`; };
+    return `<h3 class="cc-h">🧭 Toutes les écoles : ce qui est public et ce que tu fais</h3>
+      <p class="muted" style="font-size:13px;margin-bottom:10px">Un seul établissement publie de vraies annales : <b>le CFJ</b>. Pour les autres, voici le document le plus complet disponible, les dates et tes étapes. ${A.cej ? `Plusieurs écoles passent par la <a href="${esc(A.cej.url)}" target="_blank" rel="noopener">plateforme de la CEJ ↗</a>.` : ''}</p>
+      ${urgent.length ? `<div class="banner">⏰ <span><b>Urgent :</b> ${urgent.map(g => esc(g.short)).join(' et ')} : les dates 2027 sont déjà publiées. Ouvre leur fiche ci-dessous.</span></div>` : ''}
+      ${G.map(card).join('')}
+      ${A.nonRecognized ? `<div class="card" style="margin-top:12px"><b>Hors des 16 formations reconnues</b><p style="font-size:13.5px;margin:6px 0">${esc(A.nonRecognized.note)}</p><a href="${esc(A.nonRecognized.url)}" target="_blank" rel="noopener">${esc(A.nonRecognized.name)} ↗</a></div>` : ''}`;
+  }
   function view() {
     const ok = need();
     const tests = [
@@ -158,6 +178,7 @@
     return `<div class="card an-intro"><h3>📚 Les annales et les entraînements</h3>
         <p>Les consignes viennent des <b>annales publiques du CFJ (2020-2024)</b> et des épreuves publiées par les écoles. Les entraînements « du jour » sont bâtis sur les <b>infos factuelles et recoupées</b> de l'édition : tu travailles sur du réel, pas sur du vent.</p></div>
       <div class="an-tests">${tests.map(([k, ico, t, d, daily]) => `<button class="an-test" data-start="train:${k}" ${daily && !ok ? 'disabled' : ''}><span class="an-ico">${ico}</span><span><b>${t}</b>${daily ? ' <small class="an-daily">du jour</small>' : ''}<br><small>${d}</small></span><span class="an-go">▶</span></button>`).join('')}</div>
+      ${schoolsBlock()}
       <h3 class="cc-h">📅 CFJ : les sujets d'admissibilité, de 2020 à 2024</h3>
       <p class="muted" style="font-size:13px">Collecte d'informations (3 500 signes, au contact de tes sources) puis texte « actualité et créativité » sur l'un de 4 thèmes. <a href="${esc(A.cfjPdf)}" target="_blank" rel="noopener">PDF du CFJ ↗</a></p>
       <div class="an-years">${A.cfj.map(y => `<div class="card an-year"><div class="an-y">${y.year}</div><div><div class="an-c">Collecte : <b>« ${esc(y.collecte)} »</b></div><ul>${y.themes.map(t => `<li>${esc(t)}</li>`).join('')}</ul></div></div>`).join('')}</div>

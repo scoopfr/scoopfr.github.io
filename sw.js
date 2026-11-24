@@ -1,9 +1,9 @@
 /* Scoop — service worker : appli installable + hors ligne
    - éditions (data/days/*) : réseau d'abord (pour avoir l'actu fraîche), cache en secours
    - reste de l'appli : réseau d'abord aussi, cache en secours hors ligne */
-const VERSION = 'scoop-v20';
+const VERSION = 'scoop-v22';
 const SHELL = [
-  './', './index.html', './css/style.css', './js/app.js', './data/units.js', './data/culture.js', './data/prepa.js', './data/concours.js', './js/ai.js', './js/concours.js', './js/jury-local.js', './js/annales.js', './data/annales.js', './js/oral.js', './manifest.webmanifest',
+  './', './index.html', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'
 ];
 
@@ -42,7 +42,17 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // Coquille de l'appli : réseau d'abord (toujours à jour), cache si hors ligne.
+  // Fichiers versionnés (?v=…) et icônes : le contenu ne change jamais sous la même adresse,
+  // donc cache d'abord : zéro requête réseau après la première visite (moins de données, moins d'énergie).
+  if (/^\?v=/.test(url.search) || url.pathname.includes('/icons/')) {
+    e.respondWith(caches.match(req).then(hit => hit || fetch(req).then(res => {
+      if (res.ok) { const copy = res.clone(); caches.open(VERSION).then(c => c.put(req, copy)); }
+      return res;
+    })));
+    return;
+  }
+
+  // Page d'accueil et le reste : réseau d'abord (toujours à jour), cache si hors ligne.
   // cache:'no-cache' force la revalidation auprès du serveur (GitHub Pages met 10 min de cache HTTP).
   e.respondWith(fetch(new Request(req.url, { cache: 'no-cache', credentials: 'same-origin' })).then(res => {
     if (res.ok) { const copy = res.clone(); caches.open(VERSION).then(c => c.put(req, copy)); }

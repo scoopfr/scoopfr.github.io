@@ -27,8 +27,10 @@
   const DEFAULT = {
     xp: 0, streak: 0, best: 0, last: null, daily: {}, lessons: {}, review: [], saved: [], prepa: {},
     stats: { answered: 0, correct: 0, lessons: 0 },
-    settings: { name: '', goal: 50, exam: '', sound: true, theme: 'auto', freeText: false }
+    settings: { name: '', goal: 50, exam: '', sound: true, theme: 'auto', freeText: false, eco: null }
   };
+  // Mode éco : choix explicite, sinon automatique quand le navigateur est en « économie de données »
+  const ecoMode = () => S.settings.eco === true || (S.settings.eco == null && !!(navigator.connection && navigator.connection.saveData));
   const clone = o => JSON.parse(JSON.stringify(o));
   function merge(a, b) {
     for (const k in b) {
@@ -299,7 +301,7 @@
       const vids = newFeedVideos(CURRENT, day);
       const live = window.SCOOP_LIVE, upd = live && live.updated ? ago(live.updated) : '';
       html += `<a class="feed-teaser" href="#/feed/${CURRENT}">
-        <div class="ft-thumbs">${vids.slice(0, 3).map(v => `<img src="${ytThumb(v.id)}" alt="" loading="lazy">`).join('') || '<span class="ft-emoji">📱</span>'}</div>
+        <div class="ft-thumbs">${vids.slice(0, 3).map(v => `<img src="${ytThumb(v.id, 'mq')}" alt="" loading="lazy">`).join('') || '<span class="ft-emoji">📱</span>'}</div>
         <div class="ft-txt"><div class="ft-kick">${vids.length ? `${vids.length} nouvelle${vids.length > 1 ? 's' : ''} vidéo${vids.length > 1 ? 's' : ''}` : '✓ Tu es à jour'}</div><h3>Le fil de l'actu</h3>
         <p>${upd ? `Mis à jour ${esc(upd)}` : `${day.stories.length} infos`} · questions flash</p></div>
         <span class="ft-play" aria-hidden="true">▶</span>
@@ -610,6 +612,7 @@
         <div class="form-row"><label for="f-theme">Thème</label>
           <select id="f-theme">${[['auto', 'Automatique'], ['light', 'Clair'], ['dark', 'Sombre']].map(([v, l]) => `<option value="${v}" ${S.settings.theme === v ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
         <label class="toggle"><span style="font-weight:700;font-size:14px">Effets sonores</span><input id="f-sound" type="checkbox" ${S.settings.sound ? 'checked' : ''}></label>
+        <label class="toggle" style="margin-top:14px"><span><span style="font-weight:700;font-size:14px">🌱 Mode éco</span><br><small class="muted">Les vidéos du fil ne se lancent pas toutes seules : tu touches ▶ pour les voir. Beaucoup moins de données et de batterie. Activé d'office si ton téléphone est en économie de données.</small></span><input id="f-eco" type="checkbox" ${ecoMode() ? 'checked' : ''}></label>
         <label class="toggle" style="margin-top:14px"><span><span style="font-weight:700;font-size:14px">⌨️ Mode réponse libre</span><br><small class="muted">Tu tapes la réponse au lieu de choisir parmi des propositions. Aussi activable pendant un quiz (bouton en haut).</small></span><input id="f-free" type="checkbox" ${S.settings.freeText ? 'checked' : ''}></label>
       </div>
 
@@ -631,6 +634,7 @@
     $('#f-theme').onchange = e => { S.settings.theme = e.target.value; applyTheme(); upd(); };
     $('#f-sound').onchange = e => { S.settings.sound = e.target.checked; upd(); };
     $('#f-free').onchange = e => { S.settings.freeText = e.target.checked; upd(); };
+    $('#f-eco').onchange = e => { S.settings.eco = e.target.checked; upd(); };
     $('#b-export').onclick = () => {
       const a = document.createElement('a');
       a.href = URL.createObjectURL(new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' }));
@@ -1209,7 +1213,7 @@
   // =========================================================
   let F = null, feedObs = null, feedSoundPref = false;
   const YT_ID = /^[\w-]{6,20}$/;
-  const ytThumb = id => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+  const ytThumb = (id, q = 'hq') => `https://i.ytimg.com/vi/${id}/${q}default.jpg`;   // mq = 320x180 (léger), hq = 480x360
   const savedKey = (date, i) => `${date}:${i}`;
   const isSaved = (date, i) => S.saved.some(s => s.key === savedKey(date, i));
 
@@ -1229,7 +1233,7 @@
   const feedTok = s => new Set(String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(w => w.length >= 4 && !FEED_STOP.has(w)));
   const sameTopic = (a, b) => { let n = 0; for (const x of a) if (b.has(x)) n++; return n >= 2; };
 
-  // Toutes les vidéos disponibles : celles choisies par la rédaction le matin, puis le flux mis à jour toutes les 30 min
+  // Toutes les vidéos disponibles : celles choisies par la rédaction le matin, puis le flux mis à jour toutes les heures
   function feedVideoPool(date, day, live) {
     const out = [], ids = new Set();
     const add = (v, story) => {
@@ -1343,7 +1347,7 @@
         return `<section class="fcard f-intro" data-k="${k}"><div class="f-inner">
           <div class="f-kick">Le fil du ${esc(frDate(date))}</div>
           <h1>Tu es à jour 🎉</h1>
-          <p class="f-sources" style="font-size:16px;margin-top:14px">Tu as déjà vu toutes les vidéos et les infos du moment. Les vidéos sont mises à jour toutes les 30 minutes${upd ? ` (dernière mise à jour ${esc(upd)})` : ''}. Reviens un peu plus tard !</p>
+          <p class="f-sources" style="font-size:16px;margin-top:14px">Tu as déjà vu toutes les vidéos et les infos du moment. Les vidéos sont mises à jour toutes les heuresutes${upd ? ` (dernière mise à jour ${esc(upd)})` : ''}. Reviens un peu plus tard !</p>
           <div class="f-endbtns" style="margin-top:24px"><button class="btn primary" data-feed-replay>↺ Revoir tout le fil</button><button class="btn ghost f-ghost" data-feed-close>Retour à l'accueil</button></div>
         </div></section>`;
       }
@@ -1355,7 +1359,7 @@
           <li>Chaque vidéo est suivie de son <b>résumé</b>, recoupé par plusieurs médias</li>
           ${nq ? `<li>Un <b>quiz de ${nq > FEED_BLOCK ? FEED_BLOCK : nq} questions</b> tous les ${FEED_BLOCK} sujets, sur ce que tu viens de voir (+5 XP chacune)</li>` : ''}
         </ul>
-        ${upd ? `<p class="f-sources">🔄 Vidéos mises à jour ${esc(upd)} · toutes les 30 min</p>` : ''}
+        ${upd ? `<p class="f-sources">🔄 Vidéos mises à jour ${esc(upd)} · toutes les heures</p>` : ''}
         ${srcs.length ? `<p class="f-sources">${srcs.map(esc).join(' · ')}</p>` : ''}
         <div class="f-hint"><span>↑</span>Swipe pour commencer</div>
       </div></section>`;
@@ -1424,11 +1428,11 @@
         <button class="btn ghost f-ghost" data-feed-replay>↺ Revoir tout le fil</button>
         <button class="btn ghost f-ghost" data-feed-close>Retour à l'accueil</button>
       </div>
-      <p class="f-sources" style="margin-top:14px">Les vidéos se renouvellent toutes les 30 minutes : celles que tu as vues ne reviendront pas.</p>
+      <p class="f-sources" style="margin-top:14px">Les vidéos se renouvellent toutes les heuresutes : celles que tu as vues ne reviendront pas.</p>
     </div></section>`;
   }
 
-  // Charge la liste de vidéos mise à jour toutes les 30 min (data/live/shorts.js)
+  // Charge la liste de vidéos mise à jour toutes les heures (data/live/shorts.js)
   async function loadLive() {
     try { await loadScript(`data/live/shorts.js?t=${Date.now()}`); } catch (e) { /* pas encore de flux : on garde les vidéos du matin */ }
     return window.SCOOP_LIVE || null;
@@ -1599,6 +1603,8 @@
       // Son déjà activé : on tente la lecture directement avec le son (le swipe compte comme un geste).
       // Si le navigateur refuse, on repasse en muet pour que la vidéo démarre quand même.
       const ios = document.documentElement.classList.contains('is-ios');
+      // mode éco : pas de lecture automatique (on ne charge le lecteur YouTube que si tu touches ▶)
+      if (ecoMode()) { card.classList.add('eco-wait'); return; }
       mountVideo(card, it.v, { muted: !F.sound || ios });
       if (F.sound && !ios) setTimeout(() => {
         if (!F || F.active !== k || !card.classList.contains('playing')) return;
@@ -1702,6 +1708,12 @@
       // sur les côtés, on attend un éventuel 2e toucher avant de mettre en pause
       F.tapTimer = setTimeout(() => togglePlay(card), side ? 300 : 0);
       return;
+    }
+    // vidéo pas encore chargée (mode éco, ou lecture automatique bloquée) : toucher ▶ la lance
+    const idle = e.target.closest('.f-player');
+    if (idle) {
+      const card = idle.closest('.f-video'), it = card && F.seq[+card.dataset.k];
+      if (card && it && !card.classList.contains('playing')) { card.classList.remove('eco-wait'); mountVideo(card, it.v, { muted: !F.sound || document.documentElement.classList.contains('is-ios') }); return; }
     }
     const pp = e.target.closest('[data-pp]');
     if (pp) { togglePlay(pp.closest('.f-video')); return; }

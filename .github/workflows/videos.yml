@@ -1,9 +1,11 @@
-# Scoop — met à jour les vidéos du fil toutes les 30 minutes (gratuit sur un dépôt public)
+# Scoop — met à jour les vidéos du fil toutes les heures, de jour seulement (gratuit sur un dépôt public).
+# Avant : toutes les 30 min, 24 h sur 24 (48 exécutions par jour). Maintenant : 17 par jour, aucune la nuit
+# (moins de calcul, moins de publications GitHub Pages, donc moins d'énergie). Heures en UTC.
 name: Vidéos du fil
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '0 5-21 * * *'
   workflow_dispatch: {}
 
 permissions:
