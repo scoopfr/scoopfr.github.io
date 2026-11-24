@@ -1842,7 +1842,7 @@
   // et à compter les entrées, pas à protéger quoi que ce soit. À changer ici.
   const ACCESS_CODE = 'SCOOP2027';
   const INSTAGRAM = 'by.naufrage';
-  const GOATCOUNTER = '';      // code GoatCounter (ex. 'scoop' pour scoop.goatcounter.com). Vide = aucune statistique.
+  const GOATCOUNTER = 'scoopfr';      // code GoatCounter (ex. 'scoop' pour scoop.goatcounter.com). Vide = aucune statistique.
   const ACCESS_KEY = 'scoop.access';
   const hasAccess = () => { try { return localStorage.getItem(ACCESS_KEY) === '1'; } catch (e) { return true; } };   // stockage bloqué : on n'enferme personne
   const grantAccess = () => { try { localStorage.setItem(ACCESS_KEY, '1'); } catch (e) { /* ignore */ } };
