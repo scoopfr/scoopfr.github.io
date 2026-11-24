@@ -78,6 +78,7 @@
     if (!S.settings.sound) return;
     try {
       actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === 'suspended' && actx.resume) actx.resume(); // iPhone : l'audio démarre « suspendu »
       freqs.forEach((f, i) => {
         const o = actx.createOscillator(), g = actx.createGain(), t0 = actx.currentTime + i * gap;
         o.type = type; o.frequency.value = f;
@@ -934,7 +935,7 @@
   //   LE FIL : format vertical type Shorts
   //   vidéos de rédactions + cartes infos + questions flash
   // =========================================================
-  let F = null, feedObs = null;
+  let F = null, feedObs = null, feedSoundPref = false;
   const YT_ID = /^[\w-]{6,20}$/;
   const ytThumb = id => `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
   const savedKey = (date, i) => `${date}:${i}`;
@@ -998,12 +999,16 @@
     if (it.type === 'video') {
       const v = it.v, st = Number.isInteger(v.story) ? day.stories[v.story] : null;
       return `<section class="fcard f-video" data-k="${k}" data-vid="${esc(v.id)}">
-        <div class="f-player"><img src="${ytThumb(v.id)}" alt="" loading="lazy"><div class="f-play" aria-hidden="true">▶</div></div>
+        <div class="f-player"><img src="${ytThumb(v.id)}" alt="" loading="lazy"><div class="f-play" aria-hidden="true">▶</div>
+          <!-- Calque tactile : garde le swipe vertical actif (sur iPhone, le lecteur YouTube « avale » les gestes) -->
+          <button class="f-tap" data-tap aria-label="Mettre en pause ou relancer la vidéo"><span class="f-tapicon" aria-hidden="true"></span></button>
+        </div>
         <div class="f-meta">
-          <div class="f-meta-top"><span class="f-chan">▶ ${esc(v.source)}</span><a class="f-yt" href="https://www.youtube.com/shorts/${esc(v.id)}" target="_blank" rel="noopener">YouTube ↗</a></div>
+          <div class="f-meta-top"><span class="f-chan">▶ ${esc(v.source)}</span>
+            <span class="f-tools"><button class="f-sound" data-sound aria-label="Activer ou couper le son">${F && F.sound ? '🔊 Son' : '🔇 Son'}</button><a class="f-yt" href="https://www.youtube.com/shorts/${esc(v.id)}" target="_blank" rel="noopener">YouTube ↗</a></span></div>
           <h3>${esc(v.title)}</h3>
           ${st ? `<div class="f-link">📰 À suivre : l'essentiel à retenir ↓</div>` : ''}
-          <div class="f-swipe">↑ Swipe ici pour continuer</div>
+          <div class="f-swipe">Touche la vidéo : pause · swipe ↑ pour continuer</div>
         </div>
       </section>`;
     }
@@ -1034,7 +1039,7 @@
     const day = await getDay(date);
     if (!day) { location.hash = '#/home'; return; }
     if (F && F.date === date) return;
-    F = { date, day, seq: [], xp: 0, answered: 0, right: 0, videos: new Set(), active: -1, done: false };
+    F = { date, day, seq: [], xp: 0, answered: 0, right: 0, videos: new Set(), active: -1, done: false, sound: feedSoundPref };
     F.seq = buildFeed(date, day);
     const track = $('#f-track');
     track.innerHTML = F.seq.map((it, k) => feedCard(it, k, date, day)).join('');
@@ -1049,6 +1054,13 @@
     }, { root: track, threshold: 0.6 });
     $$('.fcard', track).forEach(c => feedObs.observe(c));
     feedActivate(0);
+  }
+
+  // Envoie une commande au lecteur YouTube intégré (API iframe)
+  function ytCmd(card, func) {
+    const ifr = card && $('iframe', card);
+    if (!ifr || !ifr.contentWindow) return;
+    try { ifr.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*'); } catch (e) { /* lecteur pas prêt */ }
   }
 
   function stopVideo(card) {
@@ -1068,10 +1080,14 @@
     if (it.type === 'video') {
       const id = it.v.id;
       F.videos.add(id);
-      // lecture automatique en muet (règle des navigateurs) ; le son s'active dans le lecteur
-      $('.f-player', card).insertAdjacentHTML('beforeend',
-        `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&playsinline=1&loop=1&playlist=${id}&rel=0&modestbranding=1" title="${esc(it.v.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`);
+      // Lecture automatique en muet (règle des navigateurs, iPhone compris) ; le bouton 🔊 active le son.
+      // enablejsapi permet de piloter le lecteur (pause, son) depuis notre calque tactile.
+      const origin = encodeURIComponent(location.origin);
+      $('.f-player', card).insertAdjacentHTML('afterbegin',
+        `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&playsinline=1&loop=1&playlist=${id}&rel=0&modestbranding=1&enablejsapi=1&origin=${origin}" title="${esc(it.v.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`);
       card.classList.add('playing');
+      card.classList.remove('paused');
+      if (F.sound) { const ifr = $('iframe', card); ifr.addEventListener('load', () => setTimeout(() => ytCmd(card, 'unMute'), 400), { once: true }); }
     }
     if (it.type === 'end') finishFeed();
   }
@@ -1135,6 +1151,22 @@
 
   $('#f-close').addEventListener('click', () => { location.hash = '#/home'; });
   $('#f-track').addEventListener('click', e => {
+    const tap = e.target.closest('[data-tap]');
+    if (tap) { // pause / lecture
+      const card = tap.closest('.f-video'); if (!card || !card.classList.contains('playing')) return;
+      const paused = card.classList.toggle('paused');
+      ytCmd(card, paused ? 'pauseVideo' : 'playVideo');
+      return;
+    }
+    const snd = e.target.closest('[data-sound]');
+    if (snd) { // son activé / coupé, mémorisé pour les vidéos suivantes
+      F.sound = !F.sound; feedSoundPref = F.sound;
+      $$('[data-sound]', $('#f-track')).forEach(b => { b.textContent = F.sound ? '🔊 Son' : '🔇 Son'; });
+      const card = snd.closest('.f-video');
+      ytCmd(card, F.sound ? 'unMute' : 'mute');
+      if (F.sound) ytCmd(card, 'playVideo');
+      return;
+    }
     const c = e.target.closest('.f-choice'); if (c) { answerFlash(c); return; }
     const s = e.target.closest('[data-save]'); if (s) { toggleSave(+s.dataset.save); return; }
     if (e.target.closest('[data-feed-close]')) { location.hash = '#/home'; return; }
@@ -1152,6 +1184,10 @@
   // ---------- Appli installable (PWA) ----------
   let installEvt = null;
   const isStandalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  // iPhone : marque l'appli installée pour réserver la place de l'encoche et de l'heure
+  if (isStandalone()) document.documentElement.classList.add('is-standalone');
+  if (isIOSDevice()) document.documentElement.classList.add('is-ios');
+  function isIOSDevice() { return /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1); }
   const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
   window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); installEvt = e; refreshInstall(); });
   window.addEventListener('appinstalled', () => { installEvt = null; refreshInstall(); });

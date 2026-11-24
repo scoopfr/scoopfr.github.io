@@ -536,6 +536,33 @@ p { margin: 0; }
   .word p { color: var(--paper); opacity: .85; }
 }
 
+/* ---------- Fil : calque tactile et son ---------- */
+.f-tap { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 2; border: 0; padding: 0; margin: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
+.f-tapicon { width: 76px; height: 76px; border-radius: 50%; background: rgba(0,0,0,.5); display: none; place-items: center; color: #fff; font-size: 30px; }
+.f-tapicon::before { content: "▶"; padding-left: 5px; }
+.f-video.paused .f-tapicon { display: grid; }
+.f-video:not(.playing) .f-tap { pointer-events: none; }
+.f-tools { display: flex; align-items: center; gap: 12px; }
+.f-sound { border: 0; border-radius: 999px; padding: 5px 10px; background: rgba(255,255,255,.14); color: #fff; font: 700 13px var(--sans); cursor: pointer; }
+
+/* ---------- Compatibilité iPhone / iPad (Safari) ---------- */
+a, button, label, summary { -webkit-tap-highlight-color: transparent; }
+.topbar { -webkit-backdrop-filter: blur(10px); }
+.f-act span { -webkit-backdrop-filter: blur(6px); }
+.modal::backdrop { -webkit-backdrop-filter: blur(2px); }
+/* iOS < 14.5 ne connaît pas « inset » : équivalents explicites */
+.lesson, .feed, #confetti, .f-player img, .f-player iframe, .feed-teaser::before { top: 0; right: 0; bottom: 0; left: 0; }
+.hero::before { top: 0; right: 0; left: 0; }
+.node.current::after { top: -9px; right: -9px; bottom: -9px; left: -9px; }
+@media (max-width: 760px) { .nav { left: 0; right: 0; bottom: 0; top: auto; } }
+/* Appli installée sur l'écran d'accueil : on laisse la place à l'encoche et à l'heure */
+.is-standalone .topbar { padding-top: calc(10px + env(safe-area-inset-top)); }
+.is-standalone .lesson-head { padding-top: calc(18px + env(safe-area-inset-top)); }
+/* Pas de zoom automatique sur les champs (iOS zoome si la police fait moins de 16 px) */
+.is-ios input, .is-ios select, .is-ios textarea { font-size: max(16px, 1em); }
+/* Défilement fluide des zones scrollables sur anciens iOS */
+.f-track, .lesson-body, .modal-inner, .p-tabs { -webkit-overflow-scrolling: touch; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
