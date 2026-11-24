@@ -166,11 +166,23 @@ window.SCOOP_DAYS['2026-11-24'] = {
         { name: 'franceinfo', url: 'https://www.franceinfo.fr/politique/eric-zemmour/eric-zemmour-definitivement-condamne-pour-contestation-de-l-existence-de-crime-contre-l-humanite-apres-avoir-affirme-que-le-marechal-petain-avait-sauve-les-juifs-francais_8297988.html#xtor=RSS-3-[lestitres]' },
         { name: 'Libération', url: 'https://www.liberation.fr/societe/police-justice/petain-a-sauve-les-juifs-francais-eric-zemmour-definitivement-condamne-par-la-cour-de-cassation-pour-contestation-de-crime-contre-lhumanite-20261124_3FL5UCZWMVCD5IBCWKDRMGAJRM/' }
       ]
+    },
+    {
+      tag: 'Économie',
+      title: "Sanofi rachète l'américain Insmed pour 41 milliards de dollars",
+      text: "Le groupe pharmaceutique français **Sanofi** a annoncé mardi 24 novembre un accord pour racheter l'américain **Insmed**, spécialiste du traitement des maladies respiratoires, pour **41 milliards de dollars** (environ 37,6 milliards d'euros), en numéraire. C'est sa plus importante acquisition depuis 2004, selon Le Monde. Insmed dispose déjà d'un médicament qui réalise plus de 1 milliard de dollars de recettes annuelles. Pour Euronews, l'opération vise à renforcer le portefeuille de nouveaux médicaments de Sanofi avant la perte d'exclusivité du Dupixent.",
+      why: "Racheter une entreprise « en numéraire » signifie la payer en argent comptant, et non en actions. Les laboratoires pharmaceutiques achètent des biotechs pour garnir leur catalogue quand un de leurs médicaments phares perd sa protection et peut être copié.",
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/economie/article/2026/11/24/sanofi-pret-a-debourser-37-6-milliards-d-euros-pour-l-americain-insmed-un-specialiste-du-traitement-des-maladies-respiratoires_6814758_3234.html' },
+        { name: 'Ouest-France', url: 'https://sante.ouest-france.fr/medicament/pourquoi-sanofi-veut-il-depenser-37-milliards-deuros-pour-une-entreprise-americaine-cinq-questions-pour-y-voir-clair-2ace46e0-e82c-11f1-86c1-70195b4d2e52' },
+        { name: 'Euronews', url: 'https://fr.euronews.com/2026/11/24/sanofi-rachete-lamericain-insmed-pour-41-milliards-de-dollars-pour-preparer-lapres-dupixen' }
+      ]
     }
   ],
   updates: [
     { at: '14:00', stories: [10, 11] },
-    { at: '18:00', stories: [12, 13] }
+    { at: '18:00', stories: [12, 13] },
+    { at: '21:00', stories: [14] }
   ],
   shorts: [
     { id: '27z_FzB3wrk', source: 'franceinfo', title: 'Nvidia annonce la réintégration de Jensen Huang comme PDG', tag: 'Économie', story: 0 },
@@ -243,6 +255,15 @@ window.SCOOP_DAYS['2026-11-24'] = {
         { t: 'qcm', q: "Quel était le score de la finale de la CAN sur le terrain, le 18 janvier ?", c: ["1-0 pour le Sénégal", "3-0 pour le Maroc", "2-1 pour le Maroc", "0-0, tirs au but"], a: 0, x: "Les Sénégalais s'étaient imposés 1-0 sur la pelouse, avant que la CAF n'attribue une victoire 3-0 au Maroc." },
         { t: 'qcm', q: "Que fait la Cour de cassation quand elle rejette le pourvoi d'Éric Zemmour ?", c: ["Elle rend la condamnation définitive", "Elle ordonne un nouveau procès", "Elle le relaxe", "Elle réduit sa peine"], a: 0, x: "Le rejet du pourvoi rend la condamnation pour contestation de crime contre l'humanité définitive." },
         { t: 'vf', q: "Éric Zemmour avait été condamné en première instance puis en appel avant la Cour de cassation.", a: false, x: "Il avait été relaxé en première instance et en appel ; ces décisions avaient été annulées une première fois par la Cour de cassation." }
+      ]
+    },
+    {
+      title: '⚡ Flash de 21 h', icon: '⚡', desc: 'Mise à jour', exercises: [
+        { t: 'qcm', q: "Quelle entreprise américaine Sanofi va-t-il racheter ?", c: ["Insmed", "Nvidia", "Pfizer", "Moderna"], a: 0, x: "Sanofi a annoncé un accord pour racheter l'américain Insmed." },
+        { t: 'qcm', q: "Quel est le montant de l'opération ?", c: ["41 milliards de dollars", "4,1 milliards de dollars", "14 milliards d'euros", "100 milliards de dollars"], a: 0, x: "Le rachat est évalué à 41 milliards de dollars, soit environ 37,6 milliards d'euros." },
+        { t: 'vf', q: "Insmed est spécialisé dans le traitement des maladies respiratoires.", a: true, x: "Le Monde la présente comme un spécialiste du traitement des maladies respiratoires." },
+        { t: 'vf', q: "Sanofi paie Insmed en actions.", a: false, x: "L'opération est payée en numéraire, c'est-à-dire en argent comptant." },
+        { t: 'qcm', q: "Selon Euronews, pourquoi Sanofi fait-il cette acquisition ?", c: ["Renforcer son portefeuille avant la perte d'exclusivité du Dupixent", "Quitter le marché américain", "Fermer un site en France", "Racheter ses propres actions"], a: 0, x: "L'opération vise à renforcer le portefeuille de nouveaux médicaments avant la perte d'exclusivité du Dupixent." }
       ]
     }
   ]
