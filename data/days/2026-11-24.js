@@ -142,10 +142,35 @@ window.SCOOP_DAYS['2026-11-24'] = {
         { name: 'Libération', url: 'https://www.liberation.fr/politique/detournement-de-fonds-publics-une-enquete-ouverte-a-lagglomeration-du-havre-presidee-par-edouard-philippe-20261124_YVGEWXKHJBE2JCNJ2GLT242A7E/' },
         { name: 'AFP (via Le Figaro)', url: 'https://www.lefigaro.fr/elections/presidentielles/presidentielle-2027-une-enquete-ouverte-pour-detournement-de-fonds-publics-a-l-agglomeration-du-havre-presidee-par-edouard-philippe-20261124' }
       ]
+    },
+    {
+      tag: 'Sport',
+      title: "CAN 2025 : le TAS donne le titre au Sénégal, le Maroc déchu",
+      text: "Le **Tribunal arbitral du sport** (TAS) a décidé mardi, « à l'unanimité », que le **Sénégal** est le vainqueur de la Coupe d'Afrique des nations 2025, au détriment du **Maroc**. Les Sénégalais s'étaient imposés 1-0 sur le terrain en finale le 18 janvier, mais la Confédération africaine de football avait attribué en mars une victoire 3-0 et le titre au Maroc, après que des joueurs sénégalais avaient quitté la pelouse pour protester contre un penalty. La fédération marocaine « prend acte » mais « conteste » et dit qu'elle engagera « toutes les procédures légales nécessaires » ; elle dispose de 30 jours pour faire appel.",
+      why: "Le TAS, basé à Lausanne, est la plus haute instance d'arbitrage du sport international : il tranche les litiges entre fédérations, clubs et athlètes. Ici, il a inversé la décision de la Confédération africaine de football (CAF), qui avait donné le titre au Maroc sur tapis vert, c'est-à-dire par décision administrative et non sur le terrain.",
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/football/article/2026/11/24/can-2025-le-tribunal-arbitral-du-sport-declare-le-senegal-champion-d-afrique-des-nations-au-detriment-du-maroc_6814779_1616938.html' },
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/sports/foot/can/le-tribunal-arbitral-du-sport-rend-la-victoire-de-la-coupe-d-afrique-des-nations-au-senegal-au-detriment-du-maroc_8297460.html#xtor=RSS-3-[lestitres]' },
+        { name: 'France 24', url: 'https://www.france24.com/fr/vid%C3%A9o/20261124-can-2025-le-s%C3%A9n%C3%A9gal-vainqueur-officiel-selon-le-verdict-du-tas' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/afrique-foot/20261124-la-can-2025-attribu%C3%A9e-d%C3%A9finitivement-au-s%C3%A9n%C3%A9gal-par-le-tribunal-arbitral-du-sport' },
+        { name: 'Euronews', url: 'https://fr.euronews.com/2026/11/24/football-le-senegal-retrouve-son-titre-de-champion-dafrique-apres-un-recours-victorieux' }
+      ]
+    },
+    {
+      tag: 'Justice',
+      title: "Éric Zemmour définitivement condamné pour ses propos sur Pétain",
+      text: "La **Cour de cassation** a rejeté mardi le pourvoi d'**Éric Zemmour** : sa condamnation pour « contestation de l'existence de crime contre l'humanité » est définitive. En cause, ses propos tenus sur CNews en 2019, selon lesquels le maréchal Pétain « avait sauvé les juifs français ». La Cour a jugé qu'ils constituaient une « minoration outrancière de la Shoah telle qu'elle a été mise en œuvre sur le territoire français ». Le candidat d'extrême droite à la présidentielle avait été relaxé en première instance et en appel, mais ces décisions avaient été annulées une première fois par la Cour de cassation.",
+      why: "La Cour de cassation ne rejuge pas les faits : elle vérifie que la loi a été correctement appliquée. Quand elle rejette un pourvoi, la condamnation devient définitive. La contestation de crime contre l'humanité est un délit en France, qui vise notamment la négation ou la minoration de la Shoah.",
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/societe/article/2026/11/24/eric-zemmour-definitivement-condamne-pour-avoir-affirme-que-le-marechal-petain-avait-sauve-les-juifs-francais_6814807_3224.html' },
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/politique/eric-zemmour/eric-zemmour-definitivement-condamne-pour-contestation-de-l-existence-de-crime-contre-l-humanite-apres-avoir-affirme-que-le-marechal-petain-avait-sauve-les-juifs-francais_8297988.html#xtor=RSS-3-[lestitres]' },
+        { name: 'Libération', url: 'https://www.liberation.fr/societe/police-justice/petain-a-sauve-les-juifs-francais-eric-zemmour-definitivement-condamne-par-la-cour-de-cassation-pour-contestation-de-crime-contre-lhumanite-20261124_3FL5UCZWMVCD5IBCWKDRMGAJRM/' }
+      ]
     }
   ],
   updates: [
-    { at: '14:00', stories: [10, 11] }
+    { at: '14:00', stories: [10, 11] },
+    { at: '18:00', stories: [12, 13] }
   ],
   shorts: [
     { id: '27z_FzB3wrk', source: 'franceinfo', title: 'Nvidia annonce la réintégration de Jensen Huang comme PDG', tag: 'Économie', story: 0 },
@@ -209,6 +234,15 @@ window.SCOOP_DAYS['2026-11-24'] = {
         { t: 'qcm', q: "Quelle institution a été saisie en premier de la plainte visant l'agglomération du Havre ?", c: ["Le parquet national financier", "La Cour des comptes", "Le Conseil d'État", "La Haute Autorité pour la transparence"], a: 0, x: "La procureure du Havre indique que la plainte est passée par le parquet national financier, initialement saisi." },
         { t: 'vf', q: "L'enquête sur l'agglomération du Havre porte sur des soupçons de détournement de fonds publics.", a: true, x: "Le parquet du Havre a ouvert une enquête pour détournement de fonds publics." },
         { t: 'match', q: "Associe chaque personne à son rôle dans ces affaires.", pairs: [["Nicolas Sarkozy", "Ancien président renvoyé en procès"], ["Mimi Marchand", "Communicante renvoyée en procès"], ["Ziad Takieddine", "Intermédiaire libanais dont la rétractation est en cause"], ["Édouard Philippe", "Président de l'agglomération du Havre"]], x: "Chaque rôle est rappelé dans les deux infos ajoutées à 14 h." }
+      ]
+    },
+    {
+      title: '⚡ Flash de 18 h', icon: '⚡', desc: 'Mise à jour', exercises: [
+        { t: 'qcm', q: "Quelle instance a déclaré le Sénégal vainqueur de la CAN 2025 ?", c: ["Le Tribunal arbitral du sport", "La Confédération africaine de football", "La FIFA", "La Cour de cassation"], a: 0, x: "Le TAS a statué « à l'unanimité » mardi en faveur du Sénégal." },
+        { t: 'vf', q: "La fédération marocaine « prend acte » de la décision du TAS mais la conteste.", a: true, x: "La fédération marocaine « prend acte » mais « conteste » et annonce des procédures légales." },
+        { t: 'qcm', q: "Quel était le score de la finale de la CAN sur le terrain, le 18 janvier ?", c: ["1-0 pour le Sénégal", "3-0 pour le Maroc", "2-1 pour le Maroc", "0-0, tirs au but"], a: 0, x: "Les Sénégalais s'étaient imposés 1-0 sur la pelouse, avant que la CAF n'attribue une victoire 3-0 au Maroc." },
+        { t: 'qcm', q: "Que fait la Cour de cassation quand elle rejette le pourvoi d'Éric Zemmour ?", c: ["Elle rend la condamnation définitive", "Elle ordonne un nouveau procès", "Elle le relaxe", "Elle réduit sa peine"], a: 0, x: "Le rejet du pourvoi rend la condamnation pour contestation de crime contre l'humanité définitive." },
+        { t: 'vf', q: "Éric Zemmour avait été condamné en première instance puis en appel avant la Cour de cassation.", a: false, x: "Il avait été relaxé en première instance et en appel ; ces décisions avaient été annulées une première fois par la Cour de cassation." }
       ]
     }
   ]
