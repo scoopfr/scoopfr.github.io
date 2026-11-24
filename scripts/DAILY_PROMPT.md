@@ -56,6 +56,20 @@ Trois règles passent avant tout le reste :
    - Tant qu'il affiche `ÉCHEC`, corrige le fichier : ajoute la 2e source, réécris le texte ou le `why`, ou remplace la question, puis relance-le.
    - **Ne publie jamais une édition en échec.** Si tu n'y arrives pas, n'écris pas d'édition et explique pourquoi dans ton résumé.
 
+## Mises à jour de la journée (10 h, 13 h, 16 h, 19 h, 22 h)
+
+Quand l'édition du jour **existe déjà** (sans marqueur `SCOOP:REGENERER`), tu ne la réécris pas : tu la **complètes**.
+
+1. Lance les deux scripts de récupération et lis `news-today.txt`.
+2. Cherche les sujets **recoupés par au moins 2 rédactions** qui ne sont **pas déjà traités** dans `stories` : compare les faits, pas seulement les mots. Un développement nouveau et important d'un sujet existant (par exemple une décision, un vote ou un bilan) compte comme nouveau ; une simple reformulation, non.
+3. **S'il n'y a aucun sujet nouveau et recoupé, ne modifie rien** et termine (« rien de nouveau »). Ne force jamais une mise à jour.
+4. Sinon, **ajoute** 1 à 3 infos **à la fin** de `stories`, au même format (`sources` avec au moins 2 rédactions différentes). Ne modifie, ne supprime et ne réordonne **aucune** info existante : les leçons y font référence par position. L'édition ne doit pas dépasser 16 infos au total.
+5. Ajoute **à la fin** de `lessons` une leçon `{ title: '⚡ Flash de <HH> h', icon: '⚡', desc: 'Mise à jour', exercises: [...] }` de 4 à 6 exercices (`qcm`, `vf`, éventuellement un `match`), qui portent **uniquement** sur les infos que tu viens d'ajouter.
+6. Ajoute à l'objet de l'édition (ou complète s'il existe) le tableau `updates` : `updates: [{ at: '<HH>:00', stories: [<index des infos ajoutées>] }]`, une entrée par mise à jour.
+7. Tu peux ajouter des vidéos à `shorts` pour les nouvelles infos (`story` = leur index), en respectant « un sujet = une vidéo ».
+8. Dans `data/days/index.js`, mets à jour l'entrée du jour : `lessons` = nouveau nombre total de leçons. Garde le titre, sauf si un sujet ajouté est clairement le plus important de la journée.
+9. Lance `node scripts/check-edition.js data/days/<date>.js` (il doit afficher OK), puis publie : `git commit -m "Mise à jour de <HH> h"`.
+
 ## Rappels sur les types d'exercices
 
 ```

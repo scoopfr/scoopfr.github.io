@@ -428,6 +428,9 @@ p { margin: 0; }
   .fcard { border-left: 1px solid #1d1d22; border-right: 1px solid #1d1d22; }
 }
 
+/* ---------- Étiquette des infos ajoutées en cours de journée ---------- */
+.new-badge { display: inline-block; margin-left: 6px; padding: 3px 7px; border-radius: 6px; background: var(--yellow); color: #1B1B1F; font: 800 10.5px/1.2 var(--sans); letter-spacing: .06em; vertical-align: middle; animation: pop .4s; }
+
 /* ---------- Bascule « Texte / Choix » dans une leçon ---------- */
 .mode-toggle { flex: none; border: 2px solid var(--line); border-radius: 999px; padding: 6px 11px; background: var(--card); color: var(--ink); font: 800 13px var(--sans); cursor: pointer; white-space: nowrap; }
 .mode-toggle[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }

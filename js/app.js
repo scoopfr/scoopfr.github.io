@@ -269,9 +269,9 @@
       </a>`;
       html += `
       <section class="hero">
-        <div class="kicker">Édition du ${esc(frDate(CURRENT))}</div>
+        <div class="kicker">Édition du ${esc(frDate(CURRENT))}${lastUpdate(day) ? ` · 🔄 ${esc(lastUpdate(day))}` : ''}</div>
         <h1>${esc(day.title)}</h1>
-        <ul class="hero-heads">${day.stories.slice(0, 4).map(s => `<li>${esc(s.title)}</li>`).join('')}</ul>
+        <ul class="hero-heads">${heroStories(day).map(({ s, i }) => `<li>${esc(s.title)}${newBadge(day, i)}</li>`).join('')}</ul>
         <div class="hero-actions">
           <a class="btn ghost" href="#/day/${CURRENT}">📰 Lire le brief</a>
           ${next >= 0 ? `<button class="btn primary" data-start="day:${CURRENT}:${next}">▶ ${next === 0 ? 'Quiz du jour' : 'Continuer'}</button>` : `<a class="btn green" href="#/day/${CURRENT}">✓ Édition bouclée</a>`}
@@ -300,6 +300,22 @@
         <a class="dash-chip" href="#/learn">🎓 Tout le parcours</a>
       </div>`;
     return html;
+  }
+
+  // ---------- Mises à jour de la journée (toutes les 3 h) ----------
+  // heure d'ajout d'une info (« 13:00 ») si elle vient d'une mise à jour, sinon ''
+  function storyAddedAt(day, i) {
+    const u = (day && day.updates || []).find(x => x && Array.isArray(x.stories) && x.stories.includes(i));
+    return u ? u.at : '';
+  }
+  const fmtHour = at => at ? `${parseInt(at, 10)} h${at.slice(3) !== '00' ? at.slice(3) : ''}` : '';
+  const lastUpdate = day => { const u = (day && day.updates || []).slice(-1)[0]; return u ? `à ${fmtHour(u.at)}` : ''; };
+  const newBadge = (day, i) => { const at = storyAddedAt(day, i); return at ? ` <span class="new-badge">NOUVEAU · ${esc(fmtHour(at))}</span>` : ''; };
+  // à la une de l'accueil : les ajouts les plus récents d'abord, puis les infos du matin
+  function heroStories(day) {
+    const all = day.stories.map((s, i) => ({ s, i }));
+    const added = all.filter(x => storyAddedAt(day, x.i)).reverse();
+    return [...added, ...all.filter(x => !storyAddedAt(day, x.i))].slice(0, 4);
   }
 
   // Prochaine leçon à faire dans une liste d'unités (la première non terminée et débloquée)
@@ -467,15 +483,15 @@
     if (!day) return `<div class="empty"><div class="big">🕳️</div><h2>Édition introuvable</h2><p class="muted">Pas d'édition pour le ${esc(date)}.</p><p style="margin-top:16px"><a class="btn ghost" href="#/archive">Voir les archives</a></p></div>`;
     const tagColors = day.tagColors || {};
     return `<article class="edition">
-      <div class="kicker">Édition du ${esc(frDate(date, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }))}</div>
+      <div class="kicker">Édition du ${esc(frDate(date, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }))}${lastUpdate(day) ? ` · 🔄 mise à jour ${esc(lastUpdate(day))}` : ''}</div>
       <h1>${esc(day.title)}</h1>
       ${day.intro ? `<p class="lede">${rich(day.intro)}</p>` : ''}
       <p style="margin-top:12px"><button class="btn small ghost" data-scroll="archives">🗂️ Éditions précédentes et infos gardées ↓</button></p>
       ${wordCard(day.word)}
       <h2 class="section-title">Les ${day.stories.length} infos à connaître</h2>
-      <div class="stories">${day.stories.map(s => `
+      <div class="stories">${day.stories.map((s, i) => `
         <div class="story" style="--tag:${esc(s.color || tagColors[s.tag] || '#E63946')}">
-          <span class="tag">${esc(s.tag)}</span>
+          <span class="tag">${esc(s.tag)}</span>${newBadge(day, i)}
           <h3>${esc(s.title)}</h3>
           <p>${rich(s.text)}</p>
           ${s.why ? `<div class="why"><b>🎯 Pour le concours :</b> ${rich(s.why)}</div>` : ''}
@@ -1202,7 +1218,7 @@
       const s = it.s, sv = isSaved(date, it.i);
       return `<section class="fcard f-story" data-k="${k}" style="--c:${esc(it.color)}">
         <div class="f-inner">
-          <span class="f-tag">${esc(s.tag)}</span>
+          <span class="f-tag">${esc(s.tag)}</span>${newBadge(F.day, it.i)}
           <h2>${esc(s.title)}</h2>
           <p>${rich(s.text)}</p>
           ${s.why ? `<div class="f-why">🎯 ${rich(s.why)}</div>` : ''}
@@ -1235,7 +1251,7 @@
           </div>
           <div class="f-meta-top"><span class="f-chan">▶ ${esc(v.source)}</span>
             <span class="f-tools"><a class="f-yt" href="https://www.youtube.com/shorts/${esc(v.id)}" target="_blank" rel="noopener">YouTube ↗</a></span></div>
-          ${st ? `<h3 class="f-headline">${esc(st.title)}</h3>
+          ${st ? `<h3 class="f-headline">${esc(st.title)}${newBadge(F.day, it.story)}</h3>
             <div class="f-row"><button class="f-ess" data-sheet>📰 L'essentiel ${srcList.length >= 2 ? `· ✓ ${srcList.length} sources` : ''}</button>
             <button class="f-mini ${sv ? 'on' : ''}" data-save="${it.story}" aria-pressed="${sv}" aria-label="Garder cette info"><span>🔖</span><small>${sv ? 'Gardée' : 'Garder'}</small></button></div>`
           : `<h3>${esc(v.title)}</h3>`}

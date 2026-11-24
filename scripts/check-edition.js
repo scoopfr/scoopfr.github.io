@@ -31,7 +31,12 @@
     if (!day.word || !day.word.term || !day.word.def) E('Mot du jour manquant');
     if (!Array.isArray(day.memo) || day.memo.length < 3) W('Mémo : moins de 3 éléments');
     const stories = Array.isArray(day.stories) ? day.stories : [];
-    if (stories.length < 8 || stories.length > 10) E(`Il faut 8 à 10 infos (actuellement ${stories.length})`);
+    // 8 à 10 infos le matin, jusqu'à 16 avec les mises à jour de la journée
+    if (stories.length < 8 || stories.length > 16) E(`Il faut 8 à 16 infos (actuellement ${stories.length})`);
+    (day.updates || []).forEach((u, i) => {
+      if (!u || !/^\d{2}:\d{2}$/.test(u.at || '') || !Array.isArray(u.stories) || !u.stories.length) E(`Mise à jour ${i} : format attendu { at: 'HH:MM', stories: [index…] }`);
+      else u.stories.forEach(k => { if (!Number.isInteger(k) || !stories[k]) E(`Mise à jour ${u.at} : l'info ${k} n'existe pas`); });
+    });
 
     // 1. Recoupement des sources
     stories.forEach((s, i) => {
@@ -52,7 +57,9 @@
 
     // 2. Leçons
     const lessons = Array.isArray(day.lessons) ? day.lessons : [];
-    if (lessons.length !== 3) E(`Il faut exactement 3 leçons (actuellement ${lessons.length})`);
+    // 3 leçons le matin, puis une leçon « Flash » par mise à jour
+    if (lessons.length < 3 || lessons.length > 9) E(`Il faut 3 leçons, plus une par mise à jour (actuellement ${lessons.length})`);
+    if (lessons.length > 3 && (day.updates || []).length !== lessons.length - 3) W(`${lessons.length - 3} leçon(s) Flash pour ${(day.updates || []).length} mise(s) à jour`);
     lessons.forEach((l, li) => {
       const exs = Array.isArray(l.exercises) ? l.exercises : [];
       if (exs.length < 6) W(`Leçon ${li} : seulement ${exs.length} exercices`);

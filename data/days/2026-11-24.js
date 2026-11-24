@@ -123,15 +123,10 @@ window.SCOOP_DAYS['2026-11-24'] = {
   ],
   shorts: [
     { id: '27z_FzB3wrk', source: 'franceinfo', title: 'Nvidia annonce la réintégration de Jensen Huang comme PDG', tag: 'Économie', story: 0 },
-    { id: '6tLYdyUmU5A', source: 'France 24', title: 'Jensen Huang de retour à la tête de Nvidia dans un volte-face inattendu', tag: 'Économie', story: 0 },
-    { id: 'PCngqrZFLOg', source: 'Le Parisien', title: 'Nvidia : Jensen Huang acclamé à son retour, les bourses s\'envolent', tag: 'Économie', story: 0 },
     { id: 'ItuzQkICG_8', source: 'Le Monde', title: 'Guerre en Ukraine : Volodymyr Zelensky revendique l\'attaque sur deux bateaux russes en Libye', tag: 'Monde', story: 1 },
-    { id: 'YXv5ZagMf5w', source: 'euronews', title: 'L\'Ukraine publie des images de frappes contre deux navires russes au large de la Libye', tag: 'Monde', story: 1 },
-    { id: '9dsFt7-hKBc', source: 'TV5MONDE Info', title: 'Libye - Attaque de Kiev sur deux navires russes', tag: 'Monde', story: 1 },
     { id: 'vlJw_hFaGgU', source: 'franceinfo', title: 'Affaire Nahel Merzouk', tag: 'Justice', story: 2 },
     { id: '6n5jULeT7pQ', source: 'franceinfo', title: 'Quel est le calendrier de l\'élection présidentielle ?', tag: 'Politique', story: 3 },
-    { id: 'q_40euQifz0', source: 'Brut', title: 'La COP31 vient de se terminer et c\'est un échec, on vous explique.', tag: 'Climat', story: 4 },
-    { id: 'GTXPgTGa_c8', source: 'France Inter', title: 'La fin de la #cop31 vue par la presse française', tag: 'Climat', story: 4 }
+    { id: 'q_40euQifz0', source: 'Brut', title: 'La COP31 vient de se terminer et c\'est un échec, on vous explique.', tag: 'Climat', story: 4 }
   ],
   memo: [
     "**Jensen Huang** a été réintégré à la tête de Nvidia le **23 novembre**, onze jours après sa démission du 12 novembre ; la société singapourienne **Megaspeed** est sur liste noire américaine.",
