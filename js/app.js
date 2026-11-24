@@ -642,6 +642,7 @@
           <select id="f-theme">${[['auto', 'Automatique'], ['light', 'Clair'], ['dark', 'Sombre']].map(([v, l]) => `<option value="${v}" ${S.settings.theme === v ? 'selected' : ''}>${l}</option>`).join('')}</select></div>
         <label class="toggle"><span style="font-weight:700;font-size:14px">Effets sonores</span><input id="f-sound" type="checkbox" ${S.settings.sound ? 'checked' : ''}></label>
         <label class="toggle" style="margin-top:14px"><span><span style="font-weight:700;font-size:14px">🌱 Mode éco</span><br><small class="muted">Les vidéos du fil ne se lancent pas toutes seules : tu touches ▶ pour les voir. Beaucoup moins de données et de batterie. Activé d'office si ton téléphone est en économie de données.</small></span><input id="f-eco" type="checkbox" ${ecoMode() ? 'checked' : ''}></label>
+        ${GOATCOUNTER ? `<label class="toggle" style="margin-top:14px"><span><span style="font-weight:700;font-size:14px">📊 Statistiques anonymes</span><br><small class="muted">Compte seulement les visites et les leçons terminées, sans cookie ni donnée personnelle. Tu peux les couper à tout moment.</small></span><input id="f-stats" type="checkbox" ${S.settings.stats !== false ? 'checked' : ''}></label>` : ''}
         <label class="toggle" style="margin-top:14px"><span><span style="font-weight:700;font-size:14px">⌨️ Mode réponse libre</span><br><small class="muted">Tu tapes la réponse au lieu de choisir parmi des propositions. Aussi activable pendant un quiz (bouton en haut).</small></span><input id="f-free" type="checkbox" ${S.settings.freeText ? 'checked' : ''}></label>
       </div>
 
@@ -664,6 +665,7 @@
     $('#f-sound').onchange = e => { S.settings.sound = e.target.checked; upd(); };
     $('#f-free').onchange = e => { S.settings.freeText = e.target.checked; upd(); };
     $('#f-eco').onchange = e => { S.settings.eco = e.target.checked; upd(); };
+    if ($('#f-stats')) $('#f-stats').onchange = e => { S.settings.stats = e.target.checked; upd(); if (e.target.checked) initStats(); };
     $('#b-export').onclick = () => {
       const a = document.createElement('a');
       a.href = URL.createObjectURL(new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' }));
@@ -938,6 +940,7 @@
     const before = level().n, goalBefore = todayXp() >= S.settings.goal;
     addXp(L.xp); markActive();
     S.stats.lessons++;
+    track('/event/lecon-terminee', 'Leçon terminée', true);
     if (cfg.mode !== 'review') S.lessons[cfg.key] = { stars: Math.max(stars, prev ? prev.stars : 0), at: TODAY };
     save();
     const lvUp = level().n > before, goalNow = !goalBefore && todayXp() >= S.settings.goal;
@@ -1834,6 +1837,71 @@
   };
   (window.SCOOP_MODULES || []).forEach(m => { try { m(ctx); } catch (e) { console.error('Module Scoop :', e); } });
 
+  // ---------- Accès anticipé : écran d'accueil + code ----------
+  // Le code est un simple portail d'accueil (il est lisible dans le code de la page) : il sert à l'effet « accès privé »
+  // et à compter les entrées, pas à protéger quoi que ce soit. À changer ici.
+  const ACCESS_CODE = 'SCOOP2027';
+  const INSTAGRAM = 'by.naufrage';
+  const GOATCOUNTER = '';      // code GoatCounter (ex. 'scoop' pour scoop.goatcounter.com). Vide = aucune statistique.
+  const ACCESS_KEY = 'scoop.access';
+  const hasAccess = () => { try { return localStorage.getItem(ACCESS_KEY) === '1'; } catch (e) { return true; } };   // stockage bloqué : on n'enferme personne
+  const grantAccess = () => { try { localStorage.setItem(ACCESS_KEY, '1'); } catch (e) { /* ignore */ } };
+  const alreadyUser = () => S.xp > 0 || S.stats.answered > 0 || !!S.last;   // les utilisateurs existants entrent directement
+
+  // Statistiques anonymes (GoatCounter : sans cookie, sans donnée personnelle). Seulement des visites et des événements.
+  let gcLoaded = false;
+  function track(path, title, event) {
+    try { if (gcLoaded && window.goatcounter && window.goatcounter.count && S.settings.stats !== false) window.goatcounter.count({ path: path || ('/' + ((location.hash || '#/home').slice(2).split('/')[0] || 'home')), title: title || '', event: !!event }); } catch (e) { /* ignore */ }
+  }
+  function initStats() {
+    if (!GOATCOUNTER || gcLoaded || S.settings.stats === false || !hasAccess()) return;
+    window.goatcounter = { no_onload: true, endpoint: `https://${GOATCOUNTER}.goatcounter.com/count` };
+    const s = document.createElement('script'); s.async = true; s.src = 'https://gc.zgo.at/count.js';
+    s.onload = () => { gcLoaded = true; track(); };
+    document.head.appendChild(s);
+  }
+  window.addEventListener('hashchange', () => track());
+
+  function showWelcome(done) {
+    window.__scoopReady = true;
+    const el = document.createElement('section');
+    el.id = 'welcome'; el.className = 'welcome'; el.setAttribute('aria-label', 'Bienvenue sur Scoop');
+    el.innerHTML = `<div class="wl-inner">
+      <span class="wl-badge">Accès anticipé</span>
+      <div class="wl-logo"><span class="wl-mark">S</span><span class="wl-word">scoop<i>.</i></span></div>
+      <h1 class="wl-line">S'informer en s'amusant.</h1>
+      <p class="wl-sub">L'actu du jour en leçons, et le concours des écoles de journalisme en ligne de mire.</p>
+      <form class="wl-form" novalidate>
+        <label for="wl-code">Ton code d'accès</label>
+        <input id="wl-code" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="CODE" maxlength="40">
+        <p class="wl-err" role="alert" hidden>Ce code n'est pas bon. Demande-le en message privé sur Instagram.</p>
+        <button class="wl-btn" type="submit">Entrer</button>
+      </form>
+      <p class="wl-dm">Pas encore de code ? Scoop est en accès anticipé : écris-moi en <b>message privé</b> sur Instagram pour l'obtenir.</p>
+      <a class="wl-insta" href="https://www.instagram.com/${INSTAGRAM}/" target="_blank" rel="noopener">📩 @${INSTAGRAM} sur Instagram</a>
+      ${GOATCOUNTER ? `<label class="wl-stats"><input type="checkbox" id="wl-stats" checked><span>Compter ma visite dans les statistiques anonymes (aucune donnée personnelle, pas de cookie).</span></label>` : ''}
+      <p class="wl-credit">conçu par <b>by.naufrage</b></p>
+    </div>`;
+    document.body.appendChild(el);
+    document.body.classList.add('in-welcome');
+    const form = $('form', el), inp = $('#wl-code', el), err = $('.wl-err', el);
+    setTimeout(() => inp.focus(), 80);
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const v = inp.value.toUpperCase().replace(/\s+/g, '');
+      if (v === ACCESS_CODE) {
+        grantAccess();
+        const cb = $('#wl-stats', el); if (cb) { S.settings.stats = cb.checked; save(); }
+        el.classList.add('out'); document.body.classList.remove('in-welcome');
+        setTimeout(() => el.remove(), 350);
+        sfx.end(); done(); track('/event/acces-code-ok', 'Entrée avec le code', true);
+      } else {
+        err.hidden = false; form.classList.remove('shake'); void form.offsetWidth; form.classList.add('shake'); sfx.ko(); inp.select();
+      }
+    });
+    inp.addEventListener('input', () => { err.hidden = true; });
+  }
+
   // ---------- Démarrage ----------
   async function init() {
     try { await loadScript(`data/days/index.js?t=${Date.now()}`); } catch (e) { /* pas encore d'édition */ }
@@ -1844,7 +1912,9 @@
     CURRENT = (INDEX.find(d => d.date <= TODAY) || INDEX[INDEX.length - 1] || {}).date || null;
     if (CURRENT) await getDay(CURRENT);
     await loadLive();
-    route();
+    if (!hasAccess() && alreadyUser()) grantAccess();   // anciens utilisateurs : pas d'écran de code
+    if (hasAccess()) { initStats(); route(); }
+    else showWelcome(() => { initStats(); route(); });
   }
   init();
 })();
