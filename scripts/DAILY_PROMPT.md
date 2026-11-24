@@ -45,6 +45,8 @@ Trois règles passent avant tout le reste :
    - **Exclus** le divertissement, le lifestyle, le cinéma et les séries, les conseils santé ou cuisine, les bandes-annonces et l'autopromotion. Exclus aussi les extraits de débats d'opinion où un éditorialiste donne son avis (titres entre « … » attribués à un chroniqueur), et les faits divers sordides sans portée générale.
    - **Varie les sources** : au moins 5 rédactions différentes, et 3 vidéos au maximum par rédaction. Privilégie les vidéos qui traitent des infos du brief.
    - Quand une vidéo traite d'une info retenue dans `stories`, relie-la avec `story: <index dans stories>`. Vise au moins 4 vidéos reliées.
+   - **Un sujet = une vidéo.** Au plus **1 vidéo par info**, et jamais deux vidéos non reliées sur le même sujet. Si plusieurs médias couvrent un sujet, garde la vidéo la plus claire : le recoupement se voit dans les `sources` de l'info, pas dans le fil.
+   - Le fil reçoit aussi des vidéos fraîches toutes les 30 minutes (`data/live/shorts.js`, géré par GitHub Actions). Ne modifie pas ce fichier.
    - Ajoute le tableau `shorts` : `{ id, source, title, tag, story? }`. Reprends le titre tel quel, en retirant seulement les suffixes du type « • FRANCE 24 ».
    - Ne pose **aucune question de quiz sur le contenu d'une vidéo** : tu n'en connais que le titre.
    - Si le script échoue, mets `shorts: []`.

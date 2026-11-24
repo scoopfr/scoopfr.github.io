@@ -545,6 +545,24 @@ p { margin: 0; }
 .f-tools { display: flex; align-items: center; gap: 12px; }
 .f-sound { border: 0; border-radius: 999px; padding: 5px 10px; background: rgba(255,255,255,.14); color: #fff; font: 700 13px var(--sans); cursor: pointer; }
 
+/* ---------- Carte fusionnée « vidéo + l'essentiel » ---------- */
+.f-merged .f-meta { border-top: 3px solid var(--c, var(--red)); }
+.f-headline { font: 800 17px/1.3 var(--serif) !important; }
+.f-row { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.f-ess { flex: 1; text-align: left; border: 0; border-radius: 12px; padding: 9px 12px; background: rgba(255,255,255,.12); color: #fff; font: 700 14px var(--sans); cursor: pointer; }
+.f-mini { display: flex; align-items: center; gap: 4px; border: 0; border-radius: 12px; padding: 8px 10px; background: rgba(255,255,255,.12); color: #fff; font: 700 12px var(--sans); cursor: pointer; }
+.f-mini.on { background: var(--yellow); color: #1B1B1F; }
+.f-sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; max-height: 72%; overflow-y: auto; padding: 16px 18px calc(20px + env(safe-area-inset-bottom)); border-radius: 22px 22px 0 0; background: linear-gradient(170deg, var(--c, #E63946), #0b0b10 75%); box-shadow: 0 -10px 30px rgba(0,0,0,.5); animation: sheetup .22s ease-out; -webkit-overflow-scrolling: touch; }
+@keyframes sheetup { from { transform: translateY(40px); opacity: 0; } }
+.f-sheet[hidden] { display: none; }
+.f-sheet-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.f-sheet-head .f-tag { margin: 0; }
+.f-sheet-x { border: 0; width: 34px; height: 34px; border-radius: 50%; background: rgba(0,0,0,.3); color: #fff; font-size: 16px; cursor: pointer; }
+.f-sheet h2 { font-size: 22px !important; margin-bottom: 10px; }
+.f-sheet p { font-size: 15px; line-height: 1.55; color: rgba(255,255,255,.92); }
+.f-sheet .f-src a { color: #fff; text-decoration: underline; }
+.f-vidsrc { margin-top: 10px; font-size: 12px !important; color: rgba(255,255,255,.6) !important; }
+
 /* ---------- Compatibilité iPhone / iPad (Safari) ---------- */
 a, button, label, summary { -webkit-tap-highlight-color: transparent; }
 .topbar { -webkit-backdrop-filter: blur(10px); }

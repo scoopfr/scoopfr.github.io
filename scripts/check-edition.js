@@ -106,6 +106,10 @@
       if (!v || !v.source || !v.title) E(`Vidéo ${i} : source ou titre manquant`);
       if (v && v.story != null && !(Number.isInteger(v.story) && stories[v.story])) E(`Vidéo ${i} : « story » pointe vers une info inexistante`);
     });
+    // Un sujet = une vidéo : pas deux vidéos reliées à la même info
+    const perStory = {};
+    (day.shorts || []).forEach((v, i) => { if (v && Number.isInteger(v.story)) (perStory[v.story] = perStory[v.story] || []).push(i); });
+    Object.keys(perStory).forEach(k => { if (perStory[k].length > 1) E(`Vidéos ${perStory[k].join(' et ')} : plusieurs vidéos pour la même info (${k}). Garde-n'en qu'une.`); });
     const vSrc = new Set((day.shorts || []).map(v => v && v.source));
     if ((day.shorts || []).length && vSrc.size < 5) W(`Vidéos : seulement ${vSrc.size} rédactions différentes (5 minimum conseillé)`);
 

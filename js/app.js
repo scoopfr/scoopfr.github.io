@@ -259,11 +259,12 @@
     if (day) {
       if (CURRENT !== TODAY) html += `<div class="banner">⏳ <span>L'édition d'aujourd'hui n'est pas encore en kiosque. Voici la dernière disponible, celle du <b>${esc(frDate(CURRENT))}</b>.</span></div>`;
       const next = day.lessons.findIndex((_, i) => !lessonState(`day:${CURRENT}:${i}`));
-      const vids = (day.shorts || []).filter(v => v && YT_ID.test(v.id)), feedDone = lessonState(`feed:${CURRENT}`);
+      const vids = newFeedVideos(CURRENT, day);
+      const live = window.SCOOP_LIVE, upd = live && live.updated ? ago(live.updated) : '';
       html += `<a class="feed-teaser" href="#/feed/${CURRENT}">
         <div class="ft-thumbs">${vids.slice(0, 3).map(v => `<img src="${ytThumb(v.id)}" alt="" loading="lazy">`).join('') || '<span class="ft-emoji">📱</span>'}</div>
-        <div class="ft-txt"><div class="ft-kick">${feedDone ? '✓ Fil terminé' : 'Le fil du jour'}</div><h3>Swipe l'actu ${vids.length ? 'en vidéos' : 'en cartes'}</h3>
-        <p>${vids.length ? `${vids.length} vidéos · ` : ''}${day.stories.length} infos · questions flash</p></div>
+        <div class="ft-txt"><div class="ft-kick">${vids.length ? `${vids.length} nouvelle${vids.length > 1 ? 's' : ''} vidéo${vids.length > 1 ? 's' : ''}` : '✓ Tu es à jour'}</div><h3>Le fil de l'actu</h3>
+        <p>${upd ? `Mis à jour ${esc(upd)}` : `${day.stories.length} infos`} · questions flash</p></div>
         <span class="ft-play" aria-hidden="true">▶</span>
       </a>`;
       html += `
@@ -941,41 +942,120 @@
   const savedKey = (date, i) => `${date}:${i}`;
   const isSaved = (date, i) => S.saved.some(s => s.key === savedKey(date, i));
 
-  function buildFeed(date, day) {
-    const colors = day.tagColors || {};
-    const stories = day.stories.map((s, i) => ({ type: 'story', s, i, color: s.color || colors[s.tag] || '#E63946' }));
-    const vids = (day.shorts || []).filter(v => v && YT_ID.test(v.id)).map(v => ({ type: 'video', v }));
-    const pool = [];
-    day.lessons.forEach((l, li) => l.exercises.forEach((ex, ei) => {
-      if ((ex.t === 'qcm' && ex.c.length <= 4) || ex.t === 'vf') pool.push({ ex, id: `day:${date}:${li}:${ei}` });
-    }));
-    const quiz = shuffle(pool).slice(0, Math.min(8, Math.max(4, Math.round(stories.length * 0.7)))).map(q => Object.assign({ type: 'quiz' }, q));
-    // chaque vidéo liée à une info passe juste après elle ; les autres comblent les trous
-    const linked = {}, free = [];
-    vids.forEach(v => { const k = v.v.story; if (Number.isInteger(k) && stories[k]) (linked[k] = linked[k] || []).push(v); else free.push(v); });
-    const seq = [{ type: 'intro' }];
-    stories.forEach((st, k) => {
-      if (linked[st.i]) { seq.push(linked[st.i][0], st, ...linked[st.i].slice(1)); }
-      else { seq.push(st); if (free.length) seq.push(free.shift()); }
-      if (k % 2 === 1 && quiz.length) seq.push(quiz.shift());
+  // ---------- Mémoire de ce qui a déjà été vu dans le fil ----------
+  // S.seen = { v: {idVidéo: date}, s: {"date:index": date}, q: {idQuestion: date} } — purgé après 14 jours
+  function seenStore() {
+    S.seen = S.seen || {}; ['v', 's', 'q', 'vt'].forEach(k => { S.seen[k] = S.seen[k] || {}; });
+    return S.seen;
+  }
+  (function pruneSeen() {
+    const st = seenStore(), limit = Date.now() - 14 * 864e5;
+    ['v', 's', 'q'].forEach(k => Object.keys(st[k]).forEach(id => { if (st[k][id] < limit) { delete st[k][id]; if (k === 'v') delete st.vt[id]; } }));
+  })();
+
+  // Mots-clés d'un titre, pour repérer deux vidéos sur le même sujet
+  const FEED_STOP = new Set('le la les un une des du de au aux et ou en dans sur pour par avec sans sous chez apres avant ce cette ces son sa ses leur leurs qui que dont est sont ont fait plus moins pas ne se il elle ils elles on comme mais aussi tres tout tous entre contre vers selon depuis encore deja alors quand comment pourquoi quel quelle voici video'.split(' '));
+  const feedTok = s => new Set(String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(w => w.length >= 4 && !FEED_STOP.has(w)));
+  const sameTopic = (a, b) => { let n = 0; for (const x of a) if (b.has(x)) n++; return n >= 2; };
+
+  // Toutes les vidéos disponibles : celles choisies par la rédaction le matin, puis le flux mis à jour toutes les 30 min
+  function feedVideoPool(date, day, live) {
+    const out = [], ids = new Set();
+    const add = (v, story) => {
+      if (!v || !YT_ID.test(v.id || '') || ids.has(v.id)) return;
+      ids.add(v.id); out.push({ id: v.id, source: v.source, title: v.title, published: v.published || null, story: Number.isInteger(story) && day.stories[story] ? story : null });
+    };
+    (day.shorts || []).forEach(v => add(v, v && v.story));
+    if (live && Array.isArray(live.videos)) live.videos.forEach(v => add(v, live.date === date ? v.story : null));
+    return out;
+  }
+
+  // Un sujet = une carte. Une info avec vidéo devient une carte unique « vidéo + l'essentiel » ;
+  // ce qui a déjà été vu n'est plus montré (sauf « Revoir tout »).
+  function buildFeed(date, day, live, showAll) {
+    const seen = seenStore(), colors = day.tagColors || {};
+    const color = s => s.color || colors[s.tag] || '#E63946';
+    const pool = feedVideoPool(date, day, live);
+    const isNewV = v => showAll || !seen.v[v.id];
+    const storyTok = day.stories.map(s => feedTok(s.title + ' ' + s.text));
+
+    // vidéos reliées à une info : une seule par info (la première non vue)
+    const byStory = {};
+    pool.filter(v => v.story != null).forEach(v => { (byStory[v.story] = byStory[v.story] || []).push(v); });
+    // vidéos hors édition : une seule par sujet, et pas sur un sujet déjà couvert par une info
+    // sujets déjà vus (mots-clés des vidéos regardées) : une nouvelle vidéo sur le même sujet est ignorée
+    const seenTopics = showAll ? [] : Object.values(seen.vt).map(s => new Set(String(s).split(' ')));
+    const loose = [];
+    pool.filter(v => v.story == null).forEach(v => {
+      v.tok = feedTok(v.title);
+      if (storyTok.some(t => sameTopic(t, v.tok))) return;
+      if (loose.some(l => sameTopic(l.tok, v.tok))) return;
+      if (!seen.v[v.id] && seenTopics.some(t => sameTopic(t, v.tok))) return;
+      loose.push(v);
     });
-    while (free.length || quiz.length) { if (free.length) seq.push(free.shift()); if (quiz.length) seq.push(quiz.shift()); }
+
+    const items = [];
+    day.stories.forEach((s, i) => {
+      // une info déjà vue (en carte ou en vidéo) ne revient pas, même avec une autre vidéo
+      if (!showAll && seen.s[`${date}:${i}`]) return;
+      const v = (byStory[i] || []).find(isNewV);
+      if (v) items.push({ type: 'video', v, story: i, s, color: color(s) });
+      else items.push({ type: 'story', s, i, color: color(s) });
+    });
+    const extras = loose.filter(isNewV).slice(0, 15).map(v => ({ type: 'video', v, story: null }));
+
+    // questions flash du jour pas encore répondues
+    const qpool = [];
+    day.lessons.forEach((l, li) => l.exercises.forEach((ex, ei) => {
+      const id = `day:${date}:${li}:${ei}`;
+      if (((ex.t === 'qcm' && ex.c.length <= 4) || ex.t === 'vf') && (showAll || !seen.q[id])) qpool.push({ type: 'quiz', ex, id });
+    }));
+    const quiz = shuffle(qpool).slice(0, 8);
+
+    // assemblage : infos du jour d'abord, vidéos hors édition ensuite, une question toutes les 2 cartes
+    const seq = [{ type: 'intro' }];
+    [...items, ...extras].forEach((it, n) => {
+      seq.push(it);
+      if (n % 2 === 1 && quiz.length) seq.push(quiz.shift());
+    });
+    if (seq.length > 1) seq.push(...quiz.splice(0, 2));
     seq.push({ type: 'end' });
     return seq;
   }
 
+  // Nombre de vidéos pas encore vues (pour l'accroche de l'accueil)
+  function newFeedVideos(date, day) {
+    return buildFeed(date, day, window.SCOOP_LIVE, false).filter(x => x.type === 'video').map(x => x.v);
+  }
+  const ago = iso => {
+    const m = Math.round((Date.now() - Date.parse(iso)) / 60000);
+    if (!isFinite(m) || m < 0) return '';
+    return m < 2 ? 'à l\'instant' : m < 60 ? `il y a ${m} min` : m < 1440 ? `il y a ${Math.round(m / 60)} h` : `il y a ${Math.round(m / 1440)} j`;
+  };
+
   function feedCard(it, k, date, day) {
     if (it.type === 'intro') {
-      const vids = (day.shorts || []), srcs = [...new Set(vids.map(v => v.source))];
+      const vids = F.seq.filter(x => x.type === 'video'), srcs = [...new Set(vids.map(x => x.v.source))];
+      const subjects = F.seq.filter(x => x.type === 'video' || x.type === 'story').length;
       const nq = F.seq.filter(x => x.type === 'quiz').length;
+      const live = window.SCOOP_LIVE, upd = live && live.updated ? ago(live.updated) : '';
+      if (!subjects && !nq) {
+        return `<section class="fcard f-intro" data-k="${k}"><div class="f-inner">
+          <div class="f-kick">Le fil du ${esc(frDate(date))}</div>
+          <h1>Tu es à jour 🎉</h1>
+          <p class="f-sources" style="font-size:16px;margin-top:14px">Tu as déjà vu toutes les vidéos et les infos du moment. Les vidéos sont mises à jour toutes les 30 minutes${upd ? ` (dernière mise à jour ${esc(upd)})` : ''}. Reviens un peu plus tard !</p>
+          <div class="f-endbtns" style="margin-top:24px"><button class="btn primary" data-feed-replay>↺ Revoir tout le fil</button><button class="btn ghost f-ghost" data-feed-close>Retour à l'accueil</button></div>
+        </div></section>`;
+      }
       return `<section class="fcard f-intro" data-k="${k}"><div class="f-inner">
-        <div class="f-kick">Le fil du ${esc(frDate(date))}</div>
-        <h1>L'actu en ${F.seq.length - 2} swipes</h1>
+        <div class="f-kick">Le fil du ${esc(frDate(date))}${F.all ? ' · tout revoir' : ''}</div>
+        <h1>${subjects} sujet${subjects > 1 ? 's' : ''} ${F.all ? 'au total' : 'pour toi'}</h1>
         <ul class="f-counts">
-          ${vids.length ? `<li><b>${vids.length}</b> vidéos courtes de ${srcs.length} rédactions</li>` : ''}
-          <li><b>${day.stories.length}</b> infos clés à retenir</li>
-          <li><b>${nq}</b> questions flash (+5 XP chacune)</li>
+          ${vids.length ? `<li><b>${vids.length}</b> vidéo${vids.length > 1 ? 's' : ''} ${F.all ? '' : 'pas encore vue' + (vids.length > 1 ? 's' : '')}, de ${srcs.length} rédaction${srcs.length > 1 ? 's' : ''}</li>` : ''}
+          <li><b>1</b> carte par sujet, recoupé par plusieurs médias</li>
+          ${nq ? `<li><b>${nq}</b> question${nq > 1 ? 's' : ''} flash (+5 XP chacune)</li>` : ''}
         </ul>
+        ${upd ? `<p class="f-sources">🔄 Vidéos mises à jour ${esc(upd)} · toutes les 30 min</p>` : ''}
         ${srcs.length ? `<p class="f-sources">${srcs.map(esc).join(' · ')}</p>` : ''}
         <div class="f-hint"><span>↑</span>Swipe pour commencer</div>
       </div></section>`;
@@ -997,8 +1077,9 @@
       </section>`;
     }
     if (it.type === 'video') {
-      const v = it.v, st = Number.isInteger(v.story) ? day.stories[v.story] : null;
-      return `<section class="fcard f-video" data-k="${k}" data-vid="${esc(v.id)}">
+      const v = it.v, st = it.s || null;
+      const srcList = st ? storySources(st) : [], sv = st ? isSaved(date, it.story) : false;
+      return `<section class="fcard f-video ${st ? 'f-merged' : ''}" data-k="${k}" data-vid="${esc(v.id)}" ${st ? `style="--c:${esc(it.color)}"` : ''}>
         <div class="f-player"><img src="${ytThumb(v.id)}" alt="" loading="lazy"><div class="f-play" aria-hidden="true">▶</div>
           <!-- Calque tactile : garde le swipe vertical actif (sur iPhone, le lecteur YouTube « avale » les gestes) -->
           <button class="f-tap" data-tap aria-label="Mettre en pause ou relancer la vidéo"><span class="f-tapicon" aria-hidden="true"></span></button>
@@ -1006,10 +1087,20 @@
         <div class="f-meta">
           <div class="f-meta-top"><span class="f-chan">▶ ${esc(v.source)}</span>
             <span class="f-tools"><button class="f-sound" data-sound aria-label="Activer ou couper le son">${F && F.sound ? '🔊 Son' : '🔇 Son'}</button><a class="f-yt" href="https://www.youtube.com/shorts/${esc(v.id)}" target="_blank" rel="noopener">YouTube ↗</a></span></div>
-          <h3>${esc(v.title)}</h3>
-          ${st ? `<div class="f-link">📰 À suivre : l'essentiel à retenir ↓</div>` : ''}
+          ${st ? `<h3 class="f-headline">${esc(st.title)}</h3>
+            <div class="f-row"><button class="f-ess" data-sheet>📰 L'essentiel ${srcList.length >= 2 ? `· ✓ ${srcList.length} sources` : ''}</button>
+            <button class="f-mini ${sv ? 'on' : ''}" data-save="${it.story}" aria-pressed="${sv}" aria-label="Garder cette info"><span>🔖</span><small>${sv ? 'Gardée' : 'Garder'}</small></button></div>`
+          : `<h3>${esc(v.title)}</h3>`}
           <div class="f-swipe">Touche la vidéo : pause · swipe ↑ pour continuer</div>
         </div>
+        ${st ? `<div class="f-sheet" hidden>
+          <div class="f-sheet-head"><span class="f-tag">${esc(st.tag)}</span><button class="f-sheet-x" data-sheet aria-label="Fermer">✕</button></div>
+          <h2>${esc(st.title)}</h2>
+          <p>${rich(st.text)}</p>
+          ${st.why ? `<div class="f-why">🎯 ${rich(st.why)}</div>` : ''}
+          <div class="f-src">${srcList.length >= 2 ? `✓ Recoupé par ${srcList.length} sources : ` : 'Source : '}${srcList.map(x => x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)}</a>` : esc(x.name)).join(' · ')}</div>
+          <p class="f-vidsrc">Vidéo : ${esc(v.source)} — « ${esc(v.title)} »</p>
+        </div>` : ''}
       </section>`;
     }
     if (it.type === 'quiz') {
@@ -1029,18 +1120,28 @@
       <p class="f-endstats" id="f-endstats"></p>
       <div class="f-endbtns">
         <button class="btn primary" data-feed-test>▶ Faire le test du jour</button>
+        <button class="btn ghost f-ghost" data-feed-replay>↺ Revoir tout le fil</button>
         <button class="btn ghost f-ghost" data-feed-close>Retour à l'accueil</button>
       </div>
+      <p class="f-sources" style="margin-top:14px">Les vidéos se renouvellent toutes les 30 minutes : celles que tu as vues ne reviendront pas.</p>
     </div></section>`;
   }
 
-  async function openFeed(date) {
+  // Charge la liste de vidéos mise à jour toutes les 30 min (data/live/shorts.js)
+  async function loadLive() {
+    try { await loadScript(`data/live/shorts.js?t=${Date.now()}`); } catch (e) { /* pas encore de flux : on garde les vidéos du matin */ }
+    return window.SCOOP_LIVE || null;
+  }
+
+  async function openFeed(date, showAll) {
     date = date && DATE_RE.test(date) ? date : CURRENT;
     const day = await getDay(date);
     if (!day) { location.hash = '#/home'; return; }
-    if (F && F.date === date) return;
-    F = { date, day, seq: [], xp: 0, answered: 0, right: 0, videos: new Set(), active: -1, done: false, sound: feedSoundPref };
-    F.seq = buildFeed(date, day);
+    if (F && F.date === date && !showAll) return;
+    if (F) { $$('.fcard', $('#f-track')).forEach(stopVideo); }
+    const live = await loadLive();
+    F = { date, day, seq: [], xp: 0, answered: 0, right: 0, videos: new Set(), active: -1, done: false, sound: feedSoundPref, all: !!showAll };
+    F.seq = buildFeed(date, day, live, !!showAll);
     const track = $('#f-track');
     track.innerHTML = F.seq.map((it, k) => feedCard(it, k, date, day)).join('');
     $('#feed').hidden = false;
@@ -1077,9 +1178,18 @@
     $('#f-prog').style.width = `${Math.round((k / Math.max(1, F.seq.length - 1)) * 100)}%`;
     const card = $(`.fcard[data-k="${k}"]`, track), it = F.seq[k];
     if (!card || !it) return;
+    clearTimeout(F.seenTimer);
+    if (it.type === 'story') { seenStore().s[`${F.date}:${it.i}`] = Date.now(); save(); }
     if (it.type === 'video') {
       const id = it.v.id;
       F.videos.add(id);
+      // vue au bout de 3 secondes à l'écran : elle ne reviendra plus dans le fil
+      F.seenTimer = setTimeout(() => {
+        if (!F || F.active !== k) return;
+        const st = seenStore(); st.v[id] = Date.now(); st.vt[id] = [...feedTok(it.v.title)].slice(0, 12).join(' ');
+        if (it.story != null) st.s[`${F.date}:${it.story}`] = Date.now();
+        save();
+      }, 3000);
       // Lecture automatique en muet (règle des navigateurs, iPhone compris) ; le bouton 🔊 active le son.
       // enablejsapi permet de piloter le lecteur (pause, son) depuis notre calque tactile.
       const origin = encodeURIComponent(location.origin);
@@ -1126,6 +1236,7 @@
     card.classList.add('answered');
     $$('.f-choice', card).forEach(b => { const c = +b.dataset.c; if (c === good) b.classList.add('right'); else if (c === pick) b.classList.add('wrong'); });
     S.stats.answered++; F.answered++;
+    seenStore().q[it.id] = Date.now();
     if (ok) { S.stats.correct++; F.right++; F.xp += 5; addXp(5); sfx.ok(); }
     else {
       sfx.ko();
@@ -1167,6 +1278,13 @@
       if (F.sound) ytCmd(card, 'playVideo');
       return;
     }
+    const sh = e.target.closest('[data-sheet]');
+    if (sh) { // ouvre / ferme « L'essentiel » sur la carte vidéo
+      const card = sh.closest('.f-video'), sheet = card && $('.f-sheet', card);
+      if (sheet) { sheet.hidden = !sheet.hidden; card.classList.toggle('sheet-open', !sheet.hidden); }
+      return;
+    }
+    if (e.target.closest('[data-feed-replay]')) { openFeed(F.date, true); return; }
     const c = e.target.closest('.f-choice'); if (c) { answerFlash(c); return; }
     const s = e.target.closest('[data-save]'); if (s) { toggleSave(+s.dataset.save); return; }
     if (e.target.closest('[data-feed-close]')) { location.hash = '#/home'; return; }
@@ -1219,6 +1337,7 @@
       .sort((a, b) => b.date.localeCompare(a.date));
     CURRENT = (INDEX.find(d => d.date <= TODAY) || INDEX[INDEX.length - 1] || {}).date || null;
     if (CURRENT) await getDay(CURRENT);
+    await loadLive();
     route();
   }
   init();

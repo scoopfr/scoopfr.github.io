@@ -1,7 +1,7 @@
 /* Scoop — service worker : appli installable + hors ligne
    - éditions (data/days/*) : réseau d'abord (pour avoir l'actu fraîche), cache en secours
    - reste de l'appli : réseau d'abord aussi, cache en secours hors ligne */
-const VERSION = 'scoop-v7';
+const VERSION = 'scoop-v8';
 const SHELL = [
   './', './index.html', './css/style.css', './js/app.js', './data/units.js', './data/culture.js', './data/prepa.js', './manifest.webmanifest',
   './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'
@@ -33,7 +33,7 @@ self.addEventListener('fetch', e => {
   }
 
   // Éditions : réseau d'abord (la clé de cache ignore le ?t= anti-cache)
-  if (url.pathname.includes('/data/days/')) {
+  if (url.pathname.includes('/data/days/') || url.pathname.includes('/data/live/')) {
     const key = url.origin + url.pathname;
     e.respondWith(fetch(req).then(res => {
       if (res.ok) { const copy = res.clone(); caches.open(VERSION).then(c => c.put(key, copy)); }
