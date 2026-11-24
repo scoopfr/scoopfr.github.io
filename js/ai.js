@@ -120,5 +120,5 @@
     return r;
   }
 
-  ctx.ai = { PROVIDERS, cfg, setCfg, ready, chat, parseJson, test };
+  ctx.ai = { preload: () => { loadPuter().catch(() => {}); }, PROVIDERS, cfg, setCfg, ready, chat, parseJson, test };
 });

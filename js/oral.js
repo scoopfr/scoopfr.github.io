@@ -69,6 +69,7 @@
       <div id="ai-msg" class="or-status" hidden></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" data-ai-save>Enregistrer et tester</button><button class="btn ghost" data-ai-clear>Effacer la clé</button></div>`;
     if (typeof m.showModal === 'function') { if (!m.open) m.showModal(); } else m.setAttribute('open', '');
+    if (def.nokey) ai.preload();   // le script Puter doit être déjà chargé quand tu cliques (sinon le navigateur bloque la fenêtre de connexion)
   }
   const closeModal = () => { const m = $('#modal'); if (typeof m.close === 'function') m.close(); else m.removeAttribute('open'); };
   function msg(text, cls) { const el = $('#ai-msg'); if (!el) return; el.hidden = false; el.className = 'or-status ' + cls; el.textContent = text; }
@@ -351,12 +352,20 @@ Réponds UNIQUEMENT par un objet JSON, en français :
     const sy = t.closest('[data-or-say]'); if (sy && I) { const tr = I.turns[+sy.dataset.orSay]; if (tr) { const prev = I.o.speak; I.o.speak = true; speak(tr.text, tr.who); I.o.speak = prev; } return; }
     // réglages IA
     if (t.closest('[data-ai-save]')) {
-      const prov = $('#ai-prov').value, key = $('#ai-key').value.trim(), model = $('#ai-model').value.trim(), base = $('#ai-base') ? $('#ai-base').value.trim() : undefined;
-      if (!key) { msg('Colle d\'abord ta clé API.', 'warn'); return; }
-      if (!model) { msg('Indique le nom du modèle.', 'warn'); return; }
+      const prov = $('#ai-prov').value, nokey = ai.PROVIDERS[prov].nokey;
+      const key = $('#ai-key') ? $('#ai-key').value.trim() : '', model = $('#ai-model') ? $('#ai-model').value.trim() : '', base = $('#ai-base') ? $('#ai-base').value.trim() : undefined;
+      if (!nokey && !key) { msg('Colle d\'abord ta clé API.', 'warn'); return; }
+      if (!nokey && !model) { msg('Indique le nom du modèle.', 'warn'); return; }
+      if (nokey && !window.puter) { msg('Chargement de Puter… clique à nouveau dans une seconde.', 'info'); ai.preload(); return; }
       ai.setCfg(Object.assign({ provider: prov, key, model }, base ? { base } : {}));
-      msg('Test de la connexion…', 'info');
-      try { await ai.test(); msg('✓ Connexion réussie : le jury est prêt.', 'ok'); setTimeout(() => { closeModal(); if (!$('#oral') || $('#oral').hidden) ctx.route(); }, 900); }
+      try {
+        if (nokey && !(window.puter.auth && window.puter.auth.isSignedIn && window.puter.auth.isSignedIn())) {
+          // appelé directement par ton clic : le navigateur autorise alors la fenêtre de connexion
+          msg('Une fenêtre Puter doit s\'ouvrir : connecte-toi (ou crée un compte gratuit). Si rien ne s\'ouvre, autorise les fenêtres pop-up pour ce site.', 'info');
+          await Promise.race([window.puter.auth.signIn(), new Promise((_, rej) => setTimeout(() => rej(new Error('Aucune connexion Puter reçue. Autorise les fenêtres pop-up pour ce site, puis réessaie.')), 120000))]);
+        }
+        msg('Test de la connexion…', 'info');
+        await ai.test(); msg('✓ Connexion réussie : le jury est prêt.', 'ok'); setTimeout(() => { closeModal(); if (!$('#oral') || $('#oral').hidden) ctx.route(); }, 900); }
       catch (err) { msg('✕ ' + err.message, 'warn'); }
       return;
     }
