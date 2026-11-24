@@ -777,3 +777,11 @@ a, button, label, summary { -webkit-tap-highlight-color: transparent; }
 .an-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
 .f-video.eco-wait .f-play { display: grid; }
 .f-video.eco-wait .f-player { cursor: pointer; }
+
+/* ---------- Sources primaires : mode d'emploi concret ---------- */
+.prim-steps { margin: 8px 0 0 20px; display: grid; gap: 4px; font-size: 13.5px; }
+.prim-steps mark { background: color-mix(in srgb, #FFC93C 45%, transparent); color: inherit; border-radius: 4px; padding: 1px 5px; font-weight: 700; }
+.prim-trail a small { display: block; font-weight: 500; font-size: 11px; opacity: .7; }
+.prim-list li small { opacity: .7; }
+.ex-links { margin: 10px 0 12px; }
+.prim-howto .btn { margin-top: 4px; }

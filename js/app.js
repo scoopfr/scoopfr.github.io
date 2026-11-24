@@ -247,13 +247,21 @@
     if (Array.isArray(s.sources) && s.sources.length) return s.sources.filter(x => x && x.name);
     return String(s.source || '').split(',').map(n => n.trim()).filter(Boolean).map((name, i) => ({ name, url: i === 0 ? s.link : '' }));
   }
-  function sourcesBlock(s) {
-    const list = storySources(s), ok = list.length >= 2, prim = primarySources(s);
+  function sourcesBlock(s, date, idx) {
+    const list = storySources(s), ok = list.length >= 2, prim = primarySources(s, date, idx);
     return `<div class="story-foot">
       <span class="verif ${ok ? 'ok' : ''}">${ok ? `✓ Recoupé par ${list.length} sources` : 'Source unique'}</span>
       ${prim.length ? '<span class="verif prim-ok">📜 Source primaire</span>' : ''}
       ${list.map(x => x.url && /^https?:\/\//.test(x.url) ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)} ↗</a>` : `<span>${esc(x.name)}</span>`).join('')}
     </div>${primaryBlock(s, prim)}`;
+  }
+  // mots à taper pour chercher le document d'origine : noms propres et chiffres du titre
+  const KW_STOP = new Set('Le La Les Un Une Des Du De Au Aux En Dans Sur Pour Par Avec Sans Selon Après Avant Mort Retour Fin Premier Première Nouveau Nouvelle Procès Annonce'.split(' '));
+  function storyKeywords(s) {
+    const words = String(s.title || '').replace(/[«»"“”:;,!?()]/g, ' ').replace(/\b[LDld][’']/g, '').split(/\s+/).filter(Boolean);
+    let kw = words.filter(w => /^[A-ZÉÈÀ0-9]/.test(w) && w.length >= 3 && !KW_STOP.has(w));
+    if (kw.length < 2) kw = kw.concat(words.filter(w => w.length >= 7 && !kw.includes(w)));
+    return [...new Set(kw)].slice(0, 3);
   }
 
   // ---------- Sources primaires ----------
@@ -262,32 +270,46 @@
   // un lien de `sources` qui pointe vers un site officiel est lui-même une source primaire.
   const OFFICIAL = /(^|\.)(gouv\.fr|gov|gov\.uk|europa\.eu|un\.org|who\.int|imf\.org|worldbank\.org|oecd\.org|insee\.fr|banque-france\.fr|elysee\.fr|assemblee-nationale\.fr|senat\.fr|conseil-constitutionnel\.fr|conseil-etat\.fr|courdecassation\.fr|ccomptes\.fr|cnil\.fr|arcom\.fr|ipcc\.ch|unfccc\.int|icc-cpi\.int|icj-cij\.org|echr\.coe\.int|nato\.int)$/i;
   const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return ''; } };
-  function primarySources(s) {
+  // 3 origines : `primary` écrit dans l'édition, lien officiel parmi les `sources`, et rapprochement automatique
+  // avec les publications officielles du jour (data/live/primary.js, mis à jour chaque heure : ONU, Commission européenne, OMS, Conseil constitutionnel)
+  function primarySources(s, date, idx) {
     const out = [], seen = new Set();
-    const add = (x, auto) => { if (x && x.url && /^https?:\/\//.test(x.url) && !seen.has(x.url)) { seen.add(x.url); out.push({ name: x.name || hostOf(x.url), url: x.url, auto }); } };
-    (Array.isArray(s.primary) ? s.primary : []).forEach(x => add(x, false));
-    storySources(s).filter(x => OFFICIAL.test(hostOf(x.url))).forEach(x => add(x, true));
+    const add = (x, kind) => { if (x && x.url && /^https?:\/\//.test(x.url) && !seen.has(x.url)) { seen.add(x.url); out.push({ name: x.name || hostOf(x.url), url: x.url, title: x.title || '', kind }); } };
+    (Array.isArray(s.primary) ? s.primary : []).forEach(x => add(x, 'edition'));
+    storySources(s).filter(x => OFFICIAL.test(hostOf(x.url))).forEach(x => add(x, 'site'));
+    const lp = window.SCOOP_PRIMARY;
+    if (lp && lp.items && date != null && idx != null) (lp.items[`${date}:${idx}`] || []).forEach(x => add(x, 'match'));
     return out;
   }
   // Pistes : portails officiels selon la rubrique (à vérifier : ce ne sont pas des liens vers le document exact)
+  // Par rubrique : [nom du site, domaine pour la recherche, ce qu'on y trouve]
   const TRAIL = {
-    'Politique': [['Légifrance', 'https://www.legifrance.gouv.fr/'], ['Assemblée nationale', 'https://www.assemblee-nationale.fr/'], ['Sénat', 'https://www.senat.fr/'], ['Élysée', 'https://www.elysee.fr/']],
-    'Justice': [['Légifrance', 'https://www.legifrance.gouv.fr/'], ['Cour de cassation', 'https://www.courdecassation.fr/'], ['Conseil constitutionnel', 'https://www.conseil-constitutionnel.fr/'], ['Conseil d\'État', 'https://www.conseil-etat.fr/']],
-    'Économie': [['INSEE', 'https://www.insee.fr/'], ['Banque de France', 'https://www.banque-france.fr/'], ['Cour des comptes', 'https://www.ccomptes.fr/'], ['Eurostat', 'https://ec.europa.eu/eurostat']],
-    'Europe': [['Commission européenne : presse', 'https://ec.europa.eu/commission/presscorner/'], ['Parlement européen', 'https://www.europarl.europa.eu/'], ['Conseil de l\'UE', 'https://www.consilium.europa.eu/'], ['EUR-Lex', 'https://eur-lex.europa.eu/']],
-    'Monde': [['ONU', 'https://www.un.org/fr/'], ['Actualités de l\'ONU', 'https://news.un.org/fr/'], ['Cour pénale internationale', 'https://www.icc-cpi.int/'], ['Cour internationale de justice', 'https://www.icj-cij.org/']],
-    'Climat': [['GIEC', 'https://www.ipcc.ch/'], ['Convention climat de l\'ONU', 'https://unfccc.int/'], ['Copernicus', 'https://climate.copernicus.eu/']],
-    'Médias': [['Arcom', 'https://www.arcom.fr/'], ['Reporters sans frontières', 'https://rsf.org/fr'], ['Reuters Institute', 'https://reutersinstitute.politics.ox.ac.uk/']],
-    'Société': [['INSEE', 'https://www.insee.fr/'], ['Défenseur des droits', 'https://www.defenseurdesdroits.fr/'], ['data.gouv.fr', 'https://www.data.gouv.fr/']],
-    'Culture': [['Ministère de la Culture', 'https://www.culture.gouv.fr/'], ['data.gouv.fr', 'https://www.data.gouv.fr/']]
+    'Politique': [['Légifrance', 'legifrance.gouv.fr', 'lois, décrets, Journal officiel'], ['Assemblée nationale', 'assemblee-nationale.fr', 'textes, débats, comptes rendus'], ['Sénat', 'senat.fr', 'textes, débats'], ['Élysée', 'elysee.fr', 'discours, communiqués du président']],
+    'Justice': [['Cour de cassation', 'courdecassation.fr', 'arrêts, communiqués'], ['Conseil constitutionnel', 'conseil-constitutionnel.fr', 'décisions'], ['Conseil d\'État', 'conseil-etat.fr', 'décisions'], ['Légifrance', 'legifrance.gouv.fr', 'jurisprudence et textes'], ['Ministère de la Justice', 'justice.gouv.fr', 'communiqués']],
+    'Économie': [['INSEE', 'insee.fr', 'chiffres officiels'], ['Banque de France', 'banque-france.fr', 'notes de conjoncture, statistiques'], ['Cour des comptes', 'ccomptes.fr', 'rapports'], ['Eurostat', 'ec.europa.eu/eurostat', 'statistiques européennes'], ['Ministère de l\'Économie', 'economie.gouv.fr', 'communiqués']],
+    'Europe': [['Commission européenne', 'ec.europa.eu', 'communiqués, propositions'], ['Parlement européen', 'europarl.europa.eu', 'textes, votes'], ['Conseil de l\'UE', 'consilium.europa.eu', 'décisions'], ['EUR-Lex', 'eur-lex.europa.eu', 'textes juridiques de l\'UE']],
+    'Monde': [['ONU', 'un.org', 'rapports, résolutions'], ['Actualités de l\'ONU', 'news.un.org', 'communiqués'], ['Cour pénale internationale', 'icc-cpi.int', 'décisions'], ['Cour internationale de justice', 'icj-cij.org', 'arrêts']],
+    'Climat': [['GIEC', 'ipcc.ch', 'rapports'], ['Convention climat de l\'ONU', 'unfccc.int', 'décisions des COP'], ['Copernicus', 'climate.copernicus.eu', 'données climatiques']],
+    'Médias': [['Arcom', 'arcom.fr', 'décisions, rapports'], ['Reporters sans frontières', 'rsf.org', 'classement, rapports'], ['Conseil de déontologie (CDJM)', 'cdjm.org', 'avis']],
+    'Société': [['INSEE', 'insee.fr', 'chiffres officiels'], ['Défenseur des droits', 'defenseurdesdroits.fr', 'rapports, décisions'], ['data.gouv.fr', 'data.gouv.fr', 'jeux de données'], ['DREES', 'drees.solidarites-sante.gouv.fr', 'études santé et social']],
+    'Culture': [['Ministère de la Culture', 'culture.gouv.fr', 'communiqués'], ['data.gouv.fr', 'data.gouv.fr', 'jeux de données']]
   };
+  const DOCS = { 'Politique': 'un texte de loi, un décret, un discours, un compte rendu de débat', 'Justice': 'une décision ou un arrêt, un communiqué du parquet ou du ministère', 'Économie': 'des chiffres officiels, un rapport, un communiqué d\'entreprise ou de ministère', 'Europe': 'un communiqué de la Commission, un texte législatif', 'Monde': 'un rapport ou un communiqué d\'une institution internationale', 'Climat': 'le texte de la décision ou le rapport scientifique', 'Médias': 'une décision de régulateur, un rapport', 'Société': 'une étude ou des chiffres officiels', 'Culture': 'un communiqué ou des données officielles' };
+  const gSite = (kw, domain, extra = '') => `https://www.google.com/search?q=${encodeURIComponent(`${kw.join(' ')}${extra} site:${domain}`)}`;
+  // exposé pour les entraînements (js/annales.js) : mêmes mots et mêmes liens que sous chaque info
+  window.__scoopPrimary = { OFFICIAL, TRAIL, DOCS, gSite, storyKeywords, hostOf, primarySources: (s, d, i) => primarySources(s, d, i) };
   function primaryBlock(s, prim) {
-    const trail = TRAIL[s.tag] || [['data.gouv.fr', 'https://www.data.gouv.fr/']];
-    const q = encodeURIComponent(`${s.title} communiqué OR rapport OR décision officielle`);
-    return `<details class="prim" ${prim.length ? 'open' : ''}><summary>📜 ${prim.length ? 'Source primaire' : 'Remonter à la source primaire'}</summary>
-      ${prim.length ? `<ul class="prim-list">${prim.map(x => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)} ↗</a>${x.auto ? ' <small>(site officiel, repéré automatiquement)</small>' : ''}</li>`).join('')}</ul>` : '<p class="prim-note">Aucun document d\'origine n\'est lié à cette info dans l\'édition. Pistes pour le retrouver :</p>'}
-      <div class="prim-trail">${trail.map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>`).join('')}<a href="https://www.google.com/search?q=${q}" target="_blank" rel="noopener">🔎 Chercher le texte officiel</a></div>
-      <p class="prim-note">Les portails ci-dessus sont des pistes : vérifie que le document correspond bien à l'info.</p></details>`;
+    const trail = TRAIL[s.tag] || [['data.gouv.fr', 'data.gouv.fr', 'jeux de données'], ['sites de l\'État', 'gouv.fr', 'communiqués']];
+    const kw = storyKeywords(s), kind = { edition: 'document indiqué par la rédaction', site: 'site officiel cité parmi les sources', match: 'publication officielle du jour, liée par mots-clés : vérifie qu\'elle correspond' };
+    return `<details class="prim" ${prim.length ? 'open' : ''}><summary>📜 ${prim.length ? 'Source primaire' : 'Retrouver la source primaire'}</summary>
+      ${prim.length ? `<ul class="prim-list">${prim.map(x => `<li><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title || x.name)} ↗</a><br><small>${esc(x.name)} · ${esc(kind[x.kind] || '')}</small></li>`).join('')}</ul>` : '<p class="prim-note">Aucun document d\'origine n\'est encore lié à cette info. Voici comment le retrouver :</p>'}
+      <ol class="prim-steps">
+        <li><b>Tape ces mots</b> : ${kw.length ? kw.map(k => `<mark>${esc(k)}</mark>`).join(' ') : '<i>les noms et chiffres de l\'info</i>'}</li>
+        <li><b>Cherche</b> ${esc(DOCS[s.tag] || 'un communiqué ou un document officiel')}.</li>
+        <li><b>Va chez l\'auteur du document</b> (un clic lance la recherche sur son site) :</li>
+      </ol>
+      <div class="prim-trail">${trail.map(([n, d, what]) => `<a href="${esc(gSite(kw.length ? kw : [s.title], d))}" target="_blank" rel="noopener" title="${esc(what)}">${esc(n)}<small>${esc(what)}</small></a>`).join('')}</div>
+      <p class="prim-note"><b>4. Vérifie</b> : la date, l'auteur (une institution), et que le texte dit bien ce que l'article rapporte. Puis cite-le : « selon le communiqué du… du… ». <a href="#/learn/prepa/methode">Fiche méthode</a></p></details>`;
   }
   const wordCard = w => w ? `<div class="word"><div class="kicker">Le mot du jour</div><h3>${esc(w.term)}</h3><p>${rich(w.def)}</p></div>` : '';
 
@@ -531,6 +553,13 @@
       ${day.intro ? `<p class="lede">${rich(day.intro)}</p>` : ''}
       <p style="margin-top:12px"><button class="btn small ghost" data-scroll="archives">🗂️ Éditions précédentes et infos gardées ↓</button></p>
       ${wordCard(day.word)}
+      <details class="card p-guide prim-howto"><summary><span class="p-gico">📜</span>Comment retrouver la source primaire d'une info (mode d'emploi)</summary>
+        <p style="font-size:14px;margin:6px 0">Une <b>source primaire</b> est le document d'origine : décision de justice, texte de loi, communiqué, rapport, chiffres officiels. Sous chaque info, ouvre <b>« 📜 Retrouver la source primaire »</b> :</p>
+        <ol class="prim-steps"><li>Les <mark>mots à taper</mark> sont déjà choisis pour toi (noms propres et chiffres de l'info).</li>
+          <li>Repère <b>qui a produit le document</b> (tribunal, ministère, ONU, Commission européenne…) : les boutons te donnent les sites officiels de la rubrique.</li>
+          <li>Un clic lance la <b>recherche sur le site officiel</b> avec tes mots : tu arrives sur les résultats de cette institution.</li>
+          <li><b>Vérifie</b> la date, l'auteur, et que le texte dit bien ce que l'article rapporte. Si l'info porte sur un document déjà lié, il apparaît en haut du bloc (« publication officielle du jour »).</li></ol>
+        <p class="prim-note">Pour t'entraîner : <button class="btn small ghost" data-start="train:primaire">🔎 Retrouver 3 sources primaires</button></p></details>
       <h2 class="section-title">Les ${day.stories.length} infos à connaître</h2>
       <div class="stories">${day.stories.map((s, i) => `
         <div class="story" style="--tag:${esc(s.color || tagColors[s.tag] || '#E63946')}">
@@ -538,7 +567,7 @@
           <h3>${esc(s.title)}</h3>
           <p>${rich(s.text)}</p>
           ${s.why ? `<div class="why"><b>🎯 Pour le concours :</b> ${rich(s.why)}</div>` : ''}
-          ${sourcesBlock(s)}
+          ${sourcesBlock(s, date, i)}
         </div>`).join('')}
       </div>
       ${day.memo && day.memo.length ? `<div class="card memo"><div class="kicker">À retenir</div><ul>${day.memo.map(m => `<li>${rich(m)}</li>`).join('')}</ul></div>` : ''}
@@ -1177,7 +1206,8 @@
     write(ex, el, ready) {
       el.innerHTML = `<div class="ex-type">✍️ Atelier d'écriture</div><h2 class="ex-q">${rich(ex.q)}</h2>
         ${ex.src ? `<blockquote class="src">${rich(ex.src)}</blockquote>` : ''}
-        <textarea class="text-area" rows="3" placeholder="Écris ta proposition… (Ctrl+Entrée pour valider)" aria-label="Ta proposition"></textarea>
+        ${Array.isArray(ex.links) && ex.links.length ? `<div class="prim-trail ex-links">${ex.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.name)}<small>${esc(l.what || '')}</small></a>`).join('')}</div>` : ''}
+        <textarea class="text-area" rows="${ex.rows || 3}" placeholder="${esc(ex.placeholder || 'Écris ta proposition… (Ctrl+Entrée pour valider)')}" aria-label="Ta proposition"></textarea>
         <div class="self"></div>`;
       const ta = $('textarea', el), selfEl = $('.self', el);
       // compteur de signes (ex.max) : titre et chapô ont une longueur imposée aux concours
@@ -1193,7 +1223,7 @@
         // éléments clés du dossier (ex.facts : [{ l, test(texteNormalisé) }]) : repérage automatique dans ta version
         let facts = '';
         if (Array.isArray(ex.facts) && ex.facts.length) {
-          const u = norm(ta.value).replace(/(\d) (\d)/g, '$1$2'), got = ex.facts.map(f => [f, f.test(u)]);
+          const u = norm(ta.value).replace(/(\d) (\d)/g, '$1$2'), got = ex.facts.map(f => [f, f.test(u, ta.value)]);
           facts = `<div class="facts"><div class="crit-label">Éléments clés repérés dans ta version : ${got.filter(g => g[1]).length}/${got.length}</div>
             ${got.map(([f, ok]) => `<div class="fact ${ok ? 'ok' : 'no'}">${ok ? '✓' : '✕'} ${esc(f.l)}</div>`).join('')}
             <p class="hint">Repérage par mots-clés : un ✕ peut aussi signaler une reformulation. Relis le dossier pour vérifier.</p></div>`;
@@ -1373,7 +1403,7 @@
           <h2>${esc(s.title)}</h2>
           <p>${rich(s.text)}</p>
           ${s.why ? `<div class="f-why">🎯 ${rich(s.why)}</div>` : ''}
-          ${(() => { const p = primarySources(s); return p.length ? `<div class="f-src f-prim">📜 Source primaire : ${p.map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)} ↗</a>`).join(' · ')}</div>` : ''; })()}
+          ${(() => { const p = primarySources(s, F.date, it.i); return p.length ? `<div class="f-src f-prim">📜 Source primaire : ${p.map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)} ↗</a>`).join(' · ')}</div>` : ''; })()}
           <div class="f-src">${(() => { const l = storySources(s); return l.length >= 2 ? `✓ Recoupé par ${l.length} sources : ${l.map(x => esc(x.name)).join(' · ')}` : `Source : ${esc(l.map(x => x.name).join(', '))}`; })()}</div>
         </div>
         <div class="f-rail">
@@ -1435,6 +1465,7 @@
   // Charge la liste de vidéos mise à jour toutes les heures (data/live/shorts.js)
   async function loadLive() {
     try { await loadScript(`data/live/shorts.js?t=${Date.now()}`); } catch (e) { /* pas encore de flux : on garde les vidéos du matin */ }
+    try { await loadScript(`data/live/primary.js?t=${Date.now()}`); } catch (e) { /* pas encore de rapprochement officiel */ }
     return window.SCOOP_LIVE || null;
   }
 

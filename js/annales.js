@@ -129,6 +129,29 @@
       }));
       return mk(exs, 'Parcours et motivation', 'Annales CFJ');
     }
+    if (kind === 'primaire') {
+      // Retrouver le document d'origine : liens de recherche déjà lancés sur les sites officiels de la rubrique
+      const P = window.__scoopPrimary, day = ctx.currentDay();
+      if (!P || !need()) return null;
+      const exs = pick(stories.map((s, i) => ({ s, i })), 3).map(({ s, i }) => {
+        const kw = P.storyKeywords(s), trail = P.TRAIL[s.tag] || [['data.gouv.fr', 'data.gouv.fr', 'jeux de données']];
+        const match = P.primarySources(s, day && day.date, i).filter(x => x.kind !== 'site');
+        const links = [...match.map(x => ({ name: '⭐ ' + (x.title || x.name).slice(0, 70), what: 'publication officielle du jour (à vérifier)', url: x.url })), ...trail.slice(0, 4).map(([n, d, w]) => ({ name: n, what: w, url: P.gSite(kw.length ? kw : [s.title], d) }))];
+        return {
+          t: 'write', rows: 3, placeholder: 'Colle ici l\'adresse (https://…) du document trouvé, puis une ligne : qui l\'a publié, quand, ce qu\'il dit',
+          q: `🔎 Retrouve la source primaire : « ${s.title} »`,
+          src: `Le jury attend le **document d'origine**, pas un article de presse. **Mots à taper :** ${(kw.length ? kw : [s.title]).join(' · ')}. **À chercher :** ${P.DOCS[s.tag] || 'un communiqué ou un document officiel'}. Les boutons lancent la recherche **sur le site de l'institution** : ouvre-en un, trouve le document, puis colle son adresse.`,
+          links,
+          model: `Réponse type : « Source primaire : <adresse du document officiel>. Publié par <institution> le <date> : <ce que dit le texte>. » ${match.length ? 'Piste du jour : ' + match[0].url : ''}`.trim(),
+          crit: ['Le document vient de l\'institution à l\'origine du fait (pas d\'un journal)', 'Il est daté et correspond bien à l\'info (mêmes faits, mêmes chiffres)', 'Tu sais dire en une phrase qui l\'a publié, quand, et ce qu\'il dit', 'Tu pourrais le citer : « selon le communiqué du … du … »'],
+          facts: [
+            { l: 'Tu as collé une adresse web (https://…)', test: (u, raw) => /https?:\/\/\S+/.test(raw) },
+            { l: 'Cette adresse vient d\'un site officiel (institution, État, organisation internationale)', test: (u, raw) => { const m = String(raw).match(/https?:\/\/[^\s)]+/); return !!m && P.OFFICIAL.test(P.hostOf(m[0])); } }
+          ]
+        };
+      });
+      return mk(exs, 'Retrouver la source primaire', 'Édition du jour');
+    }
     if (kind === 'savoirs') {
       const exs = [
         { t: 'qcm', q: 'Quel journal a révélé le scandale du Watergate (question rapportée à l\'oral du CUEJ) ?', c: ['The Washington Post', 'The New York Times', 'The Wall Street Journal', 'Los Angeles Times'], a: 0, x: 'Les journalistes **Bob Woodward et Carl Bernstein**, du Washington Post, ont enquêté sur le cambriolage de 1972.' },
@@ -170,6 +193,7 @@
     const tests = [
       ['synth', '🧩', 'Synthèse de dépêches', 'titre et chapô sur les infos du jour, avec repérage des faits clés', true],
       ['oral', '🎤', 'Oral d\'actualité', '5 infos du jour à restituer comme devant le jury', true],
+      ['primaire', '📜', 'Retrouver la source primaire', 'le document d\'origine de 3 infos du jour, avec recherche prête', true],
       ['collecte', '📝', 'Collecte et angle', 'sujets des annales CFJ : Aimer, Manger, Transports…', false],
       ['creat', '🌍', 'Actualité et créativité', 'textes ancrés dans le réel (annales CFJ)', false],
       ['parcours', '📋', 'Parcours et motivation', 'les vraies questions du dossier CFJ', false],

@@ -26,6 +26,9 @@ jobs:
           node-version: '20'
       - name: Récupérer et trier les vidéos
         run: node scripts/update-live.mjs
+      - name: Relier les infos aux publications officielles (sources primaires)
+        continue-on-error: true
+        run: python3 scripts/update_primary.py
       - name: Publier si la liste a changé
         run: |
           git config user.name "scoop-bot"
