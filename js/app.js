@@ -389,6 +389,7 @@
 
   // ---------- Prépa concours ----------
   const PREPA_TABS = [['plan', '🗺️', 'Plan'], ['ecoles', '🏫', 'Écoles'], ['methode', '🧭', 'Méthode'], ['oral', '🎤', 'Oral'], ['metier', '📡', 'Le métier'], ['conseils', '💬', 'Conseils'], ['quiz', '🧠', 'Quiz']];
+  const EXT = { tabs: {}, top: {} };   // onglets et blocs ajoutés par les modules
   const srcLinks = list => (list && list.length) ? `<div class="p-src">Sources : ${list.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a>`).join(' · ')}</div>` : '';
 
   function viewPrepa(tab) {
@@ -401,6 +402,8 @@
       <p class="muted">Les écoles, les épreuves, l'oral et le métier : tout ce qu'il faut pour maximiser tes chances. Infos vérifiées le ${esc(PREPA.updated)}, avec les sources à chaque bloc.</p>
       <nav class="p-tabs" aria-label="Rubriques de la prépa">${PREPA_TABS.map(([id, ico, label]) => `<a class="p-tab ${id === tab ? 'on' : ''}" href="#/learn/prepa/${id}">${ico} ${label}</a>`).join('')}</nav>`;
 
+    if (EXT.top[tab]) html += EXT.top[tab]();
+    if (EXT.tabs[tab]) html += EXT.tabs[tab]();
     if (tab === 'plan') {
       let exam = '';
       if (S.settings.exam && DATE_RE.test(S.settings.exam)) {
@@ -412,7 +415,8 @@
           <div class="p-progress"><div><b>${nDone}/${PREPA.checklist.length}</b> étapes de ton plan</div><div class="bar"><i style="width:${Math.round(nDone / PREPA.checklist.length * 100)}%"></i></div></div>
         </div>
         <div class="p-quick">
-          <button class="p-qbtn" data-start="oral"><span>🎤</span><b>Simulateur d'oral</b><small>5 questions de jury</small></button>
+          <a class="p-qbtn" href="#/learn/prepa/concours"><span>🔎</span><b>Mes concours</b><small>trouvés selon ton profil</small></a>
+          <a class="p-qbtn" href="#/learn/prepa/oral"><span>🎤</span><b>Entretien avec le jury</b><small>simulation par une IA</small></a>
           <a class="p-qbtn" href="#/learn/prepa/ecoles"><span>🏫</span><b>Les 16 écoles</b><small>dates, frais, épreuves</small></a>
           <a class="p-qbtn" href="#/learn/prepa/quiz"><span>🧠</span><b>Quiz prépa</b><small>écoles, métier, méthode</small></a>
         </div>
@@ -1046,24 +1050,87 @@
       };
     },
 
+    // Association par glisser-déposer : on tire une case d'un côté vers une case de l'autre côté pour les lier.
+    // Un simple toucher sur deux cases (une de chaque côté) marche aussi, ainsi que le clavier (Entrée).
     match(ex, el, ready) {
       const n = ex.pairs.length, Ls = shuffle([...Array(n).keys()]), Rs = shuffle([...Array(n).keys()]);
+      const PC = ['#3A86FF', '#9D4EDD', '#F4A261', '#0FA3B1', '#D6336C', '#2B9348', '#E63946', '#8E44AD'];
       el.innerHTML = `<div class="ex-type">Associe les paires</div><h2 class="ex-q">${rich(ex.q || 'Relie chaque élément à sa correspondance')}</h2>
-        <div class="match"><div class="col">${Ls.map(i => `<button class="tile" data-s="l" data-i="${i}">${rich(ex.pairs[i][0])}</button>`).join('')}</div>
+        <p class="hint" style="margin:-6px 0 12px">👆 Glisse une case vers sa correspondance de l'autre côté pour les lier.</p>
+        <div class="match"><svg class="match-lines" aria-hidden="true"></svg>
+        <div class="col">${Ls.map(i => `<button class="tile" data-s="l" data-i="${i}">${rich(ex.pairs[i][0])}</button>`).join('')}</div>
         <div class="col">${Rs.map(i => `<button class="tile" data-s="r" data-i="${i}">${rich(ex.pairs[i][1])}</button>`).join('')}</div></div>`;
-      let sl = null, sr = null, errors = 0, matched = 0, busy = false;
-      el.addEventListener('click', e => {
-        const t = e.target.closest('.tile'); if (!t || busy || t.classList.contains('ok') || el.classList.contains('locked')) return;
-        if (t.dataset.s === 'l') { if (sl) sl.classList.remove('sel'); sl = sl === t ? null : t; }
-        else { if (sr) sr.classList.remove('sel'); sr = sr === t ? null : t; }
-        if (sl) sl.classList.add('sel'); if (sr) sr.classList.add('sel');
-        if (sl && sr) {
-          const a = sl, b = sr; sl = sr = null;
-          a.classList.remove('sel'); b.classList.remove('sel');
-          if (a.dataset.i === b.dataset.i) { a.classList.add('ok'); b.classList.add('ok'); matched++; sfx.pair(); if (matched === n) ready(true); }
-          else { errors++; busy = true; a.classList.add('bad'); b.classList.add('bad'); sfx.ko(); setTimeout(() => { a.classList.remove('bad'); b.classList.remove('bad'); busy = false; }, 450); }
+      const box = $('.match', el), svg = $('.match-lines', el);
+      let sel = null, errors = 0, matched = 0, busy = false, drag = null;
+      const links = [];   // paires validées : { a, b, color }
+      const anchor = t => { const r = t.getBoundingClientRect(), c = box.getBoundingClientRect(); return { x: (t.dataset.s === 'l' ? r.right : r.left) - c.left, y: r.top + r.height / 2 - c.top }; };
+      const line = (p, q, color, dashed) => `<path d="M${p.x},${p.y} C${(p.x + q.x) / 2},${p.y} ${(p.x + q.x) / 2},${q.y} ${q.x},${q.y}" stroke="${color}" ${dashed ? 'stroke-dasharray="6 6"' : ''}/>`;
+      const redraw = () => {
+        let h = links.map(l => line(anchor(l.a), anchor(l.b), l.color)).join('');
+        if (drag && drag.moved) h += line(drag.from, drag.to, '#3A86FF', true);
+        svg.innerHTML = h;
+      };
+      window.addEventListener('resize', redraw);
+      const tryPair = (a, b) => {
+        if (a.dataset.s === b.dataset.s) return false;
+        if (a.dataset.i === b.dataset.i) {
+          const color = PC[matched % PC.length]; matched++;
+          [a, b].forEach(t => { t.classList.remove('sel'); t.classList.add('ok'); t.style.setProperty('--pc', color); });
+          links.push({ a, b, color }); redraw(); sfx.pair();
+          if (matched === n) ready(true);
+        } else {
+          errors++; busy = true; a.classList.add('bad'); b.classList.add('bad'); sfx.ko();
+          setTimeout(() => { a.classList.remove('bad'); b.classList.remove('bad'); busy = false; }, 450);
         }
+        return true;
+      };
+      const free = t => t && !t.classList.contains('ok') && !busy && !el.classList.contains('locked');
+      const pick = t => {   // sélection par toucher / clavier
+        if (!free(t)) return;
+        if (!sel || sel.dataset.s === t.dataset.s) { if (sel) sel.classList.remove('sel'); sel = sel === t ? null : t; if (sel) sel.classList.add('sel'); return; }
+        const a = sel; sel = null; a.classList.remove('sel'); tryPair(a, t);
+      };
+      el.addEventListener('click', e => { const t = e.target.closest('.tile'); if (t && e.detail === 0) pick(t); });   // détail 0 = clavier
+      const overTile = (x, y, from) => {
+        from.style.pointerEvents = 'none';
+        const t = document.elementFromPoint(x, y), tile = t && t.closest && t.closest('.tile');
+        from.style.pointerEvents = '';
+        return tile && box.contains(tile) && tile.dataset.s !== from.dataset.s && free(tile) ? tile : null;
+      };
+      el.addEventListener('pointerdown', e => {
+        const t = e.target.closest('.tile'); if (!t || !free(t) || (e.pointerType === 'mouse' && e.button !== 0)) return;
+        drag = { t, id: e.pointerId, x0: e.clientX, y0: e.clientY, moved: false, from: anchor(t), to: anchor(t), over: null };
       });
+      el.addEventListener('pointermove', e => {
+        if (!drag || e.pointerId !== drag.id) return;
+        const dx = e.clientX - drag.x0, dy = e.clientY - drag.y0;
+        if (!drag.moved) {
+          if (Math.hypot(dx, dy) < 8) return;
+          drag.moved = true; drag.t.classList.add('dragging');
+          try { drag.t.setPointerCapture(e.pointerId); } catch (_) { /* ignore */ }
+          if (sel) { sel.classList.remove('sel'); sel = null; }
+        }
+        e.preventDefault();
+        drag.t.style.transform = `translate(${dx}px,${dy}px)`;
+        const c = box.getBoundingClientRect(), r = drag.t.getBoundingClientRect();
+        drag.to = { x: (drag.t.dataset.s === 'l' ? r.right : r.left) - c.left, y: r.top + r.height / 2 - c.top };
+        const o = overTile(e.clientX, e.clientY, drag.t);
+        if (drag.over !== o) { if (drag.over) drag.over.classList.remove('over'); drag.over = o; if (o) o.classList.add('over'); }
+        redraw();
+      });
+      const end = e => {
+        if (!drag || e.pointerId !== drag.id) return;
+        const d = drag; drag = null;
+        if (d.over) d.over.classList.remove('over');
+        if (!d.moved) { if (e.type === 'pointerup') pick(d.t); return; }   // simple toucher
+        d.t.classList.remove('dragging');
+        const target = e.type === 'pointerup' ? overTile(e.clientX, e.clientY, d.t) : null;
+        d.t.style.transform = '';          // la case revient à sa place (le trait reste si la paire est juste)
+        if (target) tryPair(d.t, target);
+        redraw(); setTimeout(redraw, 260);   // 2e tracé une fois la case revenue à sa place
+      };
+      el.addEventListener('pointerup', end);
+      el.addEventListener('pointercancel', end);
       return () => matched === n ? { ok: errors === 0, sol: errors ? `${errors} erreur${errors > 1 ? 's' : ''} d'association en cours de route.` : '' } : null;
     },
 
@@ -1149,33 +1216,62 @@
       loose.push(v);
     });
 
-    const items = [];
+    // sujets à voir : une info déjà résumée dans le fil ne revient pas
+    const subjects = [];
     day.stories.forEach((s, i) => {
-      // une info déjà vue (en carte ou en vidéo) ne revient pas, même avec une autre vidéo
       if (!showAll && seen.s[`${date}:${i}`]) return;
-      const v = (byStory[i] || []).find(isNewV);
-      if (v) items.push({ type: 'video', v, story: i, s, color: color(s) });
-      else items.push({ type: 'story', s, i, color: color(s) });
+      subjects.push({ i, s, v: (byStory[i] || []).find(isNewV), color: color(s) });
     });
-    const extras = loose.filter(isNewV).slice(0, 15).map(v => ({ type: 'video', v, story: null }));
+    // les sujets avec vidéo d'abord : le rythme « vidéo → résumé » domine, les résumés seuls viennent ensuite
+    subjects.sort((a, b) => (b.v ? 1 : 0) - (a.v ? 1 : 0) || a.i - b.i);
+    // vidéos hors édition : sans résumé rédigé, elles ne viennent qu'en bonus, à la fin
+    const extras = loose.filter(isNewV).slice(0, 5).map(v => ({ type: 'video', v, story: null }));
 
-    // questions flash du jour pas encore répondues
-    const qpool = [];
-    day.lessons.forEach((l, li) => l.exercises.forEach((ex, ei) => {
-      const id = `day:${date}:${li}:${ei}`;
-      if (((ex.t === 'qcm' && ex.c.length <= 4) || ex.t === 'vf') && (showAll || !seen.q[id])) qpool.push({ type: 'quiz', ex, id });
-    }));
-    const quiz = shuffle(qpool).slice(0, 8);
-
-    // assemblage : infos du jour d'abord, vidéos hors édition ensuite, une question toutes les 2 cartes
+    // assemblage : [vidéo → résumé] × 5, puis un quiz sur ce qu'on vient de voir, et ainsi de suite
     const seq = [{ type: 'intro' }];
-    [...items, ...extras].forEach((it, n) => {
-      seq.push(it);
-      if (n % 2 === 1 && quiz.length) seq.push(quiz.shift());
-    });
-    if (seq.length > 1) seq.push(...quiz.splice(0, 2));
+    for (let b = 0, k = 0; k < subjects.length; b++, k += FEED_BLOCK) {
+      const grp = subjects.slice(k, k + FEED_BLOCK);
+      grp.forEach(sub => {
+        if (sub.v) seq.push({ type: 'video', v: sub.v, story: sub.i, s: sub.s, color: sub.color });
+        seq.push({ type: 'story', s: sub.s, i: sub.i, color: sub.color, fromVideo: !!sub.v });
+      });
+      const qs = blockQuiz(date, day, grp, showAll);
+      qs.forEach((q, n) => seq.push({ type: 'quiz', ex: q.ex, id: q.id, block: b, n: n + 1, of: qs.length }));
+    }
+    seq.push(...extras);
     seq.push({ type: 'end' });
     return seq;
+  }
+
+  const FEED_BLOCK = 5;   // nombre de sujets (vidéo + résumé) avant un quiz
+  const plain = t => String(t || '').replace(/\*\*|\*/g, '');
+  // Une question par sujet du bloc : d'abord une question des leçons du jour qui porte sur cette info,
+  // sinon une question automatique « quelle info correspond à ce résumé ? ».
+  function blockQuiz(date, day, grp, showAll) {
+    const seen = seenStore();
+    const stTok = day.stories.map(s => feedTok(`${s.title} ${s.text} ${s.why || ''}`));
+    const df = {}; stTok.forEach(t => t.forEach(w => { df[w] = (df[w] || 0) + 1; }));
+    const cand = [];
+    day.lessons.forEach((l, li) => l.exercises.forEach((ex, ei) => {
+      if (!((ex.t === 'qcm' && ex.c.length <= 4) || ex.t === 'vf')) return;
+      const id = `day:${date}:${li}:${ei}`;
+      if (!showAll && seen.q[id]) return;
+      const tk = feedTok(`${ex.q} ${ex.t === 'qcm' ? ex.c[ex.a] : ''} ${ex.x || ''}`);
+      let best = -1, bs = 0;
+      stTok.forEach((st, si) => { let sc = 0; tk.forEach(w => { if (st.has(w)) sc += 1 / df[w]; }); if (sc > bs) { bs = sc; best = si; } });
+      if (best >= 0 && bs >= 1.5) cand.push({ ex, id, story: best, score: bs });
+    }));
+    const used = new Set(), out = [];
+    grp.forEach(sub => {
+      const c = cand.filter(x => x.story === sub.i && !used.has(x.id)).sort((a, b) => b.score - a.score)[0];
+      if (c) { used.add(c.id); out.push({ ex: c.ex, id: c.id }); return; }
+      const txt = plain(sub.s.text), m1 = txt.match(/^.*?[.!?](?=\s|$)/), first = (m1 ? m1[0] : txt).slice(0, 230);
+      const others = shuffle(day.stories.filter((_, j) => j !== sub.i)).slice(0, 3).map(s => s.title);
+      if (others.length < 2) return;
+      const choices = shuffle([sub.s.title, ...others]);
+      out.push({ id: `auto:${date}:${sub.i}`, ex: { t: 'qcm', q: `Quelle info correspond à ce résumé ? « ${first} »`, c: choices, a: choices.indexOf(sub.s.title), x: `C'était : ${sub.s.title}.` } });
+    });
+    return out;
   }
 
   // Nombre de vidéos pas encore vues (pour l'accroche de l'accueil)
@@ -1207,8 +1303,8 @@
         <h1>${subjects} sujet${subjects > 1 ? 's' : ''} ${F.all ? 'au total' : 'pour toi'}</h1>
         <ul class="f-counts">
           ${vids.length ? `<li><b>${vids.length}</b> vidéo${vids.length > 1 ? 's' : ''} ${F.all ? '' : 'pas encore vue' + (vids.length > 1 ? 's' : '')}, de ${srcs.length} rédaction${srcs.length > 1 ? 's' : ''}</li>` : ''}
-          <li><b>1</b> carte par sujet, recoupé par plusieurs médias</li>
-          ${nq ? `<li><b>${nq}</b> question${nq > 1 ? 's' : ''} flash (+5 XP chacune)</li>` : ''}
+          <li>Chaque vidéo est suivie de son <b>résumé</b>, recoupé par plusieurs médias</li>
+          ${nq ? `<li>Un <b>quiz de ${nq > FEED_BLOCK ? FEED_BLOCK : nq} questions</b> tous les ${FEED_BLOCK} sujets, sur ce que tu viens de voir (+5 XP chacune)</li>` : ''}
         </ul>
         ${upd ? `<p class="f-sources">🔄 Vidéos mises à jour ${esc(upd)} · toutes les 30 min</p>` : ''}
         ${srcs.length ? `<p class="f-sources">${srcs.map(esc).join(' · ')}</p>` : ''}
@@ -1219,6 +1315,7 @@
       const s = it.s, sv = isSaved(date, it.i);
       return `<section class="fcard f-story" data-k="${k}" style="--c:${esc(it.color)}">
         <div class="f-inner">
+          <div class="f-kick">${it.fromVideo ? '📝 Résumé de la vidéo' : '📝 L\'essentiel'}</div>
           <span class="f-tag">${esc(s.tag)}</span>${newBadge(F.day, it.i)}
           <h2>${esc(s.title)}</h2>
           <p>${rich(s.text)}</p>
@@ -1252,27 +1349,16 @@
           </div>
           <div class="f-meta-top"><span class="f-chan">▶ ${esc(v.source)}</span>
             <span class="f-tools"><a class="f-yt" href="https://www.youtube.com/shorts/${esc(v.id)}" target="_blank" rel="noopener">YouTube ↗</a></span></div>
-          ${st ? `<h3 class="f-headline">${esc(st.title)}${newBadge(F.day, it.story)}</h3>
-            <div class="f-row"><button class="f-ess" data-sheet>📰 L'essentiel ${srcList.length >= 2 ? `· ✓ ${srcList.length} sources` : ''}</button>
-            <button class="f-mini ${sv ? 'on' : ''}" data-save="${it.story}" aria-pressed="${sv}" aria-label="Garder cette info"><span>🔖</span><small>${sv ? 'Gardée' : 'Garder'}</small></button></div>`
-          : `<h3>${esc(v.title)}</h3>`}
-          <div class="f-swipe">Touche : pause · double-tap ◀ ▶ : ±5 s · swipe ↑ : suite</div>
+          ${st ? `<h3 class="f-headline">${esc(st.title)}${newBadge(F.day, it.story)}</h3>` : `<h3>${esc(v.title)}</h3>`}
+          <div class="f-swipe">${st ? '<b>Swipe ↑ : le résumé de cette vidéo</b> · ' : ''}Touche : pause · double-tap ◀ ▶ : ±5 s</div>
         </div>
-        ${st ? `<div class="f-sheet" hidden>
-          <div class="f-sheet-head"><span class="f-tag">${esc(st.tag)}</span><button class="f-sheet-x" data-sheet aria-label="Fermer">✕</button></div>
-          <h2>${esc(st.title)}</h2>
-          <p>${rich(st.text)}</p>
-          ${st.why ? `<div class="f-why">🎯 ${rich(st.why)}</div>` : ''}
-          <div class="f-src">${srcList.length >= 2 ? `✓ Recoupé par ${srcList.length} sources : ` : 'Source : '}${srcList.map(x => x.url ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)}</a>` : esc(x.name)).join(' · ')}</div>
-          <p class="f-vidsrc">Vidéo : ${esc(v.source)} — « ${esc(v.title)} »</p>
-        </div>` : ''}
       </section>`;
     }
     if (it.type === 'quiz') {
       const ex = it.ex, vf = ex.t === 'vf';
       const choices = vf ? [['Vrai', 0], ['Faux', 1]] : shuffle(ex.c.map((c, i) => [c, i]));
       return `<section class="fcard f-quiz" data-k="${k}"><div class="f-inner">
-        <div class="f-kick">⚡ Question flash · +5 XP</div>
+        <div class="f-kick">${it.block != null ? `🧠 Quiz · ce que tu viens de voir · ${it.n}/${it.of}` : '⚡ Question flash'} · +5 XP</div>
         <h2>${vf ? 'Vrai ou faux ?' : rich(ex.q)}</h2>
         ${vf ? `<blockquote class="f-state">${rich(ex.q)}</blockquote>` : ''}
         <div class="f-choices ${vf ? 'two' : ''}">${choices.map(([c, i]) => `<button class="f-choice" data-c="${i}">${rich(c)}</button>`).join('')}</div>
@@ -1454,8 +1540,8 @@
       // vue au bout de 3 secondes à l'écran : elle ne reviendra plus dans le fil
       F.seenTimer = setTimeout(() => {
         if (!F || F.active !== k) return;
+        // l'info reliée n'est « vue » qu'une fois son résumé affiché (carte suivante)
         const st = seenStore(); st.v[id] = Date.now(); st.vt[id] = [...feedTok(it.v.title)].slice(0, 12).join(' ');
-        if (it.story != null) st.s[`${F.date}:${it.story}`] = Date.now();
         save();
       }, 3000);
       // Lecture automatique en muet (règle des navigateurs, iPhone compris) ; le bouton 🔊 active le son.
@@ -1515,7 +1601,13 @@
     markActive(); save();
     $('#f-xp').textContent = `⚡ ${F.xp}`;
     const ex_ = $('.f-expl', card);
-    ex_.innerHTML = `<b>${ok ? '✓ Bien vu !' : '✕ Raté, la question part dans « À revoir ».'}</b>${ex.x ? ' ' + rich(ex.x) : ''}`;
+    let score = '';
+    if (it.block != null) {
+      F.blk = F.blk || {}; const b = F.blk[it.block] = F.blk[it.block] || { right: 0 };
+      if (ok) b.right++;
+      if (it.n === it.of) score = `<br><b>🏁 Score du quiz : ${b.right}/${it.of}</b>`;
+    }
+    ex_.innerHTML = `<b>${ok ? '✓ Bien vu !' : '✕ Raté, la question part dans « À revoir ».'}</b>${ex.x ? ' ' + rich(ex.x) : ''}${score}`;
     ex_.hidden = false;
   }
 
@@ -1628,6 +1720,24 @@
     try { await installEvt.userChoice; } catch (_) { /* ignore */ }
     installEvt = null; refreshInstall();
   });
+
+  // ---------- Modules (simulateur d'entretien IA, recherche de concours…) ----------
+  // Chaque module (js/ai.js, js/oral.js, js/concours.js) s'enregistre dans window.SCOOP_MODULES
+  // et reçoit cette « boîte à outils ».
+  const ctx = {
+    $, $$, esc, rich, shuffle, norm, pad, ymd, parseYmd, addDays, frDate, TODAY, DATE_RE, sfx, confetti,
+    get S() { return S; }, save, addXp, markActive, renderChrome, route, level,
+    PREPA, UNITS, startLesson: k => startLesson(k),
+    currentDay: () => (CURRENT && DAYS[CURRENT]) || null,
+    // ajoute un onglet à la Prépa (après l'onglet `after`) ; view() renvoie le HTML
+    addPrepaTab(id, ico, label, view, after) {
+      const at = Math.max(0, PREPA_TABS.findIndex(t => t[0] === after)) + 1;
+      PREPA_TABS.splice(at, 0, [id, ico, label]); EXT.tabs[id] = view;
+    },
+    // HTML ajouté EN HAUT d'un onglet existant
+    prependPrepaTab(id, view) { EXT.top[id] = view; }
+  };
+  (window.SCOOP_MODULES || []).forEach(m => { try { m(ctx); } catch (e) { console.error('Module Scoop :', e); } });
 
   // ---------- Démarrage ----------
   async function init() {
