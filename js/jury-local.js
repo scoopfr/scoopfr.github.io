@@ -61,6 +61,19 @@
       keys: [{ l: 'un vrai défaut (pas « perfectionniste »)', rx: /defaut|j'ai tendance|je suis (parfois|souvent|trop)|je manque|je procrastine|je doute|je m'eparpille|timide|impatient/ }, { l: 'un exemple', rx: /par exemple|un jour|lors|une fois|ainsi|notamment|\d/, f: 'Pouvez-vous me donner une situation où cela vous a posé problème ?' }, { l: 'ce que tu fais pour le corriger', rx: /pour (corriger|progresser|m'ameliorer)|j'ai (mis en place|appris|decide)|desormais|je m'efforce|je travaille|je me force|methode/, f: 'Et que faites-vous concrètement pour le corriger ?' }],
       cliche: /perfectionnis|trop (investi|travailleur|exigeant avec moi)/,
       model: 'Mon vrai défaut : [défaut réel]. Cela m\'a posé problème quand [situation concrète]. Pour y remédier, j\'ai [action précise : méthode, habitude, retour demandé]. Depuis, [amélioration observée].' },
+    // Questions reprises du dossier du CFJ (annales publiques 2023-2024)
+    interview: { who: 2, min: 45, say: () => 'Quelle personnalité voudriez-vous interviewer aujourd\'hui, et quelle est LA question que vous lui poseriez ?',
+      keys: [{ l: 'une personnalité précise et d\'actualité', rx: /president|ministre|chef|dirigeant|ecrivain|chanteu|athlete|patron|maire|journaliste|acteur|scientifique|pape|premier|champion|militant/ }, { l: 'LA question, formulée clairement', rx: /\?|je (lui )?(demanderais|poserais)|ma question|comment|pourquoi/, f: 'Quelle serait précisément votre question ?' }, { l: 'pourquoi cette question', rx: /parce que|car |enjeu|pour (comprendre|savoir|reveler)|ce qu'elle|ce qu'il/, f: 'Pourquoi cette question plutôt qu\'une autre ?' }],
+      model: 'Je voudrais interviewer [personnalité précise] parce que [enjeu actuel qui la concerne]. Ma question : « [question courte, ouverte, qui ne se résume pas à oui/non] ». Elle compte car [ce qu\'elle révélerait pour le public]. Je me préparerais en lisant [2 sources] et en repérant [un point de contradiction].' },
+    enquete: { who: 1, min: 50, say: () => 'Sur quel sujet rêveriez-vous d\'enquêter ? Argumentez.',
+      keys: [{ l: 'un sujet précis (pas un thème)', rx: /comment|pourquoi|depuis|le cas de|alors que|scandale|dysfonction|opacite|marche|financement|contrat/, f: 'Vous restez général : quelle est votre question de départ ?' }, { l: 'des sources et une méthode', rx: /documents?|archives?|temoin|source|donnees|appels? d'offres|registre|base de donnees|recoup|interview/, f: 'Comment vous y prendriez-vous concrètement : quelles sources ?' }, { l: 'l\'intérêt public', rx: /interet (public|general)|citoyen|public|democratie|argent public|droit|justice|sante/ }],
+      model: 'Je voudrais enquêter sur [sujet précis formulé en question : « comment… ? », « pourquoi… ? »]. Ma méthode : [documents publics, base de données, témoins, recoupement]. L\'intérêt public : [qui est concerné, quelle règle est en jeu]. Premier pas : [action concrète cette semaine].' },
+    production: { who: 2, min: 45, say: () => 'Citez-nous une production purement journalistique qui vous a marqué ces derniers mois. Pourquoi ?',
+      keys: [{ l: 'une production précise (titre, média, auteur)', rx: /[A-Z][a-z]+ .*[A-Z]|article|reportage|enquete|documentaire|podcast|emission|le monde|liberation|mediapart|arte|france inter|complement d'enquete|envoye special|brut|the guardian/, f: 'Pouvez-vous nous la citer précisément : média, titre, auteur ?' }, { l: 'ce qui la rend remarquable (méthode, angle, écriture)', rx: /angle|enquete|ecriture|recit|precis|rigoureu|verifi|terrain|temoign|donnees|format|montage|voix/, f: 'Qu\'est-ce qui, précisément, en fait un bon travail journalistique ?' }, { l: 'ce que tu en retiens pour toi', rx: /j'ai appris|je retiens|m'inspire|a changé|donne envie|je voudrais faire/ }],
+      model: 'Je pense à [média, titre, auteur]. Ce qui m\'a marqué·e : [angle, méthode, écriture, preuves apportées]. Ce travail a changé [mon regard / ma façon de m\'informer]. J\'en retiens [une leçon pour ma pratique].' },
+    echec: { who: 1, min: 40, say: () => 'Quel échec personnel vous a le plus appris ?',
+      keys: [{ l: 'un vrai échec, raconté simplement', rx: /echec|rate|loupe|erreur|je n'ai pas (reussi|su)|j'ai (echoue|rate|perdu)/ }, { l: 'une analyse honnête de la cause', rx: /parce que|car |ma faute|j'avais|je n'avais pas|trop|pas assez|sous-estim/, f: 'À quoi tenait cet échec, selon vous ?' }, { l: 'ce que tu as changé depuis', rx: /depuis|desormais|j'ai appris|j'ai change|maintenant|aujourd'hui|grace a/, f: 'Qu\'avez-vous changé depuis ?' }],
+      model: 'L\'échec : [situation précise]. La cause : [ma part de responsabilité, sans excuse]. Ce que j\'ai changé : [action concrète]. Preuve : [une situation récente où cela a mieux marché].' },
     dix: { who: 0, min: 35, say: () => pick(['Où vous voyez-vous dans dix ans ?', 'Concrètement, quel journaliste serez-vous dans dix ans ?']),
       keys: [{ l: 'un domaine ou un rôle précis', rx: /reporter|redact|chef|grand reporter|correspondant|enquete|presentateur|editeur|fondateur|pigiste|radio|presse|video|international/ }, { l: 'de la lucidité sur le métier', rx: /pige|precarite|polyvalen|concurren|evolution|numerique|difficile|realite|metier change/, f: 'Comment imaginez-vous la réalité du métier à vos débuts ?' }, { l: 'une ambition crédible', rx: /ambition|objectif|je veux|je souhaite|j'aimerais|etape|d'abord|ensuite|progress/ }],
       model: 'Dans dix ans, je me vois [rôle précis] dans [type de média]. Je sais que les débuts passent par [pige, polyvalence, précarité possible]. Mes étapes : [d\'abord…, ensuite…]. Ce qui ne changera pas : [valeur professionnelle].' },
@@ -85,13 +98,13 @@
   const REACT = { neutral: ['Bien.', 'D\'accord.', 'Je vois.', 'Merci.', 'Très bien.'], kind: ['Très bien, merci.', 'D\'accord, c\'est clair.', 'Merci pour cette réponse.', 'Bien, je vois.'], hard: ['Hum.', 'Bon.', 'D\'accord.', 'Je note.'] };
 
   // ------------------------------------------------------------------ plan de l'entretien
-  const ORDER = ['intro', 'motiv', 'projet', 'terrain', 'ecole', 'actu_open', 'actu_cible', 'medias', 'deonto', 'reportage', 'defaut', 'dix', 'ouv'];
+  const ORDER = ['intro', 'motiv', 'projet', 'terrain', 'ecole', 'production', 'actu_open', 'actu_cible', 'medias', 'deonto', 'enquete', 'reportage', 'interview', 'echec', 'defaut', 'dix', 'ouv'];
   function makePlan(minutes, hasSchool) {
     const N = Math.max(5, Math.min(13, Math.round(minutes / 2.2)));
     const must = ['intro', 'motiv', 'projet', 'actu_open', 'ouv'];
     if (hasSchool) must.push('ecole');
     if (N >= 7) must.push('actu_cible');
-    const opt = ['terrain', 'deonto', 'medias', 'defaut', 'reportage', 'dix'];
+    const opt = ['terrain', 'deonto', 'medias', 'enquete', 'defaut', 'reportage', 'production', 'echec', 'interview', 'dix'];
     const set = new Set(must);
     for (const q of opt) if (set.size < N) set.add(q);
     const plan = ORDER.filter(q => set.has(q));

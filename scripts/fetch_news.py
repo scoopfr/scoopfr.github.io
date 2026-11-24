@@ -46,6 +46,17 @@ FEEDS = [
     ("Al Jazeera", "https://www.aljazeera.com/xml/rss/all.xml", "en"),
     ("France 24 English", "https://www.france24.com/en/rss", "en"),
 ]
+# Flux de SOURCES PRIMAIRES (publications officielles). Ils ne servent pas au recoupement entre médias :
+# ils alimentent la partie 3 de news-today.txt, pour renseigner le champ `primary` des infos.
+# Adresses vérifiées le 24/11/2026 (réponse RSS valide). Ajouter un domaine = l'autoriser aussi dans
+# l'environnement cloud (liste de domaines autorisés).
+OFFICIAL_FEEDS = [
+    ("ONU Info", "https://news.un.org/feed/subscribe/fr/news/all/rss.xml"),
+    ("Commission européenne (communiqués)", "https://ec.europa.eu/commission/presscorner/api/rss?language=fr"),
+    ("OMS", "https://www.who.int/rss-feeds/news-french.xml"),
+    ("Conseil constitutionnel", "https://www.conseil-constitutionnel.fr/flux/rss.xml"),
+]
+PER_OFFICIAL = 15
 PER_FEED = 12
 UA = "Mozilla/5.0 (compatible; ScoopNewsBot/1.0)"
 OUT = pathlib.Path(__file__).with_name("news-today.txt")
@@ -191,6 +202,25 @@ def main():
         if desc:
             lines.append(f"    {desc}")
         lines.append(f"    [{date}] {link}")
+    # --- 3. Sources primaires : publications officielles récentes (un flux en panne n'arrête rien)
+    lines += ["", "################ 3. SOURCES PRIMAIRES (publications officielles) ################",
+              "Documents d'origine (communiqués, décisions, rapports). Si une info de l'édition porte sur l'un d'eux,",
+              "ajoute-le dans son champ `primary: [{ name, url }]`. N'utilise QUE ces URL, jamais d'URL devinée.", ""]
+    for name, url in OFFICIAL_FEEDS:
+        try:
+            root = ET.fromstring(fetch(url))
+            n = 0
+            lines.append(f"=== {name} ===")
+            for title, desc, link, date in items_of(root):
+                if not title or not link:
+                    continue
+                lines.append(f"- {title}")
+                lines.append(f"    [{date}] {link}")
+                n += 1
+                if n >= PER_OFFICIAL:
+                    break
+        except Exception as e:
+            lines.append(f"=== {name} : ERREUR {e} ===")
     OUT.write_text("\n".join(lines), encoding="utf-8")
     print(f"OK -> {OUT} : {len(all_items)} titres, {len(clusters)} sujets recoupés")
 

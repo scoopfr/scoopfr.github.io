@@ -98,7 +98,8 @@
     const name = (ctx.S.settings.name || '').trim();
     const lv = { bac: 'le bac', b2: 'bac+2', b3: 'bac+3', b5: 'bac+4/5 ou plus' }[prof.level] || 'non précisé';
     const news = day ? day.stories.slice(0, 7).map(s => { const t = plain(s.text), m = t.match(/^.*?[.!?](?=\s|$)/); return `- [${s.tag}] ${s.title} : ${(m ? m[0] : t).slice(0, 220)}`; }).join('\n') : '(aucune actualité disponible)';
-    const bank = P.oral.map(q => `- ${q.q}`).join('\n');
+    const AN = window.SCOOP_ANNALES;   // + vraies questions du dossier du CFJ (annales publiques) et questions d'oral rapportées
+    const bank = [...P.oral.map(q => q.q), ...(AN ? [...AN.cfjQuestions.motivation, ...AN.cfjQuestions.personnalite].map(q => q.replace(/^Votre autoportrait.*$/, '')) : []), ...(AN ? AN.oralReported.slice(0, 4).map(o => o.q.replace(/\s*\(.*$/, '')) : [])].filter(Boolean).map(q => `- ${q}`).join('\n');
     return `Tu joues le JURY d'un oral d'admission en école de journalisme française${sc ? ` : ${sc.name} (${sc.city}), diplôme « ${sc.diploma} »` : ' (entretien général, sans école précise)'}. Le candidat s'entraîne : sois réaliste, comme à un vrai concours.
 
 JURÉS (tu peux les alterner ; le champ "who" dit qui parle) :

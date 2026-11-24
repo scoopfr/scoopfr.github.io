@@ -169,6 +169,7 @@
       if (!pick.length) return null;
       return { key, mode: 'review', title: 'Quiz éclair', color: '#9D4EDD', exercises: pick.map(p => p.ex), ids: pick.map(p => p.id), context: 'Culture G' };
     }
+    if (EXT.lessons[kind]) return EXT.lessons[kind](key, a, b);   // leçons fournies par les modules (annales, entraînements)
     if (kind === 'review') {
       const items = shuffle(S.review).slice(0, 10);
       if (!items.length) return null;
@@ -424,7 +425,7 @@
 
   // ---------- Prépa concours ----------
   const PREPA_TABS = [['plan', '🗺️', 'Plan'], ['ecoles', '🏫', 'Écoles'], ['methode', '🧭', 'Méthode'], ['oral', '🎤', 'Oral'], ['metier', '📡', 'Le métier'], ['conseils', '💬', 'Conseils'], ['quiz', '🧠', 'Quiz']];
-  const EXT = { tabs: {}, top: {} };   // onglets et blocs ajoutés par les modules
+  const EXT = { tabs: {}, top: {}, lessons: {} };   // onglets, blocs et leçons ajoutés par les modules
   const srcLinks = list => (list && list.length) ? `<div class="p-src">Sources : ${list.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a>`).join(' · ')}</div>` : '';
 
   function viewPrepa(tab) {
@@ -1175,12 +1176,25 @@
         <textarea class="text-area" rows="3" placeholder="Écris ta proposition… (Ctrl+Entrée pour valider)" aria-label="Ta proposition"></textarea>
         <div class="self"></div>`;
       const ta = $('textarea', el), selfEl = $('.self', el);
-      ta.addEventListener('input', () => ready(ta.value.trim().length >= 3));
+      // compteur de signes (ex.max) : titre et chapô ont une longueur imposée aux concours
+      let counter = null;
+      if (ex.max) { ta.insertAdjacentHTML('afterend', `<div class="sign-count"></div>`); counter = $('.sign-count', el); }
+      const upCount = () => { if (counter) { const n = ta.value.length; counter.textContent = `${n} / ${ex.max} signes`; counter.classList.toggle('over', n > ex.max); } };
+      upCount();
+      ta.addEventListener('input', () => { ready(ta.value.trim().length >= 3); upCount(); });
       setTimeout(() => ta.focus(), 60);
       return () => {
         if (ta.value.trim().length < 3) return null;
         ta.disabled = true;
-        selfEl.innerHTML = `<div class="model"><div class="model-label">Proposition de la rédaction</div><p>${rich(ex.model)}</p></div>
+        // éléments clés du dossier (ex.facts : [{ l, test(texteNormalisé) }]) : repérage automatique dans ta version
+        let facts = '';
+        if (Array.isArray(ex.facts) && ex.facts.length) {
+          const u = norm(ta.value).replace(/(\d) (\d)/g, '$1$2'), got = ex.facts.map(f => [f, f.test(u)]);
+          facts = `<div class="facts"><div class="crit-label">Éléments clés repérés dans ta version : ${got.filter(g => g[1]).length}/${got.length}</div>
+            ${got.map(([f, ok]) => `<div class="fact ${ok ? 'ok' : 'no'}">${ok ? '✓' : '✕'} ${esc(f.l)}</div>`).join('')}
+            <p class="hint">Repérage par mots-clés : un ✕ peut aussi signaler une reformulation. Relis le dossier pour vérifier.</p></div>`;
+        }
+        selfEl.innerHTML = `${facts}<div class="model"><div class="model-label">Proposition de la rédaction</div><p>${rich(ex.model)}</p></div>
           <div class="crit-label">Ta version respecte-t-elle…</div>
           ${ex.crit.map(c => `<label class="crit"><input type="checkbox"><span>${rich(c)}</span></label>`).join('')}`;
         selfEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -1771,7 +1785,9 @@
       PREPA_TABS.splice(at, 0, [id, ico, label]); EXT.tabs[id] = view;
     },
     // HTML ajouté EN HAUT d'un onglet existant
-    prependPrepaTab(id, view) { EXT.top[id] = view; }
+    prependPrepaTab(id, view) { EXT.top[id] = view; },
+    // leçon « kind:… » : fn(key, a, b) renvoie { key, mode, title, color, context, exercises }
+    addLesson(kind, fn) { EXT.lessons[kind] = fn; }
   };
   (window.SCOOP_MODULES || []).forEach(m => { try { m(ctx); } catch (e) { console.error('Module Scoop :', e); } });
 

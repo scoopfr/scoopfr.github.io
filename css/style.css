@@ -756,3 +756,18 @@ a, button, label, summary { -webkit-tap-highlight-color: transparent; }
 .prim-trail { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .prim-trail a { border: 2px solid var(--line); border-radius: 999px; padding: 4px 10px; font-size: 12.5px; font-weight: 600; text-decoration: none; color: inherit; }
 .f-prim a { color: #FFC93C; }
+
+/* ---------- Annales et entraînements ---------- */
+.an-intro p { margin-top: 6px; font-size: 14px; opacity: .85; }
+.an-tests { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; margin: 14px 0 6px; }
+.an-test { display: flex; align-items: center; gap: 12px; text-align: left; border: 2px solid var(--line); border-bottom-width: 5px; border-radius: 16px; padding: 12px 14px; background: var(--card); color: inherit; cursor: pointer; font: 600 14px var(--sans); }
+.an-test:disabled { opacity: .5; cursor: default; }
+.an-test small { font-weight: 500; opacity: .7; font-size: 12.5px; }
+.an-ico { font-size: 26px; } .an-go { margin-left: auto; opacity: .6; }
+.an-daily { display: inline-block; font: 800 10px/1 var(--sans); letter-spacing: .06em; text-transform: uppercase; background: var(--green); color: #fff !important; border-radius: 999px; padding: 3px 7px; opacity: 1 !important; }
+.an-years { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
+.an-year { display: flex; gap: 14px; } .an-y { font: 900 26px var(--serif); color: var(--red); }
+.an-c { font-size: 14px; margin-bottom: 4px; } .an-year ul { margin: 0 0 0 16px; font-size: 13.5px; display: grid; gap: 2px; }
+.sign-count { text-align: right; font-size: 12.5px; opacity: .7; margin-top: 4px; } .sign-count.over { color: var(--wrong, #E63946); font-weight: 800; opacity: 1; }
+.facts { margin: 12px 0; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--blue) 8%, var(--card)); }
+.fact { font-size: 14px; padding: 2px 0; } .fact.ok { color: var(--green); } .fact.no { color: var(--wrong, #E63946); }

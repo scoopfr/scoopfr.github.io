@@ -14,7 +14,7 @@ Trois règles passent avant tout le reste :
 2. Lance la récupération des articles et des vidéos :
    - sous Linux ou macOS (routine cloud) : `python3 scripts/fetch_news.py` et `python3 scripts/fetch_shorts.py`
    - sous Windows : `powershell -ExecutionPolicy Bypass -File scripts\fetch-news.ps1` et `scripts\fetch-shorts.ps1`
-3. Lis `scripts/news-today.txt`. Il contient 2 parties :
+3. Lis `scripts/news-today.txt`. Il contient 3 parties (la 3e, **SOURCES PRIMAIRES**, liste les publications officielles récentes de l'ONU, de la Commission européenne, de l'OMS et du Conseil constitutionnel : quand une info porte sur l'un de ces documents, mets-le dans `primary`, sans lire la 3e partie en détail si aucune info n'est concernée) :
    - **1. SUJETS RECOUPÉS** : des groupes de titres proches publiés par au moins 2 médias différents. C'est **là que tu choisis tes infos**. Le regroupement est automatique, par mots-clés : **vérifie toujours** que les titres d'un groupe parlent bien du même fait, sinon écarte-le.
    - **2. REVUE BRUTE** : tous les titres, média par média, pour retrouver un deuxième média qui confirme un sujet.
    Les sources couvrent la France (Le Monde, franceinfo, France 24, RFI, Le Figaro, les dépêches AFP via « Le Figaro Flash », Libération, Ouest-France, 20 Minutes, La Croix, Mediapart, Courrier international, Euronews), la francophonie (Radio-Canada, Le Temps) et l'international (BBC News, The Guardian, The New York Times, Al Jazeera, France 24 English). Les sources anglophones servent à recouper ; écris toujours en français.
