@@ -537,7 +537,9 @@ p { margin: 0; }
 }
 
 /* ---------- Fil : calque tactile et son ---------- */
-.f-tap { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 2; border: 0; padding: 0; margin: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
+/* Le calque laisse libre le haut du lecteur (64 px) : on peut y toucher le bouton haut-parleur
+   de YouTube, qui marche partout, iPhone compris (le geste a lieu dans le lecteur) */
+.f-tap { position: absolute; top: 64px; right: 0; bottom: 0; left: 0; z-index: 2; border: 0; padding: 0; margin: 0; background: transparent; cursor: pointer; display: grid; place-items: center; }
 .f-tapicon { width: 76px; height: 76px; border-radius: 50%; background: rgba(0,0,0,.5); display: none; place-items: center; color: #fff; font-size: 30px; }
 .f-tapicon::before { content: "▶"; padding-left: 5px; }
 .f-video.paused .f-tapicon { display: grid; }
@@ -545,8 +547,10 @@ p { margin: 0; }
 .f-tools { display: flex; align-items: center; gap: 12px; }
 /* iPhone : le navigateur exige un toucher DANS le lecteur pour le son → on libère le lecteur */
 .f-video.needs-tap .f-tap { pointer-events: none; }
-.f-video.needs-tap .f-player::after, .f-video.sound-blocked .f-player::after { position: absolute; left: 10px; right: 10px; top: 10px; z-index: 3; padding: 8px 12px; border-radius: 12px; background: rgba(0,0,0,.75); color: #fff; font: 700 13px/1.35 var(--sans); text-align: center; pointer-events: none; }
-.f-video.needs-tap .f-player::after { content: "🔊 Touche ▶ dans la vidéo pour lancer le son"; }
+.f-video.sound-loading:not(.needs-tap) .f-player::after { content: "🔊 Activation du son…"; }
+.f-video.sound-loading .f-tapicon { display: none !important; }
+.f-video.needs-tap .f-player::after, .f-video.sound-blocked .f-player::after, .f-video.sound-loading .f-player::after { position: absolute; left: 10px; right: 10px; top: 10px; z-index: 3; padding: 8px 12px; border-radius: 12px; background: rgba(0,0,0,.75); color: #fff; font: 700 13px/1.35 var(--sans); text-align: center; pointer-events: none; }
+.f-video.needs-tap .f-player::after { content: "🔊 Touche le haut-parleur (en haut de la vidéo) ou ▶ pour avoir le son"; top: auto; bottom: 10px; }
 .f-video.sound-blocked:not(.needs-tap) .f-player::after { content: "Son bloqué par ton navigateur : touche 🔊 Son"; }
 .f-sound { border: 0; border-radius: 999px; padding: 5px 10px; background: rgba(255,255,255,.14); color: #fff; font: 700 13px var(--sans); cursor: pointer; }
 

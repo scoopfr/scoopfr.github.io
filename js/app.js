@@ -1189,14 +1189,23 @@
     if (!card) return;
     const info = d.info, setState = s => {
       card.dataset.state = s;
-      if (+s === 1) card.classList.remove('paused', 'needs-tap');   // en lecture
+      if (+s === 1) card.classList.remove('paused', 'needs-tap', 'sound-loading');   // en lecture
       if (+s === 2) card.classList.add('paused');                  // en pause
     };
     if (d.event === 'onStateChange') setState(info);
     if ((d.event === 'infoDelivery' || d.event === 'initialDelivery') && info && typeof info === 'object') {
       if ('playerState' in info) setState(info.playerState);
       if ('currentTime' in info) card.dataset.time = info.currentTime;
-      if ('muted' in info) card.dataset.muted = info.muted ? '1' : '0';
+      if ('muted' in info) {
+        card.dataset.muted = info.muted ? '1' : '0';
+        // son changé depuis le bouton haut-parleur de YouTube : notre bouton 🔊 suit
+        const active = card.dataset.k === String(F.active), soundNow = !info.muted;
+        if (active && card.dataset.state === '1' && soundNow !== F.sound) {
+          F.sound = soundNow; feedSoundPref = soundNow;
+          $$('[data-sound]', $('#f-track')).forEach(b => { b.textContent = soundNow ? '🔊 Son' : '🔇 Son'; });
+          if (soundNow) card.classList.remove('needs-tap', 'sound-blocked');
+        }
+      }
     }
   });
 
@@ -1204,20 +1213,26 @@
   function soundOn(card) {
     if (!card || !card.classList.contains('playing')) return;
     const it = F.seq[+card.dataset.k]; if (!it) return;
-    // 1er essai : on demande au lecteur de remettre le son
+    const t0 = Math.floor(+card.dataset.time || 0);
+    // iPhone (Safari) : le son ne peut être activé QUE par un toucher dans le lecteur.
+    // On ne touche donc pas à la vidéo (sinon Safari la met en pause) : on montre où toucher.
+    if (document.documentElement.classList.contains('is-ios')) { card.classList.add('needs-tap'); return; }
+    // 1. Voie rapide : remettre le son sans recharger (instantané quand le navigateur l'accepte)
+    card.classList.add('sound-loading');
     ytCmd(card, 'unMute'); ytCmd(card, 'setVolume', [100]); ytCmd(card, 'playVideo');
     setTimeout(() => {
       if (!F || !card.isConnected || !card.classList.contains('playing')) return;
-      const playing = card.dataset.state === '1', muted = card.dataset.muted === '1';
-      if (playing && !muted) return; // ça a marché
-      // Le navigateur a bloqué le son (et mis en pause) : on relance le lecteur avec le son,
-      // à la même seconde, grâce à l'autorisation donnée par ton toucher sur 🔊
-      mountVideo(card, it.v, { muted: false, start: Math.floor(+card.dataset.time || 0) });
-      // iPhone : si la lecture ne repart toujours pas, on te laisse toucher ▶ dans le lecteur
-      setTimeout(() => {
-        if (F && card.isConnected && card.classList.contains('playing') && card.dataset.state !== '1') card.classList.add('needs-tap');
-      }, 2000);
-    }, 700);
+      if (card.dataset.state === '1' && card.dataset.muted === '0') { card.classList.remove('sound-loading'); return; }
+      // 2. Le navigateur a mis en pause : on relance aussitôt avec le son, à la même seconde
+      //    (ton toucher sur 🔊 vient d'autoriser la lecture sonore)
+      mountVideo(card, it.v, { muted: false, start: t0 });
+      const ifr = $('iframe', card);
+      ifr.addEventListener('load', () => setTimeout(() => {
+        if (F && card.isConnected && card.classList.contains('playing') && card.dataset.state !== '1') {
+          card.classList.remove('sound-loading'); card.classList.add('needs-tap'); // dernier recours : toucher ▶
+        }
+      }, 3000), { once: true });
+    }, 500);
   }
 
   function stopVideo(card) {
@@ -1250,8 +1265,9 @@
       // enablejsapi permet de piloter le lecteur (pause, son) depuis notre calque tactile.
       // Son déjà activé : on tente la lecture directement avec le son (le swipe compte comme un geste).
       // Si le navigateur refuse, on repasse en muet pour que la vidéo démarre quand même.
-      mountVideo(card, it.v, { muted: !F.sound });
-      if (F.sound) setTimeout(() => {
+      const ios = document.documentElement.classList.contains('is-ios');
+      mountVideo(card, it.v, { muted: !F.sound || ios });
+      if (F.sound && !ios) setTimeout(() => {
         if (!F || F.active !== k || !card.classList.contains('playing')) return;
         if (card.dataset.state !== '1') { mountVideo(card, it.v, { muted: true }); card.classList.add('sound-blocked'); }
       }, 2500);
