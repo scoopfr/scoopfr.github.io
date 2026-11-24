@@ -543,6 +543,11 @@ p { margin: 0; }
 .f-video.paused .f-tapicon { display: grid; }
 .f-video:not(.playing) .f-tap { pointer-events: none; }
 .f-tools { display: flex; align-items: center; gap: 12px; }
+/* iPhone : le navigateur exige un toucher DANS le lecteur pour le son → on libère le lecteur */
+.f-video.needs-tap .f-tap { pointer-events: none; }
+.f-video.needs-tap .f-player::after, .f-video.sound-blocked .f-player::after { position: absolute; left: 10px; right: 10px; top: 10px; z-index: 3; padding: 8px 12px; border-radius: 12px; background: rgba(0,0,0,.75); color: #fff; font: 700 13px/1.35 var(--sans); text-align: center; pointer-events: none; }
+.f-video.needs-tap .f-player::after { content: "🔊 Touche ▶ dans la vidéo pour lancer le son"; }
+.f-video.sound-blocked:not(.needs-tap) .f-player::after { content: "Son bloqué par ton navigateur : touche 🔊 Son"; }
 .f-sound { border: 0; border-radius: 999px; padding: 5px 10px; background: rgba(255,255,255,.14); color: #fff; font: 700 13px var(--sans); cursor: pointer; }
 
 /* ---------- Carte fusionnée « vidéo + l'essentiel » ---------- */

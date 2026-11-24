@@ -1158,10 +1158,66 @@
   }
 
   // Envoie une commande au lecteur YouTube intégré (API iframe)
-  function ytCmd(card, func) {
+  function ytCmd(card, func, args = []) {
     const ifr = card && $('iframe', card);
     if (!ifr || !ifr.contentWindow) return;
-    try { ifr.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args: [] }), '*'); } catch (e) { /* lecteur pas prêt */ }
+    try { ifr.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args }), '*'); } catch (e) { /* lecteur pas prêt */ }
+  }
+
+  // Monte le lecteur YouTube d'une carte. muted=false demande la lecture avec le son
+  // (autorisé par le navigateur juste après un toucher sur la page). start = seconde de reprise.
+  function mountVideo(card, v, { muted = true, start = 0 } = {}) {
+    const old = $('iframe', card); if (old) old.remove();
+    const id = v.id, origin = encodeURIComponent(location.origin);
+    $('.f-player', card).insertAdjacentHTML('afterbegin',
+      `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=${muted ? 1 : 0}&playsinline=1&loop=1&playlist=${id}&rel=0&modestbranding=1&enablejsapi=1&origin=${origin}${start > 0 ? `&start=${start}` : ''}" title="${esc(v.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`);
+    const ifr = $('iframe', card);
+    delete card.dataset.state; card.dataset.muted = muted ? '1' : '0';
+    // demande au lecteur de nous envoyer son état (lecture, pause, muet, temps écoulé)
+    const listen = () => { try { ifr.contentWindow.postMessage(JSON.stringify({ event: 'listening', id, channel: 'widget' }), '*'); } catch (e) { /* ignore */ } };
+    ifr.addEventListener('load', () => { listen(); setTimeout(listen, 600); setTimeout(listen, 1500); }, { once: true });
+    card.classList.add('playing');
+    card.classList.remove('paused', 'needs-tap');
+  }
+
+  // Messages du lecteur YouTube → état réel de la vidéo sur la carte
+  window.addEventListener('message', e => {
+    if (!F || !/^https:\/\/www\.youtube(-nocookie)?\.com$/.test(e.origin)) return;
+    let d; try { d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch (err) { return; }
+    if (!d || !d.event) return;
+    const card = $$('.f-video.playing', $('#f-track')).find(c => { const f = $('iframe', c); return f && f.contentWindow === e.source; });
+    if (!card) return;
+    const info = d.info, setState = s => {
+      card.dataset.state = s;
+      if (+s === 1) card.classList.remove('paused', 'needs-tap');   // en lecture
+      if (+s === 2) card.classList.add('paused');                  // en pause
+    };
+    if (d.event === 'onStateChange') setState(info);
+    if ((d.event === 'infoDelivery' || d.event === 'initialDelivery') && info && typeof info === 'object') {
+      if ('playerState' in info) setState(info.playerState);
+      if ('currentTime' in info) card.dataset.time = info.currentTime;
+      if ('muted' in info) card.dataset.muted = info.muted ? '1' : '0';
+    }
+  });
+
+  // Active le son sans mettre la vidéo en pause
+  function soundOn(card) {
+    if (!card || !card.classList.contains('playing')) return;
+    const it = F.seq[+card.dataset.k]; if (!it) return;
+    // 1er essai : on demande au lecteur de remettre le son
+    ytCmd(card, 'unMute'); ytCmd(card, 'setVolume', [100]); ytCmd(card, 'playVideo');
+    setTimeout(() => {
+      if (!F || !card.isConnected || !card.classList.contains('playing')) return;
+      const playing = card.dataset.state === '1', muted = card.dataset.muted === '1';
+      if (playing && !muted) return; // ça a marché
+      // Le navigateur a bloqué le son (et mis en pause) : on relance le lecteur avec le son,
+      // à la même seconde, grâce à l'autorisation donnée par ton toucher sur 🔊
+      mountVideo(card, it.v, { muted: false, start: Math.floor(+card.dataset.time || 0) });
+      // iPhone : si la lecture ne repart toujours pas, on te laisse toucher ▶ dans le lecteur
+      setTimeout(() => {
+        if (F && card.isConnected && card.classList.contains('playing') && card.dataset.state !== '1') card.classList.add('needs-tap');
+      }, 2000);
+    }, 700);
   }
 
   function stopVideo(card) {
@@ -1192,12 +1248,13 @@
       }, 3000);
       // Lecture automatique en muet (règle des navigateurs, iPhone compris) ; le bouton 🔊 active le son.
       // enablejsapi permet de piloter le lecteur (pause, son) depuis notre calque tactile.
-      const origin = encodeURIComponent(location.origin);
-      $('.f-player', card).insertAdjacentHTML('afterbegin',
-        `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&mute=1&playsinline=1&loop=1&playlist=${id}&rel=0&modestbranding=1&enablejsapi=1&origin=${origin}" title="${esc(it.v.title)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`);
-      card.classList.add('playing');
-      card.classList.remove('paused');
-      if (F.sound) { const ifr = $('iframe', card); ifr.addEventListener('load', () => setTimeout(() => ytCmd(card, 'unMute'), 400), { once: true }); }
+      // Son déjà activé : on tente la lecture directement avec le son (le swipe compte comme un geste).
+      // Si le navigateur refuse, on repasse en muet pour que la vidéo démarre quand même.
+      mountVideo(card, it.v, { muted: !F.sound });
+      if (F.sound) setTimeout(() => {
+        if (!F || F.active !== k || !card.classList.contains('playing')) return;
+        if (card.dataset.state !== '1') { mountVideo(card, it.v, { muted: true }); card.classList.add('sound-blocked'); }
+      }, 2500);
     }
     if (it.type === 'end') finishFeed();
   }
@@ -1265,8 +1322,10 @@
     const tap = e.target.closest('[data-tap]');
     if (tap) { // pause / lecture
       const card = tap.closest('.f-video'); if (!card || !card.classList.contains('playing')) return;
-      const paused = card.classList.toggle('paused');
-      ytCmd(card, paused ? 'pauseVideo' : 'playVideo');
+      // on se fie à l'état réel du lecteur quand on le connaît
+      const isPlaying = card.dataset.state ? card.dataset.state === '1' : !card.classList.contains('paused');
+      card.classList.toggle('paused', isPlaying);
+      ytCmd(card, isPlaying ? 'pauseVideo' : 'playVideo');
       return;
     }
     const snd = e.target.closest('[data-sound]');
@@ -1274,8 +1333,9 @@
       F.sound = !F.sound; feedSoundPref = F.sound;
       $$('[data-sound]', $('#f-track')).forEach(b => { b.textContent = F.sound ? '🔊 Son' : '🔇 Son'; });
       const card = snd.closest('.f-video');
-      ytCmd(card, F.sound ? 'unMute' : 'mute');
-      if (F.sound) ytCmd(card, 'playVideo');
+      if (card) card.classList.remove('sound-blocked');
+      if (F.sound) soundOn(card);
+      else ytCmd(card, 'mute');   // couper le son ne met jamais en pause
       return;
     }
     const sh = e.target.closest('[data-sheet]');
