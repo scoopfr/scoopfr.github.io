@@ -11,13 +11,32 @@
   const PROVIDERS = {
     gemini: { label: 'Google Gemini (offre gratuite)', model: 'gemini-2.5-flash', help: 'Clé gratuite sur aistudio.google.com/apikey (compte Google, sans carte bancaire).', keyUrl: 'https://aistudio.google.com/apikey' },
     anthropic: { label: 'Claude (Anthropic, payant)', model: 'claude-haiku-5-5', help: 'Clé sur console.anthropic.com. Facturée à l\'usage, séparément de ton abonnement Claude.', keyUrl: 'https://console.anthropic.com/settings/keys' },
+    puter: { label: 'Puter (sans clé, allocation gratuite)', model: '', nokey: true, help: 'Aucune clé à créer : tu te connectes avec un compte Puter gratuit (fenêtre qui s\'ouvre au premier essai). L\'usage est pris sur l\'allocation gratuite mensuelle de ton compte. Tes réponses transitent par Puter.', keyUrl: 'https://puter.com' },
     openai: { label: 'Compatible OpenAI (OpenRouter, Groq, Mistral…)', model: '', base: 'https://openrouter.ai/api/v1', help: 'Indique l\'adresse de l\'API, ta clé et le nom du modèle (ex. OpenRouter, Groq, Mistral).', keyUrl: 'https://openrouter.ai/keys' }
   };
 
   const read = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } };
-  const cfg = () => { const c = read(), p = PROVIDERS[c.provider] ? c.provider : 'gemini'; return { provider: p, key: c.key || '', model: c.model || PROVIDERS[p].model, base: c.base || PROVIDERS.openai.base }; };
+  const cfg = () => { const c = read(), p = PROVIDERS[c.provider] ? c.provider : 'puter'; return { provider: p, key: c.key || '', model: c.model || PROVIDERS[p].model, base: c.base || PROVIDERS.openai.base }; };
   const setCfg = o => { try { localStorage.setItem(KEY, JSON.stringify(Object.assign(read(), o))); } catch (e) { /* stockage indisponible */ } };
-  const ready = () => { const c = cfg(); return !!c.key && !!c.model; };
+  const ready = () => { const c = cfg(); return c.provider === 'puter' || (!!c.key && !!c.model); };
+
+  // Puter : IA sans clé (l'utilisateur se connecte à son compte gratuit Puter)
+  let puterP = null;
+  const loadPuter = () => window.puter ? Promise.resolve() : (puterP = puterP || new Promise((res, rej) => {
+    const s = document.createElement('script'); s.src = 'https://js.puter.com/v2/'; s.onload = res;
+    s.onerror = () => { puterP = null; rej(new Error('Impossible de charger Puter (connexion ?).')); }; document.head.appendChild(s);
+  }));
+  async function puterChat(c, system, messages, maxTokens, temperature) {
+    await loadPuter();
+    try {
+      const r = await window.puter.ai.chat([{ role: 'system', content: system || '' }, ...messages], Object.assign({ temperature, max_tokens: maxTokens }, c.model ? { model: c.model } : {}));
+      const m = typeof r === 'string' ? r : (r && r.message ? r.message.content : '');
+      return (Array.isArray(m) ? m.map(p => p.text || '').join('') : String(m || '')).trim();
+    } catch (e) {
+      const d = e && (e.error && e.error.message || e.message || e.msg) || (typeof e === 'string' ? e : '');
+      throw new Error('Puter : ' + (d || 'connexion refusée ou allocation gratuite épuisée.'));
+    }
+  }
 
   const sleep = ms => new Promise(r => setTimeout(r, ms));
   function friendly(status, body, c) {
@@ -33,6 +52,11 @@
   // messages : [{ role: 'user' | 'assistant', content }] (le premier doit être « user »)
   async function chat({ system, messages, json = false, maxTokens = 1200, temperature = 0.8, signal } = {}) {
     const c = cfg();
+    if (c.provider === 'puter') {
+      const t = await puterChat(c, system, messages, maxTokens, temperature);
+      if (!t) throw new Error('Réponse vide de Puter. Réessaie.');
+      return t;
+    }
     if (!c.key) throw new Error('Aucune clé IA enregistrée.');
     let url, headers = { 'Content-Type': 'application/json' }, body;
     if (c.provider === 'gemini') {
