@@ -300,7 +300,7 @@
         <a class="dash-chip" href="#/learn/prepa">🎯 Prépa${exam ? ` · ${exam}` : ''}</a>
         <a class="dash-chip" href="#/learn">🎓 Tout le parcours</a>
       </div>`;
-    return html + CREDIT;
+    return html;
   }
 
   // ---------- Mises à jour de la journée (toutes les 3 h) ----------
@@ -581,7 +581,7 @@
           <label class="btn small ghost" for="b-import">⬆ Importer</label><input id="b-import" type="file" accept="application/json" hidden>
           <button class="btn small danger" id="b-reset">Réinitialiser</button>
         </div>
-      </div>` + CREDIT;
+      </div>`;
   }
   function bindProfile() {
     const upd = () => { save(); renderChrome(); };
@@ -632,7 +632,7 @@
       case 'profile': html = viewProfile(); break;
       default: html = viewHome();
     }
-    el.innerHTML = (view === 'home' || view === 'profile' ? '<div data-install-slot></div>' : '') + html;
+    el.innerHTML = (view === 'home' || view === 'profile' ? '<div data-install-slot></div>' : '') + html + CREDIT;
     window.__scoopReady = true;
     refreshInstall();
     if (view === 'profile') bindProfile();
