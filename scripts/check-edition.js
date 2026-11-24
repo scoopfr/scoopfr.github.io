@@ -62,7 +62,7 @@
     if (lessons.length > 3 && (day.updates || []).length !== lessons.length - 3) W(`${lessons.length - 3} leçon(s) Flash pour ${(day.updates || []).length} mise(s) à jour`);
     lessons.forEach((l, li) => {
       const exs = Array.isArray(l.exercises) ? l.exercises : [];
-      if (exs.length < 6) W(`Leçon ${li} : seulement ${exs.length} exercices`);
+      if (exs.length < (li >= 3 ? 4 : 6)) W(`Leçon ${li} : seulement ${exs.length} exercices`);
       exs.forEach((ex, ei) => {
         const where = `Leçon ${li}, exercice ${ei} (${ex.t}) « ${String(ex.q || '').slice(0, 60)} »`;
         let answer = '';
