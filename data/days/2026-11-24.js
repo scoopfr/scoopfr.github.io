@@ -119,7 +119,33 @@ window.SCOOP_DAYS['2026-11-24'] = {
         { name: 'Le Monde', url: 'https://www.lemonde.fr/societe/article/2026/11/24/feminicides-47-000-femmes-ont-ete-tuees-par-des-proches-dans-le-monde-en-2025-un-nombre-qui-n-evolue-pas_6814722_3224.html' },
         { name: 'Le Temps (Suisse)', url: 'https://www.letemps.ch/monde/quelque-47-000-femmes-et-filles-tuees-par-des-proches-en-2025-dans-le-monde-selon-l-onu' }
       ]
+    },
+    {
+      tag: 'Justice',
+      title: "Takieddine : Nicolas Sarkozy et Carla Bruni renvoyés en procès",
+      text: "**Nicolas Sarkozy**, son épouse **Carla Bruni-Sarkozy** et la communicante **Mimi Marchand** sont renvoyés devant le tribunal correctionnel de Paris dans l'affaire de la fausse rétractation de l'intermédiaire **Ziad Takieddine**. Ils sont poursuivis notamment pour association de malfaiteurs en vue de commettre une escroquerie en bande organisée et pour recel de subornation de témoin. Ils seront jugés en 2027. Les juges les soupçonnent d'avoir avalisé, aidé à organiser et mis en œuvre la volte-face de Ziad Takieddine dans l'affaire du financement libyen de la campagne de 2007.",
+      why: "Un renvoi est la décision des juges d'instruction qui envoie un mis en examen devant le tribunal correctionnel pour y être jugé. Il ne vaut pas condamnation : la présomption d'innocence s'applique jusqu'au jugement. Le recel de subornation de témoin consiste à profiter d'un témoignage obtenu par pression ou contrepartie.",
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/societe/article/2026/11/24/nicolas-sarkozy-carla-bruni-et-mimi-marchand-renvoyes-devant-le-tribunal-dans-l-affaire-de-la-fausse-retractation-de-l-homme-d-affaires-ziad-takieddine_6814770_3224.html' },
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/societe/justice/nicolas-sarkozy-et-carla-bruni-sont-renvoyes-en-proces-dans-l-affaire-de-la-fausse-retractation-de-ziad-takieddine-notamment-pour-association-de-malfaiteurs_8297655.html#xtor=RSS-3-[lestitres]' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/france/20261124-fausse-r%C3%A9tractation-de-ziad-takieddine-nicolas-sarkozy-et-carla-bruni-renvoy%C3%A9s-en-proc%C3%A8s' },
+        { name: 'Libération', url: 'https://www.liberation.fr/societe/police-justice/fausse-retractation-de-takieddine-nicolas-sarkozy-et-carla-bruni-renvoyes-en-proces-en-2027-20261124_MVCMLYLVGBGMHPN4YEIXMXLYEY/' }
+      ]
+    },
+    {
+      tag: 'Politique',
+      title: "Le Havre : enquête ouverte pour détournement de fonds publics",
+      text: "Le parquet du Havre a ouvert une enquête pour détournement de fonds publics à l'agglomération du Havre, présidée par **Édouard Philippe**. L'enquête fait suite à un signalement de l'ancienne directrice générale adjointe de la métropole, Cornelia Findeisen. La procureure Soizic Guillaume a expliqué qu'une plainte lui a été adressée via le parquet national financier, initialement saisi, et qu'elle l'a transmise en enquête au commissariat du Havre.",
+      why: "Le parquet national financier (PNF) est spécialisé dans les infractions économiques et financières complexes ; il peut transmettre un dossier à un parquet local. L'ouverture d'une enquête n'est pas une mise en cause définitive : la présomption d'innocence s'applique.",
+      sources: [
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/politique/edouard-philippe/une-enquete-ouverte-apres-un-signalement-pour-detournement-de-fonds-publics-a-l-agglomeration-du-havre-presidee-par-edouard-philippe_8297676.html#xtor=RSS-3-[lestitres]' },
+        { name: 'Libération', url: 'https://www.liberation.fr/politique/detournement-de-fonds-publics-une-enquete-ouverte-a-lagglomeration-du-havre-presidee-par-edouard-philippe-20261124_YVGEWXKHJBE2JCNJ2GLT242A7E/' },
+        { name: 'AFP (via Le Figaro)', url: 'https://www.lefigaro.fr/elections/presidentielles/presidentielle-2027-une-enquete-ouverte-pour-detournement-de-fonds-publics-a-l-agglomeration-du-havre-presidee-par-edouard-philippe-20261124' }
+      ]
     }
+  ],
+  updates: [
+    { at: '14:00', stories: [10, 11] }
   ],
   shorts: [
     { id: '27z_FzB3wrk', source: 'franceinfo', title: 'Nvidia annonce la réintégration de Jensen Huang comme PDG', tag: 'Économie', story: 0 },
@@ -174,6 +200,15 @@ window.SCOOP_DAYS['2026-11-24'] = {
         { t: 'match', q: "Associe chaque média à son information du jour", pairs: [["Le Temps", "Relaie l'expression « un dangereux précédent » à propos de Nvidia"], ["Courrier international", "Titre sur « un triomphe de l'argent sur la morale »"], ["Le Figaro", "Détaille la pire année du Livret A depuis 2008"], ["Libération", "Annonce que Macron n'ira pas au congrès des maires"]], x: "Chaque média apporte un angle différent sur l'actualité du jour." },
         { t: 'write', q: "Titre cette dépêche (12 mots maximum)", src: "La cour d'appel de Versailles a ordonné mardi que le policier qui a tué Nahel Merzouk, 17 ans, lors d'un contrôle routier à Nanterre en juin 2023, soit jugé pour meurtre devant la cour d'assises des Hauts-de-Seine. En mars, la cour d'appel avait requalifié les faits en violences ayant entraîné la mort sans intention de la donner, mais la Cour de cassation avait annulé cet arrêt.", model: "Mort de Nahel : le policier sera jugé pour meurtre aux assises", crit: ["12 mots maximum", "L'information principale (procès pour meurtre) est claire", "Le nom de Nahel ou de l'affaire apparaît", "Un titre factuel, sans opinion"] },
         { t: 'write', q: "Rédige l'attaque (première phrase) d'un article sur les féminicides dans le monde", src: "Faits : 47 000 femmes et filles tuées par des proches en 2025 dans le monde, selon l'ONU · soit environ cinq par heure · chiffre stable depuis plusieurs années, entre 45 000 et 51 000 victimes · 60 % des femmes victimes d'homicide tuées dans la sphère privée, contre 11 % des hommes.", model: "Environ cinq femmes ou filles sont tuées chaque heure par un proche dans le monde : 47 000 victimes en 2025, selon l'ONU, un chiffre qui ne baisse pas.", crit: ["L'information principale (47 000 victimes) figure dans la phrase", "La source (l'ONU) est citée", "Une seule phrase, qui reste lisible", "Ton factuel, sans opinion"] }
+      ]
+    },
+    {
+      title: '⚡ Flash de 14 h', icon: '⚡', desc: 'Mise à jour', exercises: [
+        { t: 'qcm', q: "Dans quelle affaire Nicolas Sarkozy et Carla Bruni sont-ils renvoyés en procès ?", c: ["La fausse rétractation de Ziad Takieddine", "L'affaire des sondages de l'Élysée", "L'affaire Bygmalion", "L'affaire des écoutes"], a: 0, x: "Ils sont renvoyés dans l'affaire de la fausse rétractation de l'intermédiaire Ziad Takieddine." },
+        { t: 'vf', q: "Le renvoi devant le tribunal vaut condamnation.", a: false, x: "Un renvoi envoie seulement l'affaire en jugement ; la présomption d'innocence s'applique jusqu'au jugement." },
+        { t: 'qcm', q: "Quelle institution a été saisie en premier de la plainte visant l'agglomération du Havre ?", c: ["Le parquet national financier", "La Cour des comptes", "Le Conseil d'État", "La Haute Autorité pour la transparence"], a: 0, x: "La procureure du Havre indique que la plainte est passée par le parquet national financier, initialement saisi." },
+        { t: 'vf', q: "L'enquête sur l'agglomération du Havre porte sur des soupçons de détournement de fonds publics.", a: true, x: "Le parquet du Havre a ouvert une enquête pour détournement de fonds publics." },
+        { t: 'match', q: "Associe chaque personne à son rôle dans ces affaires.", pairs: [["Nicolas Sarkozy", "Ancien président renvoyé en procès"], ["Mimi Marchand", "Communicante renvoyée en procès"], ["Ziad Takieddine", "Intermédiaire libanais dont la rétractation est en cause"], ["Édouard Philippe", "Président de l'agglomération du Havre"]], x: "Chaque rôle est rappelé dans les deux infos ajoutées à 14 h." }
       ]
     }
   ]
