@@ -34,7 +34,9 @@ const EXCLUDE = [
   /recette|cuisine|astuce|horoscope|bande[- ]annonce|trailer|maquillage|beaut[ée]|régime|minceur|playlist|clip officiel|abonnez|nouvelle série|série audio|podcast/i,
   /^\s*[«"“]/,                            // titre qui commence par une citation = extrait de débat d'opinion
   /lance .{0,40} dans (le club|les grandes gueules|l'heure des pros)/i,
-  /#(sant[ée]|nutrition|lifestyle|humour)/i
+  /#(sant[ée]|nutrition|lifestyle|humour)/i,
+  /^\S+(\s+\S+){0,3}\.?\s*$/,              // titre de 4 mots ou moins (« Dernière minute. ») : pas assez informatif
+  /insolite|hippopotame|chaton|chiot|mignon|sapin de no[eë]l|illuminations|marché de no[eë]l|zoo\b/i
 ];
 
 const STOP = new Set(('le la les un une des du de au aux et ou en dans sur pour par avec sans sous chez apres avant ce cette ces son sa ses leur leurs qui que quoi dont est sont etre ete ont fait faire plus moins pas ne se il elle ils elles on nous vous comme mais aussi tres tout tous toute toutes entre contre vers selon lors depuis encore deja alors ainsi quand comment pourquoi quel quelle quels quelles vient veut doit peut nouveau nouvelle nouvelles nouveaux france24 franceinfo video direct explique explication voici voila').split(' '));
@@ -100,7 +102,8 @@ function latestEdition() {
   }
 }
 
-const tidy = t => t.replace(/\s*[•|]\s*(FRANCE 24|RFI|euronews|TV5MONDE.*|franceinfo)\s*$/i, '').trim();
+// retire les suffixes de chaîne (« • FRANCE 24 », « ｜TF1 INFO »…) et les pastilles du type 🔴
+const tidy = t => t.replace(/\s*[•|｜\-–]\s*(FRANCE 24|RFI|euronews|TV5MONDE[^|｜]*|franceinfo|TF1 INFO|LCI|Le Parisien|Le Figaro|BFMTV)\s*$/i, '').replace(/^[🔴🟠⚫️🔵\s]+/u, '').trim();
 
 async function main() {
   const since = Date.now() - HOURS * 3600e3;
