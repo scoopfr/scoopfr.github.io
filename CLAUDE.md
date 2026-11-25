@@ -32,3 +32,5 @@ Vérification avant de publier :
 - sans Node (le PC Windows n'en a pas) : lance l'app (`.claude/launch.json`, config « scoop », port 8080), charge `scripts/check-edition.js` et l'édition dans la page, puis appelle `ScoopCheck(window.SCOOP_DAYS['AAAA-MM-JJ'])` : `ok` doit valoir `true`.
 
 Ne publie jamais une édition en échec.
+
+Pour la routine cloud sur le compte de secours et le passage d'un compte à l'autre : voir `scripts/ROUTINE_COMPTE_SECOURS.md`.
