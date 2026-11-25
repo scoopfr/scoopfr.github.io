@@ -32,6 +32,11 @@ jobs:
       - name: Illustrer les infos (images libres de Wikimedia Commons, auteur et licence)
         continue-on-error: true
         run: python3 scripts/update_images.py
+      - name: Recouper avec les prises de parole officielles sur X (inactif sans clé)
+        continue-on-error: true
+        env:
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+        run: python3 scripts/update_voices.py
       - name: Publier si la liste a changé
         run: |
           git config user.name "scoop-bot"
