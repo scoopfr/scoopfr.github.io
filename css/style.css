@@ -967,3 +967,6 @@ body.in-welcome { overflow: hidden; }
 .alert-banner .ab-act{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 .alert-banner .ab-link{font-size:13px;font-weight:700;color:var(--blue,#3A86FF);text-decoration:none}
 .alert-banner .ab-x{background:none;border:0;font-size:16px;color:var(--muted);cursor:pointer;padding:4px}
+
+.alert-banner .ab-link{background:none;border:0;cursor:pointer;padding:4px;font:inherit;font-size:13px;font-weight:700;color:var(--blue,#3A86FF)}
+.alert-banner.ask{background:var(--card);border-color:var(--line-2)}

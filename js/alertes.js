@@ -61,14 +61,43 @@
   ctx.onAnswer(sync);
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') sync(); });
 
+  // ---------- Activation en une touche (rien à chercher dans les réglages) ----------
+  const standalone = () => (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone === true;
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  async function enableAlerts() {
+    const p = await Notification.requestPermission().catch(() => 'denied');
+    if (p !== 'granted') return false;
+    const s = set(); s.alerts = true; s.alertHour = s.alertHour || 18; ctx.save(); sync(); return true;
+  }
+  const canAsk = () => supported && Notification.permission === 'default';
+  function askCard() {
+    const s = set(), S = ctx.S;
+    if (s.alerts || (s.alertAskUntil && s.alertAskUntil > TODAY)) return '';
+    if (!((S.stats && S.stats.answered >= 3) || S.streak > 0)) return '';   // on demande après les premières réponses, pas à l'arrivée
+    if (canAsk()) return `<div class="alert-banner ask"><div class="ab-txt"><b>🔔 On te prévient pour ne pas perdre ta série ?</b><span>Un seul rappel par jour : le matin pour l'édition, le soir si ta série est en danger. Tu peux couper quand tu veux.</span></div>
+      <div class="ab-act"><button class="btn small green" data-enable-alerts>Oui, me rappeler</button><button class="ab-link" data-snooze-alerts>Pas maintenant</button></div></div>`;
+    if (!supported && isIOS && !standalone()) return `<div class="alert-banner ask"><div class="ab-txt"><b>📲 Reçois des rappels sur iPhone</b><span>Touche Partager puis « Sur l'écran d'accueil », et rouvre Scoop depuis son icône : les rappels pourront alors s'activer en une touche.</span></div>
+      <div class="ab-act"><button class="ab-link" data-snooze-alerts>Plus tard</button></div></div>`;
+    return '';
+  }
+  document.addEventListener('click', async e => {
+    if (e.target.closest('[data-enable-alerts]')) {
+      const ok = await enableAlerts();
+      const b = e.target.closest('.alert-banner');
+      if (b) b.innerHTML = ok ? `<div class="ab-txt"><b>✅ C'est activé</b><span>Tu seras prévenu le matin et avant que ta série s'arrête.</span></div>` : `<div class="ab-txt"><b>Notifications refusées</b><span>Tu peux les autoriser dans les réglages du navigateur. Le bandeau de l'accueil te rappellera quand même.</span></div>`;
+    } else if (e.target.closest('[data-snooze-alerts]')) {
+      set().alertAskUntil = A.addDays(TODAY, 3); ctx.save(); const b = e.target.closest('.alert-banner'); if (b) b.remove();
+    }
+  });
+
   // ---------- Bandeau de l'accueil ----------
   ctx.addHomeBlock(() => {
-    const s = set();
-    if (s.alertHideDay === TODAY) return '';
+    const s = set(), ask = askCard();
+    if (s.alertHideDay === TODAY) return ask;
     const a = A.pick({ ...state(), on: true }, new Date(), { force: true });
-    if (!a) return '';
-    return `<div class="alert-banner" data-kind="${esc(a.kind)}"><div class="ab-txt"><b>${esc(a.title)}</b><span>${esc(a.body)}</span></div>
-      <div class="ab-act"><a class="btn small green" href="#/learn">C'est parti</a>${s.alerts ? '' : '<a class="ab-link" href="#/profile">🔔 Activer les rappels</a>'}<button class="ab-x" aria-label="Masquer pour aujourd'hui" data-hide-alert>✕</button></div></div>`;
+    if (!a) return ask;
+    return ask + `<div class="alert-banner" data-kind="${esc(a.kind)}"><div class="ab-txt"><b>${esc(a.title)}</b><span>${esc(a.body)}</span></div>
+      <div class="ab-act"><a class="btn small green" href="#/learn">C'est parti</a>${s.alerts || ask ? '' : (canAsk() ? '<button class="ab-link" data-enable-alerts>🔔 Activer les rappels</button>' : '<a class="ab-link" href="#/profile">🔔 Rappels</a>')}<button class="ab-x" aria-label="Masquer pour aujourd'hui" data-hide-alert>✕</button></div></div>`;
   });
   document.addEventListener('click', e => {
     if (!e.target.closest('[data-hide-alert]')) return;
