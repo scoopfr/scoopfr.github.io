@@ -179,6 +179,10 @@ window.SCOOP_DAYS['2026-11-24'] = {
       ]
     }
   ],
+  glossary: [
+    { term: 'meurtre', cat: 'Justice', def: 'Le fait de donner volontairement la mort à autrui. C\'est un **crime**, jugé par une cour d\'assises. Il se distingue des violences ayant entraîné la mort sans intention de la donner, où l\'auteur n\'a pas voulu tuer.' },
+    { term: 'détournement de fonds publics', cat: 'Justice', def: 'Infraction commise par une personne chargée d\'une mission de service public (élu, fonctionnaire) qui **utilise à d\'autres fins** de l\'argent public dont elle a la garde.' }
+  ],
   updates: [
     { at: '14:00', stories: [10, 11] },
     { at: '18:00', stories: [12, 13] },

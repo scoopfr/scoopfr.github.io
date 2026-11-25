@@ -811,3 +811,45 @@ body.in-welcome { overflow: hidden; }
 .wl-insta { display: inline-block; padding: 10px 16px; border-radius: 999px; background: rgba(255,255,255,.18); border: 1.5px solid rgba(255,255,255,.6); color: #fff; font: 700 14px var(--sans); text-decoration: none; }
 .wl-stats { display: flex; gap: 10px; align-items: flex-start; text-align: left; font-size: 12.5px; opacity: .9; margin-top: 18px; } .wl-stats input { margin-top: 2px; accent-color: #1B1B1F; }
 .wl-credit { margin-top: 22px; font-size: 12px; opacity: .75; }
+
+/* ---------- Guides : à quoi sert chaque partie ---------- */
+.l-about { margin: 12px 0 4px; font-size: 14px; line-height: 1.5; padding: 10px 14px; border-radius: 12px; background: color-mix(in srgb, var(--blue) 8%, var(--card)); }
+.how-card { margin-bottom: 16px; } .how-list { display: grid; gap: 8px; margin: 10px 0 2px 18px; font-size: 14px; line-height: 1.5; }
+
+/* ---------- Sommaire cliquable ---------- */
+.toc { margin: 16px 0; scroll-margin-top: 70px; } .toc ol { list-style: none; margin: 8px 0 0; padding: 0; display: grid; gap: 6px; }
+.toc-i { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; border: 2px solid var(--line); border-left: 5px solid var(--tag, var(--red)); background: var(--card); color: inherit; border-radius: 12px; padding: 9px 12px; cursor: pointer; font: 600 14px/1.3 var(--sans); }
+.toc-i:hover { background: var(--paper-2, #f3efe6); }
+.toc-tag { flex: none; font: 800 10px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--tag, var(--red)); min-width: 62px; }
+.toc-quiz { --tag: var(--green); }
+.story, #teste-toi { scroll-margin-top: 70px; }
+.to-toc { float: right; border: 0; background: transparent; color: var(--blue); font: 700 12px var(--sans); cursor: pointer; }
+
+/* ---------- Recherche, glossaire, mémoire, jauge ---------- */
+.tb-search { flex: 1; max-width: 340px; margin: 0 12px; } .tb-search input { width: 100%; padding: 8px 12px; border-radius: 999px; border: 2px solid var(--line); background: var(--card); color: inherit; font: 500 14px var(--sans); }
+@media (max-width: 720px) { .tb-search { max-width: none; margin: 0 8px; min-width: 0; } .tb-logo { display: none; } }
+.gl-bigsearch { display: flex; gap: 8px; margin-bottom: 8px; } .gl-bigsearch input, .gl-search { flex: 1; width: 100%; padding: 12px 14px; border-radius: 14px; border: 2px solid var(--line); background: var(--card); color: inherit; font: 500 16px var(--sans); }
+.gl-search { margin: 12px 0 8px; } .gl-cats { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.gl-list { display: grid; gap: 8px; } .gl-item { padding: 10px 14px; } .gl-item summary { cursor: pointer; display: flex; justify-content: space-between; gap: 10px; } .gl-item p { margin-top: 8px; font-size: 14px; line-height: 1.55; }
+.gl-cat { font: 800 10px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; opacity: .6; align-self: center; } .gl-from { font-size: 12.5px; opacity: .75; }
+.gl { border: 0; background: transparent; padding: 0; margin: 0; font: inherit; color: inherit; cursor: help; border-bottom: 2px dotted var(--blue); } .gl:hover { background: color-mix(in srgb, var(--blue) 12%, transparent); }
+.sr-card { display: block; width: 100%; text-align: left; text-decoration: none; color: inherit; padding: 12px 14px; cursor: pointer; font: inherit; } .sr-card p { margin-top: 4px; font-size: 13.5px; opacity: .85; line-height: 1.45; }
+.sr-meta { font: 800 10.5px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; opacity: .6; margin-bottom: 5px; } .sr-go { display: block; margin-top: 6px; font-size: 12.5px; color: var(--blue); font-weight: 700; }
+.tools-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin: 14px 0; }
+.tool-chip { display: grid; gap: 2px; text-align: left; border: 2px solid var(--line); border-bottom-width: 4px; border-radius: 14px; padding: 10px 12px; background: var(--card); color: inherit; text-decoration: none; cursor: pointer; font: inherit; } .tool-chip span { font-size: 20px; } .tool-chip small { opacity: .65; font-size: 12px; }
+.mem-card { border: 2px solid var(--line); border-bottom-width: 6px; border-radius: 20px; padding: 18px; background: var(--card); cursor: pointer; min-height: 180px; }
+.mem-top { display: flex; justify-content: space-between; font: 800 12px var(--sans); opacity: .7; text-transform: uppercase; letter-spacing: .06em; }
+.mem-q { font: 600 19px/1.5 var(--serif); margin: 16px 0; } .mem-blank { display: inline-block; min-width: 70px; border-bottom: 3px solid var(--red); color: var(--red); text-align: center; font-weight: 800; }
+.mem-hint { font-size: 13px; opacity: .6; } .mem-a { margin-top: 10px; padding: 12px; border-radius: 12px; background: color-mix(in srgb, var(--green) 12%, var(--card)); } .mem-a small { display: block; opacity: .7; } .mem-a b { font-size: 20px; } .mem-ctx { font-size: 12.5px; opacity: .75; margin-top: 6px; }
+.mem-btns { display: flex; gap: 10px; margin-top: 12px; } .mem-btns .btn { flex: 1; } .mem-end { text-align: center; }
+.gauge h4 { margin-bottom: 10px; } .gauge-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 14px; margin-top: 8px; } .gauge-row small { opacity: .65; }
+.gauge-slider { width: 100%; accent-color: var(--blue); } .gauge-bar { position: relative; height: 14px; border-radius: 99px; background: var(--line); margin: 8px 0; } .gauge-real { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 99px; background: var(--green); }
+.gauge-self { position: absolute; top: -4px; width: 4px; height: 22px; background: var(--blue); border-radius: 2px; transform: translateX(-2px); } .gauge-msg { font-size: 13.5px; margin-top: 6px; }
+
+/* ---------- Images des infos (crédit obligatoire) ---------- */
+.story-img { margin: 0 0 12px; border-radius: 14px; overflow: hidden; background: var(--paper-2, #eee); }
+.story-img img { display: block; width: 100%; max-height: 260px; object-fit: cover; }
+.story-img figcaption { padding: 6px 10px; font-size: 11.5px; line-height: 1.4; opacity: .75; }
+.story-img figcaption a { color: inherit; text-decoration: underline; }
+.story-img.compact { max-width: 320px; } .story-img.compact img { max-height: 150px; }
+.f-story .story-img { background: rgba(255,255,255,.1); } .f-story .story-img figcaption { color: #fff; }

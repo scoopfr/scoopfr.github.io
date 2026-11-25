@@ -29,6 +29,12 @@
     if (!day || typeof day !== 'object') return { ok: false, errors: ['Édition introuvable ou invalide'], warnings };
     if (!day.title) E('Titre d\'édition manquant');
     if (!day.word || !day.word.term || !day.word.def) E('Mot du jour manquant');
+    // glossaire nourri par l'actu : 2 à 4 termes (avertissement seulement), bien formés, présents dans les textes
+    if (!Array.isArray(day.glossary) || day.glossary.length < 2) W('Glossaire : 2 à 4 termes `glossary: [{ term, def, cat }]` attendus');
+    else day.glossary.forEach((g, i) => {
+      if (!g || !g.term || !g.def) E(`Glossaire ${i} : « term » et « def » obligatoires`);
+      else if (!((day.stories || []).some(s => norm(s.text + ' ' + (s.why || '')).includes(norm(g.term))))) W(`Glossaire « ${g.term} » : le terme n'apparaît dans aucune info (pas de lien possible)`);
+    });
     if (!Array.isArray(day.memo) || day.memo.length < 3) W('Mémo : moins de 3 éléments');
     const stories = Array.isArray(day.stories) ? day.stories : [];
     // 8 à 10 infos le matin, jusqu'à 16 avec les mises à jour de la journée

@@ -169,7 +169,7 @@
       const pool = CULTURE.flatMap(u => u.lessons.flatMap((l, li) => l.exercises.map((ex, ei) => ({ ex, id: `unit:${u.id}:${li}:${ei}` }))));
       const pick = shuffle(pool).slice(0, 10);
       if (!pick.length) return null;
-      return { key, mode: 'review', title: 'Quiz éclair', color: '#9D4EDD', exercises: pick.map(p => p.ex), ids: pick.map(p => p.id), context: 'Culture G' };
+      return { key, mode: 'review', title: 'Quiz rapide', color: '#9D4EDD', exercises: pick.map(p => p.ex), ids: pick.map(p => p.id), context: 'Culture G' };
     }
     if (EXT.lessons[kind]) return EXT.lessons[kind](key, a, b);   // leçons fournies par les modules (annales, entraînements)
     if (kind === 'review') {
@@ -187,6 +187,7 @@
     const st = streakNow(), goal = S.settings.goal, tx = todayXp(), done = tx >= goal;
     $('#topbar').innerHTML = `
       <a class="tb-logo" href="#/home">scoop<span>.</span></a>
+      <form class="tb-search" role="search" data-search><input type="search" name="q" placeholder="Rechercher une info, un quiz, un mot…" aria-label="Rechercher" autocomplete="off" enterkeyhint="search"></form>
       <div class="tb-stats">
         <span class="tb-stat ${st ? '' : 'off'}" title="Série">🔥 ${st}</span>
         <span class="tb-stat" title="XP total">⚡ ${S.xp}</span>
@@ -296,6 +297,15 @@
   };
   const DOCS = { 'Politique': 'un texte de loi, un décret, un discours, un compte rendu de débat', 'Justice': 'une décision ou un arrêt, un communiqué du parquet ou du ministère', 'Économie': 'des chiffres officiels, un rapport, un communiqué d\'entreprise ou de ministère', 'Europe': 'un communiqué de la Commission, un texte législatif', 'Monde': 'un rapport ou un communiqué d\'une institution internationale', 'Climat': 'le texte de la décision ou le rapport scientifique', 'Médias': 'une décision de régulateur, un rapport', 'Société': 'une étude ou des chiffres officiels', 'Culture': 'un communiqué ou des données officielles' };
   const gSite = (kw, domain, extra = '') => `https://www.google.com/search?q=${encodeURIComponent(`${kw.join(' ')}${extra} site:${domain}`)}`;
+  // Images libres (Wikimedia Commons) : auteur et licence toujours affichés. L'image illustre un NOM PROPRE (portrait, lieu),
+  // pas l'événement lui-même ; la légende le précise. Sélection automatique et prudente (scripts/update_images.py).
+  function storyImage(date, i, compact) {
+    const im = window.SCOOP_IMAGES && window.SCOOP_IMAGES[`${date}:${i}`];
+    if (!im || !/^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(im.url || '')) return '';
+    const lic = im.licenseUrl && /^https?:\/\//.test(im.licenseUrl) ? `<a href="${esc(im.licenseUrl)}" target="_blank" rel="noopener">${esc(im.license)}</a>` : esc(im.license);
+    return `<figure class="story-img ${compact ? 'compact' : ''}"><img src="${esc(im.url)}" alt="${esc(im.kw || '')}" loading="lazy" decoding="async" ${im.w ? `width="${+im.w}" height="${+im.h}"` : ''}>
+      <figcaption>Illustration : ${esc(im.kw || '')}. Photo : ${esc(im.author)} · ${lic} · <a href="${esc(im.source)}" target="_blank" rel="noopener">Wikimedia Commons</a></figcaption></figure>`;
+  }
   // exposé pour les entraînements (js/annales.js) : mêmes mots et mêmes liens que sous chaque info
   window.__scoopPrimary = { OFFICIAL, TRAIL, DOCS, gSite, storyKeywords, hostOf, primarySources: (s, d, i) => primarySources(s, d, i) };
   function primaryBlock(s, prim) {
@@ -309,13 +319,28 @@
         <li><b>Va chez l\'auteur du document</b> (un clic lance la recherche sur son site) :</li>
       </ol>
       <div class="prim-trail">${trail.map(([n, d, what]) => `<a href="${esc(gSite(kw.length ? kw : [s.title], d))}" target="_blank" rel="noopener" title="${esc(what)}">${esc(n)}<small>${esc(what)}</small></a>`).join('')}</div>
-      <p class="prim-note"><b>4. Vérifie</b> : la date, l'auteur (une institution), et que le texte dit bien ce que l'article rapporte. Puis cite-le : « selon le communiqué du… du… ». <a href="#/learn/prepa/methode">Fiche méthode</a></p></details>`;
+      <p class="prim-note"><b>4. Vérifie</b> : la date, l'auteur (une institution), et que le texte dit bien ce que l'article rapporte. Puis cite-le : « selon le communiqué du… du… ». <a href="#/learn/prepa/methode">Fiche méthode</a></p>
+      <p class="prim-note">🗣️ <b>Prises de parole</b> : <a href="https://x.com/search?q=${encodeURIComponent(kw.join(' '))}&f=live" target="_blank" rel="noopener">voir ce qui se dit sur X</a> (un compte X peut être demandé) · <a href="#/voix">comptes officiels à suivre</a></p></details>`;
   }
   const wordCard = w => w ? `<div class="word"><div class="kicker">Le mot du jour</div><h3>${esc(w.term)}</h3><p>${rich(w.def)}</p></div>` : '';
 
   const CREDIT = `<p class="credit">conçu par <b>by.naufrage</b></p>`;
+  // À quoi sert chaque partie : ouvert tant que tu ne l'as pas refermé, puis replié
+  function howCard() {
+    const seen = !!S.settings.guideSeen;
+    return `<details class="card p-guide how-card" data-guide-card ${seen ? '' : 'open'}><summary><span class="p-gico">🧭</span>À quoi sert chaque partie de Scoop ?</summary>
+      <ul class="how-list">
+        <li><b>🏠 Accueil</b> : ton tableau de bord. L'édition du jour, la suite de ton parcours, tes révisions.</li>
+        <li><b>🎬 Fil</b> : les vidéos d'actualité, chacune suivie de son résumé, avec un quiz tous les 5 sujets. Le plus rapide pour être à jour.</li>
+        <li><b>📰 Actu</b> : l'édition du jour à lire : les infos recoupées par plusieurs médias, le mot du jour, les quiz de la journée, et un sommaire cliquable.</li>
+        <li><b>🎓 Apprendre</b> : <b>Concours</b> (les 7 thèmes à maîtriser, dans l'ordre) · <b>Culture G</b> (histoire, géo, arts, sciences) · <b>Prépa</b> (écoles, annales, écriture, entretien avec le jury) · <b>À revoir</b> (tes erreurs à refaire).</li>
+        <li><b>👤 Profil</b> : tes statistiques, la date de ton concours, les réglages (mode éco, thème…).</li>
+      </ul></details>`;
+  }
+  document.addEventListener('toggle', e => { const d = e.target; if (d && d.matches && d.matches('[data-guide-card]') && !d.open && !S.settings.guideSeen) { S.settings.guideSeen = true; save(); } }, true);
+
   function viewHome() {
-    let html = '';
+    let html = howCard();
     const day = CURRENT && DAYS[CURRENT];
     if (day) {
       if (CURRENT !== TODAY) html += `<div class="banner">⏳ <span>L'édition d'aujourd'hui n'est pas encore en kiosque. Voici la dernière disponible, celle du <b>${esc(frDate(CURRENT))}</b>.</span></div>`;
@@ -344,6 +369,8 @@
       html += `<div class="hero"><div class="kicker">Édition du jour</div><h1>Pas encore d'édition</h1><p class="muted">Lance la mise à jour quotidienne (voir README) pour générer la première édition. En attendant, le parcours concours est disponible ci-dessous.</p></div>`;
     }
 
+    html += EXT.home.map(f => { try { return f(); } catch (e) { return ''; } }).join('');   // outils de mémoire, jauge…
+
     // Tableau de bord « Continuer » : la suite logique, sans avoir à chercher dans les onglets
     const nxt = nextLesson(UNITS), nxtC = nextLesson(CULTURE), rv = S.review.length;
     let exam = '';
@@ -355,7 +382,7 @@
         ${rv ? `<button class="dash-card" data-start="review" style="--u:#3A86FF"><span class="dash-ico">🔁</span><span class="dash-txt"><small>À revoir</small><b>${rv} question${rv > 1 ? 's' : ''} ratée${rv > 1 ? 's' : ''}</b></span><span class="dash-go">▶</span></button>` : ''}
       </div>
       <div class="dash-mini">
-        <button class="dash-chip" data-start="cgmix">⚡ Quiz éclair</button>
+        <button class="dash-chip" data-start="cgmix">⚡ Quiz rapide</button>
         <button class="dash-chip" data-start="oral">🎤 Simulateur d'oral</button>
         <a class="dash-chip" href="#/learn/prepa">🎯 Prépa${exam ? ` · ${exam}` : ''}</a>
         <a class="dash-chip" href="#/learn">🎓 Tout le parcours</a>
@@ -402,7 +429,14 @@
       <h1 style="font-size:34px;margin:8px 0 6px">Les fondamentaux</h1>
       <p class="muted">Institutions, Europe et monde, médias, déontologie, écriture, langue, économie : ce que les concours attendent de toi. Les leçons se débloquent dans l'ordre.</p>
       ${unitsPath(UNITS)}`;
-    return `<nav class="l-tabs" aria-label="Rubriques d'apprentissage">${tabs.map(([id, ico, label]) => `<a class="l-tab ${id === sub ? 'on' : ''}" href="#/learn/${id}">${ico} ${esc(label)}</a>`).join('')}</nav>${body}`;
+    const ABOUT = {
+      concours: ['🧭', 'Concours', 'Les 7 grands thèmes à maîtriser pour les écrits et l\'oral, en leçons courtes. À faire dans l\'ordre : c\'est ta base.'],
+      culture: ['🧠', 'Culture G', 'Histoire, géographie, arts, sciences, idées : le socle des épreuves de culture générale. Pour tout mettre à niveau.'],
+      prepa: ['🎯', 'Prépa', 'Tout pour candidater : les écoles et leurs dates, les annales, l\'atelier d\'écriture, l\'entretien avec le jury.'],
+      revoir: ['🔁', 'À revoir', 'Les questions que tu as ratées, à refaire jusqu\'à les réussir. C\'est ce qui fait vraiment progresser.']
+    }[sub];
+    return `<nav class="l-tabs" aria-label="Rubriques d'apprentissage">${tabs.map(([id, ico, label]) => `<a class="l-tab ${id === sub ? 'on' : ''}" href="#/learn/${id}">${ico} ${esc(label)}</a>`).join('')}</nav>
+      <p class="l-about"><b>${ABOUT[0]} ${ABOUT[1]} :</b> ${ABOUT[2]}</p>${body}`;
   }
 
   // Parcours d'unités en chemin (réutilisé par le parcours concours et la Culture G)
@@ -441,7 +475,7 @@
       <p class="muted">Histoire, géographie, arts, sciences, idées : le socle de l'épreuve de culture générale et du QCM d'actualité. ${CULTURE.length} thèmes, ${nq} questions, ${done}/${all.length} leçons terminées.</p>
       <button class="cg-quick" data-start="cgmix">
         <span class="cg-quick-ico">⚡</span>
-        <span><b>Quiz éclair</b><br><small>10 questions au hasard, tous thèmes confondus</small></span>
+        <span><b>Quiz rapide</b><br><small>10 questions de culture générale tirées au hasard, tous thèmes mélangés</small></span>
         <span class="cg-quick-go">▶</span>
       </button>
       ${unitsPath(CULTURE)}`;
@@ -449,7 +483,7 @@
 
   // ---------- Prépa concours ----------
   const PREPA_TABS = [['plan', '🗺️', 'Plan'], ['ecoles', '🏫', 'Écoles'], ['methode', '🧭', 'Méthode'], ['oral', '🎤', 'Oral'], ['metier', '📡', 'Le métier'], ['conseils', '💬', 'Conseils'], ['quiz', '🧠', 'Quiz']];
-  const EXT = { tabs: {}, top: {}, lessons: {} };   // onglets, blocs et leçons ajoutés par les modules
+  const EXT = { tabs: {}, top: {}, lessons: {}, routes: {}, onAnswer: [], gloss: null, ready: [], home: [] };   // onglets, blocs et leçons ajoutés par les modules
   const srcLinks = list => (list && list.length) ? `<div class="p-src">Sources : ${list.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a>`).join(' · ')}</div>` : '';
 
   function viewPrepa(tab) {
@@ -552,6 +586,9 @@
       <h1>${esc(day.title)}</h1>
       ${day.intro ? `<p class="lede">${rich(day.intro)}</p>` : ''}
       <p style="margin-top:12px"><button class="btn small ghost" data-scroll="archives">🗂️ Éditions précédentes et infos gardées ↓</button></p>
+      <nav class="toc card" id="toc" aria-label="Sommaire de l'édition"><div class="kicker">Sommaire · touche une info pour y aller</div>
+        <ol>${day.stories.map((s, i) => `<li><button class="toc-i" data-scroll="story-${i}" style="--tag:${esc(s.color || tagColors[s.tag] || '#E63946')}"><span class="toc-tag">${esc(s.tag)}</span><span class="toc-t">${esc(s.title)}</span>${newBadge(day, i)}</button></li>`).join('')}
+          <li><button class="toc-i toc-quiz" data-scroll="teste-toi"><span class="toc-tag">Quiz</span><span class="toc-t">Teste-toi : les quiz de la journée</span></button></li></ol></nav>
       ${wordCard(day.word)}
       <details class="card p-guide prim-howto"><summary><span class="p-gico">📜</span>Comment retrouver la source primaire d'une info (mode d'emploi)</summary>
         <p style="font-size:14px;margin:6px 0">Une <b>source primaire</b> est le document d'origine : décision de justice, texte de loi, communiqué, rapport, chiffres officiels. Sous chaque info, ouvre <b>« 📜 Retrouver la source primaire »</b> :</p>
@@ -562,16 +599,17 @@
         <p class="prim-note">Pour t'entraîner : <button class="btn small ghost" data-start="train:primaire">🔎 Retrouver 3 sources primaires</button></p></details>
       <h2 class="section-title">Les ${day.stories.length} infos à connaître</h2>
       <div class="stories">${day.stories.map((s, i) => `
-        <div class="story" style="--tag:${esc(s.color || tagColors[s.tag] || '#E63946')}">
-          <span class="tag">${esc(s.tag)}</span>${newBadge(day, i)}
+        <div class="story" id="story-${i}" style="--tag:${esc(s.color || tagColors[s.tag] || '#E63946')}">
+          <span class="tag">${esc(s.tag)}</span>${newBadge(day, i)} <button class="to-toc" data-scroll="toc" aria-label="Retour au sommaire">↑ Sommaire</button>
+          ${storyImage(date, i)}
           <h3>${esc(s.title)}</h3>
-          <p>${rich(s.text)}</p>
-          ${s.why ? `<div class="why"><b>🎯 Pour le concours :</b> ${rich(s.why)}</div>` : ''}
+          <p>${linkTerms(rich(s.text))}</p>
+          ${s.why ? `<div class="why"><b>💡 Bon à savoir :</b> ${linkTerms(rich(s.why))}</div>` : ''}
           ${sourcesBlock(s, date, i)}
         </div>`).join('')}
       </div>
       ${day.memo && day.memo.length ? `<div class="card memo"><div class="kicker">À retenir</div><ul>${day.memo.map(m => `<li>${rich(m)}</li>`).join('')}</ul></div>` : ''}
-      <h2 class="section-title">Teste-toi</h2>
+      <h2 class="section-title" id="teste-toi">Teste-toi</h2>
       ${lessonCards(date, day)}
     </article>
     <section id="archives" class="actu-archives">${viewArchive()}</section>`;
@@ -705,15 +743,20 @@
       case 'learn': html = viewLearn(arg, arg2); break;
       case 'archive': html = viewArchive(); break;
       case 'profile': html = viewProfile(); break;
-      default: html = viewHome();
+      default: html = EXT.routes[view] ? await EXT.routes[view](arg, arg2) : viewHome();
     }
     el.innerHTML = (view === 'home' || view === 'profile' ? '<div data-install-slot></div>' : '') + html + CREDIT;
     window.__scoopReady = true;
     refreshInstall();
     if (view === 'profile') bindProfile();
-    window.scrollTo(0, 0);
+    const anchor = view === 'day' && arg2 && /^story-\d+$/.test(arg2) ? document.getElementById(arg2) : null;
+    if (anchor) setTimeout(() => anchor.scrollIntoView({ block: 'start' }), 60); else window.scrollTo(0, 0);
   }
   window.addEventListener('hashchange', route);
+  document.addEventListener('submit', e => {   // barre de recherche du haut
+    const f = e.target.closest && e.target.closest('[data-search]'); if (!f) return;
+    e.preventDefault(); const q = f.q.value.trim(); if (q) location.hash = '#/search/' + encodeURIComponent(q);
+  });
 
   // ---------- Fiche d'unité ----------
   function openGuide(id) {
@@ -823,8 +866,10 @@
     $('.lesson-body').scrollTop = 0;
   }
 
+  function answered(ok, src, it) { EXT.onAnswer.forEach(f => { try { f(ok, src, it); } catch (e) { /* module */ } }); }
+  const linkTerms = h => (EXT.gloss ? EXT.gloss(h) : h);   // glossaire : les mots juridiques ou techniques deviennent cliquables
   function grade(it, ok, sol, free) {
-    S.stats.answered++;
+    S.stats.answered++; answered(ok, L.cfg.mode, it);
     const expl = it.ex.x ? rich(it.ex.x) : '';
     if (ok) {
       S.stats.correct++;
@@ -1403,9 +1448,10 @@
         <div class="f-inner">
           <div class="f-kick">${it.fromVideo ? '📝 Résumé de la vidéo' : '📝 L\'essentiel'}</div>
           <span class="f-tag">${esc(s.tag)}</span>${newBadge(F.day, it.i)}
+          ${storyImage(F.date, it.i, true)}
           <h2>${esc(s.title)}</h2>
-          <p>${rich(s.text)}</p>
-          ${s.why ? `<div class="f-why">🎯 ${rich(s.why)}</div>` : ''}
+          <p>${linkTerms(rich(s.text))}</p>
+          ${s.why ? `<div class="f-why"><b>💡 Bon à savoir :</b> ${linkTerms(rich(s.why))}</div>` : ''}
           ${(() => { const p = primarySources(s, F.date, it.i); return p.length ? `<div class="f-src f-prim">📜 Source primaire : ${p.map(x => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)} ↗</a>`).join(' · ')}</div>` : ''; })()}
           <div class="f-src">${(() => { const l = storySources(s); return l.length >= 2 ? `✓ Recoupé par ${l.length} sources : ${l.map(x => esc(x.name)).join(' · ')}` : `Source : ${esc(l.map(x => x.name).join(', '))}`; })()}</div>
         </div>
@@ -1469,6 +1515,7 @@
   async function loadLive() {
     try { await loadScript(`data/live/shorts.js?t=${Date.now()}`); } catch (e) { /* pas encore de flux : on garde les vidéos du matin */ }
     try { await loadScript(`data/live/primary.js?t=${Date.now()}`); } catch (e) { /* pas encore de rapprochement officiel */ }
+    try { await loadScript(`data/live/images.js?t=${Date.now()}`); } catch (e) { /* pas encore d'images */ }
     return window.SCOOP_LIVE || null;
   }
 
@@ -1681,7 +1728,7 @@
     const good = ex.t === 'vf' ? (ex.a ? 0 : 1) : ex.a, pick = +btn.dataset.c, ok = pick === good;
     card.classList.add('answered');
     $$('.f-choice', card).forEach(b => { const c = +b.dataset.c; if (c === good) b.classList.add('right'); else if (c === pick) b.classList.add('wrong'); });
-    S.stats.answered++; F.answered++;
+    S.stats.answered++; F.answered++; answered(ok, 'feed', it);
     seenStore().q[it.id] = Date.now();
     if (ok) { S.stats.correct++; F.right++; F.xp += 5; addXp(5); sfx.ok(); }
     else {
@@ -1833,7 +1880,15 @@
     // HTML ajouté EN HAUT d'un onglet existant
     prependPrepaTab(id, view) { EXT.top[id] = view; },
     // leçon « kind:… » : fn(key, a, b) renvoie { key, mode, title, color, context, exercises }
-    addLesson(kind, fn) { EXT.lessons[kind] = fn; }
+    addLesson(kind, fn) { EXT.lessons[kind] = fn; },
+    addRoute(name, fn) { EXT.routes[name] = fn; },
+    onReady(fn) { EXT.ready.push(fn); },            // une fois les éditions chargées
+    addHomeBlock(fn) { EXT.home.push(fn); },        // bloc HTML ajouté sur l'accueil
+    onAnswer(fn) { EXT.onAnswer.push(fn); },
+    setGlossLinker(fn) { EXT.gloss = fn; },
+    get INDEX() { return INDEX; }, DAYS, getDay, get CURRENT() { return CURRENT; },
+    // charge les n dernières éditions (recherche, mémoire, rappels)
+    async loadDays(n = 14) { const out = []; for (const d of INDEX.slice(0, n)) { const day = await getDay(d.date); if (day) out.push(day); } return out; }
   };
   (window.SCOOP_MODULES || []).forEach(m => { try { m(ctx); } catch (e) { console.error('Module Scoop :', e); } });
 
@@ -1915,6 +1970,7 @@
     if (!hasAccess() && alreadyUser()) grantAccess();   // anciens utilisateurs : pas d'écran de code
     if (hasAccess()) { initStats(); route(); }
     else showWelcome(() => { initStats(); route(); });
+    EXT.ready.forEach(f => { Promise.resolve().then(f).catch(e => console.error('Module Scoop :', e)); });
   }
   init();
 })();

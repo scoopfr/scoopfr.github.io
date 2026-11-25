@@ -5,7 +5,7 @@ Trois règles passent avant tout le reste :
 
 1. **Aucune invention** : n'utilise que les faits présents dans `scripts/news-today.txt` (ta mémoire de l'actualité récente n'est pas fiable).
 2. **Double vérification** : chaque info retenue doit être couverte par **au moins 2 rédactions différentes** dans `news-today.txt`, et tu cites ces 2 sources (ou plus), avec leurs URL.
-3. **Questions = brief** : chaque question des leçons doit pouvoir se résoudre **uniquement en lisant le brief du jour** (titres, textes, « Pour le concours », mémo, mot du jour). Si une question demande un savoir de contexte (date d'une loi, article de la Constitution…), ce savoir doit être écrit dans le `why` ou le `text` d'une info.
+3. **Questions = brief** : chaque question des leçons doit pouvoir se résoudre **uniquement en lisant le brief du jour** (titres, textes, « Bon à savoir », mémo, mot du jour). Si une question demande un savoir de contexte (date d'une loi, article de la Constitution…), ce savoir doit être écrit dans le `why` ou le `text` d'une info.
 
 ## Étapes
 
@@ -23,6 +23,7 @@ Trois règles passent avant tout le reste :
    - `title` : un titre d'édition de 60 à 80 caractères qui résume les 2 ou 3 sujets majeurs.
    - `intro` : 2 phrases.
    - `word` : un « mot du jour » (notion d'institutions, d'économie, de droit ou de médias liée à l'actu), défini en 2 ou 3 phrases.
+   - `glossary` (**nourrit le glossaire de l'application**) : 2 à 4 termes **présents dans les textes des infos** (juridique, institutionnel, économique, diplomatique ou technique), `{ term, def, cat }` avec `cat` parmi Justice, Institutions, International, Europe, Économie, Climat, Monde, Métier. Définis chaque terme en une ou deux phrases, de façon **intemporelle et neutre** (pas de fait d'actualité, pas de chiffre daté, pas de jugement). Évite les termes déjà définis dans `data/glossaire.js` (`grep -c` sur le terme). Chaque terme doit apparaître tel quel dans le `text` d'une info, pour que l'application puisse le mettre en lien.
    - `stories[]` : `{ tag, title, text, why?, sources: [{ name, url }, { name, url }, …] }`.
      - `sources` contient **au moins 2 rédactions différentes** : deux rubriques du même journal ne comptent que pour une source. Chaque `url` vient de `news-today.txt`. Une dépêche du flux « Le Figaro Flash » se cite `{ name: 'AFP (via Le Figaro)', url }`.
      - `primary` (facultatif) : `[{ name, url }]`, la **source primaire** de l'info (communiqué officiel, décision de justice, texte de loi, rapport, jeu de données). **N'en mets que si l'URL figure dans `news-today.txt` ou dans un article que tu as réellement ouvert, jamais de mémoire ni d'URL devinée.** Si tu n'en as pas, omets le champ : l'application repère déjà seule les liens de `sources` qui pointent vers un site officiel (gouv.fr, europa.eu, un.org…) et propose des pistes par rubrique. Ne dépense pas de crédits à en chercher.
