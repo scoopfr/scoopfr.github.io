@@ -1,7 +1,7 @@
 /* Scoop — serveur de notifications (Cloudflare Worker, gratuit).
    - POST /subscribe   { sub, hour, morning }  : enregistre l'abonnement push d'un appareil
    - POST /unsubscribe { endpoint }            : le supprime
-   - Déclencheur horaire (cron) : à l'heure choisie par chaque élève (heure de Paris), envoie une notification « vide » ;
+   - Déclencheur horaire (cron) : 2 rappels par jour (édition publiée, puis actus de 18 h, heure de Paris), notification « vide » ;
      c'est le service worker de l'appli qui compose le message (série, objectif…) à partir de l'état local de l'élève.
    Aucune donnée personnelle n'est stockée : seulement l'adresse push de l'appareil et l'heure de rappel.
    Réglages (voir server/README.md) : KV « SUBS », variables ALLOWED_ORIGIN et VAPID_SUBJECT. Les clés VAPID se génèrent toutes seules. */
@@ -9,6 +9,17 @@
 const enc = new TextEncoder();
 const b64u = buf => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 const parisHour = () => +new Intl.DateTimeFormat('fr-FR', { hour: '2-digit', hour12: false, timeZone: 'Europe/Paris' }).format(new Date()) % 24;
+
+const parisDate = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris' }).format(new Date());   // AAAA-MM-JJ
+
+// l'édition du jour est-elle publiée ? (la 1re entrée de l'index porte la date du jour)
+async function editionPublished(today) {
+  try {
+    const t = await (await fetch('https://scoopfr.github.io/data/days/index.js?t=' + Date.now())).text();
+    const m = t.match(/date: '(\d{4}-\d{2}-\d{2})'/);
+    return !!m && m[1] === today;
+  } catch (e) { return false; }
+}
 
 async function keyId(endpoint) { return 'sub:' + b64u(await crypto.subtle.digest('SHA-256', enc.encode(endpoint))); }
 
@@ -66,21 +77,26 @@ export default {
     return new Response('Introuvable', { status: 404, headers: h });
   },
 
-  // appelé toutes les heures pile (cron)
+  // appelé toutes les heures pile (cron) : 2 rappels par jour
+  //  - édition du jour : dès qu'elle est publiée (entre 7 h et 12 h, une seule fois par jour)
+  //  - actus de la journée : à 18 h (heure de Paris)
   async scheduled(event, env, ctx) {
-    const hour = parisHour();
+    const hour = parisHour(), today = parisDate();
+    let go = hour === 18;
+    if (!go && hour >= 7 && hour <= 12 && !(await env.SUBS.get('morning:' + today)) && await editionPublished(today)) {
+      go = true; await env.SUBS.put('morning:' + today, '1', { expirationTtl: 172800 });
+    }
+    if (!go) return;
     let cursor;
     do {
       const page = await env.SUBS.list({ prefix: 'sub:', cursor });
       cursor = page.list_complete ? undefined : page.cursor;
       await Promise.all(page.keys.map(async k => {
         const raw = await env.SUBS.get(k.name); if (!raw) return;
-        const sub = JSON.parse(raw);
-        if (sub.hour !== hour && !(sub.morning && hour === 8)) return;
         try {
-          const st = await push(env, sub);
+          const st = await push(env, JSON.parse(raw));
           if (st === 404 || st === 410) await env.SUBS.delete(k.name);   // appareil désabonné
-        } catch (e) { /* on réessaiera à la prochaine heure concernée */ }
+        } catch (e) { /* on réessaiera au prochain rappel */ }
       }));
     } while (cursor);
   }

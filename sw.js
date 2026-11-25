@@ -1,7 +1,7 @@
 /* Scoop — service worker : appli installable + hors ligne
    - éditions (data/days/*) : réseau d'abord (pour avoir l'actu fraîche), cache en secours
    - reste de l'appli : réseau d'abord aussi, cache en secours hors ligne */
-const VERSION = 'scoop-v42';
+const VERSION = 'scoop-v43';
 importScripts('./js/alertes-core.js');   // choix des rappels (partagé avec l'appli)
 const STATE_CACHE = 'scoop-alert-state';   // état des rappels envoyé par l'appli (survit aux mises à jour du cache principal)
 const STATE_URL = new URL('alert-state', self.registration.scope).href;
@@ -74,14 +74,35 @@ async function maybeNotify() {
   await self.registration.showNotification(a.title, { body: a.body, tag: a.kind, icon: 'icons/icon-192.png', badge: 'icons/icon-192.png', data: { url: './#/home' } });
   st.sentDay = a.today; await writeState(st);
 }
-// notification poussée par le serveur (sans contenu) : on compose le message avec l'état local de l'élève.
+// notification poussée par le serveur (sans contenu), 2 fois par jour :
+//  - le matin, dès que l'édition du jour est publiée : son titre ;
+//  - à 18 h : les actus de la journée (titres des infos), avec un mot sur la série si elle est en danger.
 // Chrome et Safari exigent qu'une notification soit toujours affichée : message neutre si rien de précis à dire.
+const clean = (t, n) => { t = String(t || '').replace(/\*\*|\*/g, ''); return t.length > n ? t.slice(0, n - 1) + '…' : t; };
+async function loadScriptValue(url) { const w = {}; new Function('window', await (await fetch(url + '?t=' + Date.now(), { cache: 'no-store' })).text())(w); return w; }
+async function compose(st, now) {
+  try {
+    const e = ((await loadScriptValue('data/days/index.js')).SCOOP_DAYS_INDEX || [])[0];
+    if (!e) return null;
+    if (now.getHours() < 15) {
+      if (e.date !== self.ScoopAlerts.ymd(now)) return null;
+      return { kind: 'edition', title: "☕ L'édition du jour est en kiosque", body: clean(e.title, 160) };
+    }
+    const d = ((await loadScriptValue('data/days/' + e.date + '.js')).SCOOP_DAYS || {})[e.date];
+    if (!d || !Array.isArray(d.stories) || !d.stories.length) return null;
+    let body = d.stories.slice(0, 3).map(s => clean(s.title, 70)).join(' · ');
+    const p = st && self.ScoopAlerts ? self.ScoopAlerts.pick({ ...st, on: true }, now, { force: true }) : null;
+    if (p && p.kind === 'streak') body += ' · ' + p.title;
+    return { kind: 'evening', title: '📰 Les actus du jour : ' + d.stories.length + ' infos', body };
+  } catch (err) { return null; }
+}
 self.addEventListener('push', e => e.waitUntil((async () => {
-  const st = await readState();
-  let a = st && self.ScoopAlerts ? self.ScoopAlerts.pick({ ...st, on: true }, new Date(), { force: true }) : null;
+  const st = await readState(), now = new Date();
+  let a = await compose(st, now);
+  if (!a && st && self.ScoopAlerts) a = self.ScoopAlerts.pick({ ...st, on: true }, now, { force: true });
   if (!a) {
-    const done = st && self.ScoopAlerts && st.last === self.ScoopAlerts.ymd(new Date());
-    a = done ? { kind: 'done', title: '🏆 Journée réussie !', body: 'Rendez-vous demain pour la nouvelle édition.' } : { kind: 'daily', title: '📰 Les infos du jour t\'attendent', body: 'Trois minutes pour tout savoir, et des XP à gagner.' };
+    const done = st && self.ScoopAlerts && st.last === self.ScoopAlerts.ymd(now);
+    a = done ? { kind: 'done', title: '🏆 Journée réussie !', body: 'Rendez-vous demain pour la nouvelle édition.' } : { kind: 'daily', title: "📰 Les infos du jour t'attendent", body: 'Trois minutes pour tout savoir, et des XP à gagner.' };
   }
   await self.registration.showNotification(a.title, { body: a.body, tag: a.kind, icon: 'icons/icon-192.png', badge: 'icons/icon-192.png', data: { url: './#/home' } });
 })()));

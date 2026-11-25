@@ -74,7 +74,7 @@
     const s = set(), S = ctx.S;
     if (s.alerts || (s.alertAskUntil && s.alertAskUntil > TODAY)) return '';
     if (!((S.stats && S.stats.answered >= 3) || S.streak > 0)) return '';   // on demande après les premières réponses, pas à l'arrivée
-    if (canAsk()) return `<div class="alert-banner ask"><div class="ab-txt"><b>🔔 On te prévient pour ne pas perdre ta série ?</b><span>Un seul rappel par jour : le matin pour l'édition, le soir si ta série est en danger. Tu peux couper quand tu veux.</span></div>
+    if (canAsk()) return `<div class="alert-banner ask"><div class="ab-txt"><b>🔔 On te prévient pour ne pas perdre ta série ?</b><span>2 rappels par jour : dès que l'édition du jour est publiée, puis à 18 h avec les actus de la journée. Tu peux couper quand tu veux.</span></div>
       <div class="ab-act"><button class="btn small green" data-enable-alerts>Oui, me rappeler</button><button class="ab-link" data-snooze-alerts>Pas maintenant</button></div></div>`;
     if (!supported && isIOS && !standalone()) return `<div class="alert-banner ask"><div class="ab-txt"><b>📲 Reçois des rappels sur iPhone</b><span>Touche Partager puis « Sur l'écran d'accueil », et rouvre Scoop depuis son icône : les rappels pourront alors s'activer en une touche.</span></div>
       <div class="ab-act"><button class="ab-link" data-snooze-alerts>Plus tard</button></div></div>`;
@@ -84,7 +84,7 @@
     if (e.target.closest('[data-enable-alerts]')) {
       const ok = await enableAlerts();
       const b = e.target.closest('.alert-banner');
-      if (b) b.innerHTML = ok ? `<div class="ab-txt"><b>✅ C'est activé</b><span>Tu seras prévenu le matin et avant que ta série s'arrête.</span></div>` : `<div class="ab-txt"><b>Notifications refusées</b><span>Tu peux les autoriser dans les réglages du navigateur. Le bandeau de l'accueil te rappellera quand même.</span></div>`;
+      if (b) b.innerHTML = ok ? `<div class="ab-txt"><b>✅ C'est activé</b><span>Tu seras prévenu à la publication de l'édition et à 18 h.</span></div>` : `<div class="ab-txt"><b>Notifications refusées</b><span>Tu peux les autoriser dans les réglages du navigateur. Le bandeau de l'accueil te rappellera quand même.</span></div>`;
     } else if (e.target.closest('[data-snooze-alerts]')) {
       set().alertAskUntil = A.addDays(TODAY, 3); ctx.save(); const b = e.target.closest('.alert-banner'); if (b) b.remove();
     }
@@ -110,10 +110,9 @@
     const s = set(), perm = supported ? Notification.permission : 'unsupported';
     const note = !supported ? 'Ton navigateur ne gère pas les notifications : le bandeau de l\'accueil te rappelle quand même ta série.'
       : perm === 'denied' ? 'Les notifications sont bloquées dans ton navigateur : autorise-les dans les réglages du site pour les recevoir.'
-      : 'Tu reçois au plus un rappel par jour : série en danger, objectif presque atteint, nouvelle édition. Sur Android/Chrome, installe l\'appli pour qu\'ils arrivent même app fermée ; sur iPhone, ils demandent l\'appli ajoutée à l\'écran d\'accueil.';
+      : "2 rappels par jour : dès que l'édition du jour est publiée, puis à 18 h avec les actus de la journée. Sur Android/Chrome, installe l'appli pour les recevoir même app fermée ; sur iPhone, ajoute-la d'abord à l'écran d'accueil.";
     return `<h2 class="section-title" style="font-size:22px">Rappels</h2><div class="card">
       <label class="toggle"><span><span style="font-weight:700;font-size:14px">🔔 Me rappeler de venir</span><br><small class="muted">Série, objectif du jour, nouvelle édition. Rien ne quitte ton appareil.</small></span><input id="f-alerts" type="checkbox" ${s.alerts ? 'checked' : ''} ${supported ? '' : 'disabled'}></label>
-      <div class="form-row" style="margin-top:12px"><label for="f-alert-hour">Rappel à partir de</label><select id="f-alert-hour">${hours.map(h => `<option value="${h}" ${(+s.alertHour || 18) === h ? 'selected' : ''}>${h} h</option>`).join('')}</select></div>
       <p class="muted" style="font-size:13px;margin-top:10px">${note}</p>
       ${supported ? '<button class="btn small ghost" id="b-alert-test" style="margin-top:8px">Tester un rappel</button>' : ''}</div>`;
   }, () => {
@@ -126,7 +125,6 @@
       }
       s.alerts = e.target.checked; ctx.save(); sync();
     };
-    document.getElementById('f-alert-hour').onchange = e => { set().alertHour = +e.target.value; ctx.save(); sync(); };
     const b = document.getElementById('b-alert-test');
     if (b) b.onclick = async () => {
       if (Notification.permission !== 'granted') { const p = await Notification.requestPermission().catch(() => 'denied'); if (p !== 'granted') return; }

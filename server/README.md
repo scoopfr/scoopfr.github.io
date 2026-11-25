@@ -22,7 +22,7 @@ Il faut un compte Cloudflare gratuit (cloudflare.com). Tout se fait dans le navi
 ## Fonctionnement
 
 - L'appli s'abonne (`/subscribe`) quand on active les rappels et envoie son heure.
-- Chaque heure pile, le Worker envoie une notification vide aux appareils dont l'heure correspond (et à 8 h pour « l'édition du jour »).
+- Chaque heure pile, le Worker regarde s'il doit envoyer : **dès que l'édition du jour est publiée** (entre 7 h et 12 h, une seule fois par jour) et **à 18 h** (heure de Paris). La notification est vide : le service worker affiche le titre de l'édition le matin, et les titres des infos du jour le soir.
 - Le service worker de l'appli (`sw.js`, évènement `push`) compose le message selon l'état local (série en danger, objectif presque atteint…) et l'affiche. S'il n'y a rien à dire, il affiche un message neutre (iPhone et Chrome exigent qu'une notification soit toujours affichée).
 - Un abonnement expire seul après 60 jours sans réabonnement ; un appareil désabonné est supprimé automatiquement.
 
