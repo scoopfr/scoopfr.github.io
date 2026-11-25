@@ -329,7 +329,7 @@
       ${voicesBlock(date, idx)}
       <p class="prim-note">🗣️ <b>Recouper avec la parole officielle</b> : <a href="https://x.com/search?q=${encodeURIComponent(kw.join(' '))}&f=live" target="_blank" rel="noopener">ce que disent les personnes concernées sur X</a> (un compte X peut être demandé).</p></details>`;
   }
-  const wordCard = w => w ? `<div class="word"><div class="kicker">Le mot du jour</div><h3>${esc(w.term)}</h3><p>${rich(w.def)}</p></div>` : '';
+  const wordCard = w => w ? `<div class="word"><div class="kicker">Le mot du jour</div><h3>${esc(w.term)}</h3><p>${linkTerms(rich(w.def), w.term)}</p></div>` : '';
 
   const CREDIT = `<p class="credit">conçu par <b>by.naufrage</b></p>`;
 
@@ -723,11 +723,11 @@
     const items = day.stories.map((s, i) => ({ day, s, i, ts: storyTs(day, i) })).sort((a, b) => b.ts - a.ts || a.i - b.i);
     return searchBar() + `<div class="kicker">Édition du ${esc(frDate(date, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }))}</div>
       <h1 class="act-title">${esc(day.title)}</h1>
-      ${day.intro ? `<p class="lede">${rich(day.intro)}</p>` : ''}
+      ${day.intro ? `<p class="lede">${linkTerms(rich(day.intro))}</p>` : ''}
       <p class="act-sub"><a class="btn small ghost" href="#/day">← Dernières 24 heures</a></p>
       ${tocChips(items)}
       <div class="stories">${items.map(({ s, i }) => storyCard(day, s, i)).join('')}</div>
-      ${day.memo && day.memo.length ? `<div class="card memo"><div class="kicker">À retenir</div><ul>${day.memo.map(m => `<li>${rich(m)}</li>`).join('')}</ul></div>` : ''}
+      ${day.memo && day.memo.length ? `<div class="card memo"><div class="kicker">À retenir</div><ul>${day.memo.map(m => `<li>${linkTerms(rich(m))}</li>`).join('')}</ul></div>` : ''}
       <h2 class="section-title" id="teste-toi">Teste-toi</h2>${lessonCards(date, day)}${trainGrid(["mem", "rappel", "quick"])}
       ${wordCard(day.word)}
       <section id="archives" class="actu-archives">${viewArchive()}</section>`;
@@ -986,10 +986,10 @@
   }
 
   function answered(ok, src, it) { EXT.onAnswer.forEach(f => { try { f(ok, src, it); } catch (e) { /* module */ } }); if (ok) quest('ok'); }
-  const linkTerms = h => (EXT.gloss ? EXT.gloss(h) : h);   // glossaire : les mots juridiques ou techniques deviennent cliquables
+  const linkTerms = (h, skip) => (EXT.gloss ? EXT.gloss(h, skip) : h);   // glossaire : les mots juridiques ou techniques deviennent cliquables
   function grade(it, ok, sol, free) {
     S.stats.answered++; answered(ok, L.cfg.mode, it);
-    const expl = it.ex.x ? rich(it.ex.x) : '';
+    const expl = it.ex.x ? linkTerms(rich(it.ex.x)) : '';
     if (ok) {
       S.stats.correct++;
       L.combo++; L.maxCombo = Math.max(L.maxCombo, L.combo);
@@ -1032,7 +1032,7 @@
     L.combo++; L.maxCombo = Math.max(L.maxCombo, L.combo);
     L.xp += it.retry ? 5 : 10;
     sfx.ok();
-    setBar('ok', 'Compté juste 👍', '', it.ex.x ? rich(it.ex.x) : '', '✓');
+    setBar('ok', 'Compté juste 👍', '', it.ex.x ? linkTerms(rich(it.ex.x)) : '', '✓');
     L.state = 'feedback';
     updateProgress(); save();
   }
@@ -1175,7 +1175,7 @@
   function qcmCore(ex, el, ready, opts = {}) {
     const idx = opts.noShuffle ? ex.c.map((_, i) => i) : shuffle(ex.c.map((_, i) => i));
     el.innerHTML = `<div class="ex-type">${esc(opts.label || 'Choisis la bonne réponse')}</div>
-      ${opts.statement ? `<h2 class="ex-q" style="margin-bottom:14px">Vrai ou faux ?</h2><div class="statement">${rich(ex.q)}</div>` : `<h2 class="ex-q">${rich(ex.q)}</h2>`}
+      ${opts.statement ? `<h2 class="ex-q" style="margin-bottom:14px">Vrai ou faux ?</h2><div class="statement">${rich(ex.q)}</div>` : `<h2 class="ex-q">${linkTerms(rich(ex.q), ex.c.join(' '))}</h2>`}
       <div class="choices ${opts.two ? 'two' : ''}">${idx.map((ci, k) => `<button class="choice" data-i="${ci}">${opts.two ? '' : `<span class="key">${k + 1}</span>`}<span>${rich(ex.c[ci])}</span></button>`).join('')}</div>`;
     let sel = null;
     $$('.choice', el).forEach(b => b.addEventListener('click', () => {
@@ -1224,7 +1224,7 @@
   }
   function qcmFree(ex, el, ready) {
     const expected = ex.c[ex.a];
-    el.innerHTML = `<div class="ex-type">⌨️ Réponse libre</div><h2 class="ex-q">${rich(ex.q)}</h2>
+    el.innerHTML = `<div class="ex-type">⌨️ Réponse libre</div><h2 class="ex-q">${linkTerms(rich(ex.q), ex.c.join(' '))}</h2>
       <input class="text-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tape ta réponse…" aria-label="Ta réponse">
       <p class="hint">💡 Pas besoin du mot pour mot : accents, majuscules et petites fautes sont tolérés. Pour un nom, le nom de famille suffit.</p>`;
     const inp = $('input', el);
@@ -1245,7 +1245,7 @@
     vf: (ex, el, ready) => qcmCore({ q: ex.q, c: ['Vrai', 'Faux'], a: ex.a ? 0 : 1 }, el, ready, { noShuffle: true, statement: true, two: true, label: 'Vrai ou faux' }),
 
     input(ex, el, ready) {
-      el.innerHTML = `<div class="ex-type">Réponds en quelques mots</div><h2 class="ex-q">${rich(ex.q)}</h2>
+      el.innerHTML = `<div class="ex-type">Réponds en quelques mots</div><h2 class="ex-q">${linkTerms(rich(ex.q), (ex.a || []).join(' '))}</h2>
         <input class="text-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Ta réponse…" aria-label="Ta réponse">
         ${ex.hint ? `<p class="hint">💡 ${rich(ex.hint)}</p>` : ''}`;
       const inp = $('input', el);
@@ -1874,7 +1874,7 @@
       if (ok) b.right++;
       if (it.n === it.of) score = `<br><b>🏁 Score du quiz : ${b.right}/${it.of}</b>`;
     }
-    ex_.innerHTML = `<b>${ok ? '✓ Bien vu !' : '✕ Raté, la question part dans « À revoir ».'}</b>${ex.x ? ' ' + rich(ex.x) : ''}${score}`;
+    ex_.innerHTML = `<b>${ok ? '✓ Bien vu !' : '✕ Raté, la question part dans « À revoir ».'}</b>${ex.x ? ' ' + linkTerms(rich(ex.x)) : ''}${score}`;
     ex_.hidden = false;
   }
 

@@ -37,21 +37,30 @@
     ...Object.entries(extra()).map(([k, x]) => ({ key: k, t: x.t, a: (x.a && x.a.length) ? x.a : [x.t], c: x.c, d: x.d, date: x.date, src: 'actu' }))];
 
   // met en lien les termes d'un texte HTML (déjà échappé) : première occurrence de chaque terme seulement
+  // - reconnaît aussi le pluriel (« droits de douane », « sanctions »), la forme sans accent et sans majuscule
+  // - `skip` (facultatif) : texte dont les termes ne sont PAS mis en lien (les choix d'une question de quiz :
+  //   la définition ne doit pas donner la réponse)
   function buildLinker() {
     const map = new Map(), alts = [];
-    allTerms().forEach(e => e.a.forEach(a => { const n = nz(a); if (n.length >= 3 && !map.has(n)) { map.set(n, e.key); alts.push(a); } }));
+    const unacc = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+    allTerms().forEach(e => e.a.forEach(a => {
+      const n = nz(a); if ((n.length < 3 && !/^[A-Z0-9]{2}$/.test(a)) || map.has(n)) return;   // sigles de 2 caractères (G7, IA) acceptés
+      map.set(n, e.key); alts.push(a);
+      if (unacc(a) !== a) alts.push(unacc(a));
+    }));
     alts.sort((x, y) => y.length - x.length);
     if (!alts.length) return html => html;
-    const rx = new RegExp('(^|[^\\p{L}\\d])(' + alts.map(a => rxEsc(a).replace(/['’]/g, '(?:\'|&#39;|’)')).join('|') + ')(?![\\p{L}\\d])', 'giu');
-    return html => {
-      const seen = new Set();
-      return String(html).split(/(<[^>]+>)/).map((seg, i) => i % 2 ? seg : seg.replace(rx, (m, pre, term) => {
+    const rx = new RegExp('(^|[^\\p{L}\\d])(' + alts.map(a => rxEsc(a).replace(/['’]/g, '(?:\'|&#39;|’)')).join('|') + ')(s|x)?(?![\\p{L}\\d])', 'giu');
+    return (html, skip) => {
+      const seen = new Set(), sk = skip ? nz(plain(skip)) : '';
+      return String(html).split(/(<[^>]+>)/).map((seg, i) => i % 2 ? seg : seg.replace(rx, (m, pre, term, pl) => {
         const n = nz(term.replace(/&#39;/g, '\'')), key = map.get(n); if (!key || seen.has(key)) return m;
-        seen.add(key); return `${pre}<button class="gl" data-gl="${esc(key)}" title="Voir la définition">${term}</button>`;
+        if (sk && sk.includes(n)) return m;
+        seen.add(key); return `${pre}<button class="gl" data-gl="${esc(key)}" title="Voir la définition">${term}${pl || ''}</button>`;
       })).join('');
     };
   }
-  ctx.setGlossLinker(html => { if (!linker) linker = buildLinker(); return linker(html); });
+  ctx.setGlossLinker((html, skip) => { if (!linker) linker = buildLinker(); return linker(html, skip); });
   const findTerm = key => allTerms().find(e => e.key === key);
 
   document.addEventListener('click', e => {
