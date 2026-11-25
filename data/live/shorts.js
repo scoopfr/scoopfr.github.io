@@ -1,69 +1,61 @@
 /* Scoop — vidéos du fil, mises à jour automatiquement (scripts/update-live.mjs). Ne pas modifier à la main. */
-window.SCOOP_LIVE = Object.assign({ updated: '2026-11-25T03:56:47.661Z' }, /*DATA*/{
- "date": "2026-11-24",
+window.SCOOP_LIVE = Object.assign({ updated: '2026-11-25T15:18:01.328Z' }, /*DATA*/{
+ "date": "2026-11-25",
  "videos": [
   {
-   "id": "27z_FzB3wrk",
-   "source": "franceinfo",
-   "title": "Nvidia annonce la réintégration de Jensen Huang comme PDG",
-   "published": null,
+   "id": "gC1wUqjDtL0",
+   "source": "France 24",
+   "title": "En Espagne, l’extrême droite aux portes du pouvoir",
+   "published": "2026-11-25T14:01:34+00:00",
    "story": 0,
-   "curated": true
+   "curated": false
   },
   {
-   "id": "ItuzQkICG_8",
-   "source": "Le Monde",
-   "title": "Guerre en Ukraine : Volodymyr Zelensky revendique l’attaque sur deux bateaux russes en Libye",
-   "published": "2026-11-23T14:30:49+00:00",
+   "id": "rJxGH3Wu5oY",
+   "source": "HugoDécrypte",
+   "title": "Cette vidéo ne plait pas du tout à la présidente de l’Assemblée nationale.",
+   "published": "2026-11-24T14:16:15+00:00",
    "story": 1,
-   "curated": true
+   "curated": false
   },
   {
-   "id": "vlJw_hFaGgU",
-   "source": "franceinfo",
-   "title": "Affaire Nahel Merzouk",
-   "published": null,
+   "id": "9dsFt7-hKBc",
+   "source": "TV5MONDE Info",
+   "title": "Libye - Attaque de Kiev sur deux navires russes",
+   "published": "2026-11-23T19:51:26+00:00",
    "story": 2,
    "curated": true
   },
   {
-   "id": "6n5jULeT7pQ",
-   "source": "franceinfo",
-   "title": "Quel est le calendrier de l'élection présidentielle ?",
-   "published": null,
+   "id": "RjVlGwUtaS0",
+   "source": "euronews",
+   "title": "Législatives en Espagne : logement, immigration et division politique au cœur des débats",
+   "published": "2026-11-25T06:01:35+00:00",
    "story": 3,
    "curated": true
   },
   {
-   "id": "q_40euQifz0",
+   "id": "3Qt6zA-SIww",
    "source": "Brut",
-   "title": "La COP31 vient de se terminer et c'est un échec, on vous explique.",
-   "published": null,
+   "title": "Cet homme a pris 7 ans de prison, notamment pour avoir fait fuiter les premières images de GTA VI.",
+   "published": "2026-11-24T16:31:43+00:00",
    "story": 4,
-   "curated": true
+   "curated": false
   },
   {
-   "id": "znqF4MroOew",
-   "source": "Brut",
-   "title": "Cette chanteuse iranienne a reçu 74 coups de fouet pour avoir chanté sans porter le voile.",
-   "published": "2026-11-24T18:32:06+00:00",
+   "id": "aKpjUOMeMjY",
+   "source": "euronews",
+   "title": "Automobile : BYD veut produire en France pour accélérer sa conquête du marché européen",
+   "published": "2026-11-25T07:47:19+00:00",
    "story": 5,
    "curated": false
   },
   {
-   "id": "0pwdm25q-pM",
-   "source": "AFP",
-   "title": "Pourquoi la Silicon Valley a voulu le retour de Jensen Huang",
-   "published": "2026-11-24T17:11:48+00:00",
+   "id": "mxnw9jKDs7Y",
+   "source": "Brut",
+   "title": "Quitter un conjoint violent coûterait environ 15 000 € : selon la Fondation des femmes.",
+   "published": "2026-11-25T13:22:55+00:00",
    "story": 7,
-   "curated": false
-  },
-  {
-   "id": "4Oi0Yf6ockY",
-   "source": "France Inter",
-   "title": "Laurent Berger, Premier ministre de Raphaël Glucksmann ?",
-   "published": "2026-11-23T21:00:19+00:00",
-   "story": 8,
    "curated": false
   },
   {
@@ -71,254 +63,262 @@ window.SCOOP_LIVE = Object.assign({ updated: '2026-11-25T03:56:47.661Z' }, /*DAT
    "source": "franceinfo",
    "title": "Fausse rétractation de Z. Takieddine : N. Sarkozy renvoyé en procès",
    "published": "2026-11-24T21:30:54+00:00",
-   "story": 10,
-   "curated": false
+   "story": 8,
+   "curated": true
   },
   {
-   "id": "66hZd72onK8",
-   "source": "Le Monde",
-   "title": "CAN 2025 : le Sénégal champion d’Afrique, voici la décision du Tribunal arbitral du sport",
-   "published": "2026-11-24T19:00:56+00:00",
+   "id": "7eR68mu-hLI",
+   "source": "franceinfo",
+   "title": "Le Sénégal finalement sacré vainqueur de la CAN",
+   "published": null,
+   "story": 9,
+   "curated": true
+  },
+  {
+   "id": "dRe0SbSrshc",
+   "source": "France 24",
+   "title": "De retour à la tête de Nvidia, Jensen Huang assure qu'il \"sera un meilleur PDG la deuxième fois\"",
+   "published": "2026-11-24T11:49:05+00:00",
+   "story": 11,
+   "curated": true
+  },
+  {
+   "id": "-n5FJSoHPvg",
+   "source": "TV5MONDE Info",
+   "title": "Colombie : fin de la d'otages à Carthagène",
+   "published": "2026-11-25T12:46:25+00:00",
    "story": 12,
    "curated": false
   },
   {
-   "id": "U2dRM5ztRr8",
-   "source": "Le Parisien",
-   "title": "Des odeurs nauséabondes à l'UGC des Halles",
-   "published": "2026-11-24T22:58:41+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "kd5nw5Nrzcc",
-   "source": "franceinfo",
-   "title": "Vi0lences policières : Rémi a perdu ses dents lors d'une charge de CRS",
-   "published": "2026-11-24T22:01:02+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "q0LNVjtRRMU",
-   "source": "Le Parisien",
-   "title": "Dylan Thiry, « l'imposteur de l'humanitaire »",
-   "published": "2026-11-24T22:00:21+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "ichliuQvaNI",
-   "source": "France Inter",
-   "title": "Josette Clotis, dans l'ombre de Malraux",
-   "published": "2026-11-24T21:30:31+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "hhBCmr2ZX3o",
-   "source": "franceinfo",
-   "title": "6 députés LFI portent plainte après des menaces de m0rt anonymes",
-   "published": "2026-11-24T21:01:08+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "2lg8sbKhh8w",
+   "id": "jPfk0sOeQuo",
    "source": "TF1 INFO",
-   "title": "UNE ARNAQUE REDOUTABLE : Vous pensez acheter une console... c'est en fait une photo !｜",
-   "published": "2026-11-24T21:00:29+00:00",
+   "title": "Teddy Riner : \"Une primaire, c'est pour des gens qui ont une étiquette\"",
+   "published": "2026-11-25T15:08:45+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "5YENhLR6naA",
-   "source": "France Inter",
-   "title": "Laurent Berger sur la réforme des retraites du RN",
-   "published": "2026-11-24T21:00:24+00:00",
+   "id": "dcATo96gDho",
+   "source": "franceinfo",
+   "title": "L'arrivée d'une usine BYD \"va dans le bon sens\"",
+   "published": "2026-11-25T15:01:37+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "wrBjUK6zKFQ",
-   "source": "Brut",
-   "title": "Dans cette région d’Afghanistan, les femmes n’ont désormais plus de nom.",
-   "published": "2026-11-24T20:31:56+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "cq9xnAFDA-c",
-   "source": "France Inter",
-   "title": "Le jour où Cédric Doumbè a douté - À la régulière",
-   "published": "2026-11-24T20:30:09+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "YqndrZKWO9g",
+   "id": "qlozSAl_M0s",
    "source": "TF1 INFO",
-   "title": "Un pilote survit miraculeusement au crash de son hélicoptère",
-   "published": "2026-11-24T20:23:08+00:00",
+   "title": "Il avait piraté GTA VI, il vient d'être condamné à sept ans de prison !",
+   "published": "2026-11-25T15:00:15+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "OyqiSjhTdhg",
-   "source": "AFP",
-   "title": "Championnat du monde de l’œuf mayo",
-   "published": "2026-11-24T20:08:29+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "_tDnUMGxw70",
-   "source": "Mediapart",
-   "title": "Chez les douaniers de Haute-Marne, ceux qui ont parlé paient le prix",
-   "published": "2026-11-24T19:35:09+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "4iQp6bUxLhA",
-   "source": "Brut",
-   "title": "Le narcotrafiquant mexicain Chapo Isidro, parmi les plus recherchés du FBI, a été arrêté",
-   "published": "2026-11-24T19:31:56+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "oPrJkISmEXc",
-   "source": "France Inter",
-   "title": "Comprimé effervescent pour comprendre l'effet placebo",
-   "published": "2026-11-24T19:30:35+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "qTEYCK8jJUE",
-   "source": "franceinfo",
-   "title": "Le cargo échoué sur la côte landaise a été remis à flot",
-   "published": "2026-11-24T19:30:34+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "zqzyK68z-78",
-   "source": "franceinfo",
-   "title": "C’est Benjamin... à Amiens, avec l’épicier du quartier",
-   "published": "2026-11-24T19:02:58+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "yMlRd8l_PYc",
-   "source": "Libération",
-   "title": "Dans les coulisses du Libé des auteur.es jeunesse",
-   "published": "2026-11-24T19:02:00+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "prN_hKC3MdA",
-   "source": "France Inter",
-   "title": "Alcool : les mécanismes d'une dépendance qui s'installe",
-   "published": "2026-11-24T19:00:34+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "Nks0OSVoIdI",
-   "source": "Brut",
-   "title": "Jusqu’où seriez-vous prêt à aller pour garder votre travail ?",
-   "published": "2026-11-24T18:32:29+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "4awNhDn_pck",
-   "source": "franceinfo",
-   "title": "Colis livré par drone : une livraison qui tourne mal",
-   "published": "2026-11-24T18:30:42+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "hz3NueTRmN4",
-   "source": "TF1 INFO",
-   "title": "Ni moto, ni voiture : cet étonnant véhicule peut rouler à 110 km/h !",
-   "published": "2026-11-24T18:00:15+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "b4ovJpXVQpE",
-   "source": "franceinfo",
-   "title": "Billie à la croisée des mondes",
-   "published": "2026-11-24T17:02:15+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "9vjiiSVVhqo",
-   "source": "France Inter",
-   "title": "Gaspard G : \"Est-ce que la télé et la radio seront aussi à la hauteur ?\"",
-   "published": "2026-11-24T17:00:31+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "_BGd4MjLAFQ",
-   "source": "RFI",
-   "title": "Tchad - France : vers une nouvelle coopération militaire ? • RFI #france #tchad",
-   "published": "2026-11-24T17:00:06+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "0McQJmpI6uE",
-   "source": "Le Parisien",
-   "title": "Condamné à 7 ans de prison pour le piratage de GTA 6",
-   "published": "2026-11-24T16:52:41+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "TIegeR28lN0",
-   "source": "France Inter",
-   "title": "Nina Métayer, cheffe pâtissière : \"Je n'arrivais pas à me concentrer, la pâtisserie m'a canalisée\"",
-   "published": "2026-11-24T16:45:17+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "Dby4sUv6sCE",
-   "source": "TV5MONDE Info",
-   "title": "Hip-Hop : ses liens avec la rumba congolaise",
-   "published": "2026-11-24T16:31:05+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "QGEJ7lgkA_g",
+   "id": "-Y7TdmB1SRM",
    "source": "France 24",
-   "title": "Mobilisations lycéennes : des blocages... Au Sénat",
-   "published": "2026-11-24T16:30:17+00:00",
+   "title": "RD Congo : les autorités misent sur la transformation locale des minerais stratégiques",
+   "published": "2026-11-25T14:53:40+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "UJprYlpsl-o",
+   "id": "C-MLdgqhaqw",
+   "source": "TV5MONDE Info",
+   "title": "CAN-2025 : \"il faut arrêter là selon Claude Le Roy",
+   "published": "2026-11-25T14:53:35+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "TFyvfOgLa-k",
+   "source": "AFP",
+   "title": "Hommage aux victimes de féminicides sur la tombe du Soldat inconnu",
+   "published": "2026-11-25T14:42:50+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "GnLqbv0sIwI",
+   "source": "Brut",
+   "title": "Pourquoi voit-on des rubans noirs sur les panneaux à l’entrée des villes ?",
+   "published": "2026-11-25T14:29:53+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "eItvsx7cbxQ",
+   "source": "franceinfo",
+   "title": "Présidentielle 2027 : à quoi joue François Hollande ?",
+   "published": "2026-11-25T14:06:15+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "Kn4C54fuoMU",
+   "source": "franceinfo",
+   "title": "Le golfe de St-Tropez sous les eaux",
+   "published": "2026-11-25T13:17:23+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "RsUxc0FDR5w",
    "source": "TF1 INFO",
-   "title": "Brigades équestres : comment les chevaux sont-ils formés au maintien de l'ordre ?",
-   "published": "2026-11-24T16:29:03+00:00",
+   "title": "📦 Royaume-Uni : quand les voisins traquent les voleurs de colis...",
+   "published": "2026-11-25T13:00:25+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "LPz__j18dm0",
+   "id": "lm7v61K995g",
    "source": "Le Parisien",
-   "title": "Des bombardiers russes déclenchent une alerte en Corée du Sud",
-   "published": "2026-11-24T16:15:11+00:00",
+   "title": "Une influenceuse annonce elle-même son décès à ses fans",
+   "published": "2026-11-25T12:45:40+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "rPoIt-HWiR8",
+   "source": "HugoDécrypte",
+   "title": "Ils ont passé 378 jours enfermés dans une fausse base sur Mars.",
+   "published": "2026-11-25T12:19:26+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "DU7-lXj1laY",
+   "source": "Le Parisien",
+   "title": "Les Ulis : la longue file d'attente pour le kebab à 2€",
+   "published": "2026-11-25T12:18:17+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "sHK0FtOJaqo",
+   "source": "euronews",
+   "title": "Chypre : lutte commune des Chypriotes grecs et turcs pour les familles des disparus",
+   "published": "2026-11-25T12:03:12+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "pBp1uHrzeKQ",
+   "source": "France Inter",
+   "title": "Rachida Brakni dénonce l'épuisement d'être sans cesse \"ramenée à 'Française issue de...'\"",
+   "published": "2026-11-25T12:00:30+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "XyIyxF5NFkE",
+   "source": "franceinfo",
+   "title": "La Marine française saisit plus de 3 tonnes de méthamphétamine",
+   "published": "2026-11-25T11:33:23+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "c6Vu9THkCqo",
+   "source": "France Inter",
+   "title": "André Malraux et Charles de Gaulle : \"Une espèce de coup de foudre\"",
+   "published": "2026-11-25T11:30:13+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "M91w4YLfHMw",
+   "source": "France Inter",
+   "title": "Peut-on pleurer dans l'espace ? La réponse de Thomas Pesquet",
+   "published": "2026-11-25T11:10:28+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "v6sdi64tgQc",
+   "source": "Mediapart",
+   "title": "LFI : avec les grands patrons, confrontation ou compromis ? #shorts",
+   "published": "2026-11-25T11:00:53+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "ERIVe5ecirI",
+   "source": "France Inter",
+   "title": "⁠ \"Le vide n’est jamais vide\": ce que les physiciens y ont trouvé",
+   "published": "2026-11-25T11:00:10+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "bQwc48KNuy0",
+   "source": "Brut",
+   "title": "Ce film avait choqué à sa sortie !",
+   "published": "2026-11-25T10:38:27+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "6j8A1j4Eovk",
+   "source": "RFI",
+   "title": "Haïti : que sait-on de l’opération du Salvador ? • RFI #haïti #salvador #bukele #haiti",
+   "published": "2026-11-25T10:30:16+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "zHk3judUe_4",
+   "source": "AFP",
+   "title": "Congrès des maires : les candidats en quête de parrainages",
+   "published": "2026-11-25T10:28:19+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "GrP8dguqk60",
+   "source": "franceinfo",
+   "title": "Ils sont emportés par la mer",
+   "published": "2026-11-25T10:00:37+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "HnNKwma7vp0",
+   "source": "TF1 INFO",
+   "title": "M0rt de Nahel : la justice confirme en appel le renvoi du policier pour me*rtre",
+   "published": "2026-11-25T09:31:07+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "TGHywfr8p18",
+   "source": "Brut",
+   "title": "Ne plus “perdre de la vie”… voilà le but de ce mégaprojet à la Réunion",
+   "published": "2026-11-25T09:30:52+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "IDp5XkGDnBw",
+   "source": "France Inter",
+   "title": "Mosimann : “J’adore regarder les gens” - France Inter",
+   "published": "2026-11-25T09:30:33+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "bSF2aoeRTAA",
+   "source": "RFI",
+   "title": "25 novembre 2016, mort de Fidel Castro #cuba #castro #fidel #batista #missiles",
+   "published": "2026-11-25T09:30:22+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "ovmCbEGyMYY",
+   "source": "TF1 INFO",
+   "title": "Var : des routes submergées, le port de Saint-Tropez fermé",
+   "published": "2026-11-25T09:11:20+00:00",
    "story": null,
    "curated": false
   }
