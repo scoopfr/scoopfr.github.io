@@ -43,6 +43,13 @@
       else u.stories.forEach(k => { if (!Number.isInteger(k) || !stories[k]) E(`Mise à jour ${u.at} : l'info ${k} n'existe pas`); });
     });
 
+    // Recommandation culturelle (film, série, docu, podcast) en écho à l'actu : ajoutée à la mise à jour de 17 h
+    [].concat(day.reco || []).forEach((r, i) => {
+      if (!r || !r.title || !r.why || !['film', 'série', 'docu', 'podcast'].includes(r.type)) E(`Reco ${i} : « type » (film, série, docu ou podcast), « title » et « why » obligatoires`);
+      else if (r.story !== undefined && !(Number.isInteger(r.story) && stories[r.story])) E(`Reco « ${r.title} » : « story » pointe vers une info inexistante`);
+      else if (!r.by) W(`Reco « ${r.title} » : auteur ou réalisateur (« by ») manquant`);
+    });
+
     // 1. Recoupement des sources
     stories.forEach((s, i) => {
       const where = `Info ${i} « ${String(s.title || '').slice(0, 50)} »`;

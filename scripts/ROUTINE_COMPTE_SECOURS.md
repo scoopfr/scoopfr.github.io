@@ -69,7 +69,7 @@ Tu es la routine de mise à jour de Scoop (dépôt scoopfr/scoopfr.github.io). R
      écris l'édition complète (python3 scripts/fetch_news.py et python3 scripts/fetch_shorts.py).
    - Sinon, fais une mise à jour de la journée, en économisant au maximum :
      python3 scripts/fetch_news.py puis python3 scripts/new_topics.py <date>.
-     S'il affiche RIEN DE NOUVEAU, arrête-toi immédiatement sans rien publier.
+     S'il affiche RIEN DE NOUVEAU, arrête-toi sans rien publier, sauf à la mise à jour de 17 h (ou suivante) si l'édition n'a pas de `reco` : applique alors seulement l'étape 9 de scripts/DAILY_PROMPT.md.
 3. Chaque info doit être confirmée par au moins 2 rédactions différentes. Aucune invention.
 4. node scripts/check-edition.js data/days/<date>.js doit afficher OK avant toute publication.
 5. Commite avec l'e-mail 190466635+nicolaschaix34@users.noreply.github.com

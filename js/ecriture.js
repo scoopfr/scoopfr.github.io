@@ -71,6 +71,22 @@
     model: `**Brève possible :** ${clip(sents(s.text).slice(0, 4).join(' '), 590)}`, crit: ['L\'essentiel est dans la première phrase', 'Les faits sont dans l\'ordre d\'importance, pas chronologique', 'Les affirmations sont attribuées à leurs sources', 'Aucun jugement personnel, rien d\'inventé'], facts: keyFacts(s, 5) });
   const dailyPyramide = s => { const x = sents(s.text); if (x.length < 4) return null; const items = x.slice(0, 4).map(v => clip(v, 150)); return { t: 'order', q: `🔺 Pyramide inversée : remets les phrases de la dépêche « ${clip(s.title, 60)} » dans le bon ordre`, items, x: 'Dans une dépêche, la **première phrase** donne l\'essentiel ; les suivantes précisent le contexte et les détails.' }; };
 
+  const dailyResume = s => ({ t: 'write', max: 250, q: `📝 Résumé · « ${clip(s.title, 70)} »`, src: plain(s.text) + '\n\nRésume cette dépêche en **deux phrases** (250 signes maximum) pour un lecteur pressé : le fait, puis ce qu\'il faut en retenir.',
+    model: `**Résumé possible :** ${clip(sents(s.text).slice(0, 2).join(' '), 245)}`, crit: ['Le fait principal est dans la première phrase', 'Il fait deux phrases et moins de 250 signes', 'Chaque élément figure dans la dépêche', 'Je n\'ai recopié aucune phrase telle quelle'], facts: keyFacts(s, 4) });
+  const dailyQuestions = s => ({ t: 'write', q: `🎙️ Les bonnes questions · « ${clip(s.title, 70)} »`, src: plain(s.text) + '\n\nTu dois interviewer la personne la mieux placée pour en parler. Écris **3 questions** ouvertes (pas de réponse par oui ou non), de la plus factuelle à la plus incisive.',
+    model: '**Pistes :** « Que s\'est-il passé exactement, et depuis quand ? » · « Qui est concerné concrètement, et combien de personnes ? » · « Qu\'est-ce qui pourrait changer dans les prochains mois, et pour qui ? »', crit: ['Mes 3 questions sont ouvertes (« comment », « pourquoi », « qu\'est-ce que »)', 'Elles vont du factuel vers le plus incisif', 'Aucune ne contient déjà la réponse ni un jugement', 'Elles portent sur cette info, pas sur le sujet en général'] });
+  const dailyAngle = s => ({ t: 'write', q: `🧭 Trouve un angle · « ${clip(s.title, 70)} »`, src: plain(s.text) + '\n\nLe sujet est posé. Propose **un angle** de reportage sous forme de question précise, puis dis en une phrase qui tu irais voir.',
+    model: '**Exemple de démarche :** partir du fait, choisir une personne ou un lieu touché concrètement, et formuler une question à laquelle le reportage répond (par exemple « Que change ce fait pour les habitants d\'une commune précise ? »).', crit: ['Mon angle est une question précise, pas un thème', 'Il s\'appuie sur un fait de la dépêche', 'Je sais qui je verrais ou où j\'irais', 'Il apporte quelque chose que la dépêche ne dit pas'] });
+
+  // exercice d'écriture ajouté automatiquement à chaque leçon du jour (format et info tirés au hasard ; les « Flash » portent sur les infos ajoutées)
+  ctx.setDayWriter((day, li) => {
+    let pool = (day.stories || []).map((s, i) => ({ s, i }));
+    if (li >= 3) { const u = (day.updates || [])[li - 3]; if (u && Array.isArray(u.stories)) pool = pool.filter(x => u.stories.includes(x.i)); }
+    if (!pool.length) return [];
+    const f = pick([dailyTitre, dailyChapo, dailyAttaque, dailyBreve, dailyResume, dailyQuestions, dailyAngle], 1)[0];
+    return [f(pick(pool, 1)[0].s)];
+  });
+
   const need = () => stories().length >= 3;
   const build = (key, title, rules, dailies, n = 3) => {
     const ss = stories(), exs = [...pick(RULES[rules[0]].concat(rules[1] ? RULES[rules[1]] : []), 5)];
@@ -83,6 +99,8 @@
     if (kind === 'attaque') return build(key, 'L\'attaque', ['attaque'], [dailyAttaque], 3);
     if (kind === 'titre') return build(key, 'Le titre', ['titre'], [dailyTitre], 3);
     if (kind === 'breve') return build(key, 'La brève et la pyramide inversée', ['breve'], [dailyBreve, dailyPyramide], 2);
+    if (kind === 'resume') return build(key, 'Résumer en deux phrases', ['breve'], [dailyResume], 4);
+    if (kind === 'questions') return build(key, 'Les bonnes questions', ['angle'], [dailyQuestions, dailyAngle], 2);
     if (kind === 'angle') return { key, mode: 'drill', title: 'Sujet et angle', color: COL, context: 'Atelier d\'écriture', exercises: pick(RULES.angle, 3).concat(pick(RULES.style, 3)) };
     if (kind === 'style') return { key, mode: 'drill', title: 'Style et neutralité', color: COL, context: 'Atelier d\'écriture', exercises: pick(RULES.style, 5).concat(pick(RULES.angle, 1)) };
     if (kind === 'complet') {   // une info, tous les formats : l'épreuve type « rédige titre, chapô et attaque »
@@ -96,6 +114,7 @@
     ['titre', '🏷️', 'Le titre', 'informatif, court, honnête', true], ['chapo', '✍️', 'Le chapô', 'l\'essentiel en 300 signes', true],
     ['attaque', '🎯', 'L\'attaque', 'la phrase qui accroche', true], ['breve', '📰', 'Brève et pyramide inversée', 'l\'essentiel d\'abord', true],
     ['complet', '🧩', 'Titre + chapô + attaque + brève', 'la même info, tous les formats', true], ['angle', '🧭', 'Sujet et angle', 'une question, pas un thème', false],
+    ['resume', '📝', 'Résumer une dépêche', 'deux phrases pour un lecteur pressé', true], ['questions', '🎙️', 'Les bonnes questions et l\'angle', 'interviewer, choisir son angle', true],
     ['style', '🖋️', 'Style et neutralité', 'attribuer, être précis, éviter les clichés', false]
   ];
   ctx.addPrepaTab('ecriture', '✍️', 'Écriture', () => `<div class="card an-intro"><h3>✍️ L'atelier d'écriture journalistique</h3>

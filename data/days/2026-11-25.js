@@ -219,6 +219,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     { term: 'Agence spatiale européenne', def: 'Organisation intergouvernementale, **distincte de l’Union européenne**, qui coordonne les programmes spatiaux de ses États membres. Elle est abrégée **ESA** (European Space Agency).', cat: 'Europe', aliases: ['Agence spatiale européenne', 'ESA'] }
   ],
   updates: [{ at: '11:00', stories: [10, 11, 12] }, { at: '14:00', stories: [13, 14] }, { at: '17:00', stories: [15] }, { at: '21:00', stories: [16, 17] }],
+  reco: [{ type: 'film', title: 'Don’t Look Up : déni cosmique', by: 'Adam McKay', year: 2021, story: 17, why: 'Deux astronomes alertent sur une comète qui menace la Terre, et personne ne les écoute : une satire des médias et du pouvoir face à un risque scientifique. Un écho à la mission Hera, qui étudie l’astéroïde dévié par la sonde DART.' }],
   shorts: [
     { id: 'fIoU3pPa2C0', source: 'franceinfo', title: 'Fausse rétractation de Z. Takieddine : N. Sarkozy renvoyé en procès', tag: 'Justice', story: 8 },
     { id: '7eR68mu-hLI', source: 'franceinfo', title: 'Le Sénégal finalement sacré vainqueur de la CAN', tag: 'Société', story: 9 },

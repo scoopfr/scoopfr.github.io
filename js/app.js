@@ -25,7 +25,7 @@
   // ---------- État persistant ----------
   const STORE = 'scoop.v1';
   const DEFAULT = {
-    xp: 0, streak: 0, best: 0, last: null, daily: {}, lessons: {}, review: [], saved: [], prepa: {},
+    xp: 0, streak: 0, best: 0, last: null, daily: {}, lessons: {}, review: [], saved: [], prepa: {}, qseen: {},
     stats: { answered: 0, correct: 0, lessons: 0 },
     settings: { name: '', goal: 50, exam: '', sound: true, theme: 'auto', freeText: false, eco: null }
   };
@@ -155,7 +155,10 @@
     if (kind === 'day') {
       const d = DAYS[a]; const l = d && d.lessons[+b];
       if (!l) return null;
-      return { key, mode: 'day', date: a, title: l.title, color: '#E63946', exercises: l.exercises, context: `Édition du ${frDate(a)}`, bonus: a === TODAY ? 20 : 0 };
+      let exs = l.exercises;
+      // chaque leçon du jour finit par un exercice d'écriture bâti sur une info de l'édition (si la rédaction n'en a pas mis)
+      if (EXT.dayWrite && !exs.some(e => e.t === 'write')) { try { exs = exs.concat(EXT.dayWrite(d, +b) || []); } catch (e) { /* module */ } }
+      return { key, mode: 'day', date: a, title: l.title, color: '#E63946', exercises: exs, context: `Édition du ${frDate(a)}`, bonus: a === TODAY ? 20 : 0 };
     }
     if (kind === 'oral' && PREPA) {
       // Simulateur d'oral : 5 questions de jury au hasard, en exercices d'écriture auto-évalués
@@ -169,6 +172,8 @@
       const pool = CULTURE.flatMap(u => u.lessons.flatMap((l, li) => l.exercises.map((ex, ei) => ({ ex, id: `unit:${u.id}:${li}:${ei}` }))));
       const pick = shuffle(pool).slice(0, 10);
       if (!pick.length) return null;
+      // au moins un exercice rédigé dans le lot (si le catalogue en contient)
+      if (!pick.some(p => p.ex.t === 'write')) { const w = shuffle(pool.filter(p => p.ex.t === 'write'))[0]; if (w) pick[pick.length - 1] = w; }
       return { key, mode: 'review', title: 'Quiz rapide', color: '#9D4EDD', exercises: pick.map(p => p.ex), ids: pick.map(p => p.id), context: 'Culture G' };
     }
     if (EXT.lessons[kind]) return EXT.lessons[kind](key, a, b);   // leçons fournies par les modules (annales, entraînements)
@@ -368,6 +373,22 @@
     return { ico: '🧠', title: 'Quiz rapide', sub: '10 questions · 3 min', start: 'cgmix' };
   }
 
+  // ---------- « En écho à l'actu » : film, série, docu ou podcast, ajouté à la mise à jour de 17 h (day.reco) ----------
+  const RECO_TYPES = { film: ['🎬', 'Film'], 'série': ['📺', 'Série'], docu: ['🎞️', 'Documentaire'], podcast: ['🎧', 'Podcast'] };
+  function recoBlock(day) {
+    const list = [].concat((day && day.reco) || []).filter(r => r && r.title && RECO_TYPES[r.type]);
+    if (!list.length) return '';
+    return `<div class="sec-head"><h2>🍿 En écho à l'actu</h2></div><div class="reco-list">${list.map(r => {
+      const [ico, label] = RECO_TYPES[r.type], st = Number.isInteger(r.story) && day.stories[r.story];
+      const find = 'https://duckduckgo.com/?q=' + encodeURIComponent(`${r.title} ${r.by || ''} ${label}`.trim());
+      return `<article class="reco"><span class="reco-ico" aria-hidden="true">${ico}</span><div class="reco-body">
+        <small>${esc(label)}${r.year ? ' · ' + esc(String(r.year)) : ''}${r.by ? ' · ' + esc(r.by) : ''}</small>
+        <b>${esc(r.title)}</b>
+        <p>${rich(r.why || '')}</p>
+        <div class="reco-links">${st ? `<a href="#/day/${esc(day.date)}/story-${r.story}">📰 L'info : ${esc(st.title.length > 60 ? st.title.slice(0, 58) + '…' : st.title)}</a>` : ''}<a href="${esc(find)}" target="_blank" rel="noopener">🔎 Où le trouver</a></div></div></article>`;
+    }).join('')}</div>`;
+  }
+
   function viewHome() {
     const day = CURRENT && DAYS[CURRENT], tl = timeline(24), st = streakNow(), goal = S.settings.goal, tx = todayXp(), q = questState();
     const act = nextAction(tl), left = Math.max(0, goal - tx);
@@ -384,6 +405,9 @@
       const im = window.SCOOP_IMAGES && window.SCOOP_IMAGES[sKey(d.date, i)], ok = im && /^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(im.url || '');
       return `<a class="peek ${isRead(d.date, i) ? 'read' : ''}" href="#/day/${d.date}/story-${i}" style="--tag:${esc(s.color || (d.tagColors || {})[s.tag] || '#E63946')}">${ok ? `<img src="${esc(im.url)}" alt="" loading="lazy" decoding="async">` : `<span class="peek-ico">${TAG_ICON[s.tag] || '📌'}</span>`}<span class="peek-t"><small>${esc(s.tag)} · ${esc(agoTs(storyTs(d, i)))}${isRead(d.date, i) ? '' : ' · <em class="peek-new">nouveau</em>'}</small><b>${esc(s.title)}</b></span></a>`;
     }).join('')}</div>`;
+
+    // 1 bis) la reco culturelle du jour (arrive à la mise à jour de 17 h)
+    html += recoBlock(day);
 
     // 2) LES QUIZ : les entraînements à faire maintenant, en cartes bien visibles
     html += `<div class="sec-head"><h2>🧠 Les quiz</h2><a href="#/learn">Tous ›</a></div>${trainGrid(['daily', 'quick', 'mem', 'rappel'])}`;
@@ -509,7 +533,7 @@
     const nq = CULTURE.reduce((n, u) => n + u.lessons.reduce((m, l) => m + l.exercises.length, 0), 0);
     return `<div class="kicker" style="color:#9D4EDD">Culture générale</div>
       <h1 style="font-size:34px;margin:8px 0 6px">Culture G</h1>
-      <p class="muted">Histoire, géographie, arts, sciences, idées : le socle de l'épreuve de culture générale et du QCM d'actualité. ${CULTURE.length} thèmes, ${nq} questions, ${done}/${all.length} leçons terminées.</p>
+      <p class="muted">Histoire, géographie, arts, sciences, idées, institutions, médias, économie, Europe, culture et sport : le socle de l'épreuve de culture générale et du QCM d'actualité. ${CULTURE.length} thèmes, ${nq} questions, ${done}/${all.length} leçons terminées.</p>
       <button class="cg-quick" data-start="cgmix">
         <span class="cg-quick-ico">⚡</span>
         <span><b>Quiz rapide</b><br><small>10 questions de culture générale tirées au hasard, tous thèmes mélangés</small></span>
@@ -521,7 +545,7 @@
   // ---------- Prépa concours ----------
   const PREPA_MAIN = new Set(['plan', 'concours', 'ecoles', 'annales', 'ecriture', 'oral', 'plus']);   // les autres sont dans « Plus »
   const PREPA_TABS = [['plan', '🗺️', 'Plan'], ['ecoles', '🏫', 'Écoles'], ['methode', '🧭', 'Méthode'], ['oral', '🎤', 'Oral'], ['metier', '📡', 'Le métier'], ['conseils', '💬', 'Conseils'], ['quiz', '🧠', 'Quiz'], ['plus', '⋯', 'Plus']];
-  const EXT = { tabs: {}, top: {}, lessons: {}, routes: {}, onAnswer: [], gloss: null, ready: [], home: [], storyBar: null, actions: [], train: [] };   // onglets, blocs et leçons ajoutés par les modules
+  const EXT = { tabs: {}, top: {}, lessons: {}, routes: {}, onAnswer: [], gloss: null, ready: [], home: [], storyBar: null, actions: [], train: [], dayWrite: null };   // onglets, blocs et leçons ajoutés par les modules
   const srcLinks = list => (list && list.length) ? `<div class="p-src">Sources : ${list.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a>`).join(' · ')}</div>` : '';
 
   function viewPrepa(tab) {
@@ -978,9 +1002,10 @@
     body.innerHTML = '';
     L.state = 'answer';
     setBar('idle');
-    const render = RENDER[it.ex.t];
+    if (!it.v) it.v = variantize(it);   // reformulation / réponse rédigée selon le nombre de passages
+    const render = RENDER[it.v.t];
     if (!render) { L.resolved++; next(); return; }
-    L.check = render(it.ex, body, ready => { if (L && L.state === 'answer') $('#check').disabled = !ready; });
+    L.check = render(it.v, body, ready => { if (L && L.state === 'answer') $('#check').disabled = !ready; });
     if (it.retry) body.insertAdjacentHTML('afterbegin', '<div class="retry-tag">↻ Deuxième chance</div>');
     $('.lesson-body').scrollTop = 0;
   }
@@ -996,6 +1021,7 @@
   };   // glossaire : les mots juridiques ou techniques deviennent cliquables
   function grade(it, ok, sol, free) {
     S.stats.answered++; answered(ok, L.cfg.mode, it);
+    if (!it.retry) bumpSeen(it.ex);
     const expl = it.ex.x ? linkTerms(rich(it.ex.x)) : '';
     if (ok) {
       S.stats.correct++;
@@ -1075,6 +1101,7 @@
     } else if (L.state === 'self') {
       const n = L.self.count(), tot = L.self.total;
       S.stats.answered++;
+      if (!L.queue[L.pos].retry) bumpSeen(L.queue[L.pos].ex);
       if (n >= Math.ceil(tot / 2)) { S.stats.correct++; L.firstOk++; }
       L.xp += 5 + n * 3;
       L.resolved++;
@@ -1087,11 +1114,12 @@
   function onSkip() {
     if (!L || L.state !== 'answer') return;
     const it = L.queue[L.pos];
-    if (it.ex.t === 'write') { L.resolved++; next(); return; }
+    const e = it.v || it.ex;
+    if (e.t === 'write') { if (!it.retry) bumpSeen(it.ex); L.resolved++; next(); return; }
     grade(it, false, solutionOf(it.ex));
     // révèle la solution visuellement pour les QCM
-    if (it.ex.t === 'qcm' || it.ex.t === 'vf') {
-      const a = it.ex.t === 'vf' ? (it.ex.a ? 0 : 1) : it.ex.a;
+    if (e.t === 'qcm' || e.t === 'vf') {
+      const a = e.t === 'vf' ? (e.a ? 0 : 1) : e.a;
       $$('.choice', $('#ex')).forEach(b => { if (+b.dataset.i === a) b.classList.add('right'); });
     }
   }
@@ -1166,6 +1194,51 @@
     }
   });
 
+  // ---------- Variété des questions ----------
+  // Chaque question est comptée (S.qseen). 1re fois : formulation d'origine. Ensuite : reformulée (cadre de phrase, QCM → vrai/faux,
+  // « exact/inexact »). À partir de 3 passages : plus de choix, il faut taper la réponse. À partir de 5 : il faut l'expliquer par écrit.
+  const TEXT_AFTER = 3, WRITE_AFTER = 5;
+  const qHash = ex => { const t = norm(ex.q || ''); let h = 5381; for (let i = 0; i < t.length; i++) h = ((h << 5) + h + t.charCodeAt(i)) | 0; return 'q' + (h >>> 0).toString(36); };
+  const seenCount = ex => (S.qseen && S.qseen[qHash(ex)]) || 0;
+  function bumpSeen(ex) {
+    if (!ex || !ex.q) return;
+    S.qseen = S.qseen || {};
+    const k = qHash(ex), n = seenCount(ex) + 1; delete S.qseen[k]; S.qseen[k] = n;   // la plus récente passe en dernier
+    const ks = Object.keys(S.qseen); if (ks.length > 2500) ks.slice(0, ks.length - 2500).forEach(x => delete S.qseen[x]);
+  }
+  const FRAMES = ['{q}', 'Teste-toi : {q}', 'Rappel : {q}', 'Tu t\'en souviens ? {q}', 'À toi : {q}', 'Question d\'examen : {q}', 'Vérifions : {q}'];
+  const VF_STYLES = [
+    { heading: 'Vrai ou faux ?', w: ['Vrai', 'Faux'], label: 'Vrai ou faux' },
+    { heading: 'Exact ou inexact ?', w: ['Exact', 'Inexact'], label: 'Exact ou inexact' },
+    { heading: 'Info ou intox ?', w: ['Info', 'Intox'], label: 'Info ou intox' },
+    { heading: 'Cette affirmation tient-elle ?', w: ['Elle tient', 'Elle ne tient pas'], label: 'Affirmation à vérifier' }
+  ];
+  const pickOne = a => a[Math.floor(Math.random() * a.length)];
+  const framed = q => pickOne(FRAMES).replace('{q}', q);
+  function variantize(it) {
+    const ex = it.ex, n = seenCount(ex);
+    if (ex.t === 'qcm' && Array.isArray(ex.c) && ex.c[ex.a] != null) {
+      const good = ex.c[ex.a];
+      if (n >= WRITE_AFTER) return { t: 'write', q: `✍️ Explique en une ou deux phrases : ${ex.q}`, src: '', placeholder: 'Écris ta réponse, sans les choix… (Ctrl+Entrée pour valider)',
+        model: `**${good}.** ${ex.x || ''}`, crit: [`Ma réponse donne la bonne information (${good})`, 'Elle est précise : un nom, une date ou un chiffre quand il le faut', 'Je l\'ai formulée avec mes mots'], rows: 3 };
+      if (n >= TEXT_AFTER) return { ...ex, t: 'qcmfree', again: true };
+      if (n >= 1 && !it.retry) {
+        if (Math.random() < 0.45 && ex.c.length > 1) {   // QCM → vrai/faux sur une proposition de réponse
+          const asTrue = Math.random() < 0.5, wrong = ex.c.filter((_, i) => i !== ex.a), shown = asTrue ? good : pickOne(wrong);
+          return { t: 'vf', ...pickOne(VF_STYLES), q: `${ex.q} Réponse proposée : **${shown}**`, a: asTrue, x: (asTrue ? '' : `La bonne réponse est : **${good}**. `) + (ex.x || '') };
+        }
+        return { ...ex, q: framed(pickOne(ex.qv || [ex.q])) };
+      }
+    } else if (ex.t === 'vf') {
+      if (n >= TEXT_AFTER) return { t: 'write', q: '✍️ Vrai ou faux ? Tranche, puis justifie en une phrase', src: ex.q, placeholder: 'Vrai ou faux, et pourquoi… (Ctrl+Entrée pour valider)',
+        model: `**${ex.a ? 'Vrai' : 'Faux'}.** ${ex.x || ''}`, crit: ['J\'ai tranché clairement : vrai ou faux', 'Ma justification s\'appuie sur un fait précis', 'Je n\'ai rien inventé'], rows: 3 };
+      if (n >= 1 && !it.retry) return { ...ex, ...pickOne(VF_STYLES) };
+    } else if (ex.t === 'input' && n >= 1 && !it.retry) {
+      return { ...ex, q: framed(ex.q) };
+    }
+    return ex;
+  }
+
   // ---------- Solutions (texte) ----------
   function solutionOf(ex) {
     switch (ex.t) {
@@ -1183,7 +1256,7 @@
   function qcmCore(ex, el, ready, opts = {}) {
     const idx = opts.noShuffle ? ex.c.map((_, i) => i) : shuffle(ex.c.map((_, i) => i));
     el.innerHTML = `<div class="ex-type">${esc(opts.label || 'Choisis la bonne réponse')}</div>
-      ${opts.statement ? `<h2 class="ex-q" style="margin-bottom:14px">Vrai ou faux ?</h2><div class="statement">${rich(ex.q)}</div>` : `<h2 class="ex-q">${linkTerms(rich(ex.q), ex.c.join(' '))}</h2>`}
+      ${opts.statement ? `<h2 class="ex-q" style="margin-bottom:14px">${esc(opts.heading || 'Vrai ou faux ?')}</h2><div class="statement">${rich(ex.q)}</div>` : `<h2 class="ex-q">${linkTerms(rich(ex.q), ex.c.join(' '))}</h2>`}
       <div class="choices ${opts.two ? 'two' : ''}">${idx.map((ci, k) => `<button class="choice" data-i="${ci}">${opts.two ? '' : `<span class="key">${k + 1}</span>`}<span>${rich(ex.c[ci])}</span></button>`).join('')}</div>`;
     let sel = null;
     $$('.choice', el).forEach(b => b.addEventListener('click', () => {
@@ -1232,7 +1305,7 @@
   }
   function qcmFree(ex, el, ready) {
     const expected = ex.c[ex.a];
-    el.innerHTML = `<div class="ex-type">⌨️ Réponse libre</div><h2 class="ex-q">${linkTerms(rich(ex.q), ex.c.join(' '))}</h2>
+    el.innerHTML = `<div class="ex-type">⌨️ Réponse libre${ex.again ? ' · tu connais cette question, plus de choix' : ''}</div><h2 class="ex-q">${linkTerms(rich(ex.q), ex.c.join(' '))}</h2>
       <input class="text-in" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Tape ta réponse…" aria-label="Ta réponse">
       <p class="hint">💡 Pas besoin du mot pour mot : accents, majuscules et petites fautes sont tolérés. Pour un nom, le nom de famille suffit.</p>`;
     const inp = $('input', el);
@@ -1250,7 +1323,9 @@
   const RENDER = {
     qcm: (ex, el, ready) => S.settings.freeText ? qcmFree(ex, el, ready) : qcmCore(ex, el, ready),
 
-    vf: (ex, el, ready) => qcmCore({ q: ex.q, c: ['Vrai', 'Faux'], a: ex.a ? 0 : 1 }, el, ready, { noShuffle: true, statement: true, two: true, label: 'Vrai ou faux' }),
+    vf: (ex, el, ready) => qcmCore({ q: ex.q, c: ex.w || ['Vrai', 'Faux'], a: ex.a ? 0 : 1 }, el, ready, { noShuffle: true, statement: true, two: true, label: ex.label || 'Vrai ou faux', heading: ex.heading }),
+
+    qcmfree: (ex, el, ready) => qcmFree(ex, el, ready),   // QCM déjà vu plusieurs fois : réponse tapée
 
     input(ex, el, ready) {
       el.innerHTML = `<div class="ex-type">Réponds en quelques mots</div><h2 class="ex-q">${linkTerms(rich(ex.q), (ex.a || []).join(' '))}</h2>
@@ -2026,6 +2101,7 @@
     setGlossLinker(fn) { EXT.gloss = fn; },
     setStoryBar(fn) { EXT.storyBar = fn; },         // ligne « me tester » affichée sous chaque info
     addAction(fn) { EXT.actions.push(fn); },
+    setDayWriter(fn) { EXT.dayWrite = fn; },       // fn(day, indexLeçon) → exercices d'écriture ajoutés à la leçon du jour
     addTrainItem(fn) { EXT.train.push(fn); },       // carte d'entraînement : fn() → { k, o, ico, title, sub, start|href, hot } ou null        // propose « la prochaine action » de l'accueil
     get INDEX() { return INDEX; }, DAYS, getDay, get CURRENT() { return CURRENT; },
     // charge les n dernières éditions (recherche, mémoire, rappels)

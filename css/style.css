@@ -939,3 +939,15 @@ body.in-welcome { overflow: hidden; }
 .real-main { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; } .real-main b { font: 900 18px var(--serif); } .real-main small { opacity: .65; }
 .real-gap { flex: 1 1 100%; font-size: 12.5px; font-weight: 700; color: var(--green); } .real-gap.off { color: #D9A20F; } .real-gap:empty { display: none; }
 .toc-real { font-size: 11px; color: var(--green); }
+
+/* Reco culturelle de l'accueil (film, série, docu, podcast en écho à l'actu) */
+.reco-list{display:grid;gap:10px;margin-bottom:6px}
+.reco{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:2px solid var(--line,#e5e5e5);border-radius:16px;padding:14px}
+.reco-ico{font-size:30px;line-height:1;flex:none;width:44px;height:44px;display:grid;place-items:center;background:rgba(230,57,70,.1);border-radius:12px}
+.reco-body{min-width:0}
+.reco-body small{display:block;color:var(--muted,#777);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.reco-body b{display:block;font-size:18px;margin:2px 0 4px}
+.reco-body p{margin:0 0 8px;font-size:14px;line-height:1.45}
+.reco-links{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px;font-weight:700}
+.reco-links a{color:var(--blue,#3A86FF);text-decoration:none}
+.reco-links a:hover{text-decoration:underline}

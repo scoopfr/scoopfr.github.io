@@ -38,6 +38,9 @@ Trois règles passent avant tout le reste :
      1. « Le quiz de la une » ☕ (France), 9 ou 10 exercices.
      2. « Le tour du monde » 🌍 (international et Europe), 8 ou 9 exercices.
      3. « Médias & atelier » 🎙️, 7 ou 8 exercices, dont **2 `write`** (titrer une dépêche, rédiger une attaque ou un chapô) construits sur une vraie info du jour.
+     - **Écriture dans chaque leçon** : les leçons 1 et 2 comptent aussi **1 `write`** chacune (résumer une dépêche en 2 phrases, trouver un angle de reportage, écrire 3 questions d'interview). L'application en ajoute elle-même un si tu l'oublies, mais un exercice choisi par toi est meilleur.
+     - **Reformulations (facultatif)** : sur un `qcm`, tu peux ajouter `qv: ['autre formulation de la question', …]` (même sens, mots différents). L'application s'en sert quand la question revient. Elle reformule déjà seule (cadres de phrase, QCM → vrai/faux) et, après 3 passages, demande de taper la réponse.
+     - **Plus de questions** : vise le haut de la fourchette (10, 9 et 8 exercices), en variant les types (`qcm`, `vf`, `input`, `order`, `match`).
    - **Chaque question porte sur une info du brief.** Ne pose pas de question sur un sujet absent des `stories`, même s'il figure dans `news-today.txt`.
    - Varie les types : surtout des `qcm` et des `vf`, au moins un `match` ou un `order` par leçon. Un `input` est possible si la réponse est courte et sans ambiguïté.
    - `match` : 4 paires dont les textes sont tous différents, et chaque paire reprend des éléments du brief.
@@ -66,22 +69,31 @@ Trois règles passent avant tout le reste :
 Quand l'édition du jour **existe déjà** (sans marqueur `SCOOP:REGENERER`), tu ne la réécris pas : tu la **complètes**. **Économise au maximum** : ne lis ni `news-today.txt` en entier, ni l'édition en entier, ni le reste de cette consigne s'il est inutile.
 
 1. Lance `python3 scripts/fetch_news.py` puis le **pré-tri gratuit** `python3 scripts/new_topics.py <date>` (pas `fetch_shorts.py`).
-   - S'il affiche `RIEN DE NOUVEAU` : **arrête-toi immédiatement**, sans rien lire ni modifier ni publier (« rien de nouveau »).
+   - S'il affiche `RIEN DE NOUVEAU` : **arrête-toi**, sans rien lire ni publier (« rien de nouveau »), **sauf** si c'est la mise à jour de 17 h (ou une suivante) et que l'édition n'a pas encore de `reco` : va alors directement à l'étape 9 (recommandation seule).
    - Sinon, lis **seulement** `scripts/news-new.txt` : il contient les sujets recoupés absents de l'édition. Pour l'édition, ne lis que ce qu'il te faut (les titres des infos avec `grep -n "title:"`, la fin du fichier pour insérer).
    - Si le pré-tri plante, reviens à la méthode longue : lis la partie 1 de `news-today.txt` et compare avec les `stories`.
 2. Garde les sujets **recoupés par au moins 2 rédactions** qui ne sont **pas déjà traités** dans `stories` : compare les faits, pas seulement les mots. Un développement nouveau et important d'un sujet existant (par exemple une décision, un vote ou un bilan) compte comme nouveau ; une simple reformulation, non.
 3. **Si aucun ne convient, ne modifie pas l'édition** ; publie seulement `scripts/topics-seen.txt` (`git commit -m "Pré-tri de <HH> h"`) pour que ces sujets ne soient pas réexaminés. Ne force jamais une mise à jour.
 4. Sinon, **ajoute** 1 à 3 infos **à la fin** de `stories`, au même format (`sources` avec au moins 2 rédactions différentes). Ne modifie, ne supprime et ne réordonne **aucune** info existante : les leçons y font référence par position. L'édition ne doit pas dépasser 20 infos au total.
-5. Ajoute **à la fin** de `lessons` une leçon `{ title: '⚡ Flash de <HH> h', icon: '⚡', desc: 'Mise à jour', exercises: [...] }` de 4 à 6 exercices (`qcm`, `vf`, éventuellement un `match`), qui portent **uniquement** sur les infos que tu viens d'ajouter.
+5. Ajoute **à la fin** de `lessons` une leçon `{ title: '⚡ Flash de <HH> h', icon: '⚡', desc: 'Mise à jour', exercises: [...] }` de 5 à 7 exercices (`qcm`, `vf`, `input`, éventuellement un `match`) **dont 1 `write`** (titre, chapô, attaque ou résumé d'une des infos ajoutées), qui portent **uniquement** sur les infos que tu viens d'ajouter.
 6. Ajoute à l'objet de l'édition (ou complète s'il existe) le tableau `updates` : `updates: [{ at: '<HH>:00', stories: [<index des infos ajoutées>] }]`, une entrée par mise à jour.
 7. Tu peux ajouter des vidéos à `shorts` pour les nouvelles infos (`story` = leur index), en respectant « un sujet = une vidéo ».
 8. Dans `data/days/index.js`, mets à jour l'entrée du jour : `lessons` = nouveau nombre total de leçons. Garde le titre, sauf si un sujet ajouté est clairement le plus important de la journée.
-9. Lance `node scripts/check-edition.js data/days/<date>.js` (il doit afficher OK), puis publie l'édition, `index.js` et `scripts/topics-seen.txt` : `git commit -m "Mise à jour de <HH> h"`.
+9. **Recommandation culturelle « En écho à l'actu » (mise à jour de 17 h)** : si l'édition n'a **pas encore** de champ `reco` et que la mise à jour est celle de 17 h (ou une suivante, si elle a été manquée), ajoute-le, **même si aucune nouvelle info n'est publiée ce jour-là** (dans ce cas, ne touche ni aux `stories`, ni aux `lessons`, ni aux `updates`). Elle s'affiche sur l'accueil.
+   - Format : `reco: [{ type, title, by, year, story, why }]`, avec **1 recommandation** (2 ou 3 de types différents si tu en es sûr).
+   - `type` : `'film'`, `'série'`, `'docu'` ou `'podcast'`. `story` : l'index de l'info du jour qu'elle prolonge (choisis l'événement le plus marquant de la journée). `why` : 2 phrases qui expliquent le lien avec l'actu.
+   - **Aucune invention.** Ne cite qu'une œuvre que tu connais **avec certitude** : titre exact, réalisateur ou auteur, année. Le sujet de l'œuvre doit réellement faire écho à l'info (même thème, même institution, même type d'événement). Si tu n'es pas sûr d'une œuvre, choisis-en une plus connue. N'écris ni lien ni plateforme de diffusion : l'application propose une recherche.
+   - Préfère des œuvres reconnues (films et séries primés, documentaires de référence, podcasts de médias établis comme France Culture ou France Inter) et variées d'un jour à l'autre : relis `grep -h -A1 "reco:" data/days/*.js` (ou la fin des éditions récentes) pour ne pas répéter une recommandation récente.
+10. Lance `node scripts/check-edition.js data/days/<date>.js` (il doit afficher OK), puis publie l'édition, `index.js` et `scripts/topics-seen.txt` : `git commit -m "Mise à jour de <HH> h"`.
+
+## Variété des questions (côté application, rien à faire)
+
+Chaque question est comptée dans le navigateur de l'élève : reformulée dès le 2e passage, à réponse tapée dès le 3e, à expliquer par écrit dès le 5e. Les exercices `write` sont proposés en plus dans chaque leçon du jour.
 
 ## Rappels sur les types d'exercices
 
 ```
-qcm   {t:'qcm', q, c:[3 ou 4 choix], a:index_bonne_réponse, x}
+qcm   {t:'qcm', q, c:[3 ou 4 choix], a:index_bonne_réponse, x, qv?:['autre formulation', …]}
 vf    {t:'vf', q:'affirmation', a:true|false, x}
 input {t:'input', q, a:['réponse', 'variante'], hint?, x}
 order {t:'order', q, items:[dans le BON ordre], x}
