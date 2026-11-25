@@ -22,7 +22,7 @@
   const swReg = () => navigator.serviceWorker.getRegistration().then(r => r || navigator.serviceWorker.ready).catch(() => null);
 
   // ---------- Serveur de notifications (facultatif : data/push-config.js) ----------
-  const PUSH = window.SCOOP_PUSH && window.SCOOP_PUSH.url && window.SCOOP_PUSH.key ? window.SCOOP_PUSH : null;
+  const PUSH = window.SCOOP_PUSH && window.SCOOP_PUSH.url ? window.SCOOP_PUSH : null;
   const keyBytes = b64 => Uint8Array.from(atob(b64.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0));
   async function pushSync(reg, on) {
     if (!PUSH || !reg || !reg.pushManager) return;
@@ -32,7 +32,10 @@
         if (sub) { await fetch(PUSH.url + '/unsubscribe', { method: 'POST', body: JSON.stringify({ endpoint: sub.endpoint }) }).catch(() => {}); await sub.unsubscribe(); }
         return;
       }
-      if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(PUSH.key) });
+      if (!sub) {
+        const key = PUSH.key || await (await fetch(PUSH.url + '/key')).text();   // clé publique générée par le serveur
+        sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(key.trim()) });
+      }
       await fetch(PUSH.url + '/subscribe', { method: 'POST', body: JSON.stringify({ sub: sub.toJSON(), hour: state().hour, morning: true }) });   // renouvelle aussi l'abonnement (expire après 60 jours)
     } catch (e) { /* refus, hors ligne ou serveur indisponible : le bandeau prend le relais */ }
   }

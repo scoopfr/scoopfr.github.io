@@ -4,7 +4,7 @@
    - Déclencheur horaire (cron) : à l'heure choisie par chaque élève (heure de Paris), envoie une notification « vide » ;
      c'est le service worker de l'appli qui compose le message (série, objectif…) à partir de l'état local de l'élève.
    Aucune donnée personnelle n'est stockée : seulement l'adresse push de l'appareil et l'heure de rappel.
-   Réglages (voir server/README.md) : KV « SUBS », variables ALLOWED_ORIGIN, VAPID_PUBLIC, VAPID_SUBJECT, secret VAPID_PRIVATE_JWK. */
+   Réglages (voir server/README.md) : KV « SUBS », variables ALLOWED_ORIGIN et VAPID_SUBJECT. Les clés VAPID se génèrent toutes seules. */
 
 const enc = new TextEncoder();
 const b64u = buf => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -18,13 +18,24 @@ function cors(env, req) {
   return { 'Access-Control-Allow-Origin': ok ? origin : env.ALLOWED_ORIGIN, 'Access-Control-Allow-Methods': 'POST, OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type', 'Vary': 'Origin' };
 }
 
+// paire de clés VAPID : générée au premier appel puis gardée dans la mémoire KV du Worker (rien à copier-coller)
+async function getKeys(env) {
+  let k = await env.SUBS.get('vapid', 'json');
+  if (!k) {
+    const kp = await crypto.subtle.generateKey({ name: 'ECDSA', namedCurve: 'P-256' }, true, ['sign', 'verify']);
+    k = { jwk: await crypto.subtle.exportKey('jwk', kp.privateKey), pub: b64u(await crypto.subtle.exportKey('raw', kp.publicKey)) };
+    await env.SUBS.put('vapid', JSON.stringify(k));
+  }
+  return k;
+}
+
 async function vapidHeader(env, endpoint) {
-  const jwk = JSON.parse(env.VAPID_PRIVATE_JWK);
+  const { jwk, pub } = await getKeys(env);
   const key = await crypto.subtle.importKey('jwk', jwk, { name: 'ECDSA', namedCurve: 'P-256' }, false, ['sign']);
   const head = b64u(enc.encode(JSON.stringify({ typ: 'JWT', alg: 'ES256' })));
   const body = b64u(enc.encode(JSON.stringify({ aud: new URL(endpoint).origin, exp: Math.floor(Date.now() / 1000) + 12 * 3600, sub: env.VAPID_SUBJECT })));
   const sig = await crypto.subtle.sign({ name: 'ECDSA', hash: 'SHA-256' }, key, enc.encode(`${head}.${body}`));   // r||s, format attendu par JWT
-  return `vapid t=${head}.${body}.${b64u(sig)}, k=${env.VAPID_PUBLIC}`;
+  return `vapid t=${head}.${body}.${b64u(sig)}, k=${pub}`;
 }
 
 // notification sans contenu : le service worker de l'appli compose le texte
@@ -37,6 +48,7 @@ export default {
   async fetch(req, env) {
     const h = cors(env, req), url = new URL(req.url);
     if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: h });
+    if (req.method === 'GET' && url.pathname === '/key') return new Response((await getKeys(env)).pub, { headers: h });   // clé publique pour l'abonnement
     if (req.method === 'GET') return new Response('Scoop push : ok', { headers: h });
     if (req.method !== 'POST') return new Response('Méthode refusée', { status: 405, headers: h });
     let b; try { b = await req.json(); } catch (e) { return new Response('JSON invalide', { status: 400, headers: h }); }

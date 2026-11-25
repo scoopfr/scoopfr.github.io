@@ -11,11 +11,10 @@ Il faut un compte Cloudflare gratuit (cloudflare.com). Tout se fait dans le navi
 1. **Créer le Worker** : Workers & Pages → Create → Create Worker → nom `scoop-push` → Deploy → Edit code. Efface le code d'exemple, colle le contenu de `server/worker.js`, Deploy.
 2. **Créer la mémoire** : Storage & Databases → KV → Create namespace `SUBS`.
 3. **Relier la mémoire** : Worker `scoop-push` → Settings → Bindings → Add → KV namespace → nom de variable `SUBS`, namespace `SUBS`.
-4. **Variables** (Settings → Variables and Secrets) :
-   - `ALLOWED_ORIGIN` = `https://scoopfr.github.io` (texte)
-   - `VAPID_PUBLIC` = la clé publique de `data/push-config.js` (texte)
-   - `VAPID_SUBJECT` = `mailto:` suivi d'une adresse de contact de ton choix (texte). Utilise une adresse dédiée, pas ton Gmail personnel si tu veux le garder privé.
-   - `VAPID_PRIVATE_JWK` = tout le contenu du fichier `server/vapid-prive.json` (**secret**, jamais dans GitHub : le fichier est déjà ignoré par git).
+4. **Variables** (Settings → Variables and Secrets), en texte :
+   - `ALLOWED_ORIGIN` = `https://scoopfr.github.io`
+   - `VAPID_SUBJECT` = `https://scoopfr.github.io/` (ou `mailto:` + une adresse de contact dédiée)
+   - Rien d'autre : la paire de clés des notifications est **générée par le Worker** au premier appel et gardée dans la mémoire `SUBS` (aucun secret à copier).
 5. **Déclencheur horaire** : Settings → Trigger Events → Add → Cron Trigger → `0 * * * *` (toutes les heures pile).
 6. **Brancher l'appli** : copie l'adresse du Worker (du type `https://scoop-push.<ton-compte>.workers.dev`) dans `data/push-config.js`, champ `url`. Pousse sur GitHub.
 7. **Tester** : sur l'appli installée, Profil → Rappels → activer, puis choisir l'heure. Pour forcer un envoi tout de suite, dans Cloudflare : Worker → Triggers → Cron → « Test » (ou temporairement mets l'heure de rappel sur l'heure actuelle de Paris).
@@ -29,5 +28,5 @@ Il faut un compte Cloudflare gratuit (cloudflare.com). Tout se fait dans le navi
 
 ## Sécurité
 
-- Clé privée : uniquement dans les secrets Cloudflare. Si elle fuit, génère une nouvelle paire (tout le monde devra réactiver les rappels).
+- Clé privée : générée par le Worker et gardée dans sa mémoire KV (clé `vapid`), jamais publiée. Pour en changer, supprime cette clé dans KV : une nouvelle sera créée (les élèves devront réactiver les rappels).
 - Le Worker n'accepte les appels du navigateur que depuis `https://scoopfr.github.io` (et `localhost` pour les essais).
