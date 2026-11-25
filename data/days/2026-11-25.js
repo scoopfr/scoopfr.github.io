@@ -177,9 +177,22 @@ window.SCOOP_DAYS['2026-11-25'] = {
         { name: 'franceinfo', url: 'https://www.franceinfo.fr/economie/emploi/la-cour-des-comptes-epingle-des-fraudes-et-des-abus-dans-les-formations-en-apprentissage_8299608.html' },
         { name: 'Libération', url: 'https://www.liberation.fr/economie/fraude-a-lapprentissage-entre-15-et-3-milliards-deuros-dargent-public-detournes-chaque-annee-20261125_CO3OHJGT25C7FDWLBANTGX2SFQ/' }
       ]
+    },
+    {
+      tag: 'Économie',
+      title: 'Droits de douane : Washington vise 14 partenaires, dont l’UE et la Chine',
+      text: 'L’administration de **Donald Trump** a annoncé, mercredi 25 novembre, une nouvelle série de **droits de douane** visant **14 partenaires commerciaux** des États-Unis, dont l’**Union européenne** et la **Chine**. Washington les accuse de subventionner leurs industries et de favoriser la surproduction. Ces surtaxes concluent une enquête lancée en mars par le représentant américain au Commerce, **Jamieson Greer**. L’Union européenne « conteste fermement » leur bien-fondé.',
+      why: 'Un droit de douane est une taxe sur les importations : il renchérit les produits étrangers pour protéger la production nationale, c’est le principe du protectionnisme. L’annonce intervient malgré la défaite électorale de Donald Trump aux élections de mi-mandat.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/economie/article/2026/11/25/donald-trump-persiste-avec-une-nouvelle-salve-de-droits-de-douane-malgre-la-claque-electorale_6815108_3234.html' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/am%C3%A9riques/20261125-l-administration-trump-veut-instaurer-de-nouveaux-droits-de-douane-contre-ses-principaux-partenaires-commerciaux' },
+        { name: 'Le Figaro', url: 'https://www.lefigaro.fr/conjoncture/union-europeenne-chine-mexique-washington-annonce-de-nouveaux-droits-de-douane-contre-ses-principaux-partenaires-commerciaux-20261125' },
+        { name: 'Euronews', url: 'https://fr.euronews.com/2026/11/25/etats-unis-trump-propose-de-nouveaux-droits-de-douane-visant-14-partenaires-dont-lue' },
+        { name: 'Al Jazeera', url: 'https://www.aljazeera.com/news/2026/11/25/trump-announces-new-trade-tariffs-which-countries-will-they-target?traffic_source=rss' }
+      ]
     }
   ],
-  updates: [{ at: '11:00', stories: [10, 11, 12] }, { at: '14:00', stories: [13, 14] }],
+  updates: [{ at: '11:00', stories: [10, 11, 12] }, { at: '14:00', stories: [13, 14] }, { at: '17:00', stories: [15] }],
   shorts: [
     { id: 'fIoU3pPa2C0', source: 'franceinfo', title: 'Fausse rétractation de Z. Takieddine : N. Sarkozy renvoyé en procès', tag: 'Justice', story: 8 },
     { id: '7eR68mu-hLI', source: 'franceinfo', title: 'Le Sénégal finalement sacré vainqueur de la CAN', tag: 'Société', story: 9 },
@@ -255,6 +268,15 @@ window.SCOOP_DAYS['2026-11-25'] = {
         { t: 'qcm', q: 'Quelle institution a publié un rapport sur les aides à l’apprentissage le 25 novembre ?', c: ['La Cour des comptes', 'Le Conseil d’État', 'L’Assemblée nationale', 'La Banque de France'], a: 0, x: 'Le rapport pointe de nombreuses défaillances et des fraudes.' },
         { t: 'qcm', q: 'Selon franceinfo, quelle part de l’argent public dépensé serait concernée par des risques de fraude et d’abus ?', c: ['Entre 10 % et 20 %', 'Moins de 1 %', 'Environ 50 %', 'Entre 30 % et 40 %'], a: 0, x: 'Contrats fictifs et nombre excessif d’apprentis par maître d’apprentissage sont cités.' },
         { t: 'vf', q: 'Libération évoque entre 1,5 et 3 milliards d’euros d’argent public détournés chaque année.', a: true, x: 'Le journal cite aussi une « faille systémique dans le contrôle ».' }
+      ]
+    },
+    {
+      title: '⚡ Flash de 17 h', icon: '⚡', desc: 'Mise à jour', exercises: [
+        { t: 'qcm', q: 'Combien de partenaires commerciaux sont visés par les nouveaux droits de douane américains ?', c: ['14', '4', '27', '40'], a: 0, x: 'Parmi eux figurent l’Union européenne et la Chine.' },
+        { t: 'qcm', q: 'De quoi Washington accuse-t-il ces partenaires ?', c: ['De subventionner leurs industries', 'De manipuler leur monnaie', 'De piller les données des Américains', 'De refuser le dollar'], a: 0, x: 'Les États-Unis leur reprochent de favoriser la surproduction par des subventions.' },
+        { t: 'qcm', q: 'Qui a mené l’enquête qui débouche sur ces surtaxes ?', c: ['Jamieson Greer, représentant américain au Commerce', 'Le secrétaire au Trésor', 'La Réserve fédérale', 'L’Organisation mondiale du commerce'], a: 0, x: 'L’enquête avait été lancée en mars.' },
+        { t: 'vf', q: 'L’Union européenne a salué ces nouveaux droits de douane.', a: false, x: 'Elle « conteste fermement » leur bien-fondé.' },
+        { t: 'vf', q: 'Un droit de douane est une taxe sur les importations.', a: true, x: 'Il renchérit les produits étrangers pour protéger la production nationale : c’est le protectionnisme.' }
       ]
     }
   ]
