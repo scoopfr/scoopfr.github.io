@@ -333,68 +333,78 @@
   const wordCard = w => w ? `<div class="word"><div class="kicker">Le mot du jour</div><h3>${esc(w.term)}</h3><p>${rich(w.def)}</p></div>` : '';
 
   const CREDIT = `<p class="credit">conçu par <b>by.naufrage</b></p>`;
-  // À quoi sert chaque partie : en bas de l'accueil, repliée (une seule ligne) pour ne pas pousser le contenu
-  function howCard() {
-    return `<details class="how-card" data-guide-card><summary>🧭 À quoi sert chaque partie de Scoop ?</summary>
-      <ul class="how-list">
-        <li><b>🏠 Accueil</b> : ton tableau de bord. L'édition du jour, la suite de ton parcours, tes révisions.</li>
-        <li><b>🎬 Fil</b> : les vidéos d'actualité, chacune suivie de son résumé, avec un quiz tous les 5 sujets. Le plus rapide pour être à jour.</li>
-        <li><b>📰 Actu</b> : l'édition du jour à lire : les infos recoupées par plusieurs médias, le mot du jour, les quiz de la journée, et un sommaire cliquable.</li>
-        <li><b>🎓 Apprendre</b> : <b>Concours</b> (les 7 thèmes à maîtriser, dans l'ordre) · <b>Culture G</b> (histoire, géo, arts, sciences) · <b>Prépa</b> (écoles, annales, écriture, entretien avec le jury) · <b>À revoir</b> (tes erreurs à refaire).</li>
-        <li><b>👤 Profil</b> : tes statistiques, la date de ton concours, les réglages (mode éco, thème…).</li>
-      </ul></details>`;
-  }
-  document.addEventListener('toggle', e => { const d = e.target; if (d && d.matches && d.matches('[data-guide-card]') && !d.open && !S.settings.guideSeen) { S.settings.guideSeen = true; save(); } }, true);
 
-  function viewHome() {
-    let html = '';
+  // =========================================================
+  //   ACCUEIL façon réseau : stories, UNE action claire, quêtes du jour, à la une
+  // =========================================================
+  // Quêtes du jour : de petits objectifs qui donnent envie de rester (et un bonus d'XP à la clé)
+  const QUESTS = [['v', '🎬', 'Regarder 3 vidéos', 3], ['ok', '✅', 'Réussir 5 questions', 5], ['l', '🏁', 'Terminer 1 leçon', 1]];
+  function questState() { if (!S.quest || S.quest.d !== TODAY) S.quest = { d: TODAY, v: 0, ok: 0, l: 0, done: {} }; return S.quest; }
+  function toast(msg) {
+    const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg; document.body.appendChild(t);
+    requestAnimationFrame(() => t.classList.add('on')); setTimeout(() => { t.classList.remove('on'); setTimeout(() => t.remove(), 300); }, 2600);
+  }
+  function quest(kind, n = 1) {
+    const q = questState(); q[kind] = (q[kind] || 0) + n;
+    QUESTS.forEach(([k, ico, label, goal]) => {
+      if (q[k] >= goal && !q.done[k]) { q.done[k] = true; addXp(10); sfx.end(); toast(`${ico} Quête réussie : ${label} · +10 XP`); if (QUESTS.every(x => q.done[x[0]])) { setTimeout(confetti, 400); toast('🎉 Les 3 quêtes du jour sont faites !'); } }
+    });
+    save(); renderChrome();
+  }
+  const TAG_ICON = { 'Politique': '🏛️', 'Monde': '🌍', 'Justice': '⚖️', 'Économie': '💶', 'Climat': '🌡️', 'Europe': '🇪🇺', 'Médias': '📰', 'Société': '👥', 'Culture': '🎭' };
+  const ringSvg = (v, goal, ico) => { const R = 22, C = 2 * Math.PI * R, p = Math.min(1, v / Math.max(1, goal)); return `<svg class="hm-ring" viewBox="0 0 56 56" aria-hidden="true"><circle class="bg" cx="28" cy="28" r="${R}"/><circle class="fg" cx="28" cy="28" r="${R}" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - p)}" transform="rotate(-90 28 28)"/><text x="28" y="34" text-anchor="middle" font-size="18">${ico}</text></svg>`; };
+
+  // LA prochaine chose à faire : une seule grosse action, choisie pour toi
+  function nextAction(tl) {
     const day = CURRENT && DAYS[CURRENT];
     if (day) {
-      if (CURRENT !== TODAY) html += `<div class="banner">⏳ <span>L'édition d'aujourd'hui n'est pas encore en kiosque. Voici la dernière disponible, celle du <b>${esc(frDate(CURRENT))}</b>.</span></div>`;
-      const next = day.lessons.findIndex((_, i) => !lessonState(`day:${CURRENT}:${i}`));
-      const vids = newFeedVideos(CURRENT, day);
-      const live = window.SCOOP_LIVE, upd = live && live.updated ? ago(live.updated) : '';
-      html += `<a class="feed-teaser" href="#/feed/${CURRENT}">
-        <div class="ft-thumbs">${vids.slice(0, 3).map(v => `<img src="${ytThumb(v.id, 'mq')}" alt="" loading="lazy">`).join('') || '<span class="ft-emoji">📱</span>'}</div>
-        <div class="ft-txt"><div class="ft-kick">${vids.length ? `${vids.length} nouvelle${vids.length > 1 ? 's' : ''} vidéo${vids.length > 1 ? 's' : ''}` : '✓ Tu es à jour'}</div><h3>Le fil de l'actu</h3>
-        <p>${upd ? `Mis à jour ${esc(upd)}` : `${day.stories.length} infos`} · questions flash</p></div>
-        <span class="ft-play" aria-hidden="true">▶</span>
-      </a>`;
-      html += `
-      <section class="hero">
-        <div class="kicker">Édition du ${esc(frDate(CURRENT))}${lastUpdate(day) ? ` · 🔄 ${esc(lastUpdate(day))}` : ''}</div>
-        <h1>${esc(day.title)}</h1>
-        <ul class="hero-heads">${heroStories(day).map(({ s, i }) => `<li>${esc(s.title)}${newBadge(day, i)}</li>`).join('')}</ul>
-        <div class="hero-actions">
-          <a class="btn ghost" href="#/day/${CURRENT}">📰 Lire le brief</a>
-          ${next >= 0 ? `<button class="btn primary" data-start="day:${CURRENT}:${next}">▶ ${next === 0 ? 'Quiz du jour' : 'Continuer'}</button>` : `<a class="btn green" href="#/day/${CURRENT}">✓ Édition bouclée</a>`}
-        </div>
-        ${lessonCards(CURRENT, day)}
-      </section>
-      ${wordCard(day.word)}`;
-    } else {
-      html += `<div class="hero"><div class="kicker">Édition du jour</div><h1>Pas encore d'édition</h1><p class="muted">Lance la mise à jour quotidienne (voir README) pour générer la première édition. En attendant, le parcours concours est disponible ci-dessous.</p></div>`;
+      const nv = newFeedVideos(CURRENT, day).length, nu = tl.filter(x => !isRead(x.day.date, x.i)).length;
+      if (nv || nu) return { ico: '🎬', title: 'Regarder le fil', sub: `${nv ? nv + ' vidéo' + (nv > 1 ? 's' : '') + ' · ' : ''}${nu} info${nu > 1 ? 's' : ''} à découvrir · 3 min`, href: `#/feed/${CURRENT}` };
+      const li = day.lessons.findIndex((_, i) => !lessonState(`day:${CURRENT}:${i}`));
+      if (li >= 0) return { ico: '🧠', title: li === 0 ? 'Quiz du jour' : 'Continuer le quiz', sub: `${day.lessons[li].exercises.length} questions · ~4 min`, start: `day:${CURRENT}:${li}` };
     }
+    for (const f of EXT.actions) { try { const a = f(); if (a) return a; } catch (e) { /* module */ } }
+    const nxt = nextLesson(UNITS);
+    if (nxt) return { ico: nxt.lesson.icon || '🧭', title: nxt.lesson.title, sub: `Parcours concours · ${nxt.unit.title}`, start: nxt.key };
+    return { ico: '🧠', title: 'Quiz rapide', sub: '10 questions · 3 min', start: 'cgmix' };
+  }
 
+  function viewHome() {
+    const day = CURRENT && DAYS[CURRENT], tl = timeline(24), st = streakNow(), goal = S.settings.goal, tx = todayXp(), q = questState();
+    const act = nextAction(tl), left = Math.max(0, goal - tx);
+    let html = `<header class="hm-top"><div><div class="hm-hi">${S.settings.name ? `Salut ${esc(S.settings.name)}` : 'Salut'} 👋</div>
+        <div class="hm-sub">${st ? `🔥 ${st} jour${st > 1 ? 's' : ''} d'affilée` : '🔥 Lance ta série aujourd\'hui'} · ${left ? `encore ${left} XP pour ton objectif` : '🎯 objectif du jour atteint'}</div></div>
+        ${ringSvg(tx, goal, left ? '🎯' : '✅')}</header>`;
+    if (day && CURRENT !== TODAY && !tl.length) html += `<div class="banner">⏳ <span>L'édition d'aujourd'hui n'est pas encore en kiosque. Voici la dernière, celle du <b>${esc(frDate(CURRENT))}</b>.</span></div>`;
 
-    // Tableau de bord « Continuer » : la suite logique, sans avoir à chercher dans les onglets
-    const nxt = nextLesson(UNITS), nxtC = nextLesson(CULTURE), rv = S.review.length;
-    let exam = '';
-    if (S.settings.exam && DATE_RE.test(S.settings.exam)) { const d = Math.round((parseYmd(S.settings.exam) - parseYmd(TODAY)) / 864e5); if (d >= 0) exam = `J-${d}`; }
-    html += `<h2 class="section-title">Continuer</h2>
-      <div class="dash">
-        ${nxt ? `<button class="dash-card" data-start="${nxt.key}" style="--u:${esc(nxt.unit.color)}"><span class="dash-ico">${esc(nxt.lesson.icon || nxt.unit.icon)}</span><span class="dash-txt"><small>Parcours concours · ${esc(nxt.unit.title)}</small><b>${esc(nxt.lesson.title)}</b></span><span class="dash-go">▶</span></button>` : ''}
-        ${nxtC ? `<button class="dash-card" data-start="${nxtC.key}" style="--u:${esc(nxtC.unit.color)}"><span class="dash-ico">${esc(nxtC.lesson.icon || nxtC.unit.icon)}</span><span class="dash-txt"><small>Culture G · ${esc(nxtC.unit.title)}</small><b>${esc(nxtC.lesson.title)}</b></span><span class="dash-go">▶</span></button>` : ''}
-        ${rv ? `<button class="dash-card" data-start="review" style="--u:#3A86FF"><span class="dash-ico">🔁</span><span class="dash-txt"><small>À revoir</small><b>${rv} question${rv > 1 ? 's' : ''} ratée${rv > 1 ? 's' : ''}</b></span><span class="dash-go">▶</span></button>` : ''}
-      </div>
-      <div class="dash-mini">
-        <button class="dash-chip" data-start="cgmix">⚡ Quiz rapide</button>
-        <button class="dash-chip" data-start="oral">🎤 Simulateur d'oral</button>
-        <a class="dash-chip" href="#/learn/prepa">🎯 Prépa${exam ? ` · ${exam}` : ''}</a>
-        <a class="dash-chip" href="#/learn">🎓 Tout le parcours</a>
-        ${EXT.home.map(f => { try { return f(); } catch (e) { return ''; } }).join('')}
-      </div>
-      ${howCard()}`;
+    // « stories » : chaque info récente est une bulle ; un anneau coloré = pas encore vue
+    const bubbles = tl.slice(0, 16);
+    if (bubbles.length) html += `<div class="stories-row" role="list" aria-label="Infos récentes">${bubbles.map(({ day: d, s, i }) => {
+      const im = window.SCOOP_IMAGES && window.SCOOP_IMAGES[sKey(d.date, i)], col = s.color || (d.tagColors || {})[s.tag] || '#E63946', fresh = !isRead(d.date, i);
+      const label = storyKeywords(s)[0] || s.tag;
+      return `<a class="sb ${fresh ? 'new' : ''}" role="listitem" href="#/feed/${d.date}/${i}" style="--c:${esc(col)}"><span class="sb-ring"><span class="sb-img" ${im && /^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(im.url || '') ? `style="background-image:url('${esc(im.url)}')"` : ''}>${im ? '' : (TAG_ICON[s.tag] || '📌')}</span></span><small>${esc(label.length > 11 ? label.slice(0, 10) + '…' : label)}</small></a>`;
+    }).join('')}</div>`;
+
+    // UNE grosse action
+    html += `<${act.href ? 'a href="' + esc(act.href) + '"' : 'button data-start="' + esc(act.start || '') + '"'} class="cta-card"><span class="cta-ico">${act.ico}</span><span class="cta-txt"><small>Ta prochaine action</small><b>${esc(act.title)}</b><em>${esc(act.sub)}</em></span><span class="cta-go">▶</span></${act.href ? 'a' : 'button'}>`;
+
+    // quêtes du jour
+    const nq = QUESTS.filter(x => q.done[x[0]]).length;
+    html += `<section class="quests"><div class="q-head"><b>Quêtes du jour</b><span>${nq}/3</span></div>${QUESTS.map(([k, ico, label, g]) => `<div class="quest ${q.done[k] ? 'done' : ''}"><span class="q-ico">${q.done[k] ? '✓' : ico}</span><span class="q-label">${esc(label)}</span><span class="q-bar"><i style="width:${Math.min(100, (q[k] || 0) / g * 100)}%"></i></span><span class="q-n">${Math.min(q[k] || 0, g)}/${g}</span></div>`).join('')}</section>`;
+
+    // à la une : les 3 infos les plus récentes
+    if (tl.length) html += `<div class="sec-head"><h2>À la une</h2><a href="#/day">Tout voir ›</a></div><div class="peek-list">${tl.slice(0, 3).map(({ day: d, s, i }) => {
+      const im = window.SCOOP_IMAGES && window.SCOOP_IMAGES[sKey(d.date, i)], ok = im && /^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(im.url || '');
+      return `<a class="peek ${isRead(d.date, i) ? 'read' : ''}" href="#/day/${d.date}/story-${i}" style="--tag:${esc(s.color || (d.tagColors || {})[s.tag] || '#E63946')}">${ok ? `<img src="${esc(im.url)}" alt="" loading="lazy" decoding="async">` : `<span class="peek-ico">${TAG_ICON[s.tag] || '📌'}</span>`}<span class="peek-t"><small>${esc(s.tag)} · ${esc(agoTs(storyTs(d, i)))}</small><b>${esc(s.title)}</b></span></a>`;
+    }).join('')}</div>`;
+
+    // explorer : chaque entrée dit CE QU'ON Y FAIT
+    html += `<div class="sec-head"><h2>Explorer</h2></div><div class="explore">
+      <a class="ex-tile" href="#/feed"><span>🎬</span><b>Fil</b><small>Regarder · 3 min</small></a>
+      <a class="ex-tile" href="#/day"><span>📰</span><b>Actu</b><small>Lire · 24 dernières heures</small></a>
+      <a class="ex-tile" href="#/learn/culture"><span>🧠</span><b>S'entraîner</b><small>Quiz et culture G</small></a>
+      <a class="ex-tile" href="#/learn/prepa"><span>🎯</span><b>Concours</b><small>Écoles, dates, oral</small></a></div>
+      <div class="tools-scroll">${EXT.home.map(f => { try { return f(); } catch (e) { return ''; } }).join('')}</div>`;
     return html;
   }
 
@@ -406,7 +416,7 @@
   }
   const fmtHour = at => at ? `${parseInt(at, 10)} h${at.slice(3) !== '00' ? at.slice(3) : ''}` : '';
   const lastUpdate = day => { const u = (day && day.updates || []).slice(-1)[0]; return u ? `à ${fmtHour(u.at)}` : ''; };
-  const newBadge = (day, i) => { const at = storyAddedAt(day, i); return at ? ` <span class="new-badge">NOUVEAU · ${esc(fmtHour(at))}</span>` : ''; };
+  const newBadge = (day, i) => " " + readBadge(day, i);   // « nouveau » tant que non lu, puis l'heure de mise à jour
   // à la une de l'accueil : les ajouts les plus récents d'abord, puis les infos du matin
   function heroStories(day) {
     const all = day.stories.map((s, i) => ({ s, i }));
@@ -438,10 +448,10 @@
       <p class="muted">Institutions, Europe et monde, médias, déontologie, écriture, langue, économie : ce que les concours attendent de toi. Les leçons se débloquent dans l'ordre.</p>
       ${unitsPath(UNITS)}`;
     const ABOUT = {
-      concours: ['🧭', 'Concours', 'Les 7 grands thèmes à maîtriser pour les écrits et l\'oral, en leçons courtes. À faire dans l\'ordre : c\'est ta base.'],
-      culture: ['🧠', 'Culture G', 'Histoire, géographie, arts, sciences, idées : le socle des épreuves de culture générale. Pour tout mettre à niveau.'],
-      prepa: ['🎯', 'Prépa', 'Tout pour candidater : les écoles et leurs dates, les annales, l\'atelier d\'écriture, l\'entretien avec le jury.'],
-      revoir: ['🔁', 'À revoir', 'Les questions que tu as ratées, à refaire jusqu\'à les réussir. C\'est ce qui fait vraiment progresser.']
+      concours: ['🧭', 'Concours', 'Fais les 7 thèmes dans l\'ordre.'],
+      culture: ['🧠', 'Culture G', 'Quiz d\'histoire, géo, arts, sciences.'],
+      prepa: ['🎯', 'Prépa', 'Trouve tes écoles, écris, passe l\'entretien.'],
+      revoir: ['🔁', 'À revoir', 'Refais tes erreurs jusqu\'à les réussir.']
     }[sub];
     return `<nav class="l-tabs" aria-label="Rubriques d'apprentissage">${tabs.map(([id, ico, label]) => `<a class="l-tab ${id === sub ? 'on' : ''}" href="#/learn/${id}">${ico} ${esc(label)}</a>`).join('')}</nav>
       <p class="l-about"><b>${ABOUT[0]} ${ABOUT[1]} :</b> ${ABOUT[2]}</p>${body}`;
@@ -490,8 +500,9 @@
   }
 
   // ---------- Prépa concours ----------
-  const PREPA_TABS = [['plan', '🗺️', 'Plan'], ['ecoles', '🏫', 'Écoles'], ['methode', '🧭', 'Méthode'], ['oral', '🎤', 'Oral'], ['metier', '📡', 'Le métier'], ['conseils', '💬', 'Conseils'], ['quiz', '🧠', 'Quiz']];
-  const EXT = { tabs: {}, top: {}, lessons: {}, routes: {}, onAnswer: [], gloss: null, ready: [], home: [], storyBar: null };   // onglets, blocs et leçons ajoutés par les modules
+  const PREPA_MAIN = new Set(['plan', 'concours', 'ecoles', 'annales', 'ecriture', 'oral', 'plus']);   // les autres sont dans « Plus »
+  const PREPA_TABS = [['plan', '🗺️', 'Plan'], ['ecoles', '🏫', 'Écoles'], ['methode', '🧭', 'Méthode'], ['oral', '🎤', 'Oral'], ['metier', '📡', 'Le métier'], ['conseils', '💬', 'Conseils'], ['quiz', '🧠', 'Quiz'], ['plus', '⋯', 'Plus']];
+  const EXT = { tabs: {}, top: {}, lessons: {}, routes: {}, onAnswer: [], gloss: null, ready: [], home: [], storyBar: null, actions: [] };   // onglets, blocs et leçons ajoutés par les modules
   const srcLinks = list => (list && list.length) ? `<div class="p-src">Sources : ${list.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a>`).join(' · ')}</div>` : '';
 
   function viewPrepa(tab) {
@@ -502,7 +513,8 @@
     let html = `<div class="kicker">Prépa concours</div>
       <h1 style="font-size:34px;margin:8px 0 6px">Objectif admission</h1>
       <p class="muted">Les écoles, les épreuves, l'oral et le métier : tout ce qu'il faut pour maximiser tes chances. Infos vérifiées le ${esc(PREPA.updated)}, avec les sources à chaque bloc.</p>
-      <nav class="p-tabs" aria-label="Rubriques de la prépa">${PREPA_TABS.map(([id, ico, label]) => `<a class="p-tab ${id === tab ? 'on' : ''}" href="#/learn/prepa/${id}">${ico} ${label}</a>`).join('')}</nav>`;
+      <nav class="p-tabs" aria-label="Rubriques de la prépa">${PREPA_TABS.filter(t => PREPA_MAIN.has(t[0]) || t[0] === tab).map(([id, ico, label]) => `<a class="p-tab ${id === tab ? 'on' : ''}" href="#/learn/prepa/${id}">${ico} ${label}</a>`).join('')}</nav>`;
+    if (tab === 'plus') html += `<div class="explore" style="margin-top:16px">${[['methode', '🧭', 'Méthode', 'Les fiches pour réussir'], ['metier', '📡', 'Le métier', 'Chiffres et réalités'], ['conseils', '💬', 'Conseils', 'Ce que disent les jurys'], ['quiz', '🧠', 'Quiz prépa', 'Teste tes connaissances']].map(([id, ico, t, d]) => `<a class="ex-tile" href="#/learn/prepa/${id}"><span>${ico}</span><b>${t}</b><small>${d}</small></a>`).join('')}</div>`;
 
     if (EXT.top[tab]) html += EXT.top[tab]();
     if (EXT.tabs[tab]) html += EXT.tabs[tab]();
@@ -583,45 +595,110 @@
       <ul>${g.points.map(p => `<li>${rich(p)}</li>`).join('')}</ul>${srcLinks(g.sources)}</details>`;
   }
 
+
+  // =========================================================
+  //   ACTU : le fil des 24 dernières heures, la plus récente en haut
+  // =========================================================
+  const EDITION_AT = '07:00';   // les infos du matin sont publiées vers 7 h ; les autres portent l'heure de leur mise à jour
+  const storyAt = (day, i) => storyAddedAt(day, i) || EDITION_AT;
+  const storyTs = (day, i) => { const [h, m] = storyAt(day, i).split(':').map(Number); const d = parseYmd(day.date); d.setHours(h, m, 0, 0); return d.getTime(); };
+  const sKey = (date, i) => `${date}:${i}`;
+  const isRead = (date, i) => !!((S.read || {})[sKey(date, i)]) || !!seenStore().s[sKey(date, i)];
+  function markRead(date, i) {
+    S.read = S.read || {};
+    if (S.read[sKey(date, i)]) return;
+    S.read[sKey(date, i)] = Date.now();
+    const lim = Date.now() - 10 * 864e5; Object.keys(S.read).forEach(k => { if (S.read[k] < lim) delete S.read[k]; });
+    save();
+  }
+  const agoTs = ts => { const m = Math.round((Date.now() - ts) / 60000); return m < 2 ? 'à l\'instant' : m < 60 ? `il y a ${m} min` : m < 1440 ? `il y a ${Math.round(m / 60)} h` : 'hier'; };
+  // les infos publiées depuis moins de 24 h, de la plus récente à la plus ancienne ; au-delà, elles sortent de cette page (archives, recherche)
+  function timeline(hours = 24) {
+    const out = [];
+    Object.values(DAYS).forEach(day => day.stories.forEach((s, i) => { const ts = storyTs(day, i); if (Date.now() - ts <= hours * 36e5 && ts - Date.now() < 6 * 36e5) out.push({ day, s, i, ts }); }));
+    return out.sort((a, b) => b.ts - a.ts || a.day.date.localeCompare(b.day.date) || a.i - b.i);
+  }
+  // « nouveau » tant que l'info n'est pas lue ; ensuite, son heure de mise à jour
+  const readBadge = (day, i) => isRead(day.date, i)
+    ? `<span class="upd-time">🕒 mis à jour ${esc(fmtHour(storyAt(day, i)))}</span>`
+    : `<span class="new-badge">NOUVEAU · ${esc(fmtHour(storyAt(day, i)))}</span>`;
+
+  // Estimation personnelle, info par info : « à combien je pense avoir retenu cette info »
+  function retainBlock(date, i) {
+    const v = (S.retain || {})[sKey(date, i)];
+    return `<label class="retain"><span class="retain-l">Je pense avoir retenu <b data-retain-val>${v == null ? '— %' : v + ' %'}</b></span>
+      <input type="range" min="0" max="100" step="5" value="${v == null ? 50 : v}" class="${v == null ? 'unset' : ''}" data-retain="${sKey(date, i)}" aria-label="Part de cette info que je pense avoir retenue">
+      <span class="retain-hint">${v == null ? 'Glisse pour estimer' : ''}</span></label>`;
+  }
+  document.addEventListener('input', e => {
+    const r = e.target.closest && e.target.closest('[data-retain]'); if (!r) return;
+    S.retain = S.retain || {}; S.retain[r.dataset.retain] = +r.value;
+    r.classList.remove('unset');
+    const lab = r.parentElement.querySelector('[data-retain-val]'); if (lab) lab.textContent = r.value + ' %';
+    const hint = r.parentElement.querySelector('.retain-hint'); if (hint) hint.textContent = '';
+    const chip = document.querySelector(`.toc-chip[data-sk="${r.dataset.retain}"] .toc-pct`); if (chip) chip.textContent = r.value + ' %';
+    clearTimeout(r._t); r._t = setTimeout(save, 400);
+  });
+  document.addEventListener('click', e => {
+    const t = e.target.closest('[data-story-toggle]'); if (!t) return;
+    const card = t.closest('.s-card'), open = card.classList.toggle('open');
+    t.textContent = open ? 'Réduire ↑' : 'Lire la suite ↓';
+    if (open) {
+      const [date, i] = card.dataset.s.split(':'); markRead(date, +i);
+      card.classList.add('read');
+      const b = $('.new-badge', card); if (b) { const h = b.textContent.replace('NOUVEAU · ', ''); b.outerHTML = `<span class="upd-time">🕒 mis à jour ${esc(h)}</span>`; }
+      const chip = document.querySelector(`.toc-chip[data-sk="${card.dataset.s}"]`); if (chip) chip.classList.add('read');
+    }
+  });
+
+  function storyCard(day, s, i) {
+    const date = day.date, col = esc(s.color || (day.tagColors || {})[s.tag] || '#E63946'), rd = isRead(date, i);
+    return `<article class="story s-card ${rd ? 'read' : ''}" id="s-${date}-${i}" data-s="${sKey(date, i)}" style="--tag:${col}">
+      <header class="s-head"><span class="tag">${esc(s.tag)}</span>${readBadge(day, i)}<span class="s-ago">${esc(agoTs(storyTs(day, i)))}</span></header>
+      ${storyImage(date, i)}
+      <h3>${esc(s.title)}</h3>
+      <div class="s-body"><p class="s-text">${linkTerms(rich(s.text))}</p>
+        <div class="s-more">${s.why ? `<div class="why"><b>💡 Bon à savoir :</b> ${linkTerms(rich(s.why))}</div>` : ''}${sourcesBlock(s, date, i)}</div></div>
+      <button class="s-toggle" data-story-toggle>Lire la suite ↓</button>
+      ${retainBlock(date, i)}
+      ${EXT.storyBar ? EXT.storyBar(date, i) : ''}
+    </article>`;
+  }
+  const tocChips = items => `<nav class="toc-chips" id="toc" aria-label="Aller à une info">${items.map(({ day, s, i }) => {
+    const v = (S.retain || {})[sKey(day.date, i)];
+    return `<button class="toc-chip ${isRead(day.date, i) ? 'read' : ''}" data-scroll="s-${day.date}-${i}" data-sk="${sKey(day.date, i)}" style="--tag:${esc(s.color || (day.tagColors || {})[s.tag] || '#E63946')}"><i></i><span>${esc(s.title.length > 34 ? s.title.slice(0, 32) + '…' : s.title)}</span><b class="toc-pct">${v == null ? '' : v + ' %'}</b></button>`;
+  }).join('')}</nav>`;
+
   async function viewDay(date) {
-    date = date || CURRENT;
-    if (!date) return `<div class="empty"><div class="big">🗞️</div><h2>Aucune édition</h2><p class="muted">La première édition apparaîtra après la mise à jour quotidienne.</p></div>`;
+    // sans date : le fil des 24 dernières heures ; avec une date : l'édition complète de ce jour (archives)
+    if (!date) {
+      const tl = timeline(24), cur = CURRENT && DAYS[CURRENT];
+      if (!tl.length) {
+        if (!CURRENT) return `<div class="empty"><div class="big">🗞️</div><h2>Aucune info pour l'instant</h2><p class="muted">La première édition apparaîtra après la mise à jour quotidienne.</p></div>`;
+        return viewDay(CURRENT);
+      }
+      const unread = tl.filter(x => !isRead(x.day.date, x.i)).length;
+      return `<div class="kicker">Actu</div><h1 class="act-title">Les dernières 24 heures</h1>
+        <p class="muted act-sub">${tl.length} info${tl.length > 1 ? 's' : ''}${unread ? ` · <b>${unread} à lire</b>` : ' · tout est lu'} · la plus récente en haut · <a href="#archives" data-scroll="archives">archives</a></p>
+        ${tocChips(tl)}
+        <div class="stories">${tl.map(({ day, s, i }) => storyCard(day, s, i)).join('')}</div>
+        ${cur ? `<h2 class="section-title" id="teste-toi">Teste-toi</h2>${lessonCards(cur.date, cur)}` : ''}
+        ${cur && cur.word ? wordCard(cur.word) : ''}
+        <section id="archives" class="actu-archives">${viewArchive()}</section>`;
+    }
     const day = await getDay(date);
     if (!day) return `<div class="empty"><div class="big">🕳️</div><h2>Édition introuvable</h2><p class="muted">Pas d'édition pour le ${esc(date)}.</p><p style="margin-top:16px"><a class="btn ghost" href="#/archive">Voir les archives</a></p></div>`;
-    const tagColors = day.tagColors || {};
-    return `<article class="edition">
-      <div class="kicker">Édition du ${esc(frDate(date, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }))}${lastUpdate(day) ? ` · 🔄 mise à jour ${esc(lastUpdate(day))}` : ''}</div>
-      <h1>${esc(day.title)}</h1>
+    const items = day.stories.map((s, i) => ({ day, s, i, ts: storyTs(day, i) })).sort((a, b) => b.ts - a.ts || a.i - b.i);
+    return `<div class="kicker">Édition du ${esc(frDate(date, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }))}</div>
+      <h1 class="act-title">${esc(day.title)}</h1>
       ${day.intro ? `<p class="lede">${rich(day.intro)}</p>` : ''}
-      <p style="margin-top:12px"><button class="btn small ghost" data-scroll="archives">🗂️ Éditions précédentes et infos gardées ↓</button></p>
-      <nav class="toc card" id="toc" aria-label="Sommaire de l'édition"><div class="kicker">Sommaire · touche une info pour y aller</div>
-        <ol>${day.stories.map((s, i) => `<li><button class="toc-i" data-scroll="story-${i}" style="--tag:${esc(s.color || tagColors[s.tag] || '#E63946')}"><span class="toc-tag">${esc(s.tag)}</span><span class="toc-t">${esc(s.title)}</span>${newBadge(day, i)}${EXT.storyBar ? EXT.storyBar(date, i, true) : ''}</button></li>`).join('')}
-          <li><button class="toc-i toc-quiz" data-scroll="teste-toi"><span class="toc-tag">Quiz</span><span class="toc-t">Teste-toi : les quiz de la journée</span></button></li></ol></nav>
-      ${wordCard(day.word)}
-      <details class="card p-guide prim-howto"><summary><span class="p-gico">📜</span>Comment retrouver la source primaire d'une info (mode d'emploi)</summary>
-        <p style="font-size:14px;margin:6px 0">Une <b>source primaire</b> est le document d'origine : décision de justice, texte de loi, communiqué, rapport, chiffres officiels. Sous chaque info, ouvre <b>« 📜 Retrouver la source primaire »</b> :</p>
-        <ol class="prim-steps"><li>Les <mark>mots à taper</mark> sont déjà choisis pour toi (noms propres et chiffres de l'info).</li>
-          <li>Repère <b>qui a produit le document</b> (tribunal, ministère, ONU, Commission européenne…) : les boutons te donnent les sites officiels de la rubrique.</li>
-          <li>Un clic lance la <b>recherche sur le site officiel</b> avec tes mots : tu arrives sur les résultats de cette institution.</li>
-          <li><b>Vérifie</b> la date, l'auteur, et que le texte dit bien ce que l'article rapporte. Si l'info porte sur un document déjà lié, il apparaît en haut du bloc (« publication officielle du jour »).</li></ol>
-        <p class="prim-note">Pour t'entraîner : <button class="btn small ghost" data-start="train:primaire">🔎 Retrouver 3 sources primaires</button></p></details>
-      <h2 class="section-title">Les ${day.stories.length} infos à connaître</h2>
-      <div class="stories">${day.stories.map((s, i) => `
-        <div class="story" id="story-${i}" style="--tag:${esc(s.color || tagColors[s.tag] || '#E63946')}">
-          <span class="tag">${esc(s.tag)}</span>${newBadge(day, i)} <button class="to-toc" data-scroll="toc" aria-label="Retour au sommaire">↑ Sommaire</button>
-          ${storyImage(date, i)}
-          <h3>${esc(s.title)}</h3>
-          ${EXT.storyBar ? EXT.storyBar(date, i) : ''}
-          <p>${linkTerms(rich(s.text))}</p>
-          ${s.why ? `<div class="why"><b>💡 Bon à savoir :</b> ${linkTerms(rich(s.why))}</div>` : ''}
-          ${sourcesBlock(s, date, i)}
-        </div>`).join('')}
-      </div>
+      <p class="act-sub"><a class="btn small ghost" href="#/day">← Dernières 24 heures</a></p>
+      ${tocChips(items)}
+      <div class="stories">${items.map(({ s, i }) => storyCard(day, s, i)).join('')}</div>
       ${day.memo && day.memo.length ? `<div class="card memo"><div class="kicker">À retenir</div><ul>${day.memo.map(m => `<li>${rich(m)}</li>`).join('')}</ul></div>` : ''}
-      <h2 class="section-title" id="teste-toi">Teste-toi</h2>
-      ${lessonCards(date, day)}
-    </article>
-    <section id="archives" class="actu-archives">${viewArchive()}</section>`;
+      <h2 class="section-title" id="teste-toi">Teste-toi</h2>${lessonCards(date, day)}
+      ${wordCard(day.word)}
+      <section id="archives" class="actu-archives">${viewArchive()}</section>`;
   }
 
   function viewReview() {
@@ -741,7 +818,7 @@
     if (view === 'feed') {
       // le fil s'ouvre par-dessus l'accueil ; le bouton « retour » du téléphone le referme
       if (!$('#view').innerHTML.trim() || !$('.hero, .unit', $('#view'))) { $('#view').innerHTML = viewHome(); window.__scoopReady = true; }
-      await openFeed(arg);
+      await openFeed(arg, false, arg2);
       return;
     }
     renderChrome();
@@ -758,7 +835,7 @@
     window.__scoopReady = true;
     refreshInstall();
     if (view === 'profile') bindProfile();
-    const anchor = view === 'day' && arg2 && /^story-\d+$/.test(arg2) ? document.getElementById(arg2) : null;
+    const anchor = view === 'day' && arg && arg2 && /^story-\d+$/.test(arg2) ? document.getElementById('s-' + arg + '-' + arg2.slice(6)) : null;
     if (anchor) setTimeout(() => anchor.scrollIntoView({ block: 'start' }), 60); else window.scrollTo(0, 0);
   }
   window.addEventListener('hashchange', route);
@@ -875,7 +952,7 @@
     $('.lesson-body').scrollTop = 0;
   }
 
-  function answered(ok, src, it) { EXT.onAnswer.forEach(f => { try { f(ok, src, it); } catch (e) { /* module */ } }); }
+  function answered(ok, src, it) { EXT.onAnswer.forEach(f => { try { f(ok, src, it); } catch (e) { /* module */ } }); if (ok) quest('ok'); }
   const linkTerms = h => (EXT.gloss ? EXT.gloss(h) : h);   // glossaire : les mots juridiques ou techniques deviennent cliquables
   function grade(it, ok, sol, free) {
     S.stats.answered++; answered(ok, L.cfg.mode, it);
@@ -993,7 +1070,7 @@
     L.xp += bonus;
     const before = level().n, goalBefore = todayXp() >= S.settings.goal;
     addXp(L.xp); markActive();
-    S.stats.lessons++;
+    S.stats.lessons++; quest('l');
     track('/event/lecon-terminee', 'Leçon terminée', true);
     if (cfg.mode !== 'review') S.lessons[cfg.key] = { stars: Math.max(stars, prev ? prev.stars : 0), at: TODAY };
     save();
@@ -1529,7 +1606,7 @@
     return window.SCOOP_LIVE || null;
   }
 
-  async function openFeed(date, showAll) {
+  async function openFeed(date, showAll, start) {
     date = date && DATE_RE.test(date) ? date : CURRENT;
     const day = await getDay(date);
     if (!day) { location.hash = '#/home'; return; }
@@ -1538,6 +1615,14 @@
     const live = await loadLive();
     F = { date, day, seq: [], xp: 0, answered: 0, right: 0, videos: new Set(), active: -1, done: false, sound: feedSoundPref, all: !!showAll };
     F.seq = buildFeed(date, day, live, !!showAll);
+    // depuis les « stories » de l'accueil : on ouvre le fil directement sur l'info touchée
+    const startI = start != null && /^\d+$/.test(String(start)) ? +start : null;
+    let jump = -1;
+    if (startI != null) {
+      const find = seq => seq.findIndex(x => (x.type === 'story' && x.i === startI) || (x.type === 'video' && x.story === startI));
+      jump = find(F.seq);
+      if (jump < 0) { F.all = true; F.seq = buildFeed(date, day, live, true); jump = find(F.seq); }
+    }
     const track = $('#f-track');
     track.innerHTML = F.seq.map((it, k) => feedCard(it, k, date, day)).join('');
     $('#feed').hidden = false;
@@ -1550,7 +1635,8 @@
       entries.forEach(e => { if (e.isIntersecting) feedActivate(+e.target.dataset.k); });
     }, { root: track, threshold: 0.6 });
     $$('.fcard', track).forEach(c => feedObs.observe(c));
-    feedActivate(0);
+    if (jump > 0) { const c = $(`.fcard[data-k="${jump}"]`, track); if (c) track.scrollTop = c.offsetTop; feedActivate(jump); }
+    else feedActivate(0);
   }
 
   // Envoie une commande au lecteur YouTube intégré (API iframe)
@@ -1686,8 +1772,9 @@
       F.seenTimer = setTimeout(() => {
         if (!F || F.active !== k) return;
         // l'info reliée n'est « vue » qu'une fois son résumé affiché (carte suivante)
-        const st = seenStore(); st.v[id] = Date.now(); st.vt[id] = [...feedTok(it.v.title)].slice(0, 12).join(' ');
+        const st = seenStore(), firstTime = !st.v[id]; st.v[id] = Date.now(); st.vt[id] = [...feedTok(it.v.title)].slice(0, 12).join(' ');
         save();
+        if (firstTime) quest('v');
       }, 3000);
       // Lecture automatique en muet (règle des navigateurs, iPhone compris) ; le bouton 🔊 active le son.
       // enablejsapi permet de piloter le lecteur (pause, son) depuis notre calque tactile.
@@ -1896,7 +1983,8 @@
     addHomeBlock(fn) { EXT.home.push(fn); },        // bloc HTML ajouté sur l'accueil
     onAnswer(fn) { EXT.onAnswer.push(fn); },
     setGlossLinker(fn) { EXT.gloss = fn; },
-    setStoryBar(fn) { EXT.storyBar = fn; },         // barre de maîtrise affichée sur chaque info
+    setStoryBar(fn) { EXT.storyBar = fn; },         // ligne « me tester » affichée sous chaque info
+    addAction(fn) { EXT.actions.push(fn); },        // propose « la prochaine action » de l'accueil
     get INDEX() { return INDEX; }, DAYS, getDay, get CURRENT() { return CURRENT; },
     // charge les n dernières éditions (recherche, mémoire, rappels)
     async loadDays(n = 14) { const out = []; for (const d of INDEX.slice(0, n)) { const day = await getDay(d.date); if (day) out.push(day); } return out; }

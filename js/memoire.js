@@ -138,11 +138,14 @@
     const s = S(); s.recall = s.recall || {}; if (/^day:/.test(String(it.id))) s.recall[it.id] = (s.recall[it.id] || 0) + (ok ? 1 : -1);
   });
   const mastery = key => { const a = know().story[key]; return a && a.length ? Math.round(a.reduce((x, y) => x + y, 0) / a.length * 100) : null; };
+  // Sous chaque info : ton estimation à toi (curseur, dans l'app) ; ici seulement un petit test pour la vérifier, sans barre imposée
   ctx.setStoryBar((date, i, mini) => {
-    const key = `${date}:${i}`, v = mastery(key), cls = v == null ? '' : v < 40 ? 'lo' : v < 70 ? 'mid' : 'hi';
-    if (mini) return `<span class="m-mini ${cls}" title="${v == null ? 'Pas encore testé' : 'Maîtrise : ' + v + ' %'}"><i style="width:${v || 0}%"></i></span>`;
-    return `<div class="mastery"><span class="m-label">${v == null ? 'Pas encore testé' : `Je maîtrise cette info : <b>${v} %</b>`}</span><span class="m-bar ${cls}"><i style="width:${v || 0}%"></i></span><button class="m-test" data-start="story:${esc(date)}:${i}">${v == null ? 'Me tester' : 'Retester'}</button></div>`;
+    if (mini) return '';
+    const v = mastery(`${date}:${i}`);
+    return `<div class="m-line">${v == null ? '' : `Dernier test : <b>${v} %</b> · `}<button class="m-test" data-start="story:${esc(date)}:${i}">${v == null ? 'Vérifier en me testant' : 'Retester'}</button></div>`;
   });
+  // « Ta prochaine action » de l'accueil : réviser les noms et dates quand il y en a à revoir
+  ctx.addAction(() => { const n = memStats().due; return n >= 5 ? { ico: '🧩', title: 'Réviser noms et dates', sub: `${Math.min(n, 10)} questions · 2 min`, start: 'mem' } : null; });
 
   // Leçon « tester cette info » : questions du jour sur cette info + ses cartes nom/date/chiffre
   ctx.addLesson('story', (key, date, idx) => {
@@ -196,7 +199,9 @@
   ctx.addHomeBlock(() => {
     const st = memStats();
     return `<a class="dash-chip" href="#/memoire">🧩 Noms & dates${st.due ? ` · ${st.due}` : ''}</a>
-      ${prevQs.length ? '<button class="dash-chip" data-start="rappel">🔁 Rappel des jours passés</button>' : ''}
+      ${prevQs.length ? '<button class="dash-chip" data-start="rappel">🔁 Rappel</button>' : ''}
+      <button class="dash-chip" data-start="cgmix">⚡ Quiz rapide</button>
+      <button class="dash-chip" data-start="oral">🎤 Oral</button>
       <a class="dash-chip" href="#/glossaire">📖 Glossaire</a>
       <a class="dash-chip" href="#/search">🔎 Recherche</a>`;
   });
