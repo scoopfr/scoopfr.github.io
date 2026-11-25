@@ -27,7 +27,7 @@
   const DEFAULT = {
     xp: 0, streak: 0, best: 0, last: null, daily: {}, lessons: {}, review: [], saved: [], prepa: {}, qseen: {},
     stats: { answered: 0, correct: 0, lessons: 0 },
-    settings: { name: '', goal: 50, exam: '', sound: true, theme: 'auto', freeText: false, eco: null }
+    settings: { name: '', goal: 50, exam: '', sound: true, theme: 'auto', freeText: false, eco: null, alerts: false, alertHour: 18 }
   };
   // Mode éco : choix explicite, sinon automatique quand le navigateur est en « économie de données »
   const ecoMode = () => S.settings.eco === true || (S.settings.eco == null && !!(navigator.connection && navigator.connection.saveData));
@@ -191,10 +191,10 @@
   function renderChrome() {
     const st = streakNow(), goal = S.settings.goal, tx = todayXp(), done = tx >= goal;
     $('#topbar').innerHTML = `
-      <a class="tb-logo" href="#/home">scoop<span>.</span></a>
+      <a class="tb-logo" href="#/home">L'actu en s'amusant<span>.</span></a>
       <div class="tb-stats">
         <span class="tb-stat ${st ? '' : 'off'}" title="Série">🔥 ${st}</span>
-        <span class="tb-stat" title="XP total">⚡ ${S.xp}</span>
+        <span class="tb-stat" title="XP total"><b class="xp-tag">XP</b> ${S.xp}</span>
         <span class="tb-stat ${done ? '' : 'off'}" title="Objectif du jour">🎯 ${Math.min(tx, goal)}/${goal}</span>
       </div>`;
 
@@ -212,7 +212,7 @@
     $('#rail').innerHTML = `
       <div class="stat-row">
         <div class="stat-chip ${st ? '' : 'off'}" title="Jours d'affilée">🔥 ${st}</div>
-        <div class="stat-chip" title="XP total">⚡ ${S.xp}</div>
+        <div class="stat-chip" title="XP total"><b class="xp-tag">XP</b> ${S.xp}</div>
         <div class="stat-chip" title="Niveau">🎖️ ${lv.n}</div>
       </div>
       <div class="card">
@@ -395,6 +395,7 @@
     let html = searchBar() + `<header class="hm-top"><div><div class="hm-hi">${S.settings.name ? `Salut ${esc(S.settings.name)}` : 'Salut'} 👋</div>
         <div class="hm-sub">${st ? `🔥 ${st} jour${st > 1 ? 's' : ''} d'affilée` : '🔥 Lance ta série aujourd\'hui'} · ${left ? `encore ${left} XP pour ton objectif` : '🎯 objectif du jour atteint'}</div></div>
         ${ringSvg(tx, goal, left ? '🎯' : '✅')}</header>`;
+    html += EXT.home.map(f => { try { return f() || ''; } catch (e) { return ''; } }).join('');   // rappels et blocs des modules
     if (day && CURRENT !== TODAY && !tl.length) html += `<div class="banner">⏳ <span>L'édition d'aujourd'hui n'est pas encore en kiosque. Voici la dernière, celle du <b>${esc(frDate(CURRENT))}</b>.</span></div>`;
 
     // UNE grosse action
@@ -545,7 +546,7 @@
   // ---------- Prépa concours ----------
   const PREPA_MAIN = new Set(['plan', 'concours', 'ecoles', 'annales', 'ecriture', 'oral', 'plus']);   // les autres sont dans « Plus »
   const PREPA_TABS = [['plan', '🗺️', 'Plan'], ['ecoles', '🏫', 'Écoles'], ['methode', '🧭', 'Méthode'], ['oral', '🎤', 'Oral'], ['metier', '📡', 'Le métier'], ['conseils', '💬', 'Conseils'], ['quiz', '🧠', 'Quiz'], ['plus', '⋯', 'Plus']];
-  const EXT = { tabs: {}, top: {}, lessons: {}, routes: {}, onAnswer: [], gloss: null, ready: [], home: [], storyBar: null, actions: [], train: [], dayWrite: null };   // onglets, blocs et leçons ajoutés par les modules
+  const EXT = { tabs: {}, top: {}, lessons: {}, routes: {}, onAnswer: [], gloss: null, ready: [], home: [], storyBar: null, actions: [], train: [], dayWrite: null, profile: [] };   // onglets, blocs et leçons ajoutés par les modules
   const srcLinks = list => (list && list.length) ? `<div class="p-src">Sources : ${list.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a>`).join(' · ')}</div>` : '';
 
   function viewPrepa(tab) {
@@ -826,6 +827,8 @@
         <label class="toggle" style="margin-top:14px"><span><span style="font-weight:700;font-size:14px">⌨️ Mode réponse libre</span><br><small class="muted">Tu tapes la réponse au lieu de choisir parmi des propositions. Aussi activable pendant un quiz (bouton en haut).</small></span><input id="f-free" type="checkbox" ${S.settings.freeText ? 'checked' : ''}></label>
       </div>
 
+      ${EXT.profile.map(([v]) => { try { return v(); } catch (e) { return ''; } }).join('')}
+
       <h2 class="section-title" style="font-size:22px">Ma progression</h2>
       <div class="card">
         <p class="muted" style="font-size:14px;margin-bottom:14px">La progression est enregistrée dans ce navigateur. Exporte-la pour la transférer sur un autre appareil.</p>
@@ -891,7 +894,7 @@
     refreshGaps(el);
     window.__scoopReady = true;
     refreshInstall();
-    if (view === 'profile') bindProfile();
+    if (view === 'profile') { bindProfile(); EXT.profile.forEach(([, b]) => { try { b(); } catch (e) { /* module */ } }); }
     const anchor = view === 'day' && arg && arg2 && /^story-\d+$/.test(arg2) ? document.getElementById('s-' + arg + '-' + arg2.slice(6)) : null;
     if (anchor) setTimeout(() => anchor.scrollIntoView({ block: 'start' }), 60); else window.scrollTo(0, 0);
   }
@@ -1743,7 +1746,7 @@
     track.innerHTML = F.seq.map((it, k) => feedCard(it, k, date, day)).join('');
     $('#feed').hidden = false;
     document.body.classList.add('in-lesson');
-    $('#f-xp').textContent = '⚡ 0';
+    $('#f-xp').textContent = 'XP 0';
     track.scrollTop = 0;
     if (document.activeElement) document.activeElement.blur();
     if (feedObs) feedObs.disconnect();
@@ -1915,7 +1918,7 @@
       S.lessons[key] = { stars: 3, at: TODAY };
       save();
     }
-    $('#f-xp').textContent = `⚡ ${F.xp}`;
+    $('#f-xp').textContent = `XP ${F.xp}`;
     const nq = F.seq.filter(x => x.type === 'quiz').length;
     const el = $('#f-endstats');
     if (el) el.innerHTML = `${F.videos.size} vidéo${F.videos.size > 1 ? 's' : ''} vue${F.videos.size > 1 ? 's' : ''} · ${F.right}/${nq} bonnes réponses · <b>+${F.xp} XP</b><br>🔥 Série : ${streakNow()} jour${streakNow() > 1 ? 's' : ''}`;
@@ -1949,7 +1952,7 @@
       if (!S.review.some(r => r.id === it.id)) S.review.push({ id: it.id, ex, from: `Fil du ${frDate(F.date)}`, at: TODAY });
     }
     markActive(); save();
-    $('#f-xp').textContent = `⚡ ${F.xp}`;
+    $('#f-xp').textContent = `XP ${F.xp}`;
     const ex_ = $('.f-expl', card);
     let score = '';
     if (it.block != null) {
@@ -2101,6 +2104,7 @@
     setGlossLinker(fn) { EXT.gloss = fn; },
     setStoryBar(fn) { EXT.storyBar = fn; },         // ligne « me tester » affichée sous chaque info
     addAction(fn) { EXT.actions.push(fn); },
+    addProfileBlock(view, bind) { EXT.profile.push([view, bind]); },   // bloc de réglages ajouté au profil
     setDayWriter(fn) { EXT.dayWrite = fn; },       // fn(day, indexLeçon) → exercices d'écriture ajoutés à la leçon du jour
     addTrainItem(fn) { EXT.train.push(fn); },       // carte d'entraînement : fn() → { k, o, ico, title, sub, start|href, hot } ou null        // propose « la prochaine action » de l'accueil
     get INDEX() { return INDEX; }, DAYS, getDay, get CURRENT() { return CURRENT; },

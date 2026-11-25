@@ -951,3 +951,16 @@ body.in-welcome { overflow: hidden; }
 .reco-links{display:flex;flex-wrap:wrap;gap:8px 14px;font-size:13px;font-weight:700}
 .reco-links a{color:var(--blue,#3A86FF);text-decoration:none}
 .reco-links a:hover{text-decoration:underline}
+
+/* En-tête : slogan à la place du nom, libellé XP */
+.topbar .tb-logo{font-size:18px;letter-spacing:-.01em}
+@media (max-width:720px){.topbar .tb-logo{display:block;font-size:15px;max-width:48vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+.xp-tag{font:900 11px/1 var(--sans,inherit);background:var(--yellow);color:#3b2d00;border-radius:6px;padding:3px 5px;letter-spacing:.04em}
+.stat-chip .xp-tag{margin-right:2px}
+/* Rappel de l'accueil */
+.alert-banner{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--yellow-bg);border:2px solid var(--yellow);border-radius:16px;padding:12px 14px;margin:0 0 14px}
+.alert-banner .ab-txt{display:grid;gap:2px;min-width:0;flex:1 1 200px}
+.alert-banner .ab-txt span{font-size:14px;color:var(--ink-2)}
+.alert-banner .ab-act{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.alert-banner .ab-link{font-size:13px;font-weight:700;color:var(--blue,#3A86FF);text-decoration:none}
+.alert-banner .ab-x{background:none;border:0;font-size:16px;color:var(--muted);cursor:pointer;padding:4px}
