@@ -120,8 +120,44 @@ window.SCOOP_DAYS['2026-11-25'] = {
         { name: 'RFI', url: 'https://www.rfi.fr/fr/afrique-foot/20261124-can-2025-le-s%C3%A9n%C3%A9gal-en-joie-apr%C3%A8s-sa-victoire-r%C3%A9attribu%C3%A9e-par-le-tas-le-maroc-fataliste' },
         { name: 'Al Jazeera', url: 'https://www.aljazeera.com/video/newsfeed/2026/11/25/senegal-fans-celebrate-afcon-legal-victory-over-morocco?traffic_source=rss' }
       ]
+    },
+    {
+      tag: 'Économie',
+      title: 'Eurostar : une grève surprise perturbe le trafic entre Paris et Londres',
+      text: 'Une **grève imprévue** chez Eurostar provoque mercredi 25 novembre des annulations et d’importantes perturbations entre Paris et Londres, et aussi vers Bruxelles. L’opérateur ne précise ni qui fait grève ni pourquoi, et appelle les organisations syndicales « à poursuivre les discussions ». Les clients peuvent modifier leur voyage ou obtenir un remboursement intégral, et il leur est demandé de ne pas se rendre en gare en cas d’annulation.',
+      why: 'Un préavis de grève est en principe public : une grève « surprise » dont les motifs ne sont pas donnés pose la question de l’information des voyageurs, un angle classique en économie et transports.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/economie/article/2026/11/25/une-greve-surprise-a-eurostar-provoque-plusieurs-annulations-de-trains-entre-paris-et-londres_6815076_3234.html' },
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/economie/transports/le-trafic-des-trains-eurostar-entre-londres-et-paris-fortement-perturbe-en-raison-d-une-greve-imprevue_8299053.html' },
+        { name: 'Le Figaro', url: 'https://www.lefigaro.fr/societes/eurostar-une-greve-surprise-provoque-des-annulations-et-d-importantes-perturbations-entre-paris-et-londres-ce-mercredi-20261125' },
+        { name: 'France 24', url: 'https://www.france24.com/en/europe/20261125-surprise-eurostar-strike-cancels-london-paris-and-brussels-trains' }
+      ]
+    },
+    {
+      tag: 'Économie',
+      title: 'Nvidia : Jensen Huang s’excuse après son retour, des républicains s’inquiètent',
+      text: 'Onze jours après avoir été écarté de la présidence de **Nvidia** pour une liaison avec une espionne chinoise présumée, **Jensen Huang** a retrouvé sa place le 23 novembre, grâce à l’intervention de Donald Trump. Devant les salariés, il s’est excusé pour ses infidélités (« J’ai commis de graves erreurs ») et dit suivre une thérapie. Des républicains critiquent ce retour au nom de la sécurité nationale, et l’action Nvidia a reculé mardi, les investisseurs se recentrant sur les risques politiques et de gouvernance.',
+      why: 'Le dossier mêle gouvernance d’entreprise, sécurité nationale et rapports entre grands patrons de la tech et pouvoir politique : un cas d’école pour questionner l’indépendance des décisions économiques.',
+      sources: [
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/internet/nvidia/le-patron-de-nvidia-jensen-huang-s-excuse-aupres-des-salaries-et-dit-suivre-une-therapie_8298642.html' },
+        { name: 'Radio-Canada', url: 'https://ici.radio-canada.ca/article/info/2302756/republicains-trump-nvidia-jensen-huang' },
+        { name: 'Courrier international', url: 'https://www.courrierinternational.com/article/opinion-le-retour-de-jensen-huang-a-la-tete-de-nvidia-est-la-preuve-que-l-economie-est-prise-en-otage-par-l-ia_289853' },
+        { name: 'France 24', url: 'https://www.france24.com/en/tv-shows/a-propos/20261124-tech-executives-investment-in-trump-clearly-paying-off-as-huang-reinstated-at-nvidia' }
+      ]
+    },
+    {
+      tag: 'Monde',
+      title: 'Colombie : tous les otages libérés après l’assaut à Carthagène',
+      text: 'Tous les otages retenus depuis mardi 24 novembre, pendant près de 17 heures, dans un **supermarché de Carthagène** ont été libérés après un assaut de la police et de l’armée, mercredi 25 novembre. Le président colombien a annoncé qu’un des preneurs d’otages avait été tué dans l’opération. La ville est très touristique.',
+      why: 'Pour couvrir une prise d’otages, il faut distinguer le bilan officiel annoncé par les autorités des informations non confirmées, et dater précisément chaque étape.',
+      sources: [
+        { name: 'France 24', url: 'https://www.france24.com/fr/am%C3%A9riques/20261124-colombie-prise-otages-cours-ville-touristique-carthag%C3%A8ne' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/am%C3%A9riques/20261125-prise-d-otages-en-colombie-tous-les-otages-lib%C3%A9r%C3%A9s-apr%C3%A8s-un-assaut-de-la-police-et-de-l-arm%C3%A9e-%C3%A0-carthag%C3%A8ne' },
+        { name: 'Le Temps', url: 'https://www.letemps.ch/monde/une-vingtaine-de-personnes-prises-en-otages-dans-un-supermarche-en-colombie-le-president-sur-place' }
+      ]
     }
   ],
+  updates: [{ at: '11:00', stories: [10, 11, 12] }],
   shorts: [
     { id: 'fIoU3pPa2C0', source: 'franceinfo', title: 'Fausse rétractation de Z. Takieddine : N. Sarkozy renvoyé en procès', tag: 'Justice', story: 8 },
     { id: '7eR68mu-hLI', source: 'franceinfo', title: 'Le Sénégal finalement sacré vainqueur de la CAN', tag: 'Société', story: 9 },
@@ -177,6 +213,16 @@ window.SCOOP_DAYS['2026-11-25'] = {
         { t: 'match', q: 'Associe chaque acteur à son sujet', pairs: [['Arcom', 'Pluralisme des créateurs de contenu'], ['Fondation des femmes', 'Coût du départ du foyer'], ['Tribunal arbitral du sport', 'Titre de la CAN rendu au Sénégal'], ['Huawei', 'Vol de secrets industriels']], x: 'Les quatre sujets reprennent des infos du jour.' },
         { t: 'write', q: 'Titre cette dépêche (12 mots maximum)', src: 'Le constructeur chinois BYD, numéro un mondial des voitures électriques, a annoncé mardi son projet de rachat d’une usine à Hambach, en Moselle. Des négociations exclusives sont lancées pour cette première usine d’Europe de l’Ouest du groupe, qui cherche à produire en Europe pour contourner les droits de douane.', model: 'BYD veut racheter une usine en Moselle pour produire en Europe', crit: ['12 mots maximum', 'L’information principale (BYD et l’usine) est claire', 'Le lieu (Moselle) apparaît', 'Le verbe est au présent, sans jargon'] },
         { t: 'write', q: 'Rédige l’attaque (première phrase) d’un article sur la décision du TAS', src: 'Faits : le Tribunal arbitral du sport a rendu mardi le titre de la CAN 2025 au Sénégal · le jury d’appel de la CAF l’avait déchu du titre le 17 mars · la finale s’était disputée à Rabat, dix mois plus tôt.', model: 'Dix mois après une finale houleuse à Rabat, le Tribunal arbitral du sport a rendu mardi au Sénégal le titre de champion d’Afrique que la CAF lui avait retiré.', crit: ['L’information principale (le titre rendu au Sénégal) est dans la première phrase', 'L’auteur de la décision (le TAS) est nommé', 'Le contexte (CAF, finale houleuse) est évoqué', 'Une seule phrase, claire'] }
+      ]
+    },
+    {
+      title: '⚡ Flash de 11 h', icon: '⚡', desc: 'Mise à jour', exercises: [
+        { t: 'qcm', q: 'Quelles liaisons ferroviaires sont touchées par la grève surprise d’Eurostar ?', c: ['Paris, Londres et Bruxelles', 'Paris, Marseille et Lyon', 'Lille, Lyon et Nice', 'Londres, Édimbourg et Leeds'], a: 0, x: 'Des trains entre Londres, Paris et Bruxelles ont été annulés.' },
+        { t: 'vf', q: 'Eurostar a précisé quel syndicat faisait grève et pourquoi.', a: false, x: 'L’opérateur n’a précisé ni qui faisait grève ni les raisons.' },
+        { t: 'qcm', q: 'Que peuvent obtenir les clients Eurostar dont le train est annulé ?', c: ['Un changement de date ou un remboursement intégral', 'Uniquement un avoir', 'Rien', 'Un billet d’avion'], a: 0, x: 'Eurostar propose de modifier le voyage ou un remboursement intégral.' },
+        { t: 'vf', q: 'Jensen Huang a retrouvé la tête de Nvidia le 23 novembre.', a: true, x: 'Onze jours après son éviction, grâce à l’intervention de Donald Trump.' },
+        { t: 'qcm', q: 'Pourquoi des républicains critiquent-ils le retour de Jensen Huang ?', c: ['Pour des raisons de sécurité nationale', 'À cause des résultats trimestriels', 'À cause de son salaire', 'À cause d’un rachat'], a: 0, x: 'Ils invoquent la sécurité nationale.' },
+        { t: 'vf', q: 'À Carthagène, tous les otages ont été libérés après un assaut de la police et de l’armée.', a: true, x: 'Un des preneurs d’otages a été tué, a annoncé le président colombien.' }
       ]
     }
   ]
