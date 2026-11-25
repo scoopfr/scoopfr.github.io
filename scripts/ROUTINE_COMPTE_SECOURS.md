@@ -86,6 +86,12 @@ Plutôt que de basculer à la main, le compte de secours peut avoir une routine 
 
 Limites : si la routine principale a fini sur `RIEN DE NOUVEAU`, elle ne publie rien et le secours refait le pré-tri (gratuit, puis arrêt). Si la principale met plus de 30 min, les deux peuvent se chevaucher ; c'est rare, et `git pull --rebase` limite les conflits.
 
+## 2 ter. Variante locale (sans liaison GitHub côté Claude)
+
+Si la liaison GitHub du 2e compte échoue (incident GitHub du 25/11/2026 : erreurs 500/502 sur la page d'autorisation), la même logique tourne en **tâche planifiée locale** de l'application Claude sur le PC : `scoop-secours-plus-30-min`, à 7 h 30, 11 h 30, 14 h 30, 18 h 30 et 21 h 30 (heure locale). Elle utilise le git du PC pour pousser, donc aucune autorisation GitHub côté Claude.
+
+Limite : elle ne tourne que **PC allumé et application ouverte**. Si l'application est fermée à l'heure prévue, elle s'exécute au prochain lancement. Elle est installée sur le compte avec lequel l'application est connectée.
+
 ## 3. Passer d'un compte à l'autre (variante manuelle)
 
 Quand le compte principal n'a plus de crédit :
