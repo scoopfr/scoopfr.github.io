@@ -1,0 +1,183 @@
+/* Scoop — édition du 2026-11-25 (actualité du mardi 24 novembre 2026) */
+window.SCOOP_DAYS = window.SCOOP_DAYS || {};
+window.SCOOP_DAYS['2026-11-25'] = {
+  date: '2026-11-25',
+  title: 'Lisnard bouscule la droite, la loi logement passe avec le RN, Huawei condamné',
+  intro: 'À Paris, le Salon des maires devient un tremplin pour la présidentielle 2027, tandis que l’Assemblée adopte la loi logement avec les voix du RN. À l’international, la guerre d’Ukraine fait ses premiers morts en Libye et la justice américaine condamne Huawei.',
+  word: {
+    term: 'Pluralisme',
+    def: 'C’est le principe qui garantit l’expression de courants de pensée et d’opinion variés dans les médias. En France, l’**Arcom** veille au respect du pluralisme, notamment par des règles de **temps de parole** pendant les campagnes électorales. Pour la présidentielle 2027, elle veut étendre ces règles aux créateurs de contenu en ligne.'
+  },
+  tagColors: { 'Politique': '#3A86FF', 'Climat': '#2B9348', 'Monde': '#0FA3B1', 'Économie': '#F4A261', 'Médias': '#E63946', 'Justice': '#8E44AD', 'Europe': '#4361EE', 'Société': '#D6336C', 'Culture': '#7B2CBF' },
+  stories: [
+    {
+      tag: 'Politique',
+      title: 'Présidentielle 2027 : Édouard Philippe propose un débat télévisé à David Lisnard',
+      text: 'Au Salon des maires, le candidat **Horizons Édouard Philippe** a appelé le maire de Cannes **David Lisnard**, candidat Nouvelle Énergie, à clarifier sa position vis-à-vis du Rassemblement national. Invité de LCI mardi soir, il lui propose un débat télévisé plutôt qu’une primaire et dénonce une frontière « poreuse » avec l’extrême droite. David Lisnard brigue aussi la présidence de l’**Association des maires de France** (AMF), dont le résultat est attendu mercredi avant 14 h. Par ailleurs, la justice ouvre une nouvelle enquête sur la communauté urbaine du Havre, que dirige Édouard Philippe, pour de possibles détournements de fonds publics ; il dénonce une « vendetta judiciaire ».',
+      why: 'La campagne présidentielle suppose de maîtriser les rôles des candidats, des maires (parrainages) et la séparation entre débat politique et procédure judiciaire (présomption d’innocence).',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/election-presidentielle-2027/article/2026/11/24/edouard-philippe-a-vote-pour-david-lisnard-a-la-presidence-de-l-amf-mais-fustige-sa-posture-dans-la-course-a-l-elysee_6814832_6205049.html' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/france/20261125-pr%C3%A9sidentielle-2027-%C3%A9douard-philippe-marque-ses-diff%C3%A9rences-avec-david-lisnard' },
+        { name: 'Le Figaro', url: 'https://www.lefigaro.fr/elections/presidentielles/un-desaccord-manifeste-sur-la-ligne-politique-plutot-qu-une-primaire-edouard-philippe-propose-un-debat-a-david-lisnard-20261124' },
+        { name: 'Euronews', url: 'https://fr.euronews.com/2026/11/24/france-edouard-philippe-vise-par-de-nouveaux-soupcons-de-detournement-de-fonds-de-publics' },
+        { name: 'Mediapart', url: 'https://www.mediapart.fr/journal/france/241126/la-justice-ouvre-une-nouvelle-enquete-visant-la-communaute-urbaine-dirigee-par-edouard-philippe' }
+      ]
+    },
+    {
+      tag: 'Société',
+      title: 'Logement : l’Assemblée adopte la loi avec les voix du RN',
+      text: 'L’Assemblée nationale a largement adopté le projet de loi « de relance et de décentralisation » du logement, grâce aux voix de la droite et de l’extrême droite. Le Rassemblement national a obtenu un amendement qui met fin à l’**interdiction de louer les passoires thermiques**. Le ministre du logement, **Vincent Jeanbrun**, mise sur la suppression de cet amendement lors de la **commission mixte paritaire de décembre**.',
+      why: 'Révise le parcours d’une loi : vote à l’Assemblée, puis commission mixte paritaire (CMP) quand les deux chambres divergent.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/societe/article/2026/11/24/l-assemblee-nationale-adopte-le-projet-de-loi-sur-le-logement-avec-les-voix-du-rassemblement-national_6814849_3224.html' },
+        { name: 'Mediapart', url: 'https://www.mediapart.fr/journal/ecologie/241126/le-projet-de-loi-logement-du-gouvernement-adopte-avec-les-voix-de-l-extreme-droite' }
+      ]
+    },
+    {
+      tag: 'Monde',
+      title: 'Libye : deux militaires libyens meurent après les frappes ukrainiennes sur des navires russes',
+      text: 'Deux militaires libyens ont succombé à leurs blessures après les attaques du 22 novembre contre des navires russes à **Benghazi**, revendiquées par l’Ukraine, ont annoncé les autorités de l’Est libyen. **Saddam Haftar** dénonce une « attaque criminelle » contre la base navale. Selon le Guardian, le service de sécurité ukrainien affirme avoir lancé sept drones navals depuis un navire-mère, ce qui a coulé le navire de guerre russe **Merkury**. L’Italie, à quelques centaines de kilomètres de là, s’inquiète de l’attaque.',
+      why: 'La guerre en Ukraine s’étend à la Méditerranée et pose la question de la souveraineté libyenne et de la sécurité de l’Europe du Sud.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/international/live/2026/11/25/en-direct-guerre-en-ukraine-deux-militaires-libyens-succombent-a-leurs-blessures-apres-les-frappes-revendiquees-par-kiev-contre-des-navires-russes-a-benghazi_6814183_3210.html' },
+        { name: 'France 24', url: 'https://www.france24.com/fr/europe/20261125-en-direct-ukraine-russie-libye-benghazi-union-europeenne-zelensky-poutine' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/afrique/20261125-libye-deux-militaires-libyens-morts-des-suites-des-attaques-ukrainiennes-contre-des-navires-russes-%C3%A0-benghazi' },
+        { name: 'Courrier international', url: 'https://www.courrierinternational.com/article/guerre-l-italie-s-inquiete-apres-les-attaques-ukrainiennes-sur-des-navires-russes-en-libye_289866' },
+        { name: 'The Guardian', url: 'https://www.theguardian.com/world/2026/nov/23/ukraine-naval-drones-strike-russian-warship-libya' }
+      ]
+    },
+    {
+      tag: 'Monde',
+      title: 'États-Unis : Kilmar Abrego Garcia quitte le pays pour l’Espagne',
+      text: 'Le Salvadorien **Kilmar Abrego Garcia**, habitant du Maryland et marié à une Américaine, a quitté les États-Unis de son plein gré pour l’Espagne. Expulsé en mars 2025 vers le Salvador, il avait été ramené aux États-Unis après une décision de la Cour suprême, puis inculpé par la justice fédérale. Devenu un symbole de la politique migratoire de **Donald Trump**, il part après une longue bataille judiciaire. Le sénateur démocrate **Chris Van Hollen** se réjouit de le voir voyager « en homme libre ».',
+      why: 'C’est un cas d’école sur la séparation des pouvoirs aux États-Unis : la Cour suprême et les juges fédéraux face à l’exécutif.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/international/article/2026/11/25/le-salvadorien-kilmar-abrego-garcia-symbole-des-expulsions-sous-trump-quitte-les-etats-unis_6814999_3210.html' },
+        { name: 'BBC News', url: 'https://www.bbc.co.uk/news/articles/c6808pyy5dl9o?at_medium=RSS&at_campaign=rss' },
+        { name: 'The Guardian', url: 'https://www.theguardian.com/us-news/2026/nov/24/kilmar-abrego-garcia-leaves-us' },
+        { name: 'Al Jazeera', url: 'https://www.aljazeera.com/news/2026/11/25/kilmar-abrego-garcia-self-deports-to-spain-after-lengthy-us-legal-battle?traffic_source=rss' }
+      ]
+    },
+    {
+      tag: 'Justice',
+      title: 'Huawei reconnu coupable de vol de secrets industriels aux États-Unis',
+      text: 'Un jury fédéral de New York a reconnu mardi le géant chinois **Huawei** coupable de vol de secrets industriels et de fraude bancaire, après huit ans de procédure. Le groupe était notamment accusé d’avoir tenté de recruter des salariés d’entreprises américaines de télécommunications pour obtenir des informations technologiques. Il a en revanche été **acquitté du chef de racket** (association de malfaiteurs). Huawei estime que cet acquittement « valide » sa position constante depuis huit ans.',
+      why: 'C’est un épisode de la rivalité technologique et judiciaire entre les États-Unis et la Chine, à relier aux embargos sur les puces.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/international/article/2026/11/25/le-geant-chinois-huawei-reconnu-coupable-de-vol-de-secrets-industriels-aux-etats-unis-apres-huit-ans-de-procedure_6814902_3210.html' },
+        { name: 'France 24', url: 'https://www.france24.com/fr/%C3%A9co-tech/20261124-le-groupe-chinois-huawei-reconnu-coupable-de-vol-de-secret-industriel-aux-%C3%A9tats-unis' },
+        { name: 'BBC News', url: 'https://www.bbc.co.uk/news/articles/cmy49ngydqzpo?at_medium=RSS&at_campaign=rss' },
+        { name: 'Euronews', url: 'https://fr.euronews.com/2026/11/24/etats-unis-huawei-coupable-de-vol-de-secrets-commerciaux-acquitte-du-racket' }
+      ]
+    },
+    {
+      tag: 'Économie',
+      title: 'BYD va s’implanter en France, à Hambach (Moselle)',
+      text: 'Le constructeur chinois **BYD**, numéro un mondial des voitures électriques, a annoncé mardi son projet de rachat d’une usine à **Hambach, en Moselle**. Des négociations exclusives sont lancées pour cette première usine d’Europe de l’Ouest du groupe. BYD cherche depuis un an à produire ses véhicules en Europe pour contourner les droits de douane.',
+      why: 'Révise la logique des droits de douane et des relocalisations industrielles : produire sur place permet d’éviter les taxes à l’importation.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/economie/article/2026/11/24/le-constructeur-automobile-chinois-byd-va-s-implanter-en-france_6814850_3234.html' },
+        { name: 'France 24', url: 'https://www.france24.com/fr/%C3%A9co-tech/20261124-le-constructeur-automobile-chinois-byd-choisit-la-france-pour-sa-premi%C3%A8re-usine-d-europe-de-l-ouest' }
+      ]
+    },
+    {
+      tag: 'Médias',
+      title: 'Présidentielle : l’Arcom impose le pluralisme aux créateurs de contenu',
+      text: 'L’**Arcom** a annoncé jeudi 19 novembre que les influenceurs et podcasteurs qui reçoivent des personnalités politiques devront, comme les télévisions et les radios, se soumettre à des règles de **pluralisme** pendant la campagne de 2027. Le régulateur veut que les principaux créateurs de contenu, comme HugoDécrypte ou Guillaume Pley, respectent des règles de **temps de parole** et de déontologie. Plusieurs créateurs contestent ces règles.',
+      why: 'Le pluralisme, le rôle de l’Arcom et le poids croissant des créateurs de contenu dans l’accès à l’information politique sont des sujets d’oral très probables.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/economie/article/2026/11/19/presidentielle-2027-les-createurs-de-contenu-auront-des-obligations-de-pluralisme-dans-leur-traitement-de-l-election_6813376_3234.html' },
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/elections/on-vous-explique-pourquoi-les-createurs-de-contenus-contestent-les-regles-de-pluralisme-que-l-arcom-veut-leur-imposer-pour-la-presidentielle-de-2027_8297736.html' }
+      ]
+    },
+    {
+      tag: 'Société',
+      title: 'Violences conjugales : quitter son foyer coûte presque un an de salaire',
+      text: 'À l’occasion de la **journée internationale de lutte contre les violences faites aux femmes**, mercredi 25 novembre, la **Fondation des femmes** a publié un rapport qui chiffre le coût du départ du foyer pour une victime de violences conjugales. Logement, justice et soins représentent presque une année de salaire. Selon l’ONU, quelque 840 millions de femmes, soit près d’une femme sur trois, ont subi des violences conjugales.',
+      why: 'Les violences faites aux femmes sont un grand sujet de société : savoir citer un rapport associatif et un chiffre de l’ONU est un atout à l’oral.',
+      sources: [
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/societe/violences-faites-aux-femmes/logement-justice-soins-le-depart-d-une-victime-de-violences-conjugales-de-son-foyer-represente-presque-une-annee-de-salaire_8297718.html' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/france/20261125-violences-sexistes-et-sexuelles-la-fondation-des-femmes-chiffre-le-co%C3%BBt-de-la-s%C3%A9paration-pour-les-victimes' }
+      ]
+    },
+    {
+      tag: 'Justice',
+      title: 'Fausse rétractation de Takieddine : Sarkozy sera jugé fin 2027',
+      text: 'Onze personnes sont renvoyées devant le tribunal correctionnel dans l’affaire de la fausse rétractation de **Ziad Takieddine**, l’opération « Sauver Sarko ». **Nicolas Sarkozy** et son épouse **Carla Bruni** comparaîtront fin 2027 pour association de malfaiteurs et recel de subornation de témoin. Cette affaire s’inscrit dans celle du financement libyen présumé de sa campagne.',
+      why: 'Révise les infractions (association de malfaiteurs, subornation de témoin) et la procédure : renvoi devant le tribunal correctionnel.',
+      sources: [
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/politique/affaire/financement-de-la-campagne-de-sarkozy/nicolas-sarkozy-carla-bruni-mimi-marchand-qui-sont-les-principaux-protagonistes-de-l-affaire-de-la-fausse-retractation-de-ziad-takieddine_8297730.html' },
+        { name: 'Euronews', url: 'https://fr.euronews.com/2026/11/24/fausse-retractation-de-ziad-takieddine-nicolas-sarkozy-sera-de-nouveau-juge-lannee-prochai' }
+      ]
+    },
+    {
+      tag: 'Société',
+      title: 'CAN 2025 : le Tribunal arbitral du sport rend le titre au Sénégal',
+      text: 'Le **Tribunal arbitral du sport** (TAS) a tranché mardi 24 novembre : il a contredit le jury d’appel de la Confédération africaine de football qui, le 17 mars, avait déchu le Sénégal du titre de la CAN 2025. Le Sénégal est donc réinstallé champion d’Afrique, dix mois après une finale houleuse à Rabat. Le Sénégal célèbre, tandis que le Maroc se montre fataliste.',
+      why: 'Le TAS est l’instance suprême de la justice sportive : savoir le distinguer d’une juridiction d’État est utile pour les sujets sport et droit.',
+      sources: [
+        { name: 'France 24', url: 'https://www.france24.com/fr/sports/20261124-decision-tas-senegal-heureux-maroc-enrage-reactions' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/afrique-foot/20261124-can-2025-le-s%C3%A9n%C3%A9gal-en-joie-apr%C3%A8s-sa-victoire-r%C3%A9attribu%C3%A9e-par-le-tas-le-maroc-fataliste' },
+        { name: 'Al Jazeera', url: 'https://www.aljazeera.com/video/newsfeed/2026/11/25/senegal-fans-celebrate-afcon-legal-victory-over-morocco?traffic_source=rss' }
+      ]
+    }
+  ],
+  shorts: [
+    { id: 'fIoU3pPa2C0', source: 'franceinfo', title: 'Fausse rétractation de Z. Takieddine : N. Sarkozy renvoyé en procès', tag: 'Justice', story: 8 },
+    { id: '7eR68mu-hLI', source: 'franceinfo', title: 'Le Sénégal finalement sacré vainqueur de la CAN', tag: 'Société', story: 9 },
+    { id: '9dsFt7-hKBc', source: 'TV5MONDE Info', title: 'Libye - Attaque de Kiev sur deux navires russes', tag: 'Monde', story: 2 },
+    { id: '5brdfzfPG4o', source: 'HugoDécrypte', title: 'Cette chanteuse iranienne a reçu 74 coups de fouet pour avoir chanté sans voile.', tag: 'Monde' },
+    { id: 'dRe0SbSrshc', source: 'France 24', title: 'De retour à la tête de Nvidia, Jensen Huang assure qu\'il "sera un meilleur PDG la deuxième fois"', tag: 'Économie' },
+    { id: 'RjVlGwUtaS0', source: 'euronews', title: 'Législatives en Espagne : logement, immigration et division politique au cœur des débats', tag: 'Europe' },
+    { id: 'wrBjUK6zKFQ', source: 'Brut', title: 'Dans cette région d’Afghanistan, les femmes n’ont désormais plus de nom.', tag: 'Monde' },
+    { id: '_BGd4MjLAFQ', source: 'RFI', title: 'Tchad - France : vers une nouvelle coopération militaire ?', tag: 'Monde' }
+  ],
+  memo: [
+    'Présidentielle 2027 : **Édouard Philippe** (Horizons) propose un débat télévisé à **David Lisnard** (Nouvelle Énergie), maire de Cannes.',
+    'La loi logement est adoptée avec les voix du RN ; la **CMP de décembre** doit trancher l’amendement sur les passoires thermiques.',
+    '**Huawei** : coupable de vol de secrets industriels et de fraude bancaire, acquitté de racket, après huit ans de procédure.',
+    '**Arcom** : les influenceurs et podcasteurs recevant des politiques devront respecter le pluralisme pour la présidentielle 2027.',
+    '**Sarkozy** et **Carla Bruni** seront jugés fin 2027 dans l’affaire de la fausse rétractation de Takieddine.'
+  ],
+  lessons: [
+    {
+      title: 'Le quiz de la une', icon: '☕', desc: 'France', exercises: [
+        { t: 'qcm', q: 'Quel projet de loi l’Assemblée nationale a-t-elle adopté avec les voix du Rassemblement national ?', c: ['Le projet de loi sur le logement', 'Le projet de loi sur les retraites', 'Le projet de loi sur l’immigration', 'Le projet de loi sur l’énergie'], a: 0, x: 'Il s’agit du projet de loi « de relance et de décentralisation » du logement.' },
+        { t: 'qcm', q: 'Que prévoit l’amendement du RN obtenu dans cette loi ?', c: ['La fin de l’interdiction de louer les passoires thermiques', 'Un plafonnement des loyers', 'La suppression de la taxe foncière', 'Un moratoire sur les expulsions'], a: 0, x: 'Le ministre du logement Vincent Jeanbrun espère le faire supprimer en CMP.' },
+        { t: 'vf', q: 'Le ministre du logement Vincent Jeanbrun mise sur la suppression de cet amendement lors de la commission mixte paritaire de décembre.', a: true, x: 'La CMP réunit des députés et des sénateurs pour trouver un texte commun.' },
+        { t: 'qcm', q: 'Quel ancien Premier ministre propose un débat télévisé à David Lisnard ?', c: ['Édouard Philippe', 'Dominique de Villepin', 'Bernard Cazeneuve', 'Gabriel Attal'], a: 0, x: 'Il le propose plutôt qu’une primaire, invité de LCI mardi soir.' },
+        { t: 'qcm', q: 'De quelle ville David Lisnard est-il maire ?', c: ['Cannes', 'Nice', 'Antibes', 'Toulon'], a: 0, x: 'Il est candidat Nouvelle Énergie à la présidentielle 2027.' },
+        { t: 'vf', q: 'Édouard Philippe reproche à David Lisnard d’entretenir une frontière « poreuse » avec l’extrême droite.', a: true, x: 'Il lui demande de clarifier sa position vis-à-vis du RN.' },
+        { t: 'qcm', q: 'Dans quel délai le résultat de l’élection à la présidence de l’AMF est-il attendu ?', c: ['Mercredi avant 14 h', 'Lundi soir', 'Vendredi matin', 'Dimanche'], a: 0, x: 'L’AMF est l’Association des maires de France, qui tenait son 108e congrès.' },
+        { t: 'qcm', q: 'Quand Nicolas Sarkozy sera-t-il jugé dans l’affaire de la fausse rétractation de Takieddine ?', c: ['Fin 2027', 'Début 2026', 'Printemps 2028', 'Dès décembre'], a: 0, x: 'Il comparaîtra avec son épouse Carla Bruni.' },
+        { t: 'qcm', q: 'Qui comparaîtra aux côtés de Nicolas Sarkozy dans cette affaire ?', c: ['Carla Bruni', 'Mimi Marchand seule', 'Claude Guéant', 'Brice Hortefeux'], a: 0, x: 'Onze personnes sont renvoyées devant le tribunal correctionnel au total.' },
+        { t: 'match', q: 'Associe chaque personnalité à son rôle', pairs: [['Édouard Philippe', 'Candidat Horizons'], ['David Lisnard', 'Candidat Nouvelle Énergie'], ['Vincent Jeanbrun', 'Ministre du logement'], ['Carla Bruni', 'Jugée fin 2027 avec Nicolas Sarkozy']], x: 'Ces noms reviennent dans les infos politiques du jour.' }
+      ]
+    },
+    {
+      title: 'Le tour du monde', icon: '🌍', desc: 'International', exercises: [
+        { t: 'qcm', q: 'Combien de militaires libyens ont succombé à leurs blessures après les frappes sur des navires russes à Benghazi ?', c: ['Deux', 'Cinq', 'Dix', 'Aucun'], a: 0, x: 'L’annonce vient des autorités de l’Est libyen.' },
+        { t: 'qcm', q: 'Qui a dénoncé une « attaque criminelle » contre la base navale de Benghazi ?', c: ['Saddam Haftar', 'Volodymyr Zelensky', 'Giorgia Meloni', 'Vladimir Poutine'], a: 0, x: 'Il est commandant en chef adjoint des Forces armées arabes libyennes.' },
+        { t: 'vf', q: 'L’Italie s’inquiète de l’attaque, Benghazi étant à quelques centaines de kilomètres des côtes siciliennes.', a: true, x: 'Rome a fait part de son irritation.' },
+        { t: 'qcm', q: 'Vers quel pays Kilmar Abrego Garcia a-t-il quitté les États-Unis ?', c: ['L’Espagne', 'Le Salvador', 'Le Mexique', 'Le Canada'], a: 0, x: 'Il a été expulsé en mars 2025 vers le Salvador, puis ramené aux États-Unis.' },
+        { t: 'vf', q: 'Kilmar Abrego Garcia a quitté les États-Unis de son plein gré.', a: true, x: 'Ses avocats l’ont confirmé mardi.' },
+        { t: 'qcm', q: 'De quoi Huawei a-t-il été reconnu coupable par un jury de New York ?', c: ['Vol de secrets industriels', 'Corruption de fonctionnaires', 'Espionnage militaire', 'Blanchiment d’argent'], a: 0, x: 'Le groupe a aussi été reconnu coupable de fraude bancaire.' },
+        { t: 'vf', q: 'Huawei a été reconnu coupable de racket.', a: false, x: 'Il a été acquitté du chef de racket (association de malfaiteurs).' },
+        { t: 'match', q: 'Associe chaque acteur à son actualité', pairs: [['BYD', 'Projet d’usine à Hambach, en Moselle'], ['Huawei', 'Jury fédéral à New York'], ['Kilmar Abrego Garcia', 'Départ pour l’Espagne'], ['Merkury', 'Navire de guerre russe coulé']], x: 'Quatre actualités internationales de la journée.' },
+        { t: 'qcm', q: 'Quelle instance a rendu le titre de la CAN 2025 au Sénégal ?', c: ['Le Tribunal arbitral du sport', 'La FIFA', 'La Cour internationale de justice', 'Le jury d’appel de la CAF'], a: 0, x: 'Elle a contredit le jury d’appel de la CAF qui avait déchu le Sénégal le 17 mars.' }
+      ]
+    },
+    {
+      title: 'Médias & atelier', icon: '🎙️', desc: 'Médias + écriture', exercises: [
+        { t: 'qcm', q: 'Quelle autorité impose des règles de pluralisme aux créateurs de contenu pour la présidentielle 2027 ?', c: ['L’Arcom', 'La CNIL', 'Le Conseil constitutionnel', 'L’Autorité de la concurrence'], a: 0, x: 'L’Arcom est le régulateur de l’audiovisuel et du numérique.' },
+        { t: 'qcm', q: 'Quand l’Arcom a-t-elle annoncé ces règles ?', c: ['Jeudi 19 novembre', 'Lundi 2 novembre', 'Mardi 24 novembre', 'Vendredi 13 novembre'], a: 0, x: 'La mesure vise les influenceurs et podcasteurs qui reçoivent des personnalités politiques.' },
+        { t: 'vf', q: 'Les règles de l’Arcom concernent aussi les podcasteurs qui reçoivent des personnalités politiques.', a: true, x: 'Ils devront, comme les télévisions et les radios, respecter le pluralisme.' },
+        { t: 'vf', q: 'Les créateurs de contenu approuvent unanimement les règles de l’Arcom.', a: false, x: 'Plusieurs créateurs contestent ces règles de temps de parole et de déontologie.' },
+        { t: 'qcm', q: 'Quelle fondation a chiffré le coût du départ du foyer pour les victimes de violences conjugales ?', c: ['La Fondation des femmes', 'La Fondation de France', 'La Fondation Abbé-Pierre', 'La Fondation Jean-Jaurès'], a: 0, x: 'Le départ du foyer représente presque une année de salaire.' },
+        { t: 'match', q: 'Associe chaque acteur à son sujet', pairs: [['Arcom', 'Pluralisme des créateurs de contenu'], ['Fondation des femmes', 'Coût du départ du foyer'], ['Tribunal arbitral du sport', 'Titre de la CAN rendu au Sénégal'], ['Huawei', 'Vol de secrets industriels']], x: 'Les quatre sujets reprennent des infos du jour.' },
+        { t: 'write', q: 'Titre cette dépêche (12 mots maximum)', src: 'Le constructeur chinois BYD, numéro un mondial des voitures électriques, a annoncé mardi son projet de rachat d’une usine à Hambach, en Moselle. Des négociations exclusives sont lancées pour cette première usine d’Europe de l’Ouest du groupe, qui cherche à produire en Europe pour contourner les droits de douane.', model: 'BYD veut racheter une usine en Moselle pour produire en Europe', crit: ['12 mots maximum', 'L’information principale (BYD et l’usine) est claire', 'Le lieu (Moselle) apparaît', 'Le verbe est au présent, sans jargon'] },
+        { t: 'write', q: 'Rédige l’attaque (première phrase) d’un article sur la décision du TAS', src: 'Faits : le Tribunal arbitral du sport a rendu mardi le titre de la CAN 2025 au Sénégal · le jury d’appel de la CAF l’avait déchu du titre le 17 mars · la finale s’était disputée à Rabat, dix mois plus tôt.', model: 'Dix mois après une finale houleuse à Rabat, le Tribunal arbitral du sport a rendu mardi au Sénégal le titre de champion d’Afrique que la CAF lui avait retiré.', crit: ['L’information principale (le titre rendu au Sénégal) est dans la première phrase', 'L’auteur de la décision (le TAS) est nommé', 'Le contexte (CAF, finale houleuse) est évoqué', 'Une seule phrase, claire'] }
+      ]
+    }
+  ]
+};
