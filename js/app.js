@@ -656,8 +656,21 @@
     const lab = r.parentElement.querySelector('[data-retain-val]'); if (lab) lab.textContent = r.value + ' %';
     const hint = r.parentElement.querySelector('.retain-hint'); if (hint) hint.textContent = '';
     const chip = document.querySelector(`.toc-chip[data-sk="${r.dataset.retain}"] .toc-pct`); if (chip) chip.textContent = r.value + ' %';
+    refreshGaps(r.closest('.s-card'));
     clearTimeout(r._t); r._t = setTimeout(save, 400);
   });
+  // écart entre ce que tu pensais retenir et ce que les quiz mesurent vraiment
+  function gapMsg(est, real) {
+    const d = est - real;
+    return d >= 15 ? `Tu te surestimes de ${d} points` : d <= -15 ? `Tu te sous-estimes de ${-d} points` : 'Estimation juste ✓';
+  }
+  function refreshGaps(scope) {
+    $$('.real-gap[data-real]', scope || document).forEach(g => {
+      const card = g.closest('.s-card'), key = card && card.dataset.s, est = (S.retain || {})[key];
+      g.textContent = est == null ? 'Place ton estimation pour comparer' : gapMsg(est, +g.dataset.real);
+      g.classList.toggle('off', est != null && Math.abs(est - +g.dataset.real) >= 15);
+    });
+  }
   document.addEventListener('click', e => {
     const t = e.target.closest('[data-story-toggle]'); if (!t) return;
     const card = t.closest('.s-card'), open = card.classList.toggle('open');
@@ -685,7 +698,7 @@
   }
   const tocChips = items => `<nav class="toc-chips" id="toc" aria-label="Aller à une info">${items.map(({ day, s, i }) => {
     const v = (S.retain || {})[sKey(day.date, i)];
-    return `<button class="toc-chip ${isRead(day.date, i) ? 'read' : ''}" data-scroll="s-${day.date}-${i}" data-sk="${sKey(day.date, i)}" style="--tag:${esc(s.color || (day.tagColors || {})[s.tag] || '#E63946')}"><i></i><span>${esc(s.title.length > 34 ? s.title.slice(0, 32) + '…' : s.title)}</span><b class="toc-pct">${v == null ? '' : v + ' %'}</b></button>`;
+    return `<button class="toc-chip ${isRead(day.date, i) ? 'read' : ''}" data-scroll="s-${day.date}-${i}" data-sk="${sKey(day.date, i)}" style="--tag:${esc(s.color || (day.tagColors || {})[s.tag] || '#E63946')}"><i></i><span>${esc(s.title.length > 34 ? s.title.slice(0, 32) + '…' : s.title)}</span><b class="toc-pct">${v == null ? '' : v + ' %'}</b>${EXT.storyBar ? EXT.storyBar(day.date, i, true) : ''}</button>`;
   }).join('')}</nav>`;
 
   async function viewDay(date) {
@@ -851,6 +864,7 @@
       default: html = EXT.routes[view] ? await EXT.routes[view](arg, arg2) : viewHome();
     }
     el.innerHTML = (view === 'home' || view === 'profile' ? '<div data-install-slot></div>' : '') + html + CREDIT;
+    refreshGaps(el);
     window.__scoopReady = true;
     refreshInstall();
     if (view === 'profile') bindProfile();

@@ -140,9 +140,10 @@
   const mastery = key => { const a = know().story[key]; return a && a.length ? Math.round(a.reduce((x, y) => x + y, 0) / a.length * 100) : null; };
   // Sous chaque info : ton estimation à toi (curseur, dans l'app) ; ici seulement un petit test pour la vérifier, sans barre imposée
   ctx.setStoryBar((date, i, mini) => {
-    if (mini) return '';
-    const v = mastery(`${date}:${i}`);
-    return `<div class="m-line">${v == null ? '' : `Dernier test : <b>${v} %</b> · `}<button class="m-test" data-start="story:${esc(date)}:${i}">${v == null ? 'Vérifier en me testant' : 'Retester'}</button></div>`;
+    const key = `${date}:${i}`, v = mastery(key), n = (know().story[key] || []).length;
+    if (mini) return v == null ? '' : `<b class="toc-real" title="Résultat réel aux quiz">✓ ${v} %</b>`;
+    return `<div class="real-line"><div class="real-main"><span>📊 Résultat réel aux quiz</span><b>${v == null ? 'pas encore testé' : v + ' %'}</b>${v == null ? '' : `<small>sur ${n} réponse${n > 1 ? 's' : ''}</small>`}</div>
+      ${v == null ? '' : `<span class="real-gap" data-real="${v}"></span>`}<button class="m-test" data-start="story:${esc(date)}:${i}">${v == null ? 'Me tester' : 'Retester'}</button></div>`;
   });
   // « Ta prochaine action » de l'accueil : réviser les noms et dates quand il y en a à revoir
   ctx.addAction(() => { const n = memStats().due; return n >= 5 ? { ico: '🧩', title: 'Réviser noms et dates', sub: `${Math.min(n, 10)} questions · 2 min`, start: 'mem' } : null; });

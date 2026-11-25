@@ -932,3 +932,9 @@ body.in-welcome { overflow: hidden; }
 .peek-new { font-style: normal; font-weight: 800; color: var(--red); text-transform: uppercase; font-size: 10.5px; letter-spacing: .06em; }
 .quests.compact { padding: 10px 14px; margin-top: 18px; } .quests.compact .quest { padding: 3px 0; font-size: 12.5px; }
 .explore.small { margin-top: 12px; }
+
+/* Résultat réel aux quiz, face à l'estimation */
+.real-line { display: flex; align-items: center; justify-content: space-between; gap: 8px 12px; flex-wrap: wrap; margin-top: 10px; padding: 10px 12px; border-radius: 12px; background: color-mix(in srgb, var(--green) 9%, var(--card)); font-size: 13px; }
+.real-main { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; } .real-main b { font: 900 18px var(--serif); } .real-main small { opacity: .65; }
+.real-gap { flex: 1 1 100%; font-size: 12.5px; font-weight: 700; color: var(--green); } .real-gap.off { color: #D9A20F; } .real-gap:empty { display: none; }
+.toc-real { font-size: 11px; color: var(--green); }
