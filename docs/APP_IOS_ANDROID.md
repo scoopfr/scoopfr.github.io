@@ -34,3 +34,13 @@ Ce PC n'a ni Node, ni Mac, ni Android Studio, et les comptes développeur (Googl
 
 - **Rappels locaux** (série, objectif) : programmés par l'appli sur le téléphone, sans serveur, donc à heure exacte. À préférer dans l'appli native.
 - **Push** : Android via Firebase (gratuit), iPhone via la clé APNs d'Apple. Le Worker de `server/` couvre pour l'instant les navigateurs et PWA installées (Web Push) ; il faudrait y ajouter l'envoi FCM/APNs pour les appareils de l'appli native.
+
+## Version 100 % gratuite (choix retenu)
+
+Pas de compte Google Play (25 $) ni Apple (99 $ par an). Ce qui reste gratuit :
+
+- **iPhone et Android : la PWA installée** depuis le navigateur (Safari : Partager → « Sur l'écran d'accueil » ; Chrome : « Installer l'application »). Même icône, plein écran, hors ligne, et notifications grâce au serveur Cloudflare gratuit (`server/`). C'est la voie principale.
+- **Android en plus, sans store** : PWABuilder génère gratuitement un fichier `.apk` signé. On le met en téléchargement (GitHub Releases) et les élèves l'installent à la main. Sans publication sur le Play Store, donc moins de visibilité, mais aucun frais.
+- **iPhone** : il n'existe aucun moyen gratuit d'être sur l'App Store. La PWA est la seule option.
+
+Si un jour le projet rapporte de l'argent, les comptes développeur pourront être pris à ce moment-là : `native/` est prêt.
