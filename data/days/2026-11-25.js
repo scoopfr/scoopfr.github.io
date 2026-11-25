@@ -155,9 +155,31 @@ window.SCOOP_DAYS['2026-11-25'] = {
         { name: 'RFI', url: 'https://www.rfi.fr/fr/am%C3%A9riques/20261125-prise-d-otages-en-colombie-tous-les-otages-lib%C3%A9r%C3%A9s-apr%C3%A8s-un-assaut-de-la-police-et-de-l-arm%C3%A9e-%C3%A0-carthag%C3%A8ne' },
         { name: 'Le Temps', url: 'https://www.letemps.ch/monde/une-vingtaine-de-personnes-prises-en-otages-dans-un-supermarche-en-colombie-le-president-sur-place' }
       ]
+    },
+    {
+      tag: 'Europe',
+      title: 'L’Union européenne dévoile son « Quantum Act » et un fonds de 50 milliards d’euros',
+      text: 'La Commission européenne a présenté, mercredi 25 novembre, le **Quantum Act**, une stratégie pour accélérer le passage de l’informatique quantique à l’usage industriel. Le plan prévoit un **fonds souverain de 50 milliards d’euros** pour investir dans le quantique et l’intelligence artificielle. L’Europe a une avance en recherche mais peine à la traduire en activités commerciales, face aux États-Unis et à la Chine.',
+      why: 'Un chiffre de plan d’investissement doit être attribué (qui l’annonce, quand) et accompagné de son contexte : ici, le retard commercial de l’Europe sur ses concurrents.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/international/article/2026/11/25/l-union-europeenne-veut-creer-un-fonds-souverain-de-50-milliards-d-euros-pour-investir-dans-l-informatique-quantique-et-l-intelligence-artificielle_6815093_3210.html' },
+        { name: 'Euronews', url: 'https://fr.euronews.com/2026/11/25/lue-devoile-un-plan-pour-lere-quantique-avec-jusqua-50-milliards-dinvestissements' },
+        { name: 'Le Temps', url: 'https://www.letemps.ch/cyber/apres-l-ia-l-europe-ne-veut-pas-rater-le-train-du-quantique' }
+      ]
+    },
+    {
+      tag: 'France',
+      title: 'Apprentissage : la Cour des comptes alerte sur des fraudes et des abus',
+      text: 'Dans un rapport publié mercredi 25 novembre, la **Cour des comptes** pointe de nombreuses défaillances dans les aides à l’apprentissage, dont le budget a fortement augmenté. Selon franceinfo, **10 à 20 %** de l’argent public dépensé seraient concernés par des risques de fraude et d’abus (contrats fictifs, nombre excessif d’apprentis par maître d’apprentissage). Libération évoque entre **1,5 et 3 milliards d’euros** détournés chaque année et une « faille systémique dans le contrôle ».',
+      why: 'Quand deux médias présentent un chiffre différemment (part du budget ou montant en euros), il faut préciser ce qu’il mesure et attribuer chaque donnée à sa source.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/politique/article/2026/11/25/les-aides-a-l-apprentissage-font-l-objet-de-nombreux-abus-et-fraudes-selon-la-cour-des-comptes_6815092_823448.html' },
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/economie/emploi/la-cour-des-comptes-epingle-des-fraudes-et-des-abus-dans-les-formations-en-apprentissage_8299608.html' },
+        { name: 'Libération', url: 'https://www.liberation.fr/economie/fraude-a-lapprentissage-entre-15-et-3-milliards-deuros-dargent-public-detournes-chaque-annee-20261125_CO3OHJGT25C7FDWLBANTGX2SFQ/' }
+      ]
     }
   ],
-  updates: [{ at: '11:00', stories: [10, 11, 12] }],
+  updates: [{ at: '11:00', stories: [10, 11, 12] }, { at: '14:00', stories: [13, 14] }],
   shorts: [
     { id: 'fIoU3pPa2C0', source: 'franceinfo', title: 'Fausse rétractation de Z. Takieddine : N. Sarkozy renvoyé en procès', tag: 'Justice', story: 8 },
     { id: '7eR68mu-hLI', source: 'franceinfo', title: 'Le Sénégal finalement sacré vainqueur de la CAN', tag: 'Société', story: 9 },
@@ -223,6 +245,16 @@ window.SCOOP_DAYS['2026-11-25'] = {
         { t: 'vf', q: 'Jensen Huang a retrouvé la tête de Nvidia le 23 novembre.', a: true, x: 'Onze jours après son éviction, grâce à l’intervention de Donald Trump.' },
         { t: 'qcm', q: 'Pourquoi des républicains critiquent-ils le retour de Jensen Huang ?', c: ['Pour des raisons de sécurité nationale', 'À cause des résultats trimestriels', 'À cause de son salaire', 'À cause d’un rachat'], a: 0, x: 'Ils invoquent la sécurité nationale.' },
         { t: 'vf', q: 'À Carthagène, tous les otages ont été libérés après un assaut de la police et de l’armée.', a: true, x: 'Un des preneurs d’otages a été tué, a annoncé le président colombien.' }
+      ]
+    },
+    {
+      title: '⚡ Flash de 14 h', icon: '⚡', desc: 'Mise à jour', exercises: [
+        { t: 'qcm', q: 'Comment s’appelle le plan européen présenté le 25 novembre sur l’informatique quantique ?', c: ['Le Quantum Act', 'Le Digital Act', 'Le Chips Act', 'Le Green Deal'], a: 0, x: 'La Commission l’a présenté mercredi 25 novembre.' },
+        { t: 'qcm', q: 'Quel montant le fonds souverain européen doit-il atteindre ?', c: ['50 milliards d’euros', '5 milliards d’euros', '500 millions d’euros', '150 milliards d’euros'], a: 0, x: 'Il doit investir dans le quantique et l’intelligence artificielle.' },
+        { t: 'vf', q: 'L’Europe peine à traduire son avance en recherche quantique en activités commerciales.', a: true, x: 'C’est le constat relayé par Le Monde.' },
+        { t: 'qcm', q: 'Quelle institution a publié un rapport sur les aides à l’apprentissage le 25 novembre ?', c: ['La Cour des comptes', 'Le Conseil d’État', 'L’Assemblée nationale', 'La Banque de France'], a: 0, x: 'Le rapport pointe de nombreuses défaillances et des fraudes.' },
+        { t: 'qcm', q: 'Selon franceinfo, quelle part de l’argent public dépensé serait concernée par des risques de fraude et d’abus ?', c: ['Entre 10 % et 20 %', 'Moins de 1 %', 'Environ 50 %', 'Entre 30 % et 40 %'], a: 0, x: 'Contrats fictifs et nombre excessif d’apprentis par maître d’apprentissage sont cités.' },
+        { t: 'vf', q: 'Libération évoque entre 1,5 et 3 milliards d’euros d’argent public détournés chaque année.', a: true, x: 'Le journal cite aussi une « faille systémique dans le contrôle ».' }
       ]
     }
   ]
