@@ -52,6 +52,7 @@
     <h3 class="cc-h" style="margin-top:26px">Et aussi : s'entraîner par écrit</h3>`;
   }
   ctx.prependPrepaTab('oral', setupCard);
+  ctx.addTrainItem(() => ({ k: 'oral', o: 6, ico: '🎤', title: 'Entretien avec le jury', sub: 'Oral blanc : à l\'écrit ou à voix haute', href: '#/learn/prepa/oral' }));
 
   // ---------------------------------------------------------------- réglages de l'IA
   function cfgModal(provider) {

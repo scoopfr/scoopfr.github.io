@@ -187,7 +187,6 @@
     const st = streakNow(), goal = S.settings.goal, tx = todayXp(), done = tx >= goal;
     $('#topbar').innerHTML = `
       <a class="tb-logo" href="#/home">scoop<span>.</span></a>
-      <form class="tb-search" role="search" data-search><input type="search" name="q" placeholder="Rechercher une info, un quiz, un mot…" aria-label="Rechercher" autocomplete="off" enterkeyhint="search"></form>
       <div class="tb-stats">
         <span class="tb-stat ${st ? '' : 'off'}" title="Série">🔥 ${st}</span>
         <span class="tb-stat" title="XP total">⚡ ${S.xp}</span>
@@ -372,7 +371,7 @@
   function viewHome() {
     const day = CURRENT && DAYS[CURRENT], tl = timeline(24), st = streakNow(), goal = S.settings.goal, tx = todayXp(), q = questState();
     const act = nextAction(tl), left = Math.max(0, goal - tx);
-    let html = `<header class="hm-top"><div><div class="hm-hi">${S.settings.name ? `Salut ${esc(S.settings.name)}` : 'Salut'} 👋</div>
+    let html = searchBar() + `<header class="hm-top"><div><div class="hm-hi">${S.settings.name ? `Salut ${esc(S.settings.name)}` : 'Salut'} 👋</div>
         <div class="hm-sub">${st ? `🔥 ${st} jour${st > 1 ? 's' : ''} d'affilée` : '🔥 Lance ta série aujourd\'hui'} · ${left ? `encore ${left} XP pour ton objectif` : '🎯 objectif du jour atteint'}</div></div>
         ${ringSvg(tx, goal, left ? '🎯' : '✅')}</header>`;
     if (day && CURRENT !== TODAY && !tl.length) html += `<div class="banner">⏳ <span>L'édition d'aujourd'hui n'est pas encore en kiosque. Voici la dernière, celle du <b>${esc(frDate(CURRENT))}</b>.</span></div>`;
@@ -394,9 +393,8 @@
     html += `<div class="sec-head"><h2>Explorer</h2></div><div class="explore">
       <a class="ex-tile" href="#/feed"><span>🎬</span><b>Fil</b><small>Regarder · 3 min</small></a>
       <a class="ex-tile" href="#/day"><span>📰</span><b>Actu</b><small>Lire · 24 dernières heures</small></a>
-      <a class="ex-tile" href="#/learn/culture"><span>🧠</span><b>S'entraîner</b><small>Quiz et culture G</small></a>
-      <a class="ex-tile" href="#/learn/prepa"><span>🎯</span><b>Concours</b><small>Écoles, dates, oral</small></a></div>
-      <div class="tools-scroll">${EXT.home.map(f => { try { return f(); } catch (e) { return ''; } }).join('')}</div>`;
+      <a class="ex-tile" href="#/learn"><span>🧠</span><b>S'entraîner</b><small>Quiz, noms & dates, oral</small></a>
+      <a class="ex-tile" href="#/learn/prepa"><span>🎯</span><b>Concours</b><small>Écoles, dates, annales</small></a></div>`;
     return html;
   }
 
@@ -425,13 +423,43 @@
     return null;
   }
 
-  // ---------- Onglet « Apprendre » : Concours, Culture G, Prépa, À revoir ----------
+  // ---------- Recherche : en haut des pages où l'on cherche (accueil, actu, entraînement) ----------
+  const searchBar = (q = '') => `<form class="searchbar" role="search" data-search><span aria-hidden="true">🔎</span><input type="search" name="q" value="${esc(q)}" placeholder="Chercher une info, un quiz, un mot…" aria-label="Rechercher une info, un quiz ou un mot" autocomplete="off" enterkeyhint="search"></form>`;
+
+  // ---------- Entraînements : tout ce qui sert à réviser, en gros boutons clairs ----------
+  // item = { k, o (ordre), ico, title, sub, start | href, hot } ; les modules en ajoutent via ctx.addTrainItem
+  function trainItems() {
+    const out = [], day = CURRENT && DAYS[CURRENT], rv = S.review.length;
+    if (day) {
+      const li = day.lessons.findIndex((_, i) => !lessonState(`day:${CURRENT}:${i}`));
+      if (li >= 0) out.push({ k: 'daily', o: 1, hot: true, ico: '📰', title: li === 0 ? 'Quiz du jour' : 'Continuer le quiz du jour', sub: `${day.lessons[li].exercises.length} questions sur l'actu · ~4 min`, start: `day:${CURRENT}:${li}` });
+    }
+    out.push({ k: 'quick', o: 2, ico: '⚡', title: 'Quiz rapide', sub: '10 questions de culture générale · 3 min', start: 'cgmix' });
+    if (rv) out.push({ k: 'review', o: 5, ico: '🔁', title: 'Refaire mes erreurs', sub: `${rv} question${rv > 1 ? 's' : ''} ratée${rv > 1 ? 's' : ''}`, start: 'review' });
+    EXT.train.forEach(f => { try { const it = f(); if (it) out.push(it); } catch (e) { /* module */ } });
+    return out.sort((a, b) => a.o - b.o);
+  }
+  const trainCard = it => `<${it.href ? 'a href="' + esc(it.href) + '"' : 'button data-start="' + esc(it.start || '') + '"'} class="train-card ${it.hot ? 'hot' : ''}"><span class="tc-ico">${it.ico}</span><span class="tc-t"><b>${esc(it.title)}</b><small>${esc(it.sub || '')}</small></span><span class="tc-go">${it.hot ? '▶' : '›'}</span></${it.href ? 'a' : 'button'}>`;
+  const trainGrid = keys => { const l = trainItems().filter(x => !keys || keys.includes(x.k)); return l.length ? `<div class="train-grid">${l.map(trainCard).join('')}</div>` : ''; };
+  function viewTrain() {
+    const items = trainItems(), by = k => items.find(x => x.k === k);
+    const groups = [
+      ['Quiz et révisions', ['daily', 'quick', 'mem', 'rappel', 'review']],
+      ['Entretien', ['oral']],
+      ['Comprendre', ['glossaire']]
+    ];
+    return searchBar() + `<div class="kicker">S'entraîner</div><h1 class="act-title">Choisis ton entraînement</h1>` +
+      groups.map(([t, ks]) => { const l = ks.map(by).filter(Boolean); return l.length ? `<div class="sec-head"><h2>${t}</h2></div><div class="train-grid">${l.map(trainCard).join('')}</div>` : ''; }).join('');
+  }
+
+  // ---------- Onglet « S'entraîner » : Entraînement, Concours, Culture G, Prépa, À revoir ----------
   function viewLearn(sub, arg) {
     const rv = S.review.length;
-    const tabs = [['concours', '🧭', 'Concours'], ['culture', '🧠', 'Culture G'], ['prepa', '🎯', 'Prépa'], ['revoir', '🔁', `À revoir${rv ? ` · ${rv}` : ''}`]];
-    sub = tabs.some(t => t[0] === sub) ? sub : 'concours';
+    const tabs = [['entrainement', '⚡', 'Entraînement'], ['concours', '🧭', 'Concours'], ['culture', '🧠', 'Culture G'], ['prepa', '🎯', 'Prépa'], ['revoir', '🔁', `À revoir${rv ? ` · ${rv}` : ''}`]];
+    sub = tabs.some(t => t[0] === sub) ? sub : 'entrainement';
     try { localStorage.setItem('scoop.learnTab', sub); } catch (e) { /* ignore */ }
     let body;
+    if (sub === 'entrainement') return `<nav class="l-tabs" aria-label="Rubriques d'apprentissage">${tabs.map(([id, ico, label]) => `<a class="l-tab ${id === sub ? 'on' : ''}" href="#/learn/${id}">${ico} ${esc(label)}</a>`).join('')}</nav>${viewTrain()}`;
     if (sub === 'culture') body = viewCulture();
     else if (sub === 'prepa') body = viewPrepa(arg);
     else if (sub === 'revoir') body = viewReview();
@@ -494,7 +522,7 @@
   // ---------- Prépa concours ----------
   const PREPA_MAIN = new Set(['plan', 'concours', 'ecoles', 'annales', 'ecriture', 'oral', 'plus']);   // les autres sont dans « Plus »
   const PREPA_TABS = [['plan', '🗺️', 'Plan'], ['ecoles', '🏫', 'Écoles'], ['methode', '🧭', 'Méthode'], ['oral', '🎤', 'Oral'], ['metier', '📡', 'Le métier'], ['conseils', '💬', 'Conseils'], ['quiz', '🧠', 'Quiz'], ['plus', '⋯', 'Plus']];
-  const EXT = { tabs: {}, top: {}, lessons: {}, routes: {}, onAnswer: [], gloss: null, ready: [], home: [], storyBar: null, actions: [] };   // onglets, blocs et leçons ajoutés par les modules
+  const EXT = { tabs: {}, top: {}, lessons: {}, routes: {}, onAnswer: [], gloss: null, ready: [], home: [], storyBar: null, actions: [], train: [] };   // onglets, blocs et leçons ajoutés par les modules
   const srcLinks = list => (list && list.length) ? `<div class="p-src">Sources : ${list.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a>`).join(' · ')}</div>` : '';
 
   function viewPrepa(tab) {
@@ -670,25 +698,25 @@
         return viewDay(CURRENT);
       }
       const unread = tl.filter(x => !isRead(x.day.date, x.i)).length;
-      return `<div class="kicker">Actu</div><h1 class="act-title">Les dernières 24 heures</h1>
+      return searchBar() + `<div class="kicker">Actu</div><h1 class="act-title">Les dernières 24 heures</h1>
         <p class="muted act-sub">${tl.length} info${tl.length > 1 ? 's' : ''}${unread ? ` · <b>${unread} à lire</b>` : ' · tout est lu'} · la plus récente en haut · <a href="#archives" data-scroll="archives">archives</a></p>
         ${tocChips(tl)}
         <div class="stories">${tl.map(({ day, s, i }) => storyCard(day, s, i)).join('')}</div>
-        ${cur ? `<h2 class="section-title" id="teste-toi">Teste-toi</h2>${lessonCards(cur.date, cur)}` : ''}
+        ${cur ? `<h2 class="section-title" id="teste-toi">Teste-toi</h2>${lessonCards(cur.date, cur)}${trainGrid(["mem", "rappel", "quick"])}` : ''}
         ${cur && cur.word ? wordCard(cur.word) : ''}
         <section id="archives" class="actu-archives">${viewArchive()}</section>`;
     }
     const day = await getDay(date);
     if (!day) return `<div class="empty"><div class="big">🕳️</div><h2>Édition introuvable</h2><p class="muted">Pas d'édition pour le ${esc(date)}.</p><p style="margin-top:16px"><a class="btn ghost" href="#/archive">Voir les archives</a></p></div>`;
     const items = day.stories.map((s, i) => ({ day, s, i, ts: storyTs(day, i) })).sort((a, b) => b.ts - a.ts || a.i - b.i);
-    return `<div class="kicker">Édition du ${esc(frDate(date, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }))}</div>
+    return searchBar() + `<div class="kicker">Édition du ${esc(frDate(date, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }))}</div>
       <h1 class="act-title">${esc(day.title)}</h1>
       ${day.intro ? `<p class="lede">${rich(day.intro)}</p>` : ''}
       <p class="act-sub"><a class="btn small ghost" href="#/day">← Dernières 24 heures</a></p>
       ${tocChips(items)}
       <div class="stories">${items.map(({ s, i }) => storyCard(day, s, i)).join('')}</div>
       ${day.memo && day.memo.length ? `<div class="card memo"><div class="kicker">À retenir</div><ul>${day.memo.map(m => `<li>${rich(m)}</li>`).join('')}</ul></div>` : ''}
-      <h2 class="section-title" id="teste-toi">Teste-toi</h2>${lessonCards(date, day)}
+      <h2 class="section-title" id="teste-toi">Teste-toi</h2>${lessonCards(date, day)}${trainGrid(["mem", "rappel", "quick"])}
       ${wordCard(day.word)}
       <section id="archives" class="actu-archives">${viewArchive()}</section>`;
   }
@@ -803,7 +831,7 @@
     if (view === 'culture') { view = 'learn'; arg = 'culture'; }
     else if (view === 'prepa') { view = 'learn'; arg2 = arg; arg = 'prepa'; }
     else if (view === 'review') { view = 'learn'; arg = 'revoir'; }
-    if (view === 'learn' && !arg) { try { arg = localStorage.getItem('scoop.learnTab') || 'concours'; } catch (e) { arg = 'concours'; } }
+    if (view === 'learn' && !arg) arg = 'entrainement';   // « S'entraîner » ouvre toujours le hub des entraînements
     if (view !== 'feed' && F) closeFeed();
     const navKey = view === 'archive' ? 'day' : view;
     $$('.nav-link').forEach(a => a.classList.toggle('active', a.dataset.nav === navKey));
@@ -1976,7 +2004,8 @@
     onAnswer(fn) { EXT.onAnswer.push(fn); },
     setGlossLinker(fn) { EXT.gloss = fn; },
     setStoryBar(fn) { EXT.storyBar = fn; },         // ligne « me tester » affichée sous chaque info
-    addAction(fn) { EXT.actions.push(fn); },        // propose « la prochaine action » de l'accueil
+    addAction(fn) { EXT.actions.push(fn); },
+    addTrainItem(fn) { EXT.train.push(fn); },       // carte d'entraînement : fn() → { k, o, ico, title, sub, start|href, hot } ou null        // propose « la prochaine action » de l'accueil
     get INDEX() { return INDEX; }, DAYS, getDay, get CURRENT() { return CURRENT; },
     // charge les n dernières éditions (recherche, mémoire, rappels)
     async loadDays(n = 14) { const out = []; for (const d of INDEX.slice(0, n)) { const day = await getDay(d.date); if (day) out.push(day); } return out; }

@@ -912,3 +912,17 @@ body.in-welcome { overflow: hidden; }
 .m-line { margin-top: 6px; font-size: 12.5px; opacity: .8; } .m-test { border: 0; background: transparent; color: var(--blue); font: 700 12.5px var(--sans); cursor: pointer; padding: 0; text-decoration: underline; }
 .toast { position: fixed; left: 50%; bottom: calc(86px + env(safe-area-inset-bottom)); transform: translate(-50%, 20px); opacity: 0; z-index: 300; background: #1B1B1F; color: #fff; padding: 11px 18px; border-radius: 999px; font: 700 14px var(--sans); box-shadow: 0 8px 24px rgba(0,0,0,.35); transition: all .3s; max-width: 90vw; text-align: center; }
 .toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+/* ---------- Recherche en haut des pages + cartes d'entraînement ---------- */
+.searchbar { display: flex; align-items: center; gap: 10px; margin: 2px 0 14px; padding: 4px 14px; border: 2px solid var(--line); border-radius: 999px; background: var(--card); }
+.searchbar span { font-size: 16px; opacity: .7; } .searchbar input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: inherit; padding: 10px 0; font: 500 16px var(--sans); }
+.searchbar:focus-within { border-color: var(--blue); }
+.train-grid { display: grid; gap: 10px; }
+.train-card { display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; text-decoration: none; color: inherit; cursor: pointer; font: inherit;
+  border: 2px solid var(--line); border-bottom-width: 5px; border-radius: 18px; padding: 14px 16px; background: var(--card); }
+.train-card:active { transform: translateY(2px); }
+.tc-ico { font-size: 28px; width: 40px; text-align: center; flex: none; } .tc-t { flex: 1; min-width: 0; display: grid; gap: 2px; } .tc-t b { font: 800 16.5px/1.2 var(--sans); } .tc-t small { font-size: 13px; opacity: .72; }
+.tc-go { font-size: 18px; opacity: .5; flex: none; }
+.train-card.hot { color: #fff; border-color: transparent; background: linear-gradient(120deg, #E63946, #F4A261); box-shadow: 0 5px 0 #B92B37; }
+.train-card.hot .tc-t small, .train-card.hot .tc-go { opacity: .92; } .train-card.hot .tc-go { background: rgba(255,255,255,.25); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-size: 15px; }
+@media (min-width: 720px) { .train-grid { grid-template-columns: 1fr 1fr; } }

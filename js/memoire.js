@@ -195,16 +195,13 @@
     return { key, mode: 'review', title: 'Rappel des jours précédents', color: '#2BA84A', exercises: pool.map(p => p.ex), ids: pool.map(p => p.id), context: 'Actu des éditions précédentes' };
   });
 
-  // pastilles de l'accueil (même style que les autres)
-  ctx.addHomeBlock(() => {
-    const st = memStats();
-    return `<a class="dash-chip" href="#/memoire">🧩 Noms & dates${st.due ? ` · ${st.due}` : ''}</a>
-      ${prevQs.length ? '<button class="dash-chip" data-start="rappel">🔁 Rappel</button>' : ''}
-      <button class="dash-chip" data-start="cgmix">⚡ Quiz rapide</button>
-      <button class="dash-chip" data-start="oral">🎤 Oral</button>
-      <a class="dash-chip" href="#/glossaire">📖 Glossaire</a>
-      <a class="dash-chip" href="#/search">🔎 Recherche</a>`;
+  // cartes d'entraînement (page « S'entraîner » et sous les quiz de l'actu)
+  ctx.addTrainItem(() => {
+    const n = memStats().due;
+    return n ? { k: 'mem', o: 3, hot: true, ico: '🧩', title: 'Noms, dates et chiffres', sub: `${Math.min(n, 10)} questions à réviser · 2 min`, start: 'mem' }
+      : { k: 'mem', o: 3, ico: '🧩', title: 'Noms, dates et chiffres', sub: 'Tout est à jour · reviens demain', href: '#/memoire' };
   });
+  ctx.addTrainItem(() => prevQs.length ? { k: 'rappel', o: 4, ico: '🔁', title: 'Rappel des jours passés', sub: '8 questions des éditions précédentes', start: 'rappel' } : null);
 
   ctx.onReady(async () => {
     const days = await ctx.loadDays(60);

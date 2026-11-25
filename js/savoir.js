@@ -88,6 +88,7 @@
     const on = c.classList.contains('on'); $$('[data-glcat]').forEach(x => x.classList.remove('on')); if (!on) c.classList.add('on'); filterGloss();
   });
   ctx.addRoute('glossaire', arg => viewGlossaire(arg));
+  ctx.addTrainItem(() => ({ k: 'glossaire', o: 7, ico: '📖', title: 'Glossaire', sub: `${allTerms().length} mots · il grandit avec l'actu`, href: '#/glossaire' }));
 
   // =========================================================== RECHERCHE
   const stripMd = s => plain(s);
