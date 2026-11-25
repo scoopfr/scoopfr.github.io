@@ -1,0 +1,46 @@
+# Scoop — contrôle automatique des éditions à chaque publication.
+# Lance scripts/check-edition.js sur les éditions modifiées par le push (ou sur la plus récente à défaut).
+# Une édition en échec fait passer l'exécution au rouge et GitHub envoie un e-mail : la publication
+# (GitHub Pages) n'est pas bloquée, mais l'erreur est signalée tout de suite au lieu de passer inaperçue.
+name: Contrôle des éditions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/days/**'
+      - 'scripts/check-edition.js'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Vérifier les éditions modifiées (ou la plus récente)
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          files=""
+          if [ -n "$BEFORE" ] && git cat-file -e "$BEFORE^{commit}" 2>/dev/null; then
+            files=$(git diff --name-only "$BEFORE" HEAD -- 'data/days/20*.js')
+          fi
+          if [ -z "$files" ]; then
+            files=$(ls data/days/20*.js | sort | tail -n 1)
+          fi
+          status=0
+          for f in $files; do
+            [ -f "$f" ] || continue
+            echo "== $f"
+            node scripts/check-edition.js "$f" || status=1
+          done
+          exit $status

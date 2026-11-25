@@ -690,7 +690,7 @@
       ${storyImage(date, i)}
       <h3>${esc(s.title)}</h3>
       <div class="s-body"><p class="s-text">${linkTerms(rich(s.text))}</p>
-        <div class="s-more">${s.why ? `<div class="why"><b>💡 Bon à savoir :</b> ${linkTerms(rich(s.why))}</div>` : ''}${sourcesBlock(s, date, i)}</div></div>
+        <div class="s-more">${s.why ? `<div class="why"><b>💡 Bon à savoir :</b> ${linkTerms(rich(s.why))}</div>` : ''}${sourcesBlock(s, date, i)}<p class="report-row">${reportLink(s.title, `Édition du ${date}, info n° ${i + 1} : « ${s.title} »`)}</p></div></div>
       <button class="s-toggle" data-story-toggle>Lire la suite ↓</button>
       ${retainBlock(date, i)}
       ${EXT.storyBar ? EXT.storyBar(date, i) : ''}
@@ -986,7 +986,14 @@
   }
 
   function answered(ok, src, it) { EXT.onAnswer.forEach(f => { try { f(ok, src, it); } catch (e) { /* module */ } }); if (ok) quest('ok'); }
-  const linkTerms = (h, skip) => (EXT.gloss ? EXT.gloss(h, skip) : h);   // glossaire : les mots juridiques ou techniques deviennent cliquables
+  const linkTerms = (h, skip) => (EXT.gloss ? EXT.gloss(h, skip) : h);
+  // « Signaler une erreur » : ouvre un ticket GitHub pré-rempli (page, édition, texte concerné ; aucune donnée personnelle)
+  const reportLink = (sujet, detail) => {
+    const clean = s => String(s).replace(/\*\*|\*/g, '');
+    const url = 'https://github.com/scoopfr/scoopfr.github.io/issues/new?title=' + encodeURIComponent('Erreur signalée : ' + clean(sujet).slice(0, 90))
+      + '&body=' + encodeURIComponent(clean(detail) + '\n\nPage : ' + location.href + '\n\nCe qui est faux ou imprécis (et la source qui le montre) :\n');
+    return `<a class="report" href="${esc(url)}" target="_blank" rel="noopener">⚑ Signaler une erreur</a>`;
+  };   // glossaire : les mots juridiques ou techniques deviennent cliquables
   function grade(it, ok, sol, free) {
     S.stats.answered++; answered(ok, L.cfg.mode, it);
     const expl = it.ex.x ? linkTerms(rich(it.ex.x)) : '';
@@ -1013,6 +1020,7 @@
       // réponse libre jugée fausse : tu peux la compter juste si c'était la bonne, mal formulée
       if (free) { L.overrideCtx = { it }; $('#override').hidden = false; }
     }
+    $('#fb-text').insertAdjacentHTML('beforeend', `<p class="report-row">${reportLink(it.ex.q, `Question de quiz (${(L.cfg && L.cfg.context) || 'entraînement'}) : ${it.ex.q}\n${solutionOf(it.ex)}`)}</p>`);
     L.state = 'feedback';
     $('#ex').classList.add('locked');
     updateProgress();

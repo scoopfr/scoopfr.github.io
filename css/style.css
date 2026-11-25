@@ -214,6 +214,7 @@ p { margin: 0; }
 .story-foot a { color: var(--blue); font-weight: 600; }
 .verif { font-weight: 800; color: var(--muted); }
 .verif.ok { color: var(--green); }
+.report-row { margin: 8px 0 0; } .report { font-size: 12px; opacity: .65; text-decoration: underline; text-underline-offset: 2px; color: inherit; } .report:hover { opacity: 1; }
 .why { margin-top: 12px; padding: 10px 12px; border-radius: 12px; background: var(--yellow-bg); font-size: 14px; }
 .why b { color: var(--yellow-d); }
 .memo { margin-top: 22px; }
