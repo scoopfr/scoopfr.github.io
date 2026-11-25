@@ -358,7 +358,7 @@
     const day = CURRENT && DAYS[CURRENT];
     if (day) {
       const nv = newFeedVideos(CURRENT, day).length, nu = tl.filter(x => !isRead(x.day.date, x.i)).length;
-      if (nv || nu) return { ico: '🎬', title: 'Regarder le fil', sub: `${nv ? nv + ' vidéo' + (nv > 1 ? 's' : '') + ' · ' : ''}${nu} info${nu > 1 ? 's' : ''} à découvrir · 3 min`, href: `#/feed/${CURRENT}` };
+      if (nv || nu) return { ico: '🎬', title: "Regarder l'actu en vidéo", sub: `${nv ? nv + ' vidéo' + (nv > 1 ? 's' : '') + ' · ' : ''}${nu} info${nu > 1 ? 's' : ''} à découvrir · 3 min`, href: `#/feed/${CURRENT}` };
       const li = day.lessons.findIndex((_, i) => !lessonState(`day:${CURRENT}:${i}`));
       if (li >= 0) return { ico: '🧠', title: li === 0 ? 'Quiz du jour' : 'Continuer le quiz', sub: `${day.lessons[li].exercises.length} questions · ~4 min`, start: `day:${CURRENT}:${li}` };
     }
@@ -379,21 +379,20 @@
     // UNE grosse action
     html += `<${act.href ? 'a href="' + esc(act.href) + '"' : 'button data-start="' + esc(act.start || '') + '"'} class="cta-card"><span class="cta-ico">${act.ico}</span><span class="cta-txt"><small>Ta prochaine action</small><b>${esc(act.title)}</b><em>${esc(act.sub)}</em></span><span class="cta-go">▶</span></${act.href ? 'a' : 'button'}>`;
 
-    // quêtes du jour
-    const nq = QUESTS.filter(x => q.done[x[0]]).length;
-    html += `<section class="quests"><div class="q-head"><b>Quêtes du jour</b><span>${nq}/3</span></div>${QUESTS.map(([k, ico, label, g]) => `<div class="quest ${q.done[k] ? 'done' : ''}"><span class="q-ico">${q.done[k] ? '✓' : ico}</span><span class="q-label">${esc(label)}</span><span class="q-bar"><i style="width:${Math.min(100, (q[k] || 0) / g * 100)}%"></i></span><span class="q-n">${Math.min(q[k] || 0, g)}/${g}</span></div>`).join('')}</section>`;
-
-    // à la une : les 3 infos les plus récentes
-    if (tl.length) html += `<div class="sec-head"><h2>À la une</h2><a href="#/day">Tout voir ›</a></div><div class="peek-list">${tl.slice(0, 3).map(({ day: d, s, i }) => {
+    // 1) LES NEWS : les infos les plus récentes, en grand, avec leur image
+    if (tl.length) html += `<div class="sec-head"><h2>📰 L'actu</h2><a href="#/day">Tout voir ›</a></div><div class="peek-list big">${tl.slice(0, 4).map(({ day: d, s, i }) => {
       const im = window.SCOOP_IMAGES && window.SCOOP_IMAGES[sKey(d.date, i)], ok = im && /^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(im.url || '');
-      return `<a class="peek ${isRead(d.date, i) ? 'read' : ''}" href="#/day/${d.date}/story-${i}" style="--tag:${esc(s.color || (d.tagColors || {})[s.tag] || '#E63946')}">${ok ? `<img src="${esc(im.url)}" alt="" loading="lazy" decoding="async">` : `<span class="peek-ico">${TAG_ICON[s.tag] || '📌'}</span>`}<span class="peek-t"><small>${esc(s.tag)} · ${esc(agoTs(storyTs(d, i)))}</small><b>${esc(s.title)}</b></span></a>`;
+      return `<a class="peek ${isRead(d.date, i) ? 'read' : ''}" href="#/day/${d.date}/story-${i}" style="--tag:${esc(s.color || (d.tagColors || {})[s.tag] || '#E63946')}">${ok ? `<img src="${esc(im.url)}" alt="" loading="lazy" decoding="async">` : `<span class="peek-ico">${TAG_ICON[s.tag] || '📌'}</span>`}<span class="peek-t"><small>${esc(s.tag)} · ${esc(agoTs(storyTs(d, i)))}${isRead(d.date, i) ? '' : ' · <em class="peek-new">nouveau</em>'}</small><b>${esc(s.title)}</b></span></a>`;
     }).join('')}</div>`;
 
-    // explorer : chaque entrée dit CE QU'ON Y FAIT
-    html += `<div class="sec-head"><h2>Explorer</h2></div><div class="explore">
-      <a class="ex-tile" href="#/feed"><span>🎬</span><b>Fil</b><small>Regarder · 3 min</small></a>
-      <a class="ex-tile" href="#/day"><span>📰</span><b>Actu</b><small>Lire · 24 dernières heures</small></a>
-      <a class="ex-tile" href="#/learn"><span>🧠</span><b>S'entraîner</b><small>Quiz, noms & dates, oral</small></a>
+    // 2) LES QUIZ : les entraînements à faire maintenant, en cartes bien visibles
+    html += `<div class="sec-head"><h2>🧠 Les quiz</h2><a href="#/learn">Tous ›</a></div>${trainGrid(['daily', 'quick', 'mem', 'rappel'])}`;
+
+    // 3) quêtes du jour (discrètes), puis l'accès aux autres parties, chacune avec ce qu'on y fait
+    const nq = QUESTS.filter(x => q.done[x[0]]).length;
+    html += `<section class="quests compact"><div class="q-head"><b>Quêtes du jour</b><span>${nq}/3</span></div>${QUESTS.map(([k, ico, label, g]) => `<div class="quest ${q.done[k] ? 'done' : ''}"><span class="q-ico">${q.done[k] ? '✓' : ico}</span><span class="q-label">${esc(label)}</span><span class="q-bar"><i style="width:${Math.min(100, (q[k] || 0) / g * 100)}%"></i></span><span class="q-n">${Math.min(q[k] || 0, g)}/${g}</span></div>`).join('')}</section>
+      <div class="explore small">
+      <a class="ex-tile" href="#/feed"><span>🎬</span><b>Actu en vidéo</b><small>Regarder · 3 min</small></a>
       <a class="ex-tile" href="#/learn/prepa"><span>🎯</span><b>Concours</b><small>Écoles, dates, annales</small></a></div>`;
     return html;
   }
@@ -1529,14 +1528,14 @@
       const live = window.SCOOP_LIVE, upd = live && live.updated ? ago(live.updated) : '';
       if (!subjects && !nq) {
         return `<section class="fcard f-intro" data-k="${k}"><div class="f-inner">
-          <div class="f-kick">Le fil du ${esc(frDate(date))}</div>
+          <div class="f-kick">L'actu en vidéo du ${esc(frDate(date))}</div>
           <h1>Tu es à jour 🎉</h1>
           <p class="f-sources" style="font-size:16px;margin-top:14px">Tu as déjà vu toutes les vidéos et les infos du moment. Les vidéos sont mises à jour toutes les heuresutes${upd ? ` (dernière mise à jour ${esc(upd)})` : ''}. Reviens un peu plus tard !</p>
-          <div class="f-endbtns" style="margin-top:24px"><button class="btn primary" data-feed-replay>↺ Revoir tout le fil</button><button class="btn ghost f-ghost" data-feed-close>Retour à l'accueil</button></div>
+          <div class="f-endbtns" style="margin-top:24px"><button class="btn primary" data-feed-replay>↺ Tout revoir</button><button class="btn ghost f-ghost" data-feed-close>Retour à l'accueil</button></div>
         </div></section>`;
       }
       return `<section class="fcard f-intro" data-k="${k}"><div class="f-inner">
-        <div class="f-kick">Le fil du ${esc(frDate(date))}${F.all ? ' · tout revoir' : ''}</div>
+        <div class="f-kick">L'actu en vidéo du ${esc(frDate(date))}${F.all ? ' · tout revoir' : ''}</div>
         <h1>${subjects} sujet${subjects > 1 ? 's' : ''} ${F.all ? 'au total' : 'pour toi'}</h1>
         <ul class="f-counts">
           ${vids.length ? `<li><b>${vids.length}</b> vidéo${vids.length > 1 ? 's' : ''} ${F.all ? '' : 'pas encore vue' + (vids.length > 1 ? 's' : '')}, de ${srcs.length} rédaction${srcs.length > 1 ? 's' : ''}</li>` : ''}
@@ -1610,7 +1609,7 @@
       <p class="f-endstats" id="f-endstats"></p>
       <div class="f-endbtns">
         <button class="btn primary" data-feed-test>▶ Faire le test du jour</button>
-        <button class="btn ghost f-ghost" data-feed-replay>↺ Revoir tout le fil</button>
+        <button class="btn ghost f-ghost" data-feed-replay>↺ Tout revoir</button>
         <button class="btn ghost f-ghost" data-feed-close>Retour à l'accueil</button>
       </div>
       <p class="f-sources" style="margin-top:14px">Les vidéos se renouvellent toutes les heuresutes : celles que tu as vues ne reviendront pas.</p>

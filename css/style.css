@@ -926,3 +926,9 @@ body.in-welcome { overflow: hidden; }
 .train-card.hot { color: #fff; border-color: transparent; background: linear-gradient(120deg, #E63946, #F4A261); box-shadow: 0 5px 0 #B92B37; }
 .train-card.hot .tc-t small, .train-card.hot .tc-go { opacity: .92; } .train-card.hot .tc-go { background: rgba(255,255,255,.25); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-size: 15px; }
 @media (min-width: 720px) { .train-grid { grid-template-columns: 1fr 1fr; } }
+
+/* Accueil : l'accent sur les news et les quiz */
+.peek-list.big .peek { padding: 12px; } .peek-list.big .peek img, .peek-list.big .peek-ico { width: 92px; height: 92px; border-radius: 14px; } .peek-list.big .peek-t b { font-size: 16px; }
+.peek-new { font-style: normal; font-weight: 800; color: var(--red); text-transform: uppercase; font-size: 10.5px; letter-spacing: .06em; }
+.quests.compact { padding: 10px 14px; margin-top: 18px; } .quests.compact .quest { padding: 3px 0; font-size: 12.5px; }
+.explore.small { margin-top: 12px; }
