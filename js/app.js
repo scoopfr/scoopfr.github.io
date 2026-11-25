@@ -377,14 +377,6 @@
         ${ringSvg(tx, goal, left ? '🎯' : '✅')}</header>`;
     if (day && CURRENT !== TODAY && !tl.length) html += `<div class="banner">⏳ <span>L'édition d'aujourd'hui n'est pas encore en kiosque. Voici la dernière, celle du <b>${esc(frDate(CURRENT))}</b>.</span></div>`;
 
-    // « stories » : chaque info récente est une bulle ; un anneau coloré = pas encore vue
-    const bubbles = tl.slice(0, 16);
-    if (bubbles.length) html += `<div class="stories-row" role="list" aria-label="Infos récentes">${bubbles.map(({ day: d, s, i }) => {
-      const im = window.SCOOP_IMAGES && window.SCOOP_IMAGES[sKey(d.date, i)], col = s.color || (d.tagColors || {})[s.tag] || '#E63946', fresh = !isRead(d.date, i);
-      const label = storyKeywords(s)[0] || s.tag;
-      return `<a class="sb ${fresh ? 'new' : ''}" role="listitem" href="#/feed/${d.date}/${i}" style="--c:${esc(col)}"><span class="sb-ring"><span class="sb-img" ${im && /^https:\/\/(upload|thumb)\.wikimedia\.org\//.test(im.url || '') ? `style="background-image:url('${esc(im.url)}')"` : ''}>${im ? '' : (TAG_ICON[s.tag] || '📌')}</span></span><small>${esc(label.length > 11 ? label.slice(0, 10) + '…' : label)}</small></a>`;
-    }).join('')}</div>`;
-
     // UNE grosse action
     html += `<${act.href ? 'a href="' + esc(act.href) + '"' : 'button data-start="' + esc(act.start || '') + '"'} class="cta-card"><span class="cta-ico">${act.ico}</span><span class="cta-txt"><small>Ta prochaine action</small><b>${esc(act.title)}</b><em>${esc(act.sub)}</em></span><span class="cta-go">▶</span></${act.href ? 'a' : 'button'}>`;
 
