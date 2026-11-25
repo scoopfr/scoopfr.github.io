@@ -191,7 +191,7 @@
   function renderChrome() {
     const st = streakNow(), goal = S.settings.goal, tx = todayXp(), done = tx >= goal;
     $('#topbar').innerHTML = `
-      <a class="tb-logo" href="#/home">L'actu en s'amusant<span>.</span></a>
+      <a class="tb-logo" href="#/home"><span class="tb-name">scoop<span>.</span></span><small class="tb-base">l'actu en s'amusant</small></a>
       <div class="tb-stats">
         <span class="tb-stat ${st ? '' : 'off'}" title="Série">🔥 ${st}</span>
         <span class="tb-stat" title="XP total"><b class="xp-tag">XP</b> ${S.xp}</span>

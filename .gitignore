@@ -3,3 +3,6 @@ scripts/news-today.txt
 scripts/shorts-today.txt
 __pycache__/
 scripts/news-new.txt
+
+# Clé privée des notifications : ne JAMAIS la publier
+server/vapid-prive.json

@@ -1,5 +1,5 @@
 {
-  "name": "Scoop · L'actu chaque jour",
+  "name": "Scoop · l'actu en s'amusant",
   "short_name": "Scoop",
   "description": "Suis l'actualité chaque jour et prépare les concours des écoles de journalisme.",
   "lang": "fr",
@@ -10,8 +10,52 @@
   "background_color": "#FBF8F1",
   "theme_color": "#E63946",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "id": "/",
+  "categories": [
+    "news",
+    "education"
+  ],
+  "shortcuts": [
+    {
+      "name": "L'édition du jour",
+      "short_name": "Édition",
+      "url": "./#/day",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Quiz rapide",
+      "short_name": "Quiz",
+      "url": "./#/learn",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
   ]
 }

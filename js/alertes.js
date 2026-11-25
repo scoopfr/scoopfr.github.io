@@ -21,6 +21,22 @@
   }
   const swReg = () => navigator.serviceWorker.getRegistration().then(r => r || navigator.serviceWorker.ready).catch(() => null);
 
+  // ---------- Serveur de notifications (facultatif : data/push-config.js) ----------
+  const PUSH = window.SCOOP_PUSH && window.SCOOP_PUSH.url && window.SCOOP_PUSH.key ? window.SCOOP_PUSH : null;
+  const keyBytes = b64 => Uint8Array.from(atob(b64.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0));
+  async function pushSync(reg, on) {
+    if (!PUSH || !reg || !reg.pushManager) return;
+    try {
+      let sub = await reg.pushManager.getSubscription();
+      if (!on) {
+        if (sub) { await fetch(PUSH.url + '/unsubscribe', { method: 'POST', body: JSON.stringify({ endpoint: sub.endpoint }) }).catch(() => {}); await sub.unsubscribe(); }
+        return;
+      }
+      if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: keyBytes(PUSH.key) });
+      await fetch(PUSH.url + '/subscribe', { method: 'POST', body: JSON.stringify({ sub: sub.toJSON(), hour: state().hour, morning: true }) });   // renouvelle aussi l'abonnement (expire après 60 jours)
+    } catch (e) { /* refus, hors ligne ou serveur indisponible : le bandeau prend le relais */ }
+  }
+
   // envoie l'état au service worker (il décide seul d'envoyer ou non le rappel)
   let timer = null;
   function sync() {
@@ -29,6 +45,7 @@
     timer = setTimeout(async () => {
       const reg = await swReg(); if (!reg || !reg.active) return;
       reg.active.postMessage({ type: 'alert-state', state: state() });
+      pushSync(reg, state().on && Notification.permission === 'granted');
       try {
         if (reg.periodicSync) {
           if (state().on && Notification.permission === 'granted') await reg.periodicSync.register('scoop-rappel', { minInterval: 6 * 3600 * 1000 });

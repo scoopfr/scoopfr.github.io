@@ -1,0 +1,16 @@
+{
+  "appId": "fr.scoop.app",
+  "appName": "Scoop",
+  "webDir": "www",
+  "server": {
+    "url": "https://scoopfr.github.io/",
+    "cleartext": false,
+    "allowNavigation": ["scoopfr.github.io", "i.ytimg.com", "www.youtube.com", "upload.wikimedia.org"]
+  },
+  "ios": { "contentInset": "always", "backgroundColor": "#FBF8F1" },
+  "android": { "backgroundColor": "#FBF8F1" },
+  "plugins": {
+    "SplashScreen": { "launchShowDuration": 800, "backgroundColor": "#E63946" },
+    "LocalNotifications": { "smallIcon": "ic_stat_icon", "iconColor": "#E63946" }
+  }
+}

@@ -1,7 +1,7 @@
 /* Scoop — service worker : appli installable + hors ligne
    - éditions (data/days/*) : réseau d'abord (pour avoir l'actu fraîche), cache en secours
    - reste de l'appli : réseau d'abord aussi, cache en secours hors ligne */
-const VERSION = 'scoop-v38';
+const VERSION = 'scoop-v39';
 importScripts('./js/alertes-core.js');   // choix des rappels (partagé avec l'appli)
 const STATE_CACHE = 'scoop-alert-state';   // état des rappels envoyé par l'appli (survit aux mises à jour du cache principal)
 const STATE_URL = new URL('alert-state', self.registration.scope).href;
@@ -74,6 +74,17 @@ async function maybeNotify() {
   await self.registration.showNotification(a.title, { body: a.body, tag: a.kind, icon: 'icons/icon-192.png', badge: 'icons/icon-192.png', data: { url: './#/home' } });
   st.sentDay = a.today; await writeState(st);
 }
+// notification poussée par le serveur (sans contenu) : on compose le message avec l'état local de l'élève.
+// Chrome et Safari exigent qu'une notification soit toujours affichée : message neutre si rien de précis à dire.
+self.addEventListener('push', e => e.waitUntil((async () => {
+  const st = await readState();
+  let a = st && self.ScoopAlerts ? self.ScoopAlerts.pick({ ...st, on: true }, new Date(), { force: true }) : null;
+  if (!a) {
+    const done = st && self.ScoopAlerts && st.last === self.ScoopAlerts.ymd(new Date());
+    a = done ? { kind: 'done', title: '🏆 Journée réussie !', body: 'Rendez-vous demain pour la nouvelle édition.' } : { kind: 'daily', title: '📰 Les infos du jour t\'attendent', body: 'Trois minutes pour tout savoir, et des XP à gagner.' };
+  }
+  await self.registration.showNotification(a.title, { body: a.body, tag: a.kind, icon: 'icons/icon-192.png', badge: 'icons/icon-192.png', data: { url: './#/home' } });
+})()));
 self.addEventListener('periodicsync', e => { if (e.tag === 'scoop-rappel') e.waitUntil(maybeNotify()); });
 self.addEventListener('message', e => {
   const m = e.data || {};

@@ -952,9 +952,12 @@ body.in-welcome { overflow: hidden; }
 .reco-links a{color:var(--blue,#3A86FF);text-decoration:none}
 .reco-links a:hover{text-decoration:underline}
 
-/* En-tête : slogan à la place du nom, libellé XP */
-.topbar .tb-logo{font-size:18px;letter-spacing:-.01em}
-@media (max-width:720px){.topbar .tb-logo{display:block;font-size:15px;max-width:48vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+/* En-tête : nom + baseline, libellé XP */
+.topbar .tb-logo{display:flex;flex-direction:column;gap:2px;min-width:0}
+.topbar .tb-name{font:900 22px/1 var(--serif)}
+.topbar .tb-name span{color:var(--red)}
+.topbar .tb-base{font:600 11px/1 var(--sans,inherit);color:var(--muted);letter-spacing:.02em;white-space:nowrap}
+@media (max-width:720px){.topbar .tb-logo{display:flex}}
 .xp-tag{font:900 11px/1 var(--sans,inherit);background:var(--yellow);color:#3b2d00;border-radius:6px;padding:3px 5px;letter-spacing:.04em}
 .stat-chip .xp-tag{margin-right:2px}
 /* Rappel de l'accueil */
