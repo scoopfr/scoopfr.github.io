@@ -77,7 +77,16 @@ Tu es la routine de mise à jour de Scoop (dépôt scoopfr/scoopfr.github.io). R
    Message : « Édition du <date> » ou « Mise à jour de <HH> h » ou « Pré-tri de <HH> h ».
 ```
 
-## 3. Passer d'un compte à l'autre
+## 2 bis. Variante automatique : routine de secours décalée de 30 min (recommandée)
+
+Plutôt que de basculer à la main, le compte de secours peut avoir une routine **toujours active**, lancée **30 min après** la principale (cron `30 6,10,13,17,20 * * *`, soit 7 h 30, 11 h 30, 14 h 30, 18 h 30 et 21 h 30 à Paris en hiver). Elle lance d'abord `python3 scripts/deja_fait.py` (gratuit, sans Claude) :
+
+- `DÉJÀ FAIT` : un commit d'édition ou de pré-tri a eu lieu dans les 50 dernières minutes, donc la routine principale est passée. Elle s'arrête aussitôt, pour quelques centimes de crédit.
+- `À FAIRE` : la routine principale n'a rien publié (crédits épuisés ou panne). Elle fait la mise à jour à sa place, avec la même consigne, et signe ses commits « (secours) ».
+
+Limites : si la routine principale a fini sur `RIEN DE NOUVEAU`, elle ne publie rien et le secours refait le pré-tri (gratuit, puis arrêt). Si la principale met plus de 30 min, les deux peuvent se chevaucher ; c'est rare, et `git pull --rebase` limite les conflits.
+
+## 3. Passer d'un compte à l'autre (variante manuelle)
 
 Quand le compte principal n'a plus de crédit :
 
