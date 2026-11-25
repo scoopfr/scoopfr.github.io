@@ -190,9 +190,35 @@ window.SCOOP_DAYS['2026-11-25'] = {
         { name: 'Euronews', url: 'https://fr.euronews.com/2026/11/25/etats-unis-trump-propose-de-nouveaux-droits-de-douane-visant-14-partenaires-dont-lue' },
         { name: 'Al Jazeera', url: 'https://www.aljazeera.com/news/2026/11/25/trump-announces-new-trade-tariffs-which-countries-will-they-target?traffic_source=rss' }
       ]
+    },
+    {
+      tag: 'Justice',
+      title: 'Israël : des juges suggèrent d’abandonner l’un des dossiers de corruption contre Nétanyahou',
+      text: 'Dans le procès pour corruption de **Benyamin Nétanyahou**, les juges ont recommandé, mercredi 25 novembre, à l’accusation d’abandonner l’un des dossiers dans lesquels il est accusé de corruption. Le premier ministre sortant est poursuivi pour corruption, fraude et abus de confiance ; il **nie tout acte répréhensible** et affirme que son procès « doit prendre fin ». Plusieurs médias y voient un coup de pouce pour sa défense, alors qu’il joue son avenir politique.',
+      why: 'Dans un procès, les **juges** et l’**accusation** (le parquet) ont des rôles distincts : ici, les juges recommandent à l’accusation d’abandonner un dossier. Un journaliste qui rend compte d’un tel procès rappelle la **présomption d’innocence** : la personne poursuivie est présumée innocente, et sa position (ici, il nie les faits) doit figurer dans l’article.',
+      sources: [
+        { name: 'BBC News', url: 'https://www.bbc.co.uk/news/articles/cxj05mv723r2o?at_medium=RSS&at_campaign=rss' },
+        { name: 'The New York Times', url: 'https://www.nytimes.com/2026/11/25/world/middleeast/judges-israel-corruption-case-netanyahu.html' },
+        { name: 'Al Jazeera', url: 'https://www.aljazeera.com/news/2026/11/25/netanyahu-says-corruption-trial-must-end-as-court-suggests-dropping-case?traffic_source=rss' },
+        { name: 'France 24 English', url: 'https://www.france24.com/en/in-boost-for-netanyahu-judges-question-corruption-trial-charges' }
+      ]
+    },
+    {
+      tag: 'Europe',
+      title: 'Espace : la mission européenne Hera dévoile le chaos de l’astéroïde Dimorphos',
+      text: 'L’**Agence spatiale européenne** (ESA) a publié, mercredi 25 novembre, les premières images de **Dimorphos**, l’astéroïde percuté volontairement il y a quatre ans par la sonde américaine **DART** de la NASA, dans une première expérience de défense spatiale. Dans le cadre de sa mission **Hera**, elle montre une vaste zone d’impact et des centaines de roches à la dérive près de la surface. Selon Le Temps, ce nuage de rochers « de la taille d’une machine à laver » est un imprévu qui complique la mission.',
+      why: 'L’ESA est une organisation **distincte de l’Union européenne** : elle réunit des États qui coordonnent leurs programmes spatiaux. Le Figaro, Euronews et Le Temps couvrent le même événement : un fait scientifique se recoupe comme un fait politique, en comparant ce que chaque média rapporte.',
+      sources: [
+        { name: 'Euronews', url: 'https://fr.euronews.com/2026/11/25/mission-hera-lesa-devoile-le-chaos-sur-lasteroide-dimorphos-frappe-par-la-sonde-dart-de-la' },
+        { name: 'Le Temps', url: 'https://www.letemps.ch/sciences/espace/en-route-pour-etudier-un-asteroide-frappe-par-la-nasa-la-sonde-europeenne-hera-affronte-un-inattendu-nuage-de-rochers-de-la-taille-d-une-machine-a-laver' },
+        { name: 'Le Figaro', url: 'https://www.lefigaro.fr/sciences/c-est-de-la-folie-les-surprenantes-decouvertes-d-une-sonde-europeenne-sur-l-asteroide-devie-par-dart-la-flechette-de-la-nasa-20261125' }
+      ]
     }
   ],
-  updates: [{ at: '11:00', stories: [10, 11, 12] }, { at: '14:00', stories: [13, 14] }, { at: '17:00', stories: [15] }],
+  glossary: [
+    { term: 'Agence spatiale européenne', def: 'Organisation intergouvernementale, **distincte de l’Union européenne**, qui coordonne les programmes spatiaux de ses États membres. Elle est abrégée **ESA** (European Space Agency).', cat: 'Europe', aliases: ['Agence spatiale européenne', 'ESA'] }
+  ],
+  updates: [{ at: '11:00', stories: [10, 11, 12] }, { at: '14:00', stories: [13, 14] }, { at: '17:00', stories: [15] }, { at: '21:00', stories: [16, 17] }],
   shorts: [
     { id: 'fIoU3pPa2C0', source: 'franceinfo', title: 'Fausse rétractation de Z. Takieddine : N. Sarkozy renvoyé en procès', tag: 'Justice', story: 8 },
     { id: '7eR68mu-hLI', source: 'franceinfo', title: 'Le Sénégal finalement sacré vainqueur de la CAN', tag: 'Société', story: 9 },
@@ -277,6 +303,15 @@ window.SCOOP_DAYS['2026-11-25'] = {
         { t: 'qcm', q: 'Qui a mené l’enquête qui débouche sur ces surtaxes ?', c: ['Jamieson Greer, représentant américain au Commerce', 'Le secrétaire au Trésor', 'La Réserve fédérale', 'L’Organisation mondiale du commerce'], a: 0, x: 'L’enquête avait été lancée en mars.' },
         { t: 'vf', q: 'L’Union européenne a salué ces nouveaux droits de douane.', a: false, x: 'Elle « conteste fermement » leur bien-fondé.' },
         { t: 'vf', q: 'Un droit de douane est une taxe sur les importations.', a: true, x: 'Il renchérit les produits étrangers pour protéger la production nationale : c’est le protectionnisme.' }
+      ]
+    },
+    {
+      title: '⚡ Flash de 21 h', icon: '⚡', desc: 'Mise à jour', exercises: [
+        { t: 'qcm', q: 'Qui a recommandé d’abandonner l’un des dossiers de corruption visant Benyamin Nétanyahou ?', c: ['Les juges du procès', 'Le Parlement israélien', 'Le président d’Israël', 'Les avocats de la défense'], a: 0, x: 'Les juges ont recommandé à l’accusation d’abandonner l’un des dossiers.' },
+        { t: 'vf', q: 'Benyamin Nétanyahou nie tout acte répréhensible dans son procès pour corruption.', a: true, x: 'Il affirme aussi que son procès « doit prendre fin ».' },
+        { t: 'qcm', q: 'De quelle organisation dépend la mission Hera ?', c: ['L’Agence spatiale européenne (ESA)', 'La NASA', 'L’Union européenne', 'L’ONU'], a: 0, x: 'L’ESA est une organisation distincte de l’Union européenne.' },
+        { t: 'qcm', q: 'Que montrent les premières images de l’astéroïde Dimorphos ?', c: ['Une vaste zone d’impact et des centaines de roches à la dérive', 'Un cratère rempli d’eau', 'Une surface lisse et intacte', 'Les débris de la sonde DART'], a: 0, x: 'Dimorphos a été percuté volontairement il y a quatre ans par la sonde DART de la NASA.' },
+        { t: 'vf', q: 'L’Agence spatiale européenne est une institution de l’Union européenne.', a: false, x: 'L’ESA est une organisation distincte de l’Union européenne.' }
       ]
     }
   ]

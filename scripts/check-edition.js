@@ -36,8 +36,8 @@
     });
     if (!Array.isArray(day.memo) || day.memo.length < 3) W('Mémo : moins de 3 éléments');
     const stories = Array.isArray(day.stories) ? day.stories : [];
-    // 8 à 10 infos le matin, jusqu'à 16 avec les mises à jour de la journée
-    if (stories.length < 8 || stories.length > 16) E(`Il faut 8 à 16 infos (actuellement ${stories.length})`);
+    // 8 à 10 infos le matin, jusqu'à 20 avec les mises à jour de la journée
+    if (stories.length < 8 || stories.length > 20) E(`Il faut 8 à 20 infos (actuellement ${stories.length})`);
     (day.updates || []).forEach((u, i) => {
       if (!u || !/^\d{2}:\d{2}$/.test(u.at || '') || !Array.isArray(u.stories) || !u.stories.length) E(`Mise à jour ${i} : format attendu { at: 'HH:MM', stories: [index…] }`);
       else u.stories.forEach(k => { if (!Number.isInteger(k) || !stories[k]) E(`Mise à jour ${u.at} : l'info ${k} n'existe pas`); });

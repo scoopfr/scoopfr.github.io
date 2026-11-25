@@ -20,9 +20,12 @@ except Exception:
     pass
 
 try:
-    subprocess.run(["git", "pull", "--ff-only", "-q"], check=False)
+    # Dans le cloud, le dépôt est cloné en « HEAD détaché » (git pull échoue) : on lit donc origin/main directement.
+    subprocess.run(["git", "fetch", "-q", "origin", "main"], check=False)
+    ref = "origin/main" if subprocess.run(["git", "rev-parse", "-q", "--verify", "origin/main"],
+                                          capture_output=True).returncode == 0 else "HEAD"
     out = subprocess.run(
-        ["git", "log", f"--since={MINUTES} minutes ago", "--format=%s", "--",
+        ["git", "log", ref, f"--since={MINUTES} minutes ago", "--format=%s", "--",
          "data/days", "scripts/topics-seen.txt"],
         capture_output=True, text=True, encoding="utf-8", check=True,
     ).stdout.strip()

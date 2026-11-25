@@ -25,7 +25,7 @@ Règles non négociables :
 - chaque info est confirmée par **au moins 2 rédactions différentes**, avec leurs URL ;
 - chaque question se résout en lisant le brief du jour ;
 - aucune invention : les faits viennent de `scripts/news-today.txt` (ou `news-new.txt`) ;
-- 16 infos au maximum par édition ; ne modifie, ne supprime et ne réordonne jamais les infos existantes.
+- 20 infos au maximum par édition ; ne modifie, ne supprime et ne réordonne jamais les infos existantes.
 
 Vérification avant de publier :
 - avec Node : `node scripts/check-edition.js data/days/AAAA-MM-JJ.js` doit afficher `OK` ;
