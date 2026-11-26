@@ -200,7 +200,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
       why: 'Un chiffre officiel se présente avec sa source (l’ONS), sa période (fin juin 2026) et sa comparaison (un an plus tôt) ; la réaction du gouvernement vient ensuite.',
       sources: [
         { name: 'Le Monde', url: 'https://www.lemonde.fr/international/article/2026/11/26/royaume-uni-l-immigration-nette-enregistre-sa-plus-forte-baisse-depuis-1997-hors-periode-du-covid-19_6815526_3210.html' },
-        { name: 'RFI', url: 'https://www.rfi.fr/fr/europe/20261126-royaume-uni-l-immigration-l%C3%A9gale-nette-au-plus-bas-depuis-1997-hors-p%C3%A9riode-du-covid-19' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/europe/20261126-royaume-uni-l-immigration-l%C3%A9gale-nette-au-plus-bas-depuis-1997-hors-p%C3%A9riode-du-covid-19', titre: 'Royaume-Uni: l\'immigration légale nette au plus bas depuis 1997, hors période du Covid-19', extrait: 'À la fin de juin 2026, l\'immigration nette au Royaume-Uni avait chuté de 62% sur un an pour atteindre son plus bas niveau depuis 1997, pandémie de Covid-19 exclue, a annoncé jeudi 26 novembre l\'Office national des statistiques (ONS). Le gou...' },
         { name: 'Le Temps', url: 'https://www.letemps.ch/monde/europe/au-royaume-uni-l-immigration-nette-tombe-au-plus-bas-depuis-1997-hors-periode-du-covid' }
       ]
     },
@@ -215,6 +215,45 @@ window.SCOOP_DAYS['2026-11-26'] = {
         { name: 'Ouest-France', url: 'https://www.ouest-france.fr/monde/thailande/sept-blesses-dont-quatre-dans-un-etat-grave-dans-lexplosion-dun-site-petrolier-a-bangkok-en-thailande-9a4baf9a-e97a-11f1-86c1-70195b4d2e52', titre: 'Sept blessés, dont quatre dans un état grave, dans l’explosion d’un site pétrolier à Bangkok en Thaïlande', extrait: 'Sept personnes ont été blessées, dont quatre se trouvent dans un état grave, après l’explosion d’un site pétrolier dans la capitale thaïlandaise, jeudi 26 novembre.' },
         { name: 'Euronews', url: 'https://fr.euronews.com/video/2026/11/26/explosion-sur-le-site-petrolier-bangchak-a-bangkok-epais-panaches-de-fumee' },
         { name: 'BBC News', url: 'https://www.bbc.co.uk/news/articles/crx209kwk4kzo' }
+      ]
+    },
+    {
+      tag: 'Économie',
+      title: 'BCE : l’Espagnol Pablo Hernandez de Cos va succéder à Christine Lagarde',
+      sujet: "La succession de Christine Lagarde à la tête de la BCE",
+      text: 'Les dirigeants de la **zone euro** (**21 pays**) ont désigné jeudi l’Espagnol **Pablo Hernandez de Cos** pour succéder à **Christine Lagarde** à la tête de la **Banque centrale européenne** (BCE), selon des sources diplomatiques. Économiste de **55 ans**, il dirige la **Banque des règlements internationaux** (BRI), à Bâle, et a été préféré au Néerlandais **Klaas Knot**. Il prendra ses fonctions en **février**.',
+      why: 'Une nomination se raconte en trois temps : qui succède à qui, d’où il vient, et ce que la fonction implique. Quand l’information vient de « sources diplomatiques », on l’écrit : la décision n’est pas encore officielle.',
+      sources: [
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/monde/europe/union-europeenne/l-ex-gouverneur-de-la-banque-d-espagne-pablo-hernandez-de-cos-va-succeder-a-christine-lagarde-a-la-tete-de-la-banque-centrale-europeenne_8301510.html', titre: 'L\'Espagnol Pablo Hernandez de Cos va succéder à Christine Lagarde à la tête de la Banque centrale européenne', extrait: 'Cet économiste de formation dirige actuellement la Banque des règlements internationaux. Il a été préféré au Néerlandais Klaas Knot.' },
+        { name: 'France 24', url: 'https://www.france24.com/fr/europe/20261126-pr%C3%A9sidence-bce-espagnol-pablo-hernandez-de-cos-succ%C3%A9dera-christine-lagarde', titre: 'Présidence de la BCE : l\'Espagnol Pablo Hernandez de Cos succédera à Christine Lagarde', extrait: 'L\'Espagnol ​Pablo Hernandez de Cos, directeur de la Banque des règlements internationaux, va être nommé à la tête de la Banque centrale européenne (BCE), en remplacement de la Française Christine Lagarde, ont annoncé jeudi des sources diplo...' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/%C3%A9conomie/20261126-l-espagnol-pablo-hernandez-de-cos-va-%C3%AAtre-nomm%C3%A9-pr%C3%A9sident-de-la-banque-centrale-europ%C3%A9enne', titre: 'L\'Espagnol Pablo Hernandez de Cos va être nommé président de la Banque centrale européenne', extrait: '⁠Le Conseil ​européen va nommer l\'Espagnol Pablo ​Hernandez de Cos au poste de président de la Banque centrale ​européenne (BCE), ‌en remplacement de Christine ⁠Lagarde, selon des informations de sources diplomatiques européennes du jeudi 2...' },
+        { name: 'Libération', url: 'https://www.liberation.fr/international/europe/christine-lagarde-va-etre-remplacee-par-lespagnol-pablo-hernandez-de-cos-a-la-tete-de-la-bce-20261126_GFSOMAAJCRFSFDBYP5KYFRNG54/', titre: 'L’Espagnol Pablo Hernandez de Cos, un technicien «pragmatique» pour remplacer Christine Lagarde à la tête de la BCE', extrait: 'L’économiste de 55 ans, notamment passé par la Banque d’Espagne et qui dirigeait jusqu’à présent «la banque des banques centrales», est aujourd’hui l’une des figures les plus respectées de la politique monétaire européenne.' },
+        { name: 'Le Temps', url: 'https://www.letemps.ch/economie/finance/l-espagnol-pablo-hernandez-de-cos-succede-a-christine-lagarde-a-la-presidence-de-la-bce' }
+      ]
+    },
+    {
+      tag: 'Monde',
+      title: 'Hong Kong : un an après l’incendie de Wang Fuk Court, des hommages sous surveillance',
+      sujet: "Hong Kong : un an après un incendie meurtrier",
+      text: 'Un an après l’immense **incendie** de la résidence **Wang Fuk Court**, à **Hong Kong**, qui a fait **168 morts**, des habitants ont déposé des **fleurs** jeudi devant les **sept gratte-ciels** sinistrés, malgré les **mises en garde des autorités**. Selon le New York Times, les responsables ont averti qu’il ne fallait pas utiliser le drame pour semer la division.',
+      why: 'Un anniversaire est l’occasion de rappeler le bilan humain (168 morts) et de montrer ce qui a changé depuis : ici, les hommages ont lieu sous le regard des autorités.',
+      sources: [
+        { name: 'France 24', url: 'https://www.france24.com/fr/vid%C3%A9o/20261126-chine-comm%C3%A9moration-un-an-apr%C3%A8s-l-incendies-de-gratte-ciels-%C3%A0-hong-kong', titre: 'Chine : commémoration un an après l\'incendies de gratte-ciels à Hong Kong', extrait: 'Un an après l\'immense incendie qui a tué 168 habitants de la résidence de Wang Fuk Court à Hong Kong, des citoyens déposent des fleurs jeudi 26 novembre devant les sept gratte-ciels sinistrés, malgré les mises en garde des autorités.' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/asie-pacifique/20261126-hong-kong-des-hommages-sous-surveillance-un-an-apr%C3%A8s-l-incendie-d-une-zone-r%C3%A9sidentielle', titre: 'Hong Kong: des hommages sous surveillance, un an après l\'incendie de Wang Fuk Court', extrait: 'Un an après l\'immense incendie qui a tué 168 habitants d\'un ensemble résidentiel de Hong Kong, des citoyens ont déposé des fleurs, jeudi 26 novembre 2026, devant les sept gratte-ciels sinistrés, malgré les mises en garde des autorités. Les ...' },
+        { name: 'Euronews', url: 'https://fr.euronews.com/video/2026/11/26/hong-kong-hommage-un-an-apres-aux-168-morts-de-lincendie-de-wang-fuk-court', titre: 'Hong Kong : hommage un an après aux 168 morts de l’incendie de Wang Fuk Court', extrait: 'Les habitants de Hong Kong déposent des fleurs et rendent hommage aux 168 victimes de l\'incendie de Wang Fuk Court, un an après ce drame meurtrier.' },
+        { name: 'The New York Times', url: 'https://www.nytimes.com/2026/11/26/world/asia/hong-kong-fire-wang-fuk-court-anniversary.html', titre: 'Hong Kong Grieves Fire Victims Under Watchful Eye of Authorities', extrait: 'The city’s residents quietly mourned the 168 lives lost in a high-rise complex blaze a year ago, as officials warned against using the disaster to sow division.' }
+      ]
+    },
+    {
+      tag: 'Politique',
+      title: 'Présidentielle : Teddy Riner fait polémique en jugeant que l’Ukraine « n’est pas notre guerre »',
+      sujet: "Présidentielle 2027 : la polémique sur le soutien à l’Ukraine",
+      text: 'Le candidat à la présidentielle **Teddy Riner** a estimé mercredi qu’il fallait arrêter « de donner de l’**argent que nous n’avons pas** » pour soutenir l’**Ukraine**, car « ce n’est **pas notre guerre** », à propos du déploiement de soldats français. Jeudi, il a assuré que « la France soutiendra toujours les **pays opprimés** ». **Raphaël Glucksmann** lui a répondu que « la guerre en Ukraine est **notre guerre** », et le maire de Béziers **Robert Ménard** s’est dit « outré ».',
+      why: 'Une polémique se raconte en trois temps : la phrase d’origine (citée entre guillemets), la réaction des concurrents, puis la mise au point de son auteur.',
+      sources: [
+        { name: 'France 24', url: 'https://www.france24.com/fr/vid%C3%A9o/20261126-congr%C3%A8s-des-maires-de-france-le-candidat-teddy-riner-fait-pol%C3%A9mique-sur-l-ukraine', titre: 'France : le candidat à la Présidentielle Teddy Riner fait polémique sur l\'Ukraine', extrait: 'Le candidat à la présidentielle Teddy Riner a exhorté mercredi 25 novembre à arrêter "de donner de l\'argent que nous n\'avons pas" pour soutenir l\'Ukraine, d\'autant que "ce n\'est pas notre guerre", à propos du déploiement de soldats français...' },
+        { name: 'Le Figaro', url: 'https://www.lefigaro.fr/elections/presidentielles/presidentielle-2027-la-guerre-en-ukraine-est-notre-guerre-repond-raphael-glucksmann-a-teddy-riner-20261126', titre: 'Présidentielle 2027 : «La guerre en Ukraine est notre guerre», répond Raphaël Glucksmann à Teddy Riner', extrait: 'En déplacement en Mayenne jeudi, le candidat à l’Élysée a défendu la poursuite du soutien à Kiev, estimant que la sécurité de la France et de l’Europe était en jeu.' },
+        { name: '20 Minutes', url: 'https://www.20minutes.fr/politique/4265846-20261126-direct-presidentielle-2027-lisnard-veut-convaincre-electeurs-tous-horizons-compris-rn', titre: 'EN DIRECT Présidentielle 2027 : « La guerre en Ukraine est notre guerre », réplique Raphaël Glucksmann à Teddy Riner…', extrait: 'Suivez avec nous les informations de ce jeudi 26 novembre concernant la campagne présidentielle 2027' }
       ]
     }
   ],
@@ -287,9 +326,20 @@ window.SCOOP_DAYS['2026-11-26'] = {
         { t: 'vf', q: 'Tous les médias donnent exactement le même bilan de blessés pour l’explosion de Bangkok.', a: false, x: 'Le bilan provisoire varie : **sept** blessés selon Le Monde et la BBC, **neuf** selon Ouest-France.' },
         { t: 'write', max: 300, q: '✍️ Chapô · « Royaume-Uni : l’immigration nette chute de 62 % »', src: 'Dépêche :\n\nÀ la fin juin 2026, l’immigration nette au Royaume-Uni avait chuté de 62 % sur un an, son plus bas niveau depuis 1997 hors période du Covid-19, a annoncé jeudi l’Office national des statistiques (ONS). Le gouvernement d’Andy Burnham s’est félicité d’avoir « rétabli le contrôle ».\n\nRédige un **chapô** (300 signes maximum).', model: '**Chapô possible :** L’immigration nette au Royaume-Uni a chuté de 62 % sur un an à fin juin 2026, son plus bas niveau depuis 1997 hors Covid-19, selon l’ONS. Le gouvernement d’Andy Burnham dit avoir « rétabli le contrôle ».', crit: ['Il donne le chiffre (62 %) et la période', 'Il cite la source (l’ONS)', 'Il mentionne la réaction du gouvernement', 'Il fait moins de 300 signes'] }
       ]
+    },
+    {
+      title: '⚡ Flash de 18 h', icon: '⚡', desc: 'Mise à jour', exercises: [
+        { t: 'qcm', q: 'Qui doit succéder à Christine Lagarde à la tête de la BCE ?', c: ['Pablo Hernandez de Cos', 'Klaas Knot', 'Mario Draghi', 'Jean-Claude Trichet'], a: 0, x: 'L’Espagnol **Pablo Hernandez de Cos** a été préféré au Néerlandais Klaas Knot.' },
+        { t: 'input', q: 'Complète : Pablo Hernandez de Cos dirige actuellement la Banque des _____ internationaux (BRI).', a: ['règlements', 'reglements'], hint: 'Un seul mot.', x: 'Il dirige la **Banque des règlements internationaux**, à Bâle.' },
+        { t: 'vf', q: 'La BCE fixe les taux d’intérêt des 21 pays qui utilisent l’euro.', a: true, x: 'La zone euro compte bien **21 pays**.' },
+        { t: 'qcm', q: 'Combien de personnes sont mortes dans l’incendie de Wang Fuk Court, à Hong Kong ?', c: ['168', '68', '128', '208'], a: 0, x: 'L’incendie a fait **168 morts**.' },
+        { t: 'qcm', q: 'Que s’est-il passé jeudi devant les gratte-ciels sinistrés de Hong Kong ?', c: ['Des habitants ont déposé des fleurs malgré les mises en garde', 'Les tours ont été rouvertes', 'Un procès s’est ouvert', 'Une manifestation a été autorisée'], a: 0, x: 'Des citoyens ont déposé des **fleurs**, malgré les mises en garde des autorités.' },
+        { t: 'vf', q: 'Raphaël Glucksmann a répondu à Teddy Riner que la guerre en Ukraine est « notre guerre ».', a: true, x: 'Glucksmann a défendu la poursuite du soutien à Kiev.' },
+        { t: 'write', max: 300, q: '✍️ Chapô · « BCE : Pablo Hernandez de Cos succède à Christine Lagarde »', src: 'Dépêche :\n\nLes dirigeants des 21 pays de la zone euro ont désigné jeudi l’Espagnol Pablo Hernandez de Cos, 55 ans, directeur de la Banque des règlements internationaux, pour succéder à Christine Lagarde à la tête de la BCE, selon des sources diplomatiques. Il a été préféré au Néerlandais Klaas Knot.\n\nRédige un **chapô** (300 signes maximum).', model: '**Chapô possible :** L’Espagnol Pablo Hernandez de Cos, 55 ans, va succéder à Christine Lagarde à la tête de la BCE, ont décidé jeudi les dirigeants de la zone euro, selon des sources diplomatiques. Il a été préféré à Klaas Knot.', crit: ['Il nomme le successeur et la personne remplacée', 'Il nomme la BCE', 'Il cite la source (sources diplomatiques)', 'Il fait moins de 300 signes'] }
+      ]
     }
   ],
-  updates: [{ at: '11:00', stories: [10, 11, 12] }, { at: '14:00', stories: [13, 14, 15] }],
+  updates: [{ at: '11:00', stories: [10, 11, 12] }, { at: '14:00', stories: [13, 14, 15] }, { at: '18:00', stories: [16, 17, 18] }],
   reco: [{ type: 'film', title: 'Les Hommes du président', by: 'Alan J. Pakula', year: 1976, story: 0, why: 'Deux journalistes du Washington Post enquêtent sur le scandale du Watergate. Un classique sur le journalisme d’investigation et la protection des sources, au cœur des nouvelles révélations de Mediapart et du Monde.' }],
   shorts: []
 };
