@@ -1348,7 +1348,8 @@
   function variantize(it) {
     const ex = it.ex, n = seenCount(ex);
     const w = wordings(ex);
-    const typed = n >= TEXT_AFTER || (w !== Infinity && (n >= w || (n >= 2 && w >= 3)));   // 3e formulation, puis tout nouveau cycle : réponse à taper
+    // 3e formulation, puis tout nouveau cycle : réponse à taper ; toujours dans le test d'une info que tu estimes retenue à 100 %
+    const typed = !!(L && L.cfg && L.cfg.typedOnly) || n >= TEXT_AFTER || (w !== Infinity && (n >= w || (n >= 2 && w >= 3)));
     if (ex.t === 'qcm' && Array.isArray(ex.c) && ex.c[ex.a] != null) {
       const q = framed(turn([ex.q, ...(ex.qv || [])], n));
       if (typed) return { ...ex, q, t: 'qcmfree', again: true };   // on tape la réponse

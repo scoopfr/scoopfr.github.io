@@ -168,9 +168,12 @@
   ctx.addLesson('story', (key, date, idx) => {
     const day = ctx.DAYS[date], i = +idx, s = day && day.stories[i]; if (!s) return null;
     const map = exMap(date), items = [];
-    day.lessons.forEach((l, li) => l.exercises.forEach((ex, ei) => { const id = `day:${date}:${li}:${ei}`; if (map.get(id) === i && ((ex.t === 'qcm' && ex.c.length <= 4) || ex.t === 'vf')) items.push({ ex, id }); }));
+    // estimation « Je pense avoir retenu » à 100 % : le test de cette info ne pose que des questions à réponse tapée
+    // (les quiz globaux, eux, gardent le choix de l'élève : bouton « Choix » / réponse libre)
+    const typedOnly = ((S().retain || {})[`${date}:${i}`]) === 100;
+    day.lessons.forEach((l, li) => l.exercises.forEach((ex, ei) => { const id = `day:${date}:${li}:${ei}`; if (map.get(id) === i && ((ex.t === 'qcm' && ex.c.length <= 4) || ex.t === 'vf' || (typedOnly && ex.t === 'input'))) items.push({ ex, id }); }));
     Object.values(mem().cards).filter(c => c.d === date && c.sid === i).forEach(c => { const ex = exOfCard(c); if (ex) items.push({ ex, id: 'mem:' + c.id }); });
-    if (!items.length) {   // secours : reconnaître l'info à partir de son résumé
+    if (!items.length && !typedOnly) {   // secours : reconnaître l'info à partir de son résumé (QCM de titres : pas en mode « réponses à taper »)
       const first = (plain(s.text).match(/^.*?[.!?](?=\s|$)/) || [plain(s.text)])[0].slice(0, 230);
       const others = shuffle(day.stories.filter((_, j) => j !== i)).slice(0, 3).map(x => x.title);
       if (others.length < 2) return null;
@@ -181,7 +184,8 @@
     const pick = shuffle(items).sort((a, b) => used(a) - used(b)).slice(0, 6);
     // contexte : le sujet de l'info pour ses questions ; rien de plus pour les fiches (la phrase à trous situe déjà l'info)
     const hint = ctx.storyHint ? ctx.storyHint(day, i) : '';
-    return { key, mode: 'drill', title: s.title.length > 46 ? s.title.slice(0, 44) + '…' : s.title, color: '#2BA84A', context: 'Tester cette info', exercises: pick.map(p => p.ex), ids: pick.map(p => p.id),
+    if (!items.length) return null;
+    return { key, mode: 'drill', typedOnly, title: s.title.length > 46 ? s.title.slice(0, 44) + '…' : s.title, color: '#2BA84A', context: typedOnly ? 'Tester cette info · réponses à taper (estimée à 100 %)' : 'Tester cette info', exercises: pick.map(p => p.ex), ids: pick.map(p => p.id),
       ctx: pick.map(p => ({ kind: 'story', label: /^day:/.test(p.id) ? hint : '', tag: s.tag, n: i, date: day.date })) };
   });
 
