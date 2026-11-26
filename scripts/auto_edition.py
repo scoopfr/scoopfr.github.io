@@ -590,7 +590,17 @@ def build_full(date, clusters):
         stories = []
         for chunk in (clusters[0:6], clusters[6:11], clusters[11:16]):   # petites demandes : l'IA gratuite coupe ses réponses longues
             if chunk:
-                stories += llm_stories(chunk, 3, per_story="3 phrases")
+                try:
+                    stories += llm_stories(chunk, 4, per_story="3 phrases")
+                except NoLLM:
+                    raise
+                except Exception as e:
+                    log(f"  lot d'infos ignoré ({str(e)[:100]})")
+        stories = stories[:10]
+        log(f"  {len(stories)} infos rédigées par l'IA")
+        if 4 <= len(stories) < 9:   # on complète avec des infos recoupées en extraits (sans IA)
+            used = {x["url"] for st in stories for x in st["sources"]}
+            stories += basic_stories(clusters, 9 - len(stories), used)
         if len(stories) < 8:
             raise RuntimeError(f"seulement {len(stories)} infos retenues")
         meta = llm_meta(stories)
