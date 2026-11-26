@@ -1,0 +1,57 @@
+# Scoop — édition quotidienne et mises à jour AUTOMATIQUES (sans Claude, sans abonnement).
+# Gratuit sur un dépôt public. Les heures sont en UTC (hiver : Paris = UTC+1 ; été : UTC+2) ; le script décide
+# lui-même ce qu'il faut faire d'après l'heure de Paris : édition complète (si elle n'existe pas encore),
+# mise à jour de la journée (au moins 2 h après la précédente), recommandation culturelle (à partir de 17 h).
+name: Édition automatique
+
+on:
+  schedule:
+    - cron: '10 5,6 * * *'      # édition du matin (7 h Paris l'hiver, 7 h ou 8 h l'été)
+    - cron: '10 9,10 * * *'     # mise à jour de fin de matinée
+    - cron: '10 12,13 * * *'    # mise à jour de l'après-midi
+    - cron: '10 15,16 * * *'    # mise à jour + recommandation culturelle (17 h)
+    - cron: '10 19,20 * * *'    # dernière mise à jour du soir
+  workflow_dispatch:
+    inputs:
+      options:
+        description: 'Options du script (ex. --force pour ignorer l''heure)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+  models: read      # accès gratuit aux modèles d'IA de GitHub (GitHub Models)
+
+concurrency:
+  group: edition-auto
+  cancel-in-progress: false
+
+jobs:
+  edition:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Générer l'édition ou la mise à jour
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}   # facultatif : clé gratuite Google AI Studio (meilleure limite que GitHub Models)
+        run: python3 scripts/auto_edition.py ${{ github.event.inputs.options }}
+      - name: Publier si quelque chose a changé
+        run: |
+          git config user.name "Scoop (édition automatique)"
+          git config user.email "190466635+nicolaschaix34@users.noreply.github.com"
+          git add data/days
+          if git diff --cached --quiet; then
+            echo "Rien à publier."
+          else
+            git commit -m "Édition automatique $(TZ=Europe/Paris date +'%d/%m %H h')"
+            git pull --rebase origin main
+            git push origin main
+          fi

@@ -12,13 +12,15 @@ Réponds toujours en français.
 
 ## Avant toute modification
 
-1. `git pull` : une routine cloud pousse plusieurs fois par jour (7 h, 11 h, 14 h, 18 h, 21 h, heure de Paris) et GitHub Actions rafraîchit `data/live/` toutes les 30 min.
+1. `git pull` : GitHub Actions publie plusieurs fois par jour (édition automatique) et rafraîchit `data/live/` toutes les heures.
 2. Quand tu modifies le code de l'app, incrémente le `?v=` dans `index.html` et `VERSION` dans `sw.js`.
 3. Pour les commits, utilise l'e-mail `190466635+nicolaschaix34@users.noreply.github.com` (l'adresse Gmail doit rester privée).
 
 ## Mettre l'actu à jour
 
-Suis `scripts/DAILY_PROMPT.md` à la lettre. Si l'édition du jour existe déjà, applique la partie « Mises à jour de la journée » :
+**C'est automatique et indépendant de Claude** : le workflow `.github/workflows/edition-auto.yml` (GitHub Actions, gratuit) lance `scripts/auto_edition.py` plusieurs fois par jour : édition complète le matin, mises à jour dans la journée, recommandation culturelle à partir de 17 h. La rédaction est faite par une IA gratuite (Gemini si le secret `GEMINI_API_KEY` existe, sinon GitHub Models) ; sans IA, un mode de secours fabrique une revue de presse automatique. Aucune routine Claude (cloud ou locale) ne doit tourner. Voir `docs/EDITION_AUTOMATIQUE.md`.
+
+Pour une édition à la main (rare), suis `scripts/DAILY_PROMPT.md` :
 `python scripts/fetch_news.py`, puis `python scripts/new_topics.py AAAA-MM-JJ` (arrête-toi à `RIEN DE NOUVEAU`).
 
 Règles non négociables :
@@ -33,4 +35,4 @@ Vérification avant de publier :
 
 Ne publie jamais une édition en échec.
 
-Pour la routine cloud sur le compte de secours et le passage d'un compte à l'autre : voir `scripts/ROUTINE_COMPTE_SECOURS.md`.
+
