@@ -4,7 +4,7 @@
 Lancé par GitHub Actions (.github/workflows/edition-auto.yml, gratuit). Étapes :
   1. récupère les titres de ~24 rédactions (scripts/fetch_news.py) et les regroupe par sujet (au moins 2 rédactions différentes) ;
   2. selon l'heure de Paris : édition complète (si elle n'existe pas), mise à jour de la journée, ou recommandation culturelle (17 h) ;
-  3. la rédaction (textes, quiz) est confiée à une IA GRATUITE : Gemini (si le secret GEMINI_API_KEY existe) sinon GitHub Models (inclus avec GitHub) ;
+  3. la rédaction (textes, quiz) est confiée à une IA GRATUITE : une IA gratuite à clé (Groq, Gemini, Mistral ou OpenRouter : un secret GitHub) ;
      les sources (rédactions et liens) viennent du code, jamais de l'IA ;
   4. contrôle par scripts/check-edition.js (les exercices fautifs sont retirés) ; sans IA ou en cas d'échec, un mode de secours
      fabrique une édition « revue de presse » sans aucune IA (extraits des dépêches + quiz automatiques).
@@ -185,8 +185,8 @@ def parse_json(txt):
 def llm(system, user, max_tokens=3500):
     if "--no-llm" in ARGS:
         raise NoLLM("désactivée")
-    gk, gh = os.environ.get("GEMINI_API_KEY"), os.environ.get("GITHUB_TOKEN")
-    if gk:
+    gk = os.environ.get("GEMINI_API_KEY")
+    if gk and "--no-gemini" not in ARGS:
         model = os.environ.get("GEMINI_MODEL", "gemini-2.0-flash")
         r = _post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gk}",
                   {"systemInstruction": {"parts": [{"text": system}]}, "contents": [{"role": "user", "parts": [{"text": user}]}],
@@ -195,21 +195,27 @@ def llm(system, user, max_tokens=3500):
             return parse_json(r["candidates"][0]["content"]["parts"][0]["text"])
         except Exception:
             raise RuntimeError("réponse Gemini inattendue : " + json.dumps(r, ensure_ascii=False)[:300])
-    if gh:
-        last = None
-        tries = [("https://models.github.ai/inference/chat/completions", m) for m in (os.environ.get("SCOOP_MODEL"), "openai/gpt-4.1-mini", "openai/gpt-4o-mini") if m]
-        for url, model in tries:
+    # fournisseurs gratuits compatibles OpenAI : (secret, adresse, modèles)
+    providers = [
+        ("GROQ_API_KEY", "https://api.groq.com/openai/v1/chat/completions", [os.environ.get("GROQ_MODEL"), "llama-3.3-70b-versatile", "llama-3.1-8b-instant"]),
+        ("MISTRAL_API_KEY", "https://api.mistral.ai/v1/chat/completions", [os.environ.get("MISTRAL_MODEL"), "mistral-small-latest"]),
+        ("OPENROUTER_API_KEY", "https://openrouter.ai/api/v1/chat/completions", [os.environ.get("OPENROUTER_MODEL"), "meta-llama/llama-3.3-70b-instruct:free"]),
+    ]
+    for env, url, models in providers:
+        key = os.environ.get(env)
+        if not key:
+            continue
+        for model in [m for m in models if m]:
             try:
                 r = _post(url, {"model": model, "temperature": 0.3, "max_tokens": min(max_tokens, 4000), "response_format": {"type": "json_object"},
                                 "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]},
-                          {"Authorization": f"Bearer {gh}", "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"})
+                          {"Authorization": f"Bearer {key}"})
                 content = (r.get("choices") or [{}])[0].get("message", {}).get("content") or ""
                 if not content.strip():
                     raise RuntimeError("réponse vide : " + json.dumps(r, ensure_ascii=False)[:300])
                 return parse_json(content)
             except Exception as e:
-                last = e; log(f"  ({url.split('/')[2]} · {model} : {str(e)[:160]})")
-        log("  GitHub Models indisponible : essai d'une IA gratuite sans clé (Pollinations)")
+                log(f"  ({env.split('_')[0].lower()} · {model} : {str(e)[:160]})")
     # dernier recours : IA gratuite sans clé ni compte (qualité et disponibilité variables)
     last = None
     for model in ("openai", "mistral"):
