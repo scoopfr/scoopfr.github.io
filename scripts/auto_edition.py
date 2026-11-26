@@ -160,7 +160,11 @@ def _post(url, body, headers, tries=3):
         req = urllib.request.Request(url, data=json.dumps(body).encode(), headers={"Content-Type": "application/json", **headers})
         try:
             with urllib.request.urlopen(req, timeout=120) as r:
-                return json.loads(r.read().decode("utf-8"))
+                raw = r.read().decode("utf-8", "ignore")
+                try:
+                    return json.loads(raw)
+                except Exception:
+                    raise RuntimeError(f"HTTP {r.status}, corps non JSON : {raw[:300]!r}")
         except urllib.error.HTTPError as e:
             last = f"HTTP {e.code} {e.read().decode('utf-8', 'ignore')[:200]}"
             if e.code in (429, 500, 502, 503):
@@ -187,7 +191,10 @@ def llm(system, user, max_tokens=3500):
         r = _post(f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gk}",
                   {"systemInstruction": {"parts": [{"text": system}]}, "contents": [{"role": "user", "parts": [{"text": user}]}],
                    "generationConfig": {"responseMimeType": "application/json", "temperature": 0.3, "maxOutputTokens": max_tokens}}, {})
-        return parse_json(r["candidates"][0]["content"]["parts"][0]["text"])
+        try:
+            return parse_json(r["candidates"][0]["content"]["parts"][0]["text"])
+        except Exception:
+            raise RuntimeError("réponse Gemini inattendue : " + json.dumps(r, ensure_ascii=False)[:300])
     if gh:
         last = None
         for model in [os.environ.get("SCOOP_MODEL")] + ["openai/gpt-4.1-mini", "openai/gpt-4o-mini", "meta/Llama-3.3-70B-Instruct"]:
@@ -198,7 +205,10 @@ def llm(system, user, max_tokens=3500):
                           {"model": model, "temperature": 0.3, "max_tokens": min(max_tokens, 4000), "response_format": {"type": "json_object"},
                            "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]},
                           {"Authorization": f"Bearer {gh}", "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"})
-                return parse_json(r["choices"][0]["message"]["content"])
+                content = (r.get("choices") or [{}])[0].get("message", {}).get("content") or ""
+                if not content.strip():
+                    raise RuntimeError("réponse vide : " + json.dumps(r, ensure_ascii=False)[:300])
+                return parse_json(content)
             except Exception as e:
                 last = e; log(f"  (modèle {model} indisponible : {str(e)[:120]})")
         raise NoLLM(str(last))
