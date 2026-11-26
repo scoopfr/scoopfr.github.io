@@ -361,6 +361,37 @@ def repair(day, path_writer):
 
 
 # ------------------------------------------------------------------ rédaction par l'IA
+def llm_fact_check(stories, clusters_by_story):
+    """2e passe : chaque info est comparée à ses dépêches ; toute affirmation non prouvée ou déformée fait rejeter l'info."""
+    if not stories:
+        return stories
+    blocks = []
+    for k, (st, c) in enumerate(zip(stories, clusters_by_story)):
+        src = "\n".join(f"   - ({media_base(i['src'])}) {i['title']} — {(i['desc'] or '')[:200]}" for i in c["items"][:4])
+        blocks.append(f"[{k}] INFO : {st['title']}. {st['text']}\n   DÉPÊCHES :\n{src}")
+    u = ("Compare chaque INFO à ses DÉPÊCHES. Une INFO est fausse si elle contient une affirmation absente des dépêches, "
+         "si elle déforme le sens (qui a dit, fait, proposé ou refusé quoi), ou si elle exagère. Sois strict.\n\n" + "\n\n".join(blocks) +
+         '\n\nRéponds : {"fausses":[{"i":NUMÉRO,"why":"raison courte"}]}  (liste vide si toutes sont fidèles)')
+    try:
+        r = llm(SYSTEM, u, 700)
+    except NoLLM:
+        raise
+    except Exception as e:
+        log(f"  vérification des infos impossible ({str(e)[:80]})")
+        return stories
+    bad = set()
+    for b in r.get("fausses", []) or []:
+        try:
+            k = int(b.get("i") if isinstance(b, dict) else b)
+        except Exception:
+            continue
+        if 0 <= k < len(stories):
+            bad.add(k)
+            QUALITY["infos rejetées"] += 1
+            log(f"  info rejetée par la vérification ({(b.get('why') if isinstance(b, dict) else '')[:90]}) : {stories[k]['title'][:70]}")
+    return [st for k, st in enumerate(stories) if k not in bad]
+
+
 def llm_stories(clusters, want, already="", per_story="3 à 5 phrases"):
     u = (f"Voici des sujets d'actualité du jour, regroupés par fait (chaque sujet est couvert par au moins 2 rédactions). Identifiants entre crochets.\n\n{brief(clusters)}\n\n"
          f"{already}"
@@ -386,6 +417,10 @@ def llm_stories(clusters, want, already="", per_story="3 à 5 phrases"):
             continue
         seen.add(cid)
         out.append(story)
+        story["_c"] = c
+    out = llm_fact_check(out, [x["_c"] for x in out])
+    for x in out:
+        x.pop("_c", None)
     return out
 
 
@@ -486,6 +521,24 @@ def ambiguous_qcm(stories, e):
     return False
 
 
+COUNTRIES = set(plain_norm(x) for x in "France Allemagne Espagne Italie Royaume-Uni États-Unis Chine Russie Ukraine Israël Iran Birmanie Salvador Égypte Libye Syrie Liban Turquie Inde Japon Brésil Mexique Canada Belgique Suisse Pologne Hongrie Grèce Portugal Algérie Maroc Tunisie Mali Niger Soudan Gaza Venezuela Argentine Colombie Corée Australie".split())
+
+
+def wrong_kind(e):
+    """« Quel pays » dont la réponse est une personne, « Qui » dont la réponse est un chiffre, etc."""
+    q = plain_norm(e.get("q", ""))
+    ans = e["c"][e["a"]] if e.get("t") == "qcm" and isinstance(e.get("c"), list) and isinstance(e.get("a"), int) and 0 <= e["a"] < len(e["c"]) else ((e.get("a") or [""])[0] if isinstance(e.get("a"), list) else "")
+    a = plain_norm(ans)
+    person = len(re.findall(r"[A-ZÉÈ][a-zà-ÿ]+", str(ans))) >= 2 and not any(c in a for c in COUNTRIES)
+    if re.search(r"\bquel(le)? (pays|ville|region|etat)\b", q) and person:
+        return True
+    if re.search(r"\b(qui|quel dirigeant|quelle personne)\b", q) and re.fullmatch(r"[\d\s.,%]+", a or "x"):
+        return True
+    if re.search(r"\bcombien\b", q) and not re.search(r"\d", a):
+        return True
+    return False
+
+
 def check_exercises(stories, exs):
     """Contrôles automatiques simples, avant la relecture par l'IA."""
     corpus = plain_norm(" ".join(s["title"] + " " + s["text"] + " " + s.get("why", "") for s in stories))
@@ -513,6 +566,8 @@ def check_exercises(stories, exs):
             pairs = e.get("pairs")
             if not isinstance(pairs, list) or len(pairs) < 3 or any(not isinstance(pr, list) or len(pr) != 2 for pr in pairs):
                 continue
+        if t in ("qcm", "input") and wrong_kind(e):
+            continue
         if t == "input":
             a = e.get("a")
             if not isinstance(a, list) or not a or len(str(a[0]).split()) > 5 or plain_norm(a[0]) not in corpus:
@@ -866,8 +921,7 @@ def build_full(date, clusters):
         meta["memo"] = [m for m in (meta.get("memo") or []) if isinstance(m, str) and not [n for n in nums(m) if n not in cnums]
                         and len([w for w in norm_tokens(m) if w in corpus]) >= 0.7 * max(1, len(norm_tokens(m)))]
         meta["glossary"] = [g for g in (meta.get("glossary") or []) if isinstance(g, dict) and plain_norm(g.get("term", "")) in corpus]
-        if len(meta["memo"]) < 3:
-            meta["memo"] = (meta["memo"] + [x["title"] for x in stories])[:5]
+        meta["memo"] = [x["title"] for x in stories[:5]]   # mémo = titres vérifiés des infos, jamais de phrase inventée
     day = {"date": date, "title": meta.get("title") or "Les infos du jour", "intro": meta.get("intro", ""), "word": meta.get("word") or {},
            "glossary": [g for g in (meta.get("glossary") or []) if isinstance(g, dict) and g.get("term") and g.get("def")][:5],
            "memo": [m for m in (meta.get("memo") or []) if isinstance(m, str)][:5], "stories": stories,
