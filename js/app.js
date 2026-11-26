@@ -1254,10 +1254,9 @@
       // (pas de « Explique en une ou deux phrases : <question> » : la formulation ne collait pas à toutes les questions)
       if (n >= TEXT_AFTER) return { ...ex, t: 'qcmfree', again: true };
       if (n >= 1 && !it.retry) {
-        if (Math.random() < 0.45 && ex.c.length > 1) {   // QCM → vrai/faux sur une proposition de réponse
-          const asTrue = Math.random() < 0.5, wrong = ex.c.filter((_, i) => i !== ex.a), shown = asTrue ? good : pickOne(wrong);
-          return { t: 'vf', heading: 'Cette réponse est-elle juste ?', w: ['Juste', 'Fausse'], label: 'Vérifie la réponse', q: `${ex.q}\n\nRéponse proposée : **${shown}**`, a: asTrue, x: (asTrue ? '' : `La bonne réponse est : **${good}**. `) + (ex.x || '') };
-        }
+        // Plus de conversion QCM → « Cette réponse est-elle juste ? Réponse proposée : X » : elle collait une réponse
+        // piochée parmi les leurres à n'importe quelle question et donnait des cartes absurdes (« Qui ? … Réponse proposée : Édouard Philippe »).
+        // Une question n'est reformulée qu'avec des variantes écrites et relues (ex.qv), jamais fabriquées.
         return { ...ex, q: framed(pickOne(ex.qv || [ex.q])) };
       }
     } else if (ex.t === 'vf') {

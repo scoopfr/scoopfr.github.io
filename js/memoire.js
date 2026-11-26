@@ -25,6 +25,9 @@
   const BLANK = '……';
   // un nom de personne : 2 ou 3 mots à majuscule, aucun mot d'institution ou de média, une seule fois dans la phrase
   const PREP = new Set(['de', 'du', 'des', 'à', 'au', 'aux', 'en', 'dans', 'sur', 'par', 'chez', 'vers', 'pour']);
+  const PERSON_CUE = new RegExp('(?:\\b(?:président|présidente|ministre|maire|dirigeant|dirigeante|secrétaire général|secrétaire générale|candidat|candidate|député|députée|sénateur|sénatrice|juge|procureur|procureure|avocat|avocate|chanteur|chanteuse|guitariste|musicien|musicienne|acteur|actrice|comédien|comédienne|metteur en scène|metteuse en scène|écrivain|écrivaine|romancier|romancière|journaliste|réalisateur|réalisatrice|entraîneur|joueur|joueuse|patron|patronne|PDG|fondateur|fondatrice|porte-parole|chef|cheffe|leader|militant|militante|opposant|opposante|ancien|ancienne|épouse|époux|fils|fille|M\\.|Mme)\\b[^¤]{0,25}¤)'
+    + '|(?:¤\\s*,\\s*(?:le |la |l’|l\')?(?:président|présidente|ministre|maire|dirigeant|dirigeante|secrétaire|candidat|candidate|député|sénateur|juge|avocat|chanteur|chanteuse|guitariste|acteur|actrice|comédien|comédienne|journaliste|réalisateur|réalisatrice|patron|fondateur|porte-parole|chef|leader|ancien|ancienne))'
+    + '|(?:\\b(?:le|la|l’|l\')\\s+[A-ZÉ][a-zéè]+(?:ien|ienne|ais|aise|ain|aine|on|onne|ois|oise|ol|ole|and|ande)\\s+¤)', 'i');
   function personName(sen) {
     for (const m of sen.slice(1).matchAll(NAME_RX)) {
       let t = m[0].split(/\s+/);
@@ -36,6 +39,11 @@
       if (t.length < 2 || t.length > 4 || t.some(w => w.length < 3)) continue;
       const name = t.join(' ');
       if (name.length < 6 || name.length > 34 || sen.split(name).length !== 2) continue;
+      // « Qui ? » seulement si le texte dit que c'est une personne : une fonction ou un métier juste avant ou juste après le nom
+      // (« le président américain Donald Trump », « Mark Rutte, secrétaire général », « le guitariste britannique Andy Taylor »).
+      // Sans cet indice, on ne pose pas la question : « Le Med Emre, un navire… » avait été pris pour une personne.
+      const at = sen.indexOf(name), around = `${sen.slice(Math.max(0, at - 45), at)} ¤ ${sen.slice(at + name.length, at + name.length + 30)}`;
+      if (!PERSON_CUE.test(around)) continue;
       return name;
     }
     return null;
@@ -53,7 +61,15 @@
     });
     return out;
   }
-  const mem = () => { const s = S(); s.mem = s.mem || {}; if (s.mem.v !== 2) { s.mem = { v: 2, cards: {} }; } s.mem.cards = s.mem.cards || {}; return s.mem; };
+  const mem = () => {
+    const s = S(); s.mem = s.mem || {};
+    if (s.mem.v === 2 && s.mem.cards) {   // v3 : les fiches « Qui ? » créées avant le contrôle « c'est bien une personne » sont retirées (elles seront recréées si elles le méritent)
+      Object.keys(s.mem.cards).forEach(id => { if (s.mem.cards[id].k === 'nom') delete s.mem.cards[id]; });
+      s.mem.v = 3; dirty = true;
+    }
+    if (s.mem.v !== 3) { s.mem = { v: 3, cards: {} }; }
+    s.mem.cards = s.mem.cards || {}; return s.mem;
+  };
   const INTERVALS = [1, 2, 4, 8, 16, 32];
   function absorb(day) {
     const m = mem(); let added = 0;
