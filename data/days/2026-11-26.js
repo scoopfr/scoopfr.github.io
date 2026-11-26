@@ -1,44 +1,27 @@
-// SCOOP:REGENERER
-/* Scoop — édition du 2026-11-26 (générée automatiquement, IA gratuite) */
+/* Scoop — édition du 2026-11-26 (édition de secours sans IA : citations exactes des rédactions) */
 window.SCOOP_DAYS = window.SCOOP_DAYS || {};
 window.SCOOP_DAYS['2026-11-26'] = {
   "date": "2026-11-26",
-  "title": "Incidents maritimes, décès de musiciens et régulation des médias : un panorama international",
-  "intro": "Un pétrolier coule au large d’Ibiza, Andy Taylor, guitariste de Duran Duran, meurt à 65 ans, et Reporters sans frontières demande la suspension d’un mois de CNews. Ces événements illustrent les enjeux environnementaux, culturels et de pluralisme médiatique.",
+  "title": "Revue de presse : Espagne : un pétrolier chargé de diesel coule au large",
+  "intro": "Les informations du jour confirmées par au moins deux rédactions, citées telles qu'elles ont été publiées.",
   "word": {
-    "term": "pluralisme",
-    "def": "Principe de diversité des opinions et des points de vue dans les médias, garantissant un débat public équilibré et informé."
+    "term": "Dépêche",
+    "def": "Texte court et factuel diffusé par une agence de presse (AFP, Reuters) que les médias reprennent."
   },
-  "glossary": [
-    {
-      "term": "plan d’urgence contre la pollution maritime",
-      "def": "Mesure d’intervention rapide activée par les autorités pour limiter les impacts environnementaux d’un déversement de pétrole ou de carburant.",
-      "cat": "International"
-    },
-    {
-      "term": "Arcom",
-      "def": "Autorité de régulation de la communication audiovisuelle, chargée de veiller au respect du pluralisme et de la liberté de presse.",
-      "cat": "Institutions"
-    },
-    {
-      "term": "CNews",
-      "def": "Chaîne de télévision française de l’actualité, souvent critiquée pour son orientation politique.",
-      "cat": "Médias"
-    }
-  ],
+  "glossary": [],
   "memo": [
-    "Pétrolier chargé de diesel coule au large d’Ibiza, un mort",
-    "Andy Taylor, guitariste de Duran Duran, décède à 65 ans",
-    "Reporters sans frontières demande la suspension de CNews",
-    "Kilmar Abrego Garcia, expulsé à tort, part pour l'Espagne",
-    "\"Le Monde\" et Mediapart publient de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella"
+    "Espagne : un pétrolier chargé de diesel coule au large d’Ibiza, faisant un mort",
+    "Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité",
+    "Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans",
+    "🔴 Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants",
+    "Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord"
   ],
   "stories": [
     {
       "tag": "Monde",
-      "title": "Pétrolier chargé de diesel coule au large d’Ibiza, un mort",
-      "text": "Un navire transportant jusqu’à 7 000 tonnes de diesel coule au large de l’île espagnole d’Ibiza. L’équipage de 17 membres a été secouru, mais un membre a été déclaré mort à l’hôpital. Les autorités espagnoles ont activé le plan d’urgence contre la pollution maritime.",
-      "why": "Ce cas illustre l’impact des incidents maritimes sur l’environnement et la nécessité de maîtriser les procédures d’urgence, compétence clé pour les journalistes couvrant les affaires internationales.",
+      "title": "Espagne : un pétrolier chargé de diesel coule au large d’Ibiza, faisant un mort",
+      "text": "Le Monde : « L’équipage de 17 membres a été secouru, mais l’un d’entre eux a ensuite été déclaré mort à l’hôpital, à Ibiza, selon les secours de l’archipel des Baléares. Les dommages environnementaux sont en cours d’évaluation. » franceinfo : « Les éventuels dommages environnementaux sont en cours d'évaluation, selon les secours. » Information également rapportée par Le Figaro, Libération.",
+      "why": "",
       "sources": [
         {
           "name": "Le Monde",
@@ -59,150 +42,18 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
-      "tag": "Société",
-      "title": "Andy Taylor, guitariste de Duran Duran, décède à 65 ans",
-      "text": "Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans. Il a quitté le groupe au milieu des années 1980 après de nombreux tubes. Son décès a été confirmé par un communiqué conjoint de sa famille et de ses anciens camarades de groupe.",
-      "why": "Comprendre les biographies de figures culturelles et la manière de rapporter les décès est essentiel pour les journalistes spécialisés en culture et musique.",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/disparitions/article/2026/11/26/andy-taylor-guitariste-historique-du-groupe-duran-duran-est-mort-a-65-ans_6815296_3382.html"
-        },
-        {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/culture/20261125-andy-taylor-ex-guitariste-de-duran-duran-est-d%C3%A9c%C3%A9d%C3%A9-%C3%A0-l-%C3%A2ge-de-65-ans"
-        },
-        {
-          "name": "Libération",
-          "url": "https://www.liberation.fr/culture/musique/duran-duran-andy-taylor-guitariste-et-compositeur-du-groupe-est-mort-a-65-ans-20261126_SLA7SRUR6RCMNJCEXHOPDESYDI/"
-        },
-        {
-          "name": "La Croix",
-          "url": "https://www.la-croix.com/culture/mort-d-andy-taylor-ancien-guitariste-du-groupe-britannique-duran-duran-20261126"
-        }
-      ]
-    },
-    {
-      "tag": "Médias",
-      "title": "Reporters sans frontières demande la suspension de CNews",
-      "text": "Reporters sans frontières saisit l’Arcom pour demander la suspension d’un mois de CNews. L’ONG accuse la chaîne de non‑respect répété du pluralisme et de favoriser l’extrême droite. Le dossier porte sur 61 heures de programmes diffusés en septembre.",
-      "why": "La connaissance des mécanismes de régulation des médias et du pluralisme est indispensable pour les journalistes qui couvrent le secteur audiovisuel et les questions de liberté de presse.",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/economie/article/2026/11/26/reporters-sans-frontieres-demande-la-suspension-de-cnews-pour-une-duree-d-un-mois_6815475_3234.html"
-        },
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/economie/medias/l-ong-reporters-sans-frontieres-saisit-l-arcom-pour-demander-de-suspendre-cnews-pendant-un-mois_8300685.html#xtor=RSS-3-[lestitres]"
-        },
-        {
-          "name": "La Croix",
-          "url": "https://www.la-croix.com/culture/cnews-reporters-sans-frontieres-demande-la-suspension-de-la-chaine-pendant-un-mois-20261126"
-        },
-        {
-          "name": "Mediapart",
-          "url": "https://www.mediapart.fr/journal/culture-et-idees/261126/reporters-sans-frontieres-reclame-la-suspension-de-cnews-pendant-un-mois"
-        }
-      ]
-    },
-    {
       "tag": "Monde",
-      "title": "Kilmar Abrego Garcia, expulsé à tort, part pour l'Espagne",
-      "text": "Kilmar Abrego Garcia, Salvadorien expulsé à tort vers le Salvador en 2025, est arrivé en Espagne pour une nouvelle vie. Il avait été inculpé sans suite à son retour aux États-Unis. Sa décision de partir volontairement vers l'Espagne suit une décision de la Cour suprême américaine.",
-      "why": "Illustration des procédures d'expulsion et de recours judiciaire aux États-Unis, utile pour comprendre les droits des migrants et le rôle des tribunaux.",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/international/article/2026/11/26/kilmar-abrego-garcia-le-salvadorien-devenu-symbole-des-expulsions-massives-sous-donald-trump-est-arrive-en-espagne-pour-une-nouvelle-vie_6815471_3210.html"
-        },
-        {
-          "name": "The Guardian",
-          "url": "https://www.theguardian.com/us-news/2026/nov/24/kilmar-abrego-garcia-leaves-us"
-        }
-      ]
-    },
-    {
-      "tag": "Médias",
-      "title": "\"Le Monde\" et Mediapart publient de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella",
-      "text": "Les deux médias ont eu accès à une conversation où un ancien camarade de lycée de Jordan Bardella reçoit des messages affirmant notamment que \"ce sont les sionistes qui sont à la tête des banques\". 🔴 Écrits antisémites : révélations de nouveaux éléments accablant pour Jordan Bardella.",
-      "why": "Un fait relayé par 9 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
-      "sources": [
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/politique/jordan-bardella/le-monde-et-mediapart-publient-de-nouveaux-elements-de-preuve-sur-les-ecrits-antisemites-attribues-a-jordan-bardella_8300856.html#xtor=RSS-3-[lestitres]"
-        },
-        {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/france/20261126-%C3%A9crits-antis%C3%A9mites-de-nouveaux-%C3%A9l%C3%A9ments-accablent-jordan-bardella"
-        },
-        {
-          "name": "RFI",
-          "url": "https://www.rfi.fr/fr/france/20261126-%C3%A9crits-antis%C3%A9mites-le-monde-et-mediapart-r%C3%A9v%C3%A8lent-de-nouveaux-%C3%A9l%C3%A9ments-compromettants-pour-jordan-bardella"
-        },
-        {
-          "name": "Le Figaro",
-          "url": "https://www.lefigaro.fr/politique/ecrits-antisemites-de-nouveaux-elements-compromettants-attribues-a-jordan-bardella-par-le-monde-et-mediapart-20261126"
-        }
-      ]
-    },
-    {
-      "tag": "Climat",
-      "title": "EN DIRECT, guerre en Ukraine : des foyers privés d’électricité dans sept régions après des attaques russes ; près de 170 affrontements",
-      "text": "La Russie a poursuivi ses attaques contre des installations énergétiques, a déclaré jeudi matin le ministère de l’énergie ukrainien. Pour affaiblir la Russie, l’armée ukrainienne tente de perturber les livraisons d’armes vers les pays africains où Moscou est implanté, et de viser la flotte fantôme qui lui sert à contourner les sanctions.",
-      "why": "Un fait relayé par 6 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/international/live/2026/11/26/en-direct-guerre-en-ukraine-donald-trump-et-le-secretaire-general-de-l-otan-mark-rutte-exhortent-moscou-a-ne-pas-etendre-la-guerre-avec-kiev_6814183_3210.html"
-        },
-        {
-          "name": "Mediapart",
-          "url": "https://www.mediapart.fr/journal/international/251126/attaque-de-navires-russes-en-libye-l-ukraine-en-guerre-au-dela-de-ses-frontieres"
-        },
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/monde/europe/manifestations-en-ukraine/une-attaque-de-drone-ukrainienne-a-fait-cinq-morts-en-territoire-occupe-par-moscou-annoncent-les-autorites-prorusses_8300877.html#xtor=RSS-3-[lestitres]"
-        },
-        {
-          "name": "20 Minutes",
-          "url": "https://www.20minutes.fr/monde/ukraine/4265844-20261126-direct-guerre-ukraine-trump-chef-otan-appellent-russie-etendre-guerre?at_medium=display&at_campaign=149"
-        }
-      ]
-    },
-    {
-      "tag": "Économie",
-      "title": "\"Inacceptables\", \"regrettables\", \"prétexte à la manipulation politique\"... Les pays visés s'indignent face aux nouveaux droits de douane",
-      "text": "Washington accuse les pays visés de recourir à des subventions qui occasionnent une surproduction et pénalisent les entreprises américaines. La nouvelle série de droits de douane annoncée par l'administration Trump, mercredi, a suscité la colère de ses principaux partenaires commerciaux – dont la Chine, le Brésil, l'Union européenne et le Japon.",
-      "why": "Un fait relayé par 4 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
-      "sources": [
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/monde/usa/droits-de-douane/inacceptables-regrettables-pretexte-a-la-manipulation-politique-les-pays-vises-s-indignent-face-aux-nouveaux-droits-de-douane-americains_8300712.html#xtor=RSS-3-[lestitres]"
-        },
-        {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/am%C3%A9riques/20261126-l-ue-la-chine-et-d-autres-pays-s-indignent-des-nouveaux-droits-de-douane-am%C3%A9ricains"
-        },
-        {
-          "name": "RFI",
-          "url": "https://www.rfi.fr/fr/monde/20261126-l-annonce-de-nouveaux-droits-de-douane-am%C3%A9ricains-par-washington-suscite-l-indignation-des-pays-vis%C3%A9s"
-        },
-        {
-          "name": "AFP (via Le Figaro)",
-          "url": "https://www.lefigaro.fr/conjoncture/la-chine-menace-de-riposter-face-a-l-annonce-des-nouveaux-droits-de-douane-americains-20261126"
-        }
-      ]
-    },
-    {
-      "tag": "Justice",
       "title": "Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité",
-      "text": "Au total, quarante-sept djihadistes français, transférés de Syrie vers l’Irak l’an dernier, doivent être jugés par une cour criminelle de Bagdad. Au total, 47 ressortissants français ont été jugés depuis septembre après avoir été extradés de Syrie.",
-      "why": "Un fait relayé par 3 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
+      "text": "Le Monde : « Au total, quarante-sept djihadistes français, transférés de Syrie vers l’Irak l’an dernier, doivent être jugés par une cour criminelle de Bagdad. » France 24 : « Huit Français ont été condamnés à la prison à perpétuité jeudi par la justice irakienne pour leur appartenance au groupe État islamique (EI). » Information également rapportée par Libération, Euronews.",
+      "why": "",
       "sources": [
         {
           "name": "Le Monde",
           "url": "https://www.lemonde.fr/international/article/2026/11/26/irak-huit-nouveaux-djihadistes-francais-dont-romain-garnier-condamnes-a-la-perpetuite_6815494_3210.html"
+        },
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/moyen-orient/20261126-en-irak-huit-nouveaux-jihadistes-fran%C3%A7ais-condamn%C3%A9s-%C3%A0-la-perp%C3%A9tuit%C3%A9"
         },
         {
           "name": "Libération",
@@ -215,14 +66,66 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
+      "tag": "Culture",
+      "title": "Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans",
+      "text": "Le Monde : « Le guitariste originel de la formation britannique de new wave avait quitté le groupe au milieu des années 1980, après de nombreux tubes. » Libération : « L’artiste britannique est mort lundi 23 novembre 2026 d’un cancer, selon un communiqué conjoint de sa famille et de ses anciens camarades de groupe publié mercredi 25 novembre. » Information également rapportée par La Croix, Radio-Canada.",
+      "why": "",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/disparitions/article/2026/11/26/andy-taylor-guitariste-historique-du-groupe-duran-duran-est-mort-a-65-ans_6815296_3382.html"
+        },
+        {
+          "name": "Libération",
+          "url": "https://www.liberation.fr/culture/musique/duran-duran-andy-taylor-guitariste-et-compositeur-du-groupe-est-mort-a-65-ans-20261126_SLA7SRUR6RCMNJCEXHOPDESYDI/"
+        },
+        {
+          "name": "La Croix",
+          "url": "https://www.la-croix.com/culture/mort-d-andy-taylor-ancien-guitariste-du-groupe-britannique-duran-duran-20261126"
+        },
+        {
+          "name": "Radio-Canada",
+          "url": "https://ici.radio-canada.ca/article/info/2303112/deces-andy-taylor-ex-guitariste-duran-duran"
+        }
+      ]
+    },
+    {
       "tag": "Économie",
+      "title": "🔴 Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants",
+      "text": "franceinfo : « Les deux médias ont eu accès à une conversation où un ancien camarade de lycée de Jordan Bardella reçoit des messages affirmant notamment que \"ce sont les sionistes qui sont à la tête des banques\". » RFI : « Deux mois après les premières révélations de Mediapart sur des écrits antisémites de jeunesse attribués à Jordan Bardella, le site d'investigation et Le Monde publient, jeudi 26 novembre, de nouveaux éléments indiquant que le président du R […] » Information également rapportée par France 24, Le Figaro.",
+      "why": "",
+      "sources": [
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/france/20261126-%C3%A9crits-antis%C3%A9mites-de-nouveaux-%C3%A9l%C3%A9ments-accablent-jordan-bardella"
+        },
+        {
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/politique/jordan-bardella/le-monde-et-mediapart-publient-de-nouveaux-elements-de-preuve-sur-les-ecrits-antisemites-attribues-a-jordan-bardella_8300856.html#xtor=RSS-3-[lestitres]"
+        },
+        {
+          "name": "RFI",
+          "url": "https://www.rfi.fr/fr/france/20261126-%C3%A9crits-antis%C3%A9mites-le-monde-et-mediapart-r%C3%A9v%C3%A8lent-de-nouveaux-%C3%A9l%C3%A9ments-compromettants-pour-jordan-bardella"
+        },
+        {
+          "name": "Le Figaro",
+          "url": "https://www.lefigaro.fr/politique/ecrits-antisemites-de-nouveaux-elements-compromettants-attribues-a-jordan-bardella-par-le-monde-et-mediapart-20261126"
+        }
+      ]
+    },
+    {
+      "tag": "Politique",
       "title": "Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord",
-      "text": "Réunis jeudi matin en commission mixte paritaire, sept députés et sept sénateurs ne sont pas parvenus à s’entendre sur ce texte. Les sept députés et sept sénateurs réunis jeudi 26 novembre en commission mixte paritaire ont échoué à trouver un compromis sur le projet de budget de la Sécurité sociale pour 2027.",
-      "why": "Un fait relayé par 3 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
+      "text": "AFP (via Le Figaro) : « Réunis jeudi matin en commission mixte paritaire, sept députés et sept sénateurs ne sont pas parvenus à s’entendre sur ce texte. Il repart donc en nouvelle lecture à l’Assemblée nationale. » Libération : « Les élus des deux chambres réunis ce jeudi en commission mixte paritaire (CMP) ont préféré mettre fin rapidement aux discussions, voulant éviter «un texte non adoptable par les deux chambres». » Information également rapportée par Ouest-France, La Croix.",
+      "why": "",
       "sources": [
         {
           "name": "AFP (via Le Figaro)",
           "url": "https://www.lefigaro.fr/social/budget-de-la-securite-sociale-2027-deputes-et-senateurs-echouent-a-trouver-un-accord-20261126"
+        },
+        {
+          "name": "Libération",
+          "url": "https://www.liberation.fr/politique/projet-de-budget-de-la-secu-deputes-et-senateurs-echouent-a-saccorder-le-texte-va-repartir-a-lassemblee-20261126_FZQE3QSPMZAMFM5CXFHZWB5LBM/"
         },
         {
           "name": "Ouest-France",
@@ -233,76 +136,206 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "url": "https://www.la-croix.com/economie/budget-de-la-securite-sociale-deputes-et-senateurs-echouent-a-trouver-un-accord-20261126"
         }
       ]
+    },
+    {
+      "tag": "Médias",
+      "title": "Reporters sans frontières demande à l’Arcom la suspension de CNews pour une durée d’un mois",
+      "text": "Le Monde : « Après avoir examiné soixante et une heures de programmes diffusés en septembre sur la chaîne contrôlée par Vincent Bolloré, l’ONG dénonce de nouveau un « défaut de pluralisme » et saisit une nouvelle fois l’Autorité de régulation de la comm […] » franceinfo : « L'ONG accuse la chaîne de non-respect répété du pluralisme pour favoriser l'extrême droite. » Information également rapportée par Mediapart.",
+      "why": "",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/economie/article/2026/11/26/reporters-sans-frontieres-demande-la-suspension-de-cnews-pour-une-duree-d-un-mois_6815475_3234.html"
+        },
+        {
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/economie/medias/l-ong-reporters-sans-frontieres-saisit-l-arcom-pour-demander-de-suspendre-cnews-pendant-un-mois_8300685.html#xtor=RSS-3-[lestitres]"
+        },
+        {
+          "name": "Mediapart",
+          "url": "https://www.mediapart.fr/journal/culture-et-idees/261126/reporters-sans-frontieres-reclame-la-suspension-de-cnews-pendant-un-mois"
+        }
+      ]
+    },
+    {
+      "tag": "Économie",
+      "title": "L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains",
+      "text": "France 24 : « La nouvelle série de droits de douane annoncée par l'administration Trump, mercredi, a suscité la colère de ses principaux partenaires commerciaux – dont la Chine, le Brésil, l'Union européenne et le Japon. » franceinfo : « Washington accuse les pays visés de recourir à des subventions qui occasionnent une surproduction et pénalisent les entreprises américaines. » Information également rapportée par RFI.",
+      "why": "",
+      "sources": [
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/am%C3%A9riques/20261126-l-ue-la-chine-et-d-autres-pays-s-indignent-des-nouveaux-droits-de-douane-am%C3%A9ricains"
+        },
+        {
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/monde/usa/droits-de-douane/inacceptables-regrettables-pretexte-a-la-manipulation-politique-les-pays-vises-s-indignent-face-aux-nouveaux-droits-de-douane-americains_8300712.html#xtor=RSS-3-[lestitres]"
+        },
+        {
+          "name": "RFI",
+          "url": "https://www.rfi.fr/fr/monde/20261126-l-annonce-de-nouveaux-droits-de-douane-am%C3%A9ricains-par-washington-suscite-l-indignation-des-pays-vis%C3%A9s"
+        }
+      ]
+    },
+    {
+      "tag": "Justice",
+      "title": "Emilie König, la plus médiatique des djihadistes françaises, devant la justice",
+      "text": "Le Monde : « Le procès de cette « revenante » de Syrie, âgée de 41 ans et mère de cinq enfants, accusée d’association de malfaiteurs terroriste notamment pour avoir relayé la propagande de l’organisation Etat islamique, s’ouvre jeudi à Paris. » 20 Minutes : « Cette ancienne figure de l’État islamique, seule femme à figurer sur la liste noire des Etats-Unis, est jugée à partir de ce jeudi devant la cour d’assises spécialement composée. »",
+      "why": "",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/societe/article/2026/11/26/emilie-konig-la-plus-mediatique-des-djihadistes-francaises-devant-la-justice_6815463_3224.html"
+        },
+        {
+          "name": "20 Minutes",
+          "url": "https://www.20minutes.fr/justice/4265072-20261125-emilie-konig-ancienne-egerie-daesh-accusee-avoir-joue-recruteuses-devant-assises?at_medium=display&at_campaign=149"
+        }
+      ]
+    },
+    {
+      "tag": "Monde",
+      "title": "Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite",
+      "text": "Le Monde : « Dans cette ancienne place forte socialiste du sud de l’Espagne et à quelques jours des élections législatives anticipées du dimanche 29 novembre, les partisans du Parti populaire et de Vox expriment leur détermination à chasser du pouvoir P […] » RFI : « Aux Canaries, le débat électoral s'est beaucoup focalisé sur la question migratoire. Une nouvelle loi permet normalement une répartition des migrants mineurs entre régions. »",
+      "why": "",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/international/article/2026/11/26/elections-legislatives-en-espagne-l-andalousie-laboratoire-de-l-alliance-entre-la-droite-et-l-extreme-droite_6815491_3210.html"
+        },
+        {
+          "name": "RFI",
+          "url": "https://www.rfi.fr/fr/podcasts/reportage-international/20261125-l%C3%A9gislatives-en-espagne-les-canaries-redoutent-une-crise-migratoire-en-cas-de-victoire-de-la-droite-dure"
+        }
+      ]
+    },
+    {
+      "tag": "Monde",
+      "title": "Danemark : une nouvelle fuite de données touche 11 000 personnes",
+      "text": "Le Monde : « Pour le moment, l’auteur de la fuite n’a pas été identifié. Le nouvel incident s’inscrit dans un contexte de vigilance accrue lié à une hausse des piratages informatiques à travers l’Europe. » Euronews : « Ce nouvel incident survient alors que le Danemark a renforcé ses systèmes de cybersécurité après une précédente faille ayant exposé des données concernant des millions de personnes. »",
+      "why": "",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/pixels/article/2026/11/26/danemark-une-nouvelle-fuite-de-donnees-touche-11-000-personnes_6815509_4408996.html"
+        },
+        {
+          "name": "Euronews",
+          "url": "https://fr.euronews.com/2026/11/26/danemark-11-000-personnes-touchees-par-une-nouvelle-fuite-de-donnees"
+        }
+      ]
     }
   ],
   "lessons": [
     {
       "title": "Le quiz de la une",
       "icon": "☕",
-      "desc": "France : politique, société, économie",
+      "desc": "Les titres du jour",
       "exercises": [
         {
+          "t": "input",
+          "q": "Complète le titre publié par AFP (via Le Figaro) : « Budget de la _____ sociale 2027 : députés et sénateurs échouent à trouver un accord »",
+          "a": [
+            "Sécurité"
+          ],
+          "x": "Titre exact : « Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord »"
+        },
+        {
           "t": "qcm",
-          "q": "Quel groupe a vu quitter Andy Taylor au milieu des années 1980 ?",
+          "q": "Quelle rédaction a publié ce titre : « 🔴 Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants » ?",
           "c": [
-            "Duran Duran",
-            "The Beatles",
-            "Rolling Stones",
-            "Pink Floyd"
+            "France 24",
+            "Ouest-France",
+            "Libération",
+            "Mediapart"
           ],
           "a": 0,
-          "x": "Andy Taylor a quitté Duran Duran au milieu des années 1980."
+          "x": "Titre publié par France 24."
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre publié par Le Monde : « Andy Taylor, guitariste historique du groupe Duran _____ est mort à 65 ans »",
+          "a": [
+            "Duran"
+          ],
+          "x": "Titre exact : « Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans »"
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre publié par Le Monde : « Emilie _____ la plus médiatique des djihadistes françaises, devant la justice »",
+          "a": [
+            "König"
+          ],
+          "x": "Titre exact : « Emilie König, la plus médiatique des djihadistes françaises, devant la justice »"
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre publié par France 24 : « 🔴 Écrits antisémites : Jordan _____ dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »",
+          "a": [
+            "Bardella"
+          ],
+          "x": "Titre exact : « 🔴 Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »"
         },
         {
           "t": "vf",
-          "q": "La Russie a poursuivi ses attaques contre des installations énergétiques en Ukraine.",
+          "q": "France 24 a publié ce titre : « L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains »",
           "a": true,
-          "x": "Le ministère de l’énergie ukrainien a déclaré que la Russie a poursuivi ses attaques contre des installations énergétiques."
-        },
-        {
-          "t": "vf",
-          "q": "Les droits de douane annoncés par l’administration Trump ont été salués par les pays visés.",
-          "a": false,
-          "x": "Les pays visés se sont indignés face aux nouveaux droits de douane annoncés par l’administration Trump."
+          "x": "C'est le titre exact."
         },
         {
           "t": "qcm",
-          "q": "Qui a quitté Duran Duran au milieu des années 1980 après de nombreux tubes ?",
+          "q": "Quelle rédaction a publié ce titre : « Emilie König, la plus médiatique des djihadistes françaises, devant la justice » ?",
           "c": [
-            "Andy Taylor",
-            "John Taylor",
-            "Andy Smith",
-            "John Smith"
+            "Le Monde",
+            "France 24",
+            "RFI",
+            "Mediapart"
           ],
           "a": 0,
-          "x": "Le texte indique que Andy Taylor a quitté le groupe au milieu des années 1980."
+          "x": "Titre publié par Le Monde."
         },
         {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « \"Le _____ et Mediapart publient de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella »",
-          "a": [
-            "Monde"
+          "t": "qcm",
+          "q": "Quelle rédaction a publié ce titre : « Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans » ?",
+          "c": [
+            "Le Monde",
+            "20 Minutes",
+            "France 24",
+            "RFI"
           ],
-          "x": "Titre complet : \"Le Monde\" et Mediapart publient de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella"
+          "a": 0,
+          "x": "Titre publié par Le Monde."
         },
         {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « EN _____ guerre en Ukraine : des foyers privés d’électricité dans sept régions après des attaques russes ; près de 170 affrontements »",
-          "a": [
-            "DIRECT"
+          "t": "match",
+          "q": "Associe chaque titre à la rédaction qui l'a publié",
+          "pairs": [
+            [
+              "Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans",
+              "Le Monde"
+            ],
+            [
+              "🔴 Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\"",
+              "France 24"
+            ],
+            [
+              "Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver",
+              "AFP (via Le Figaro)"
+            ]
           ],
-          "x": "Titre complet : EN DIRECT, guerre en Ukraine : des foyers privés d’électricité dans sept régions après des attaques russes ; près de 170 affrontements"
+          "x": "Chaque titre est cité tel qu'il a été publié."
         },
         {
           "t": "write",
-          "q": "Rédige un titre et un chapô (première phrase) pour une dépêche sur le décès d’Andy Taylor, en suivant les critères de neutralité et de concision.",
-          "src": "Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans. Il a quitté le groupe au milieu des années 1980 après de nombreux tubes. Son décès a été confirmé par un communiqué conjoint de sa famille et de ses anciens camarades de groupe.",
-          "model": "Titre : Andy Taylor, guitariste de Duran Duran, décède à 65 ans\nChapô : Le groupe Duran Duran a perdu son ancien guitariste, Andy Taylor, qui est décédé à 65 ans, comme l’a confirmé un communiqué de sa famille et de ses anciens camarades.",
+          "max": 300,
+          "q": "✍️ Écris un chapô de 300 signes maximum pour cette info (l'essentiel : qui, quoi, où, quand)",
+          "src": "Titre : Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans\n\nLe Monde : « Le guitariste originel de la formation britannique de new wave avait quitté le groupe au milieu des années 1980, après de nombreux tubes. » Libération : « L’artiste britannique est mort lundi 23 novembre 2026 d’un cancer, selon un communiqué conjoint de sa famille et de ses anciens camarades de groupe publié mercredi 25 novembre. » Information également rapportée par La Croix, Radio-Canada.",
+          "model": "**Chapô publié par Le Monde :** Le guitariste originel de la formation britannique de new wave avait quitté le groupe au milieu des années 1980, après de nombreux tubes.",
           "crit": [
-            "Titre court et informatif",
-            "Chapô résume l’information principale",
-            "Pas de jugement ni d’émotion excessive",
-            "Utilisation des faits fournis uniquement"
+            "Il donne l'essentiel (qui, quoi, où, quand)",
+            "Il fait moins de 300 signes",
+            "Il ne recopie pas le titre",
+            "Tout ce qui est écrit figure dans les citations"
           ]
         }
       ]
@@ -313,76 +346,90 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "desc": "International et Europe",
       "exercises": [
         {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « Irak : huit nouveaux djihadistes français, dont _____ Garnier, condamnés à la perpétuité »",
-          "a": [
-            "Romain"
-          ],
-          "x": "Titre complet : Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « Reporters sans frontières demande la suspension de _____ »",
-          "a": [
-            "CNews"
-          ],
-          "x": "Titre complet : Reporters sans frontières demande la suspension de CNews"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « Budget de la _____ sociale 2027 : députés et sénateurs échouent à trouver un accord »",
-          "a": [
-            "Sécurité"
-          ],
-          "x": "Titre complet : Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord"
+          "t": "vf",
+          "q": "Le Monde a publié ce titre : « Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite »",
+          "a": true,
+          "x": "C'est le titre exact."
         },
         {
           "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Justice » dans l'édition du jour ?",
+          "q": "Quelle rédaction a publié ce titre : « Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite » ?",
           "c": [
-            "Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité",
-            "Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord",
-            "\"Le Monde\" et Mediapart publient de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan ",
-            "Andy Taylor, guitariste de Duran Duran, décède à 65 ans"
+            "Le Monde",
+            "La Croix",
+            "Ouest-France",
+            "Radio-Canada"
           ],
           "a": 0,
-          "x": "Rubrique Justice : Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité"
+          "x": "Titre publié par Le Monde."
+        },
+        {
+          "t": "vf",
+          "q": "Le Monde a publié ce titre : « Espagne : un pétrolier chargé de diesel coule au large d’Ibiza, faisant un mort »",
+          "a": true,
+          "x": "C'est le titre exact."
         },
         {
           "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Monde » dans l'édition du jour ?",
+          "q": "Quelle rédaction a publié ce titre : « Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité » ?",
           "c": [
-            "Kilmar Abrego Garcia, expulsé à tort, part pour l'Espagne",
-            "Andy Taylor, guitariste de Duran Duran, décède à 65 ans",
-            "\"Le Monde\" et Mediapart publient de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan ",
-            "EN DIRECT, guerre en Ukraine : des foyers privés d’électricité dans sept régions après des attaques russes ; p"
+            "Le Monde",
+            "franceinfo",
+            "Le Figaro",
+            "Radio-Canada"
           ],
           "a": 0,
-          "x": "Rubrique Monde : Kilmar Abrego Garcia, expulsé à tort, part pour l'Espagne"
+          "x": "Titre publié par Le Monde."
+        },
+        {
+          "t": "vf",
+          "q": "Le Monde a publié ce titre : « Irak : huit nouveaux djihadistes français, dont Romain König, condamnés à la perpétuité »",
+          "a": false,
+          "x": "Le titre exact est : « Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité »"
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre publié par Le Monde : « Danemark : une nouvelle fuite de données touche 11 _____ personnes »",
+          "a": [
+            "000"
+          ],
+          "x": "Titre exact : « Danemark : une nouvelle fuite de données touche 11 000 personnes »"
         },
         {
           "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Société » dans l'édition du jour ?",
+          "q": "Quelle rédaction a publié ce titre : « Espagne : un pétrolier chargé de diesel coule au large d’Ibiza, faisant un mort » ?",
           "c": [
-            "Andy Taylor, guitariste de Duran Duran, décède à 65 ans",
-            "Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité",
-            "\"Le Monde\" et Mediapart publient de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan ",
-            "\"Inacceptables\", \"regrettables\", \"prétexte à la manipulation politique\"... Les pays visés s'indignent face aux"
+            "Le Monde",
+            "RFI",
+            "AFP (via Le Figaro)",
+            "La Croix"
           ],
           "a": 0,
-          "x": "Rubrique Société : Andy Taylor, guitariste de Duran Duran, décède à 65 ans"
+          "x": "Titre publié par Le Monde."
+        },
+        {
+          "t": "qcm",
+          "q": "Quelle rédaction a publié ce titre : « Danemark : une nouvelle fuite de données touche 11 000 personnes » ?",
+          "c": [
+            "Le Monde",
+            "RFI",
+            "Le Figaro",
+            "Ouest-France"
+          ],
+          "a": 0,
+          "x": "Titre publié par Le Monde."
         },
         {
           "t": "write",
-          "q": "✍️ Écris un chapô de 300 signes maximum pour cette dépêche",
-          "src": "Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans. Il a quitté le groupe au milieu des années 1980 après de nombreux tubes. Son décès a été confirmé par un communiqué conjoint de sa famille et de ses anciens camarades de groupe.",
           "max": 300,
-          "model": "**Chapô possible :** Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans. Il a quitté le groupe au milieu des années 1980 après de nombreux tubes.",
+          "q": "✍️ Écris un chapô de 300 signes maximum pour cette info (l'essentiel : qui, quoi, où, quand)",
+          "src": "Titre : Espagne : un pétrolier chargé de diesel coule au large d’Ibiza, faisant un mort\n\nLe Monde : « L’équipage de 17 membres a été secouru, mais l’un d’entre eux a ensuite été déclaré mort à l’hôpital, à Ibiza, selon les secours de l’archipel des Baléares. Les dommages environnementaux sont en cours d’évaluation. » franceinfo : « Les éventuels dommages environnementaux sont en cours d'évaluation, selon les secours. » Information également rapportée par Le Figaro, Libération.",
+          "model": "**Chapô publié par Le Monde :** L’équipage de 17 membres a été secouru, mais l’un d’entre eux a ensuite été déclaré mort à l’hôpital, à Ibiza, selon les secours de l’archipel des Baléares. Les dommages environnementaux sont en cours d’évaluation.",
           "crit": [
             "Il donne l'essentiel (qui, quoi, où, quand)",
             "Il fait moins de 300 signes",
             "Il ne recopie pas le titre",
-            "Tout ce qui est écrit figure dans la dépêche"
+            "Tout ce qui est écrit figure dans les citations"
           ]
         }
       ]
@@ -390,55 +437,113 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       "title": "Médias & atelier",
       "icon": "🎙️",
-      "desc": "Presse, culture et écriture",
+      "desc": "Qui a publié quoi, et à toi d'écrire",
       "exercises": [
         {
-          "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Monde » dans l'édition du jour ?",
-          "c": [
-            "Pétrolier chargé de diesel coule au large d’Ibiza, un mort",
-            "\"Le Monde\" et Mediapart publient de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan ",
-            "Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord",
-            "Andy Taylor, guitariste de Duran Duran, décède à 65 ans"
+          "t": "input",
+          "q": "Complète le titre publié par France 24 : « L'UE, la _____ et d'autres pays s'indignent des nouveaux droits de douane américains »",
+          "a": [
+            "Chine"
           ],
-          "a": 0,
-          "x": "Rubrique Monde : Pétrolier chargé de diesel coule au large d’Ibiza, un mort"
+          "x": "Titre exact : « L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains »"
+        },
+        {
+          "t": "vf",
+          "q": "Le Monde a publié ce titre : « Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans »",
+          "a": true,
+          "x": "C'est le titre exact."
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre publié par Le Monde : « Irak : huit nouveaux djihadistes français, dont _____ Garnier, condamnés à la perpétuité »",
+          "a": [
+            "Romain"
+          ],
+          "x": "Titre exact : « Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité »"
+        },
+        {
+          "t": "vf",
+          "q": "Le Monde a publié ce titre : « Irak : huit nouveaux djihadistes français, dont Romain Bardella, condamnés à la perpétuité »",
+          "a": false,
+          "x": "Le titre exact est : « Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité »"
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre publié par Le Monde : « Danemark : une nouvelle fuite de données touche _____ 000 personnes »",
+          "a": [
+            "11"
+          ],
+          "x": "Titre exact : « Danemark : une nouvelle fuite de données touche 11 000 personnes »"
+        },
+        {
+          "t": "vf",
+          "q": "France 24 a publié ce titre : « 🔴 Écrits antisémites : Sécurité Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »",
+          "a": false,
+          "x": "Le titre exact est : « 🔴 Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »"
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre publié par Le Monde : « Elections législatives en _____ : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite »",
+          "a": [
+            "Espagne"
+          ],
+          "x": "Titre exact : « Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite »"
         },
         {
           "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Climat » dans l'édition du jour ?",
+          "q": "Quelle rédaction a publié ce titre : « L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains » ?",
           "c": [
-            "EN DIRECT, guerre en Ukraine : des foyers privés d’électricité dans sept régions après des attaques russes ; p",
-            "\"Inacceptables\", \"regrettables\", \"prétexte à la manipulation politique\"... Les pays visés s'indignent face aux",
-            "\"Le Monde\" et Mediapart publient de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan ",
-            "Andy Taylor, guitariste de Duran Duran, décède à 65 ans"
+            "France 24",
+            "Ouest-France",
+            "Le Monde",
+            "Mediapart"
           ],
           "a": 0,
-          "x": "Rubrique Climat : EN DIRECT, guerre en Ukraine : des foyers privés d’électricité dans sept régions après des attaques russes ; près de 170 affrontements"
+          "x": "Titre publié par France 24."
         },
         {
-          "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Médias » dans l'édition du jour ?",
-          "c": [
-            "Reporters sans frontières demande la suspension de CNews",
-            "Andy Taylor, guitariste de Duran Duran, décède à 65 ans",
-            "Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord",
-            "Pétrolier chargé de diesel coule au large d’Ibiza, un mort"
+          "t": "match",
+          "q": "Associe chaque titre à la rédaction qui l'a publié",
+          "pairs": [
+            [
+              "L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane",
+              "France 24"
+            ],
+            [
+              "Emilie König, la plus médiatique des djihadistes françaises, devant la justice",
+              "Le Monde"
+            ],
+            [
+              "Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver",
+              "AFP (via Le Figaro)"
+            ]
           ],
-          "a": 0,
-          "x": "Rubrique Médias : Reporters sans frontières demande la suspension de CNews"
+          "x": "Chaque titre est cité tel qu'il a été publié."
         },
         {
           "t": "write",
-          "q": "✍️ Écris un chapô de 300 signes maximum pour cette dépêche",
-          "src": "Reporters sans frontières saisit l’Arcom pour demander la suspension d’un mois de CNews. L’ONG accuse la chaîne de non‑respect répété du pluralisme et de favoriser l’extrême droite. Le dossier porte sur 61 heures de programmes diffusés en septembre.",
           "max": 300,
-          "model": "**Chapô possible :** Reporters sans frontières saisit l’Arcom pour demander la suspension d’un mois de CNews. L’ONG accuse la chaîne de non‑respect répété du pluralisme et de favoriser l’extrême droite.",
+          "q": "✍️ Écris un chapô de 300 signes maximum pour cette info (l'essentiel : qui, quoi, où, quand)",
+          "src": "Titre : L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains\n\nFrance 24 : « La nouvelle série de droits de douane annoncée par l'administration Trump, mercredi, a suscité la colère de ses principaux partenaires commerciaux – dont la Chine, le Brésil, l'Union européenne et le Japon. » franceinfo : « Washington accuse les pays visés de recourir à des subventions qui occasionnent une surproduction et pénalisent les entreprises américaines. » Information également rapportée par RFI.",
+          "model": "**Chapô publié par France 24 :** La nouvelle série de droits de douane annoncée par l'administration Trump, mercredi, a suscité la colère de ses principaux partenaires commerciaux – dont la Chine, le Brésil, l'Union européenne et le Japon.",
           "crit": [
             "Il donne l'essentiel (qui, quoi, où, quand)",
             "Il fait moins de 300 signes",
             "Il ne recopie pas le titre",
-            "Tout ce qui est écrit figure dans la dépêche"
+            "Tout ce qui est écrit figure dans les citations"
+          ]
+        },
+        {
+          "t": "write",
+          "max": 300,
+          "q": "✍️ Écris un chapô de 300 signes maximum pour cette info (l'essentiel : qui, quoi, où, quand)",
+          "src": "Titre : Emilie König, la plus médiatique des djihadistes françaises, devant la justice\n\nLe Monde : « Le procès de cette « revenante » de Syrie, âgée de 41 ans et mère de cinq enfants, accusée d’association de malfaiteurs terroriste notamment pour avoir relayé la propagande de l’organisation Etat islamique, s’ouvre jeudi à Paris. » 20 Minutes : « Cette ancienne figure de l’État islamique, seule femme à figurer sur la liste noire des Etats-Unis, est jugée à partir de ce jeudi devant la cour d’assises spécialement composée. »",
+          "model": "**Chapô publié par Le Monde :** Le procès de cette « revenante",
+          "crit": [
+            "Il donne l'essentiel (qui, quoi, où, quand)",
+            "Il fait moins de 300 signes",
+            "Il ne recopie pas le titre",
+            "Tout ce qui est écrit figure dans les citations"
           ]
         }
       ]
