@@ -1,39 +1,33 @@
-// SCOOP:REGENERER
 /* Scoop — édition du 2026-11-26 (générée automatiquement, IA gratuite) */
 window.SCOOP_DAYS = window.SCOOP_DAYS || {};
 window.SCOOP_DAYS['2026-11-26'] = {
   "date": "2026-11-26",
-  "title": "Antisémitisme, diplomatie et droits de douane : enjeux mondiaux et français",
-  "intro": "Les révélations antisémites sur Jordan Bardella soulignent l'importance de la vérification des faits. En parallèle, la diplomatie internationale et les mesures commerciales américaines alimentent les débats politiques.",
+  "title": "Bardella, Trump et l’UE : révélations, diplomatie et sanctions",
+  "intro": "Les médias dévoilent de nouveaux écrits antisémites de Jordan Bardella, tandis que Trump et Rutte appellent Moscou à éviter d’étendre la guerre en Ukraine. Parallèlement, l’UE se penche sur son budget et l’aide à l’Ukraine, et les États-Unis imposent de nouveaux droits de douane.",
   "word": {
-    "term": "vérification des faits",
-    "def": "Processus d'examen rigoureux des informations avant publication, visant à garantir l'exactitude et la fiabilité des contenus journalistiques."
+    "term": "droit de douane",
+    "def": "Mesure fiscale appliquée aux marchandises importées, visant à protéger l’industrie nationale ou à générer des revenus. Les droits de douane peuvent influencer les relations commerciales internationales."
   },
   "glossary": [
     {
-      "term": "Mediapart",
-      "def": "Média d'investigation français spécialisé dans la publication d'enquêtes et de révélations politiques.",
-      "cat": "Journalisme"
-    },
-    {
-      "term": "OTAN",
-      "def": "Organisation du Traité de l'Atlantique Nord, alliance militaire intergouvernementale regroupant 31 pays.",
-      "cat": "Institutions"
+      "term": "cour internationale de justice",
+      "def": "Tribunal supranational chargé de régler les différends entre États et de rendre des avis consultatifs.",
+      "cat": "Justice"
     }
   ],
   "memo": [
-    "Jordan Bardella face à de nouveaux éléments d’écrits antisémites",
+    "- 2025 : expulsion de Kilmar Abrego Garcia vers le Salvador",
+    "- 2027 : David Lisnard progresse dans les sondages présidentiels",
+    "Jordan Bardella face à de nouveaux écrits antisémites",
     "Trump et le chef de l’OTAN exhortent Moscou à ne pas « étendre la guerre »",
-    "Les États-Unis imposent de nouveaux droits de douane, provoquant l’indignation des partenaires",
-    "David Lisnard séduit les déçus de la droite pour la présidentielle 2027",
-    "Législatives en Espagne : l’Andalousie, laboratoire de l’alliance droite et extrême droite"
+    "Les États-Unis annoncent de nouveaux droits de douane, provoquant l’indignation de l’UE et de la Chine"
   ],
   "stories": [
     {
       "tag": "Politique",
-      "title": "Jordan Bardella face à de nouveaux éléments d’écrits antisémites",
-      "text": "Le Monde et Mediapart ont publié de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella. Les médias ont eu accès à une conversation où un ancien camarade de lycée de Bardella reçoit des messages. Les révélations viennent deux mois après les premières découvertes de Mediapart.",
-      "why": "Ce sujet illustre la responsabilité des médias et la vérification des faits, un concept clé pour les concours de journalisme.",
+      "title": "Jordan Bardella face à de nouveaux écrits antisémites",
+      "text": "Le Monde et Mediapart publient de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella. Les médias ont eu accès à une conversation où un ancien camarade de lycée reçoit des messages affirmant que les sionistes sont responsables. Les révélations renforcent les accusations déjà portées contre le candidat de l’Rassemblement National.",
+      "why": "Comprendre le rôle des médias d’investigation et l’impact des preuves documentées sur la réputation d’un homme politique.",
       "sources": [
         {
           "name": "franceinfo",
@@ -56,8 +50,8 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       "tag": "Monde",
       "title": "Trump et le chef de l’OTAN exhortent Moscou à ne pas « étendre la guerre »",
-      "text": "Lors d’une rencontre à huis clos, Donald Trump et Mark Rutte ont appelé la Russie à ne pas étendre la guerre en Ukraine. La déclaration conjointe a été publiée mercredi. Les deux hommes ont plaidé pour une résolution rapide et pacifique du conflit.",
-      "why": "Il permet d’aborder la diplomatie internationale, les institutions comme l’OTAN et les enjeux géopolitiques, essentiels pour les concours.",
+      "text": "Lors d’une rencontre à huis clos, Donald Trump et Mark Rutte ont appelé la Russie à éviter toute action qui étendrait délibérément ou involontairement la guerre en Ukraine. La déclaration conjointe a été publiée mercredi. Les deux dirigeants ont souligné l’importance de la stabilité régionale.",
+      "why": "Illustrer les mécanismes de la diplomatie internationale et la communication conjointe entre chefs d’État.",
       "sources": [
         {
           "name": "Le Monde",
@@ -68,25 +62,21 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "url": "https://www.france24.com/fr/europe/20261126-en-direct-ukraine-russie-ue-sommet-aide-zelensky-poutine"
         },
         {
-          "name": "Le Figaro",
-          "url": "https://www.lefigaro.fr/international/guerre-en-ukraine-trump-et-le-secretaire-general-de-l-otan-exhortent-la-russie-a-ne-pas-etendre-la-guerre-avec-kiev-20261126"
-        },
-        {
           "name": "Libération",
           "url": "https://www.liberation.fr/international/amerique/donald-trump-et-lotan-exhortent-la-russie-a-eviter-toute-action-susceptible-daggraver-la-guerre-en-ukraine-20261126_R7D7NLQYHNC7ZJQ7CPTTRQDPJ4/"
+        },
+        {
+          "name": "20 Minutes",
+          "url": "https://www.20minutes.fr/monde/ukraine/4265844-20261126-direct-guerre-ukraine-trump-chef-otan-appellent-russie-etendre-guerre?at_medium=display&at_campaign=149"
         }
       ]
     },
     {
       "tag": "Économie",
-      "title": "Les États-Unis imposent de nouveaux droits de douane, provoquant l’indignation des partenaires",
-      "text": "Washington a annoncé une série de droits de douane qui a suscité la colère de l’Union européenne, de la Chine, du Brésil et d’autres pays. Les partenaires affirment que ces mesures pénalisent les entreprises américaines. Les États-Unis accusent les pays visés de recourir à des subventions.",
-      "why": "Ce sujet introduit les mécanismes du commerce international, les droits de douane et les relations commerciales, des notions fondamentales pour les concours.",
+      "title": "Les États-Unis annoncent de nouveaux droits de douane, provoquant l’indignation de l’UE et de la Chine",
+      "text": "L’administration Trump a annoncé une série de droits de douane qui a suscité la colère de ses principaux partenaires commerciaux, dont l’Union européenne et la Chine. La Chine a menacé de riposter en prenant des mesures nécessaires. L’annonce a des répercussions sur le commerce international.",
+      "why": "Comprendre les relations commerciales internationales, les droits de douane et leurs effets sur l’économie mondiale.",
       "sources": [
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/monde/usa/droits-de-douane/inacceptables-regrettables-pretexte-a-la-manipulation-politique-les-pays-vises-s-indignent-face-aux-nouveaux-droits-de-douane-americains_8300712.html#xtor=RSS-3-[lestitres]"
-        },
         {
           "name": "France 24",
           "url": "https://www.france24.com/fr/am%C3%A9riques/20261126-l-ue-la-chine-et-d-autres-pays-s-indignent-des-nouveaux-droits-de-douane-am%C3%A9ricains"
@@ -98,50 +88,58 @@ window.SCOOP_DAYS['2026-11-26'] = {
         {
           "name": "AFP (via Le Figaro)",
           "url": "https://www.lefigaro.fr/conjoncture/la-chine-menace-de-riposter-face-a-l-annonce-des-nouveaux-droits-de-douane-americains-20261126"
+        },
+        {
+          "name": "Le Temps",
+          "url": "https://www.letemps.ch/monde/les-pays-vises-par-les-nouveaux-droits-de-douane-etats-uniens-font-part-de-leur-mecontentement"
         }
       ]
     },
     {
       "tag": "Politique",
-      "title": "David Lisnard séduit les déçus de la droite pour la présidentielle 2027",
-      "text": "Le candidat David Lisnard attire les électeurs mécontents des figures de leur camp dans les Yvelines, les Hauts-de-Seine et le Rhône. Il se présente comme un continuateur sans changement avec Retailleau et Philippe. Il propose d’organiser une primaire pour débattre avec Édouard Philippe.",
-      "why": "Cette histoire illustre la dynamique des élections présidentielles françaises, la formation de nouvelles coalitions et la stratégie de campagne, des notions clés pour les concours de journalisme.",
+      "title": "David Lisnard, maire de Cannes, veut débattre avec Édouard Philippe sous condition de primaire",
+      "text": "Le maire de Cannes, David Lisnard, a confirmé son intention de participer à un débat avec Édouard Philippe, mais uniquement si une primaire à droite est organisée. Il souhaite que cette primaire inclue des candidats comme Éric Zemmour et Nicolas Dupont-Aignan. Lisnard est également à la tête de l'Association des maires de France et progresse dans les sondages pour la présidentielle 2027.",
+      "why": "Cette affaire illustre le rôle des institutions locales dans la politique nationale et la dynamique des primaires, concepts essentiels pour comprendre la gouvernance française.",
       "sources": [
         {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/politique/article/2026/11/25/comment-le-candidat-david-lisnard-seduit-les-decus-d-une-partie-de-la-droite-avec-retailleau-et-philippe-on-continue-sans-rien-changer_6815170_823448.html"
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/elections/c-est-la-confirmation-de-mon-identite-politique-comment-david-lisnard-compte-utiliser-son-image-de-maire-pour-la-presidentielle_8296046.html#xtor=RSS-3-[lestitres]"
         },
         {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/europe/20261126-en-espagne-l-extr%C3%AAme-droite-s%C3%A9duit-une-partie-de-la-jeunesse-en-surfant-sur-sa-d%C3%A9tresse"
+          "name": "AFP (via Le Figaro)",
+          "url": "https://www.lefigaro.fr/elections/presidentielles/presidentielle-2027-david-lisnard-dit-oui-a-edouard-philippe-pour-un-debat-mais-avec-une-primaire-20261126"
         },
         {
-          "name": "Le Figaro",
-          "url": "https://www.lefigaro.fr/elections/presidentielles/en-direct-presidentielle-2027-marine-le-pen-se-declare-sereine-face-a-l-emergence-de-david-lisnard-20261126"
+          "name": "Ouest-France",
+          "url": "https://www.ouest-france.fr/elections/presidentielle/presidentielle-2027-david-lisnard-veut-attirer-des-electeurs-de-tous-horizons-y-compris-le-rn-dc250d74-e972-11f1-86c1-70195b4d2e52?utm_source=fluxpublicactu&utm_medium=fluxrss&utm_campaign=banquedecontenu"
+        }
+      ]
+    },
+    {
+      "tag": "Europe",
+      "title": "Sommet extraordinaire de Bruxelles sur le budget de l'UE et l'aide à l'Ukraine",
+      "text": "Les 27 chefs d’État et de gouvernements de l’Union européenne se réunissent à Bruxelles pour avancer sur le futur budget de l’Union. Le sommet vise également à débloquer les discussions sur l’aide à l’Ukraine. Les dirigeants cherchent à conclure un accord sur le budget de sept ans.",
+      "why": "Comprendre les mécanismes de décision de l’UE et les enjeux budgétaires internationaux est crucial pour les concours portant sur le droit européen et la politique internationale.",
+      "sources": [
+        {
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/monde/europe/union-europeenne/direct-sommet-europeen-les-dirigeants-de-l-ue-reunis-a-bruxelles-pour-avancer-sur-le-futur-budget-des-27-et-l-aide-a-l-ukraine_8300823.html#xtor=RSS-3-[lestitres]"
+        },
+        {
+          "name": "RFI",
+          "url": "https://www.rfi.fr/fr/europe/20261126-les-dirigeants-de-l-ue-r%C3%A9unis-en-sommet-extraordinaire-pour-discuter-du-budget-et-de-l-aide-%C3%A0-l-ukraine"
+        },
+        {
+          "name": "Euronews",
+          "url": "https://fr.euronews.com/2026/11/26/sommet-de-bruxelles-tendu-sur-budget-europeen-de-2-000-milliards-et-aide-a-lukraine"
         }
       ]
     },
     {
       "tag": "Monde",
-      "title": "Législatives en Espagne : l’Andalousie, laboratoire de l’alliance droite et extrême droite",
-      "text": "À l’approche des élections législatives en Espagne, l’Andalousie est un terrain d’essai pour l’alliance entre la droite et l’extrême droite. Les partisans du Parti populaire et de Vox se préparent à un nouveau scrutin. Le contexte est marqué par la montée des forces politiques conservatrices.",
-      "why": "Cette situation montre la montée de l’extrême droite en Europe, un phénomène d’importance pour les concours de journalisme qui examinent les tendances politiques et sociales.",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/international/article/2026/11/26/elections-legislatives-en-espagne-l-andalousie-laboratoire-de-l-alliance-entre-la-droite-et-l-extreme-droite_6815491_3210.html"
-        },
-        {
-          "name": "RFI",
-          "url": "https://www.rfi.fr/fr/podcasts/reportage-international/20261125-l%C3%A9gislatives-en-espagne-les-canaries-redoutent-une-crise-migratoire-en-cas-de-victoire-de-la-droite-dure"
-        }
-      ]
-    },
-    {
-      "tag": "Justice",
-      "title": "Kilmar Ábrego García, symbole des expulsions massives, part pour l’Espagne",
-      "text": "Le Salvadorien Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne après une décision de la Cour suprême. Il a été inculpé sans suite à son retour aux États-Unis. Son départ illustre les enjeux de la politique migratoire américaine.",
-      "why": "L’histoire met en lumière les procédures d’expulsion, les droits des migrants et les décisions judiciaires, des thèmes fondamentaux pour les concours de journalisme juridique et social.",
+      "title": "Kilmar Abrego Garcia, ex-déporté, part en Espagne",
+      "text": "Kilmar Abrego Garcia, Salvadorien expulsé à tort vers le Salvador en 2025, est arrivé en Espagne pour une nouvelle vie. Il a été inculpé sans suite à son retour aux États-Unis. Son départ volontaire vers l’Espagne intervient après une décision de la Cour suprême.",
+      "why": "Illustration de la procédure d’expulsion et des recours judiciaires aux États-Unis, utile pour comprendre les droits des migrants et le rôle des tribunaux.",
       "sources": [
         {
           "name": "Le Monde",
@@ -154,10 +152,10 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
-      "tag": "Monde",
-      "title": "Elections en Espagne : le coup de poker de Pedro Sanchez",
-      "text": "Les sondages favorisent la droite et l’extrême droite, mais le premier ministre refuse d’envisager une défaite. Il cherche à consolider son pouvoir malgré les pressions internationales. Les élections législatives approchent.",
-      "why": "Comprendre les dynamiques électorales et le rôle des partis politiques dans un pays européen, utile pour analyser les stratégies de pouvoir.",
+      "tag": "Europe",
+      "title": "Pedro Sanchez refuse de céder face aux sondages",
+      "text": "Les sondages favorisent la droite et l’extrême droite, mais le Premier ministre espagnol refuse d’envisager une défaite aux élections législatives. La politique espagnole est mise à l’épreuve par les tensions entre les partis. Le contexte électoral influence la stabilité gouvernementale.",
+      "why": "Permet d’aborder les mécanismes électoraux, la majorité parlementaire et les stratégies politiques en Europe.",
       "sources": [
         {
           "name": "Le Monde",
@@ -170,26 +168,10 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
-      "tag": "Europe",
-      "title": "Espagne : les féministes manifestent contre les violences faites aux femmes",
-      "text": "Des milliers de femmes se mobilisent avant les législatives pour dénoncer les violences. Les manifestations coïncident avec la montée de l’extrême droite. Elles exigent des mesures de protection et de justice.",
-      "why": "Illustration des mouvements sociaux en Europe et de leur influence sur les élections, compétence clé pour les concours de journalisme.",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/international/article/2026/11/26/nous-jouons-tout-lors-de-cette-election-en-espagne-les-femmes-manifestent-pour-leurs-droits-avant-les-legislatives-dimanche_6815461_3210.html"
-        },
-        {
-          "name": "Euronews",
-          "url": "https://fr.euronews.com/2026/11/26/espagne-les-feministes-manifestent-contre-les-violences-faites-aux-femmes-a-lapproche-des-"
-        }
-      ]
-    },
-    {
       "tag": "Justice",
-      "title": "La Birmanie refuse de se conformer aux exigences de la CIJ sur le génocide des Rohingyas",
-      "text": "La Cour internationale de justice a jugé la Birmanie responsable du génocide. Le dirigeant Min Aung Hlaing a déclaré qu’elle ne suivrait pas les parties jugées inappropriées. Le verdict impose des mesures de réparation.",
-      "why": "Comprendre le fonctionnement de la CIJ et les enjeux de la justice internationale, essentiel pour les concours de journalisme international.",
+      "title": "Birmanie refuse de suivre certaines exigences de la CIJ",
+      "text": "La Cour internationale de justice a jugé la Birmanie responsable du génocide des Rohingyas. Le dirigeant Min Aung Hlaing a déclaré que la Birmanie ne suivrait pas les parties du verdict qu’elle juge «inappropriées». Le pays conteste les exigences de la CIJ.",
+      "why": "Exemple de la jurisprudence internationale, de la responsabilité des États et du rôle des institutions judiciaires supranationales.",
       "sources": [
         {
           "name": "France 24",
@@ -198,6 +180,22 @@ window.SCOOP_DAYS['2026-11-26'] = {
         {
           "name": "Le Temps",
           "url": "https://www.letemps.ch/monde/asie-oceanie/coupable-de-genocide-birmanie-ne-se-conformera-pas-a-toutes-les-exigences-de-la-cour-internationale-de-justice"
+        }
+      ]
+    },
+    {
+      "tag": "Europe",
+      "title": "Ligue des champions : PSG accroché par la Roma, Lille bat le Bayern",
+      "text": "Le PSG a obtenu un nul 2-2 contre la Roma, restant deuxième du classement de la Ligue des champions. Lille a remporté un exploit en battant le Bayern. Les performances des clubs influencent les classements européens.",
+      "why": "Illustration du fonctionnement des compétitions sportives européennes, du classement et de l’impact des résultats sur les clubs et les sponsors.",
+      "sources": [
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/sports/20261125-ligue-des-champions-premi%C3%A8re-difficult%C3%A9-pour-le-psg-lille-signe-un-exploit-face-au-bayern"
+        },
+        {
+          "name": "RFI",
+          "url": "https://www.rfi.fr/fr/sports/20261125-ligue-des-champions-le-psg-accroch%C3%A9-par-la-roma-lille-s-offre-le-bayern"
         }
       ]
     }
@@ -210,98 +208,77 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "exercises": [
         {
           "t": "qcm",
-          "q": "Quel média a publié de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella ?",
+          "q": "Quel candidat de l’Rassemblement National est accusé d’écrits antisémites selon Le Monde et Mediapart ?",
           "c": [
-            "Le Monde",
-            "Mediapart",
-            "Le Figaro",
-            "L'Humanité"
-          ],
-          "a": 0,
-          "x": "Le Monde et Mediapart ont publié de nouveaux éléments de preuve."
-        },
-        {
-          "t": "vf",
-          "q": "Trump et Mark Rutte ont appelé la Russie à ne pas \"étendre la guerre\" en Ukraine.",
-          "a": true,
-          "x": "La déclaration conjointe a été publiée mercredi."
-        },
-        {
-          "t": "qcm",
-          "q": "Qui propose d’organiser une primaire pour débattre avec Édouard Philippe ?",
-          "c": [
-            "David Lisnard",
             "Jordan Bardella",
-            "Mark Rutte",
-            "Pedro Sanchez"
+            "Éric Zemmour",
+            "Nicolas Dupont-Aignan",
+            "David Lisnard"
           ],
           "a": 0,
-          "x": "David Lisnard propose d’organiser une primaire."
+          "x": "Le texte indique que les écrits antisémites sont attribués à Jordan Bardella."
         },
         {
           "t": "vf",
-          "q": "Les manifestations féministes en Espagne ont lieu avant les législatives pour dénoncer les violences faites aux femmes.",
+          "q": "Les États-Unis ont annoncé de nouveaux droits de douane qui ont provoqué l’indignation de l’Union européenne et de la Chine.",
           "a": true,
-          "x": "Des milliers de femmes se mobilisent avant les législatives."
-        },
-        {
-          "t": "qcm",
-          "q": "Qui a exhorté Moscou à ne pas « étendre la guerre » lors de la rencontre à huis clos ?",
-          "c": [
-            "Donald Trump et Mark Rutte",
-            "Joe Biden et Emmanuel Macron",
-            "Vladimir Poutine et Recep Tayyip Erdoğan",
-            "Angela Merkel et Boris Johnson"
-          ],
-          "a": 0,
-          "x": "Les deux hommes ont plaidé pour une résolution rapide et pacifique du conflit."
-        },
-        {
-          "t": "vf",
-          "q": "Kilmar Ábrego García a été expulsé à tort en 2025.",
-          "a": true,
-          "x": "Le Salvadorien a quitté les États-Unis pour l’Espagne après une décision de la Cour suprême."
+          "x": "La phrase du résumé confirme cette affirmation."
         },
         {
           "t": "input",
-          "q": "Quel est le nom de la région espagnole où l’alliance droite et extrême droite se préparent à un nouveau scrutin ?",
+          "q": "Quel dirigeant birmane a déclaré que la Birmanie ne suivrait pas les parties du verdict de la CIJ qu’elle juge «inappropriées» ?",
           "a": [
-            "Andalousie"
+            "Min Aung Hlaing"
           ],
-          "x": "À l’approche des élections législatives en Espagne, l’Andalousie est un terrain d’essai pour l’alliance entre la droite et l’extrême droite."
+          "x": "Le résumé précise que c’est Min Aung Hlaing qui a fait cette déclaration."
+        },
+        {
+          "t": "vf",
+          "q": "La Cour internationale de justice a jugé la Birmanie responsable du génocide des Rohingyas.",
+          "a": true,
+          "x": "Le résumé indique que la CIJ a jugé la Birmanie responsable."
         },
         {
           "t": "match",
-          "q": "Associe chaque thème aux éléments clés mentionnés dans les informations du jour",
+          "q": "Associe chaque acteur à son rôle dans les événements décrits",
           "pairs": [
             [
               "Jordan Bardella",
-              "écrits antisémites"
+              "candidat de l’Rassemblement National"
             ],
             [
-              "Trump et Rutte",
-              "exhorter Moscou à ne pas étendre la guerre"
+              "Le Monde",
+              "médias d’investigation"
             ],
             [
               "David Lisnard",
-              "séduit les déçus de la droite pour la présidentielle 2027"
+              "maire de Cannes"
             ],
             [
-              "Kilmar Ábrego García",
-              "expulsion à tort et départ pour l’Espagne"
+              "Min Aung Hlaing",
+              "dirigeant de la Birmanie"
             ]
           ],
-          "x": "Chaque paire relie un sujet à son élément distinctif."
+          "x": "Chaque paire relie un nom à la fonction ou à la position mentionnée dans le texte."
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre d'une info du jour : « Ligue des champions : PSG accroché par la _____ Lille bat le Bayern »",
+          "a": [
+            "Roma"
+          ],
+          "x": "Titre complet : Ligue des champions : PSG accroché par la Roma, Lille bat le Bayern"
         },
         {
           "t": "write",
-          "q": "Rédige un titre, un chapô et un résumé d’une dépêche basée sur l’information suivante : \"Le Salvadorien Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne après une décision de la Cour suprême. Il a été inculpé sans suite à son retour aux États-Unis.\"",
-          "src": "Le Salvadorien Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne après une décision de la Cour suprême. Il a été inculpé sans suite à son retour aux États-Unis.",
-          "model": "Titre : Kilmar Ábrego García, expulsé à tort, part pour l’Espagne après décision de la Cour suprême.\nChapô : Le Salvadorien, victime d’une expulsion jugée illégale en 2025, quitte les États-Unis pour l’Espagne après que la Cour suprême ait annulé son inculpation.\nRésumé : Kilmar Ábrego García, expulsé à tort en 2025, se rend en Espagne suite à une décision de la Cour suprême qui a annulé son inculpation. Son départ met en lumière les procédures d’expulsion et les droits des migrants aux États-Unis.",
+          "q": "Rédige un titre accrocheur et un chapô (accroche) pour une dépêche sur la décision de la Birmanie de ne pas suivre certaines exigences de la CIJ. Utilise les informations suivantes : La Cour internationale de justice a jugé la Birmanie responsable du génocide des Rohingyas. Le dirigeant Min Aung Hlaing a déclaré que la Birmanie ne suivrait pas les parties du verdict qu’elle juge «inappropriées». Le pays conteste les exigences de la CIJ. Exemple de la jurisprudence internationale, de la responsabilité des États et du rôle des institutions judiciaires supranationales.",
+          "src": "La Cour internationale de justice a jugé la Birmanie responsable du génocide des Rohingyas. Le dirigeant Min Aung Hlaing a déclaré que la Birmanie ne suivrait pas les parties du verdict qu’elle juge «inappropriées». Le pays conteste les exigences de la CIJ. Exemple de la jurisprudence internationale, de la responsabilité des États et du rôle des institutions judiciaires supranationales.",
+          "model": "Titre : \"Birmanie refuse de respecter les exigences de la CIJ sur le génocide des Rohingyas\" \nChapô : \"Face à la décision de la Cour internationale de justice, le dirigeant Min Aung Hlaing a annoncé que la Birmanie ne suivrait pas les parties du verdict qu’elle juge inappropriées, soulignant ainsi son refus de se conformer aux exigences de la CIJ. Cette décision met en lumière les enjeux de la jurisprudence internationale et la responsabilité des États face aux institutions judiciaires supranationales.\"",
           "crit": [
             "Titre court et informatif",
-            "Chapô explicite l’événement principal",
-            "Résumé synthétique et sans ambiguïté"
+            "Chapô explicite la décision et son contexte",
+            "Utilisation des termes exacts du brief",
+            "Pas d’invention d’informations"
           ]
         }
       ]
@@ -312,96 +289,73 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "desc": "International et Europe",
       "exercises": [
         {
-          "t": "qcm",
-          "q": "Quel pays a annoncé de nouveaux droits de douane qui ont suscité l’indignation de l’Union européenne, de la Chine, du Brésil et d’autres pays ?",
-          "c": [
-            "France",
-            "Allemagne",
-            "Royaume-Uni",
-            "États-Unis"
-          ],
-          "a": 3,
-          "x": "Les États-Unis ont annoncé une série de droits de douane."
-        },
-        {
           "t": "vf",
-          "q": "Jordan Bardella a été accusé d’écrits antisémites selon les révélations de Le Monde et Mediapart.",
+          "q": "Les États-Unis ont annoncé une série de droits de douane qui a suscité la colère de l'Union européenne et de la Chine.",
           "a": true,
-          "x": "Les médias ont publié de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella."
+          "x": "L’administration Trump a annoncé une série de droits de douane qui a suscité la colère de ses principaux partenaires commerciaux, dont l’Union européenne et la Chine."
         },
         {
           "t": "input",
-          "q": "Quel chef d’État a exhorté Moscou à ne pas « étendre la guerre » lors d’une rencontre à huis clos avec Mark Rutte ?",
+          "q": "Quel pays a été expulsé à tort vers le Salvador en 2025 et est maintenant en Espagne ?",
           "a": [
-            "Donald Trump"
+            "Kilmar Abrego Garcia"
           ],
-          "x": "Lors d’une rencontre à huis clos, Donald Trump et Mark Rutte ont appelé la Russie à ne pas étendre la guerre."
-        },
-        {
-          "t": "qcm",
-          "q": "Quel candidat attire les électeurs mécontents des figures de leur camp dans les Yvelines, les Hauts-de-Seine et le Rhône pour la présidentielle 2027 ?",
-          "c": [
-            "David Lisnard",
-            "Édouard Philippe",
-            "Nicolas Sarkozy",
-            "Marine Le Pen"
-          ],
-          "a": 0,
-          "x": "Le candidat David Lisnard attire les électeurs mécontents des figures de leur camp."
+          "x": "Kilmar Abrego Garcia, Salvadorien expulsé à tort vers le Salvador en 2025, est arrivé en Espagne pour une nouvelle vie."
         },
         {
           "t": "vf",
-          "q": "La Birmanie a accepté de se conformer aux exigences de la Cour internationale de justice sur le génocide des Rohingyas.",
+          "q": "Le Premier ministre espagnol Pedro Sanchez envisage une défaite aux élections législatives.",
           "a": false,
-          "x": "La Cour internationale de justice a jugé la Birmanie responsable du génocide, mais le dirigeant Min Aung Hlaing a déclaré qu’elle ne suivrait pas les parties jugées inappropriées."
-        },
-        {
-          "t": "vf",
-          "q": "Le candidat David Lisnard propose d’organiser une primaire avec Édouard Philippe.",
-          "a": true,
-          "x": "Il propose d’organiser une primaire pour débattre avec Édouard Philippe."
-        },
-        {
-          "t": "input",
-          "q": "Quel est le nom du Salvadorien expulsé à tort en 2025 qui part pour l’Espagne ?",
-          "a": [
-            "Kilmar Ábrego García"
-          ],
-          "x": "Le Salvadorien Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne."
+          "x": "Le Premier ministre espagnol refuse d’envisager une défaite aux élections législatives."
         },
         {
           "t": "match",
-          "q": "Associe chaque thème aux éléments correspondants de la nouvelle",
+          "q": "Associe chaque déclaration aux dirigeants qui l’ont faite",
           "pairs": [
             [
-              "Jordan Bardella",
-              "écrits antisémites"
+              "Trump et Mark Rutte ont appelé la Russie à éviter toute action qui étendrait délibérément ou involontairement la guerre en Ukraine",
+              "Monde"
             ],
             [
-              "Trump et Mark Rutte",
-              "exhorter Moscou à ne pas étendre la guerre"
+              "Les États-Unis annoncent de nouveaux droits de douane qui ont suscité la colère de l’Union européenne et de la Chine",
+              "Économie"
             ],
             [
-              "Les États-Unis",
-              "nouveaux droits de douane"
-            ],
-            [
-              "David Lisnard",
-              "séduit les déçus de la droite"
+              "Les 27 chefs d’État et de gouvernements de l’Union européenne se réunissent à Bruxelles pour avancer sur le futur budget de l’Union",
+              "Europe"
             ]
           ],
-          "x": "Chaque paire relie un sujet d’actualité à son événement précis."
+          "x": "Associez chaque affirmation à la catégorie d’actualité correspondante."
+        },
+        {
+          "t": "qcm",
+          "q": "Quel est le principal objectif du sommet extraordinaire de Bruxelles mentionné dans l’actualité ?",
+          "c": [
+            "Déterminer le budget de sept ans de l’Union européenne",
+            "Lancer une nouvelle politique commerciale avec la Chine",
+            "Organiser une réunion de crise sur la guerre en Ukraine",
+            "Mettre en place un plan d’expulsion des migrants"
+          ],
+          "a": 0,
+          "x": "Le sommet vise à conclure un accord sur le budget de sept ans de l’Union européenne."
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre d'une info du jour : « Pedro _____ refuse de céder face aux sondages »",
+          "a": [
+            "Sanchez"
+          ],
+          "x": "Titre complet : Pedro Sanchez refuse de céder face aux sondages"
         },
         {
           "t": "write",
-          "q": "Rédige un titre et un chapô pour une dépêche sur la décision de la Cour suprême concernant Kilmar Ábrego García.",
-          "src": "Le Salvadorien Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne après une décision de la Cour suprême. Il a été inculpé sans suite à son retour aux États-Unis.",
-          "model": "Titre : Kilmar Ábrego García quitte les États-Unis après décision de la Cour suprême\nChapô : Le Salvadorien, expulsé à tort en 2025, s’envole vers l’Espagne après que la Cour suprême ait annulé son expulsion, mettant en lumière les enjeux de la politique migratoire américaine.",
+          "q": "Rédige un court paragraphe de 3 à 4 phrases (chapô) qui résume la déclaration conjointe de Trump et Mark Rutte concernant la guerre en Ukraine. Utilise les informations exactes fournies dans le brief.",
+          "src": "Trump et le chef de l’OTAN exhortent Moscou à ne pas « étendre la guerre » — Lors d’une rencontre à huis clos, Donald Trump et Mark Rutte ont appelé la Russie à éviter toute action qui étendrait délibérément ou involontairement la guerre en Ukraine. La déclaration conjointe a été publiée mercredi. Les deux dirigeants ont souligné l’importance de la stabilité régionale.",
+          "model": "Trump et Mark Rutte, lors d’une rencontre à huis clos, ont appelé la Russie à éviter toute action qui étendrait délibérément ou involontairement la guerre en Ukraine. La déclaration conjointe, publiée mercredi, souligne l’importance de la stabilité régionale.",
           "crit": [
-            "Titre court et informatif",
-            "Chapô résume l’essentiel",
-            "Utilise un ton neutre",
-            "Respecte la structure titre/chapô"
+            "Utiliser les termes exacts « Trump et Mark Rutte », « éviter toute action qui étendrait délibérément ou involontairement la guerre en Ukraine », « déclaration conjointe », « publiée mercredi », « importance de la stabilité régionale\"",
+            "Respecter la longueur de 3 à 4 phrases",
+            "Éviter toute information non présente dans le brief"
           ]
         }
       ]
@@ -413,94 +367,81 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "exercises": [
         {
           "t": "qcm",
-          "q": "Quel média a publié de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella ?",
+          "q": "Quel candidat a reçu des messages antisémites selon les nouveaux éléments de preuve publiés par Le Monde et Mediapart ?",
           "c": [
-            "Le Monde",
-            "Mediapart",
-            "Le Figaro",
-            "Libération"
+            "Jordan Bardella",
+            "David Lisnard",
+            "Édouard Philippe",
+            "Min Aung Hlaing"
           ],
           "a": 0,
-          "x": "Le Monde a publié de nouveaux éléments de preuve."
+          "x": "Les médias ont publié des messages attribués à Jordan Bardella."
         },
         {
           "t": "vf",
-          "q": "Les droits de douane imposés par les États-Unis ont été salués par l'Union européenne.",
-          "a": false,
-          "x": "L'Union européenne a exprimé son indignation."
-        },
-        {
-          "t": "input",
-          "q": "Quel pays a été mentionné comme partenaire des États-Unis dans la dispute sur les droits de douane ?",
-          "a": [
-            "Chine"
-          ],
-          "x": "La Chine est citée comme partenaire."
+          "q": "Le maire de Cannes, David Lisnard, souhaite débattre avec Édouard Philippe uniquement si une primaire à droite est organisée.",
+          "a": true,
+          "x": "La déclaration de Lisnard précise cette condition."
         },
         {
           "t": "qcm",
-          "q": "Qui a appelé la Russie à ne pas « étendre la guerre » lors d’une rencontre à huis clos ?",
+          "q": "Quel groupe de candidats souhaite être inclus dans la primaire à droite selon David Lisnard ?",
           "c": [
-            "Donald Trump et Mark Rutte",
-            "Vladimir Poutine et Angela Merkel",
-            "Joe Biden et Emmanuel Macron",
-            "Xi Jinping et Boris Johnson"
+            "Éric Zemmour et Nicolas Dupont-Aignan",
+            "Jordan Bardella et David Lisnard",
+            "Édouard Philippe et Min Aung Hlaing",
+            "Le Monde et Mediapart"
           ],
           "a": 0,
-          "x": "Donald Trump et Mark Rutte ont fait cette déclaration."
+          "x": "Lisnard mentionne spécifiquement Éric Zemmour et Nicolas Dupont-Aignan."
         },
         {
           "t": "vf",
-          "q": "David Lisnard propose d’organiser une primaire pour débattre avec Édouard Philippe.",
-          "a": true,
-          "x": "Il propose d’organiser une primaire pour débattre avec Édouard Philippe."
-        },
-        {
-          "t": "vf",
-          "q": "David Lisnard propose d’organiser une primaire avec Édouard Philippe.",
-          "a": true,
-          "x": "Le candidat David Lisnard propose d’organiser une primaire pour débattre avec Édouard Philippe."
+          "q": "Le verdict de la Cour internationale de justice oblige la Birmanie à suivre toutes les parties du jugement.",
+          "a": false,
+          "x": "Le texte indique que la Birmanie ne suivra pas les parties qu’elle juge «inappropriées»."
         },
         {
           "t": "input",
-          "q": "Quel est le nom du Salvadorien expulsé à tort en 2025 qui part pour l’Espagne ?",
+          "q": "Quel média a publié de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella ?",
           "a": [
-            "Kilmar Ábrego García"
+            "Le Monde",
+            "Mediapart"
           ],
-          "x": "Le Salvadorien Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne."
+          "x": "Les deux médias ont publié les éléments de preuve mentionnés dans le résumé."
         },
         {
           "t": "match",
-          "q": "Associe chaque thème aux éléments correspondants de l’actualité du jour",
+          "q": "Associe chaque élément aux informations correspondantes",
           "pairs": [
             [
-              "Écrits antisémites",
-              "Jordan Bardella face à de nouveaux éléments d’écrits antisémites"
+              "Jordan Bardella",
+              "Les médias ont eu accès à une conversation où un ancien camarade de lycée reçoit des messages affirmant que les sionistes sont responsables"
             ],
             [
-              "Diplomatie internationale",
-              "Trump et le chef de l’OTAN exhortent Moscou à ne pas « étendre la guerre »"
+              "David Lisnard",
+              "Il souhaite que cette primaire inclue des candidats comme Éric Zemmour et Nicolas Dupont-Aignan"
             ],
             [
-              "Commerce international",
-              "Les États-Unis imposent de nouveaux droits de douane"
+              "Birmanie",
+              "Le dirigeant Min Aung Hlaing a déclaré que la Birmanie ne suivrait pas les parties du verdict qu’elle juge «inappropriées»"
             ],
             [
-              "Élections espagnoles",
-              "Législatives en Espagne : l’Andalousie, laboratoire de l’alliance droite et extrême droite"
+              "Édouard Philippe",
+              "Le maire de Cannes, David Lisnard, a confirmé son intention de participer à un débat avec Édouard Philippe"
             ]
           ],
-          "x": "Chaque paire relie un sujet général à un article précis du brief."
+          "x": "Associez chaque phrase aux éléments de la nouvelle."
         },
         {
           "t": "write",
-          "q": "Rédige un titre, un chapô et un résumé d’une dépêche sur l’expulsion de Kilmar Ábrego García vers l’Espagne",
-          "src": "Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne après une décision de la Cour suprême. Il a été inculpé sans suite à son retour aux États-Unis.",
-          "model": "Titre : Kilmar Ábrego García part pour l’Espagne après une expulsion contestée\nChapô : Le Salvadorien, expulsé à tort en 2025, s’envole vers l’Espagne suite à une décision de la Cour suprême américaine.\nRésumé : Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne après une décision de la Cour suprême. Il a été inculpé sans suite à son retour aux États-Unis.",
+          "q": "Rédige un court paragraphe (2-3 phrases) qui résume la position de David Lisnard concernant le débat avec Édouard Philippe.",
+          "src": "Le maire de Cannes, David Lisnard, a confirmé son intention de participer à un débat avec Édouard Philippe, mais uniquement si une primaire à droite est organisée. Il souhaite que cette primaire inclue des candidats comme Éric Zemmour et Nicolas Dupont-Aignan. Lisnard est également à la tête de l'Association des maires de France et progresse dans les sondages pour la présidentielle 2027.",
+          "model": "David Lisnard, maire de Cannes, souhaite débattre avec Édouard Philippe uniquement si une primaire à droite est organisée. Il veut que cette primaire inclue des candidats comme Éric Zemmour et Nicolas Dupont-Aignan. En tant que président de l'Association des maires de France, il progresse également dans les sondages pour la présidentielle 2027.",
           "crit": [
-            "Titre court et informatif",
-            "Chapô accrocheur et précis",
-            "Résumé fidèle aux faits du brief"
+            "Utiliser un ton neutre et factuel",
+            "Ne pas ajouter d'informations non présentes dans le texte",
+            "Respecter la longueur indiquée"
           ]
         }
       ]
