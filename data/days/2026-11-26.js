@@ -1,4 +1,3 @@
-// SCOOP:REGENERER
 /* Scoop — édition du 2026-11-26 (édition de secours sans IA : citations exactes des rédactions) */
 window.SCOOP_DAYS = window.SCOOP_DAYS || {};
 window.SCOOP_DAYS['2026-11-26'] = {
@@ -14,7 +13,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     "Espagne : un pétrolier chargé de diesel coule au large d’Ibiza, faisant un mort",
     "Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité",
     "Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans",
-    "🔴 Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants",
+    "Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants",
     "Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord"
   ],
   "stories": [
@@ -91,8 +90,8 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
-      "tag": "Économie",
-      "title": "🔴 Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants",
+      "tag": "Politique",
+      "title": "Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants",
       "text": "franceinfo : « Les deux médias ont eu accès à une conversation où un ancien camarade de lycée de Jordan Bardella reçoit des messages affirmant notamment que \"ce sont les sionistes qui sont à la tête des banques\". » RFI : « Deux mois après les premières révélations de Mediapart sur des écrits antisémites de jeunesse attribués à Jordan Bardella, le site d'investigation et Le Monde publient, jeudi 26 novembre, de nouveaux éléments indiquant que le président du R […] » Information également rapportée par France 24, Le Figaro.",
       "why": "",
       "sources": [
@@ -135,26 +134,6 @@ window.SCOOP_DAYS['2026-11-26'] = {
         {
           "name": "La Croix",
           "url": "https://www.la-croix.com/economie/budget-de-la-securite-sociale-deputes-et-senateurs-echouent-a-trouver-un-accord-20261126"
-        }
-      ]
-    },
-    {
-      "tag": "Médias",
-      "title": "Reporters sans frontières demande à l’Arcom la suspension de CNews pour une durée d’un mois",
-      "text": "Le Monde : « Après avoir examiné soixante et une heures de programmes diffusés en septembre sur la chaîne contrôlée par Vincent Bolloré, l’ONG dénonce de nouveau un « défaut de pluralisme » et saisit une nouvelle fois l’Autorité de régulation de la comm […] » franceinfo : « L'ONG accuse la chaîne de non-respect répété du pluralisme pour favoriser l'extrême droite. » Information également rapportée par Mediapart.",
-      "why": "",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/economie/article/2026/11/26/reporters-sans-frontieres-demande-la-suspension-de-cnews-pour-une-duree-d-un-mois_6815475_3234.html"
-        },
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/economie/medias/l-ong-reporters-sans-frontieres-saisit-l-arcom-pour-demander-de-suspendre-cnews-pendant-un-mois_8300685.html#xtor=RSS-3-[lestitres]"
-        },
-        {
-          "name": "Mediapart",
-          "url": "https://www.mediapart.fr/journal/culture-et-idees/261126/reporters-sans-frontieres-reclame-la-suspension-de-cnews-pendant-un-mois"
         }
       ]
     },
@@ -211,18 +190,34 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
-      "tag": "Monde",
-      "title": "Danemark : une nouvelle fuite de données touche 11 000 personnes",
-      "text": "Le Monde : « Pour le moment, l’auteur de la fuite n’a pas été identifié. Le nouvel incident s’inscrit dans un contexte de vigilance accrue lié à une hausse des piratages informatiques à travers l’Europe. » Euronews : « Ce nouvel incident survient alors que le Danemark a renforcé ses systèmes de cybersécurité après une précédente faille ayant exposé des données concernant des millions de personnes. »",
+      "tag": "Société",
+      "title": "Des laits infantiles vendus en France sont contaminés par des PFAS interdits et cancérogènes",
+      "text": "Le Monde : « Pour la première fois, des analyses sur des laits infantiles vendus en France révèlent la présence de polluants éternels, et à des niveaux qui exposent les nourrissons à des dépassements de la dose hebdomadaire tolérable fixée par les autor […] » franceinfo : « Sur 652 échantillons alimentaires analysés en France, 21% contiennent au moins un composé per- et polyfluoroalkylé (PFAS), réglementé ou non, selon une étude menée par l'association. »",
       "why": "",
       "sources": [
         {
           "name": "Le Monde",
-          "url": "https://www.lemonde.fr/pixels/article/2026/11/26/danemark-une-nouvelle-fuite-de-donnees-touche-11-000-personnes_6815509_4408996.html"
+          "url": "https://www.lemonde.fr/planete/article/2026/11/26/des-laits-infantiles-vendus-en-france-sont-contamines-par-des-pfas-interdits-et-cancerogenes_6815474_3244.html"
         },
         {
-          "name": "Euronews",
-          "url": "https://fr.euronews.com/2026/11/26/danemark-11-000-personnes-touchees-par-une-nouvelle-fuite-de-donnees"
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/environnement/pollution/pfas/l-ong-generations-futures-denonce-des-failles-reglementaires-pour-limiter-la-presence-de-pfas-dans-les-aliments_8300646.html#xtor=RSS-3-[lestitres]"
+        }
+      ]
+    },
+    {
+      "tag": "Médias",
+      "title": "Reporters sans frontières demande à l’Arcom la suspension de CNews pour une durée d’un mois",
+      "text": "Le Monde : « Après avoir examiné soixante et une heures de programmes diffusés en septembre sur la chaîne contrôlée par Vincent Bolloré, l’ONG dénonce de nouveau un « défaut de pluralisme » et saisit une nouvelle fois l’Autorité de régulation de la comm […] » Mediapart : « L’ONG dépose une nouvelle saisine auprès de l’Arcom pour défaut de pluralisme. »",
+      "why": "",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/economie/article/2026/11/26/reporters-sans-frontieres-demande-la-suspension-de-cnews-pour-une-duree-d-un-mois_6815475_3234.html"
+        },
+        {
+          "name": "Mediapart",
+          "url": "https://www.mediapart.fr/journal/culture-et-idees/261126/reporters-sans-frontieres-reclame-la-suspension-de-cnews-pendant-un-mois"
         }
       ]
     }
@@ -234,66 +229,10 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "desc": "Les titres du jour",
       "exercises": [
         {
-          "t": "input",
-          "q": "Complète le titre publié par AFP (via Le Figaro) : « Budget de la _____ sociale 2027 : députés et sénateurs échouent à trouver un accord »",
-          "a": [
-            "Sécurité"
-          ],
-          "x": "Titre exact : « Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord »"
-        },
-        {
-          "t": "qcm",
-          "q": "Quelle rédaction a publié ce titre : « 🔴 Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants » ?",
-          "c": [
-            "France 24",
-            "Ouest-France",
-            "Libération",
-            "Mediapart"
-          ],
-          "a": 0,
-          "x": "Titre publié par France 24."
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre publié par Le Monde : « Andy Taylor, guitariste historique du groupe Duran _____ est mort à 65 ans »",
-          "a": [
-            "Duran"
-          ],
-          "x": "Titre exact : « Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans »"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre publié par Le Monde : « Emilie _____ la plus médiatique des djihadistes françaises, devant la justice »",
-          "a": [
-            "König"
-          ],
-          "x": "Titre exact : « Emilie König, la plus médiatique des djihadistes françaises, devant la justice »"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre publié par France 24 : « 🔴 Écrits antisémites : Jordan _____ dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »",
-          "a": [
-            "Bardella"
-          ],
-          "x": "Titre exact : « 🔴 Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »"
-        },
-        {
           "t": "vf",
-          "q": "France 24 a publié ce titre : « L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains »",
+          "q": "Le Monde a publié ce titre : « Emilie König, la plus médiatique des djihadistes françaises, devant la justice »",
           "a": true,
           "x": "C'est le titre exact."
-        },
-        {
-          "t": "qcm",
-          "q": "Quelle rédaction a publié ce titre : « Emilie König, la plus médiatique des djihadistes françaises, devant la justice » ?",
-          "c": [
-            "Le Monde",
-            "France 24",
-            "RFI",
-            "Mediapart"
-          ],
-          "a": 0,
-          "x": "Titre publié par Le Monde."
         },
         {
           "t": "qcm",
@@ -308,6 +247,56 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "x": "Titre publié par Le Monde."
         },
         {
+          "t": "qcm",
+          "q": "Quelle rédaction a publié ce titre : « Emilie König, la plus médiatique des djihadistes françaises, devant la justice » ?",
+          "c": [
+            "Le Monde",
+            "AFP (via Le Figaro)",
+            "franceinfo",
+            "RFI"
+          ],
+          "a": 0,
+          "x": "Titre publié par Le Monde."
+        },
+        {
+          "t": "vf",
+          "q": "Le Monde a publié ce titre : « Reporters sans frontières demande à l’Arcom la suspension de CNews pour une durée d’un mois »",
+          "a": true,
+          "x": "C'est le titre exact."
+        },
+        {
+          "t": "vf",
+          "q": "AFP (via Le Figaro) a publié ce titre : « Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord »",
+          "a": true,
+          "x": "C'est le titre exact."
+        },
+        {
+          "t": "qcm",
+          "q": "Quelle rédaction a publié ce titre : « L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains » ?",
+          "c": [
+            "France 24",
+            "Radio-Canada",
+            "20 Minutes",
+            "Le Monde"
+          ],
+          "a": 0,
+          "x": "Titre publié par France 24."
+        },
+        {
+          "t": "vf",
+          "q": "France 24 a publié ce titre : « L'UE, la Taylor et d'autres pays s'indignent des nouveaux droits de douane américains »",
+          "a": false,
+          "x": "Le titre exact est : « L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains »"
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre publié par France 24 : « Écrits antisémites : _____ Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »",
+          "a": [
+            "Jordan"
+          ],
+          "x": "Titre exact : « Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »"
+        },
+        {
           "t": "match",
           "q": "Associe chaque titre à la rédaction qui l'a publié",
           "pairs": [
@@ -316,7 +305,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
               "Le Monde"
             ],
             [
-              "🔴 Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\"",
+              "Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\"",
               "France 24"
             ],
             [
@@ -348,53 +337,21 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "exercises": [
         {
           "t": "vf",
-          "q": "Le Monde a publié ce titre : « Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite »",
-          "a": true,
-          "x": "C'est le titre exact."
-        },
-        {
-          "t": "qcm",
-          "q": "Quelle rédaction a publié ce titre : « Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite » ?",
-          "c": [
-            "Le Monde",
-            "La Croix",
-            "Ouest-France",
-            "Radio-Canada"
-          ],
-          "a": 0,
-          "x": "Titre publié par Le Monde."
-        },
-        {
-          "t": "vf",
-          "q": "Le Monde a publié ce titre : « Espagne : un pétrolier chargé de diesel coule au large d’Ibiza, faisant un mort »",
-          "a": true,
-          "x": "C'est le titre exact."
+          "q": "Le Monde a publié ce titre : « Irak : huit nouveaux djihadistes français, dont Romain Chine, condamnés à la perpétuité »",
+          "a": false,
+          "x": "Le titre exact est : « Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité »"
         },
         {
           "t": "qcm",
           "q": "Quelle rédaction a publié ce titre : « Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité » ?",
           "c": [
             "Le Monde",
-            "franceinfo",
-            "Le Figaro",
+            "Ouest-France",
+            "Mediapart",
             "Radio-Canada"
           ],
           "a": 0,
           "x": "Titre publié par Le Monde."
-        },
-        {
-          "t": "vf",
-          "q": "Le Monde a publié ce titre : « Irak : huit nouveaux djihadistes français, dont Romain König, condamnés à la perpétuité »",
-          "a": false,
-          "x": "Le titre exact est : « Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité »"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre publié par Le Monde : « Danemark : une nouvelle fuite de données touche 11 _____ personnes »",
-          "a": [
-            "000"
-          ],
-          "x": "Titre exact : « Danemark : une nouvelle fuite de données touche 11 000 personnes »"
         },
         {
           "t": "qcm",
@@ -403,19 +360,47 @@ window.SCOOP_DAYS['2026-11-26'] = {
             "Le Monde",
             "RFI",
             "AFP (via Le Figaro)",
-            "La Croix"
+            "Radio-Canada"
           ],
           "a": 0,
           "x": "Titre publié par Le Monde."
         },
         {
+          "t": "vf",
+          "q": "Le Monde a publié ce titre : « Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite »",
+          "a": true,
+          "x": "C'est le titre exact."
+        },
+        {
+          "t": "vf",
+          "q": "Le Monde a publié ce titre : « Espagne : un pétrolier chargé de diesel coule au large d’Ibiza, faisant un mort »",
+          "a": true,
+          "x": "C'est le titre exact."
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre publié par Le Monde : « Elections législatives en _____ : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite »",
+          "a": [
+            "Espagne"
+          ],
+          "x": "Titre exact : « Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite »"
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre publié par Le Monde : « Irak : huit nouveaux djihadistes français, dont _____ Garnier, condamnés à la perpétuité »",
+          "a": [
+            "Romain"
+          ],
+          "x": "Titre exact : « Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité »"
+        },
+        {
           "t": "qcm",
-          "q": "Quelle rédaction a publié ce titre : « Danemark : une nouvelle fuite de données touche 11 000 personnes » ?",
+          "q": "Quelle rédaction a publié ce titre : « Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite » ?",
           "c": [
             "Le Monde",
-            "RFI",
-            "Le Figaro",
-            "Ouest-France"
+            "France 24",
+            "La Croix",
+            "Libération"
           ],
           "a": 0,
           "x": "Titre publié par Le Monde."
@@ -449,70 +434,68 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "x": "Titre exact : « L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains »"
         },
         {
+          "t": "input",
+          "q": "Complète le titre publié par Le Monde : « Emilie _____, la plus médiatique des djihadistes françaises, devant la justice »",
+          "a": [
+            "König"
+          ],
+          "x": "Titre exact : « Emilie König, la plus médiatique des djihadistes françaises, devant la justice »"
+        },
+        {
           "t": "vf",
-          "q": "Le Monde a publié ce titre : « Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans »",
+          "q": "France 24 a publié ce titre : « L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains »",
           "a": true,
           "x": "C'est le titre exact."
         },
         {
-          "t": "input",
-          "q": "Complète le titre publié par Le Monde : « Irak : huit nouveaux djihadistes français, dont _____ Garnier, condamnés à la perpétuité »",
-          "a": [
-            "Romain"
-          ],
-          "x": "Titre exact : « Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité »"
-        },
-        {
-          "t": "vf",
-          "q": "Le Monde a publié ce titre : « Irak : huit nouveaux djihadistes français, dont Romain Bardella, condamnés à la perpétuité »",
-          "a": false,
-          "x": "Le titre exact est : « Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité »"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre publié par Le Monde : « Danemark : une nouvelle fuite de données touche _____ 000 personnes »",
-          "a": [
-            "11"
-          ],
-          "x": "Titre exact : « Danemark : une nouvelle fuite de données touche 11 000 personnes »"
-        },
-        {
-          "t": "vf",
-          "q": "France 24 a publié ce titre : « 🔴 Écrits antisémites : Sécurité Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »",
-          "a": false,
-          "x": "Le titre exact est : « 🔴 Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre publié par Le Monde : « Elections législatives en _____ : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite »",
-          "a": [
-            "Espagne"
-          ],
-          "x": "Titre exact : « Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite »"
-        },
-        {
           "t": "qcm",
-          "q": "Quelle rédaction a publié ce titre : « L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains » ?",
+          "q": "Quelle rédaction a publié ce titre : « Des laits infantiles vendus en France sont contaminés par des PFAS interdits et cancérogènes » ?",
           "c": [
-            "France 24",
-            "Ouest-France",
             "Le Monde",
-            "Mediapart"
+            "Ouest-France",
+            "20 Minutes",
+            "Libération"
           ],
           "a": 0,
-          "x": "Titre publié par France 24."
+          "x": "Titre publié par Le Monde."
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre publié par Le Monde : « Des laits infantiles vendus en _____ sont contaminés par des PFAS interdits et cancérogènes »",
+          "a": [
+            "France"
+          ],
+          "x": "Titre exact : « Des laits infantiles vendus en France sont contaminés par des PFAS interdits et cancérogènes »"
+        },
+        {
+          "t": "vf",
+          "q": "Le Monde a publié ce titre : « Andy Taylor, guitariste historique du groupe Romain Duran, est mort à 65 ans »",
+          "a": false,
+          "x": "Le titre exact est : « Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans »"
+        },
+        {
+          "t": "vf",
+          "q": "France 24 a publié ce titre : « Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »",
+          "a": true,
+          "x": "C'est le titre exact."
+        },
+        {
+          "t": "vf",
+          "q": "AFP (via Le Figaro) a publié ce titre : « Budget de la Duran sociale 2027 : députés et sénateurs échouent à trouver un accord »",
+          "a": false,
+          "x": "Le titre exact est : « Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord »"
         },
         {
           "t": "match",
           "q": "Associe chaque titre à la rédaction qui l'a publié",
           "pairs": [
             [
-              "L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane",
-              "France 24"
-            ],
-            [
               "Emilie König, la plus médiatique des djihadistes françaises, devant la justice",
               "Le Monde"
+            ],
+            [
+              "Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\"",
+              "France 24"
             ],
             [
               "Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver",
@@ -525,8 +508,8 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "t": "write",
           "max": 300,
           "q": "✍️ Écris un chapô de 300 signes maximum pour cette info (l'essentiel : qui, quoi, où, quand)",
-          "src": "Titre : L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains\n\nFrance 24 : « La nouvelle série de droits de douane annoncée par l'administration Trump, mercredi, a suscité la colère de ses principaux partenaires commerciaux – dont la Chine, le Brésil, l'Union européenne et le Japon. » franceinfo : « Washington accuse les pays visés de recourir à des subventions qui occasionnent une surproduction et pénalisent les entreprises américaines. » Information également rapportée par RFI.",
-          "model": "**Chapô publié par France 24 :** La nouvelle série de droits de douane annoncée par l'administration Trump, mercredi, a suscité la colère de ses principaux partenaires commerciaux – dont la Chine, le Brésil, l'Union européenne et le Japon.",
+          "src": "Titre : Emilie König, la plus médiatique des djihadistes françaises, devant la justice\n\nLe Monde : « Le procès de cette « revenante » de Syrie, âgée de 41 ans et mère de cinq enfants, accusée d’association de malfaiteurs terroriste notamment pour avoir relayé la propagande de l’organisation Etat islamique, s’ouvre jeudi à Paris. » 20 Minutes : « Cette ancienne figure de l’État islamique, seule femme à figurer sur la liste noire des Etats-Unis, est jugée à partir de ce jeudi devant la cour d’assises spécialement composée. »",
+          "model": "**Chapô publié par Le Monde :** Le procès de cette « revenante",
           "crit": [
             "Il donne l'essentiel (qui, quoi, où, quand)",
             "Il fait moins de 300 signes",
@@ -538,8 +521,8 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "t": "write",
           "max": 300,
           "q": "✍️ Écris un chapô de 300 signes maximum pour cette info (l'essentiel : qui, quoi, où, quand)",
-          "src": "Titre : Emilie König, la plus médiatique des djihadistes françaises, devant la justice\n\nLe Monde : « Le procès de cette « revenante » de Syrie, âgée de 41 ans et mère de cinq enfants, accusée d’association de malfaiteurs terroriste notamment pour avoir relayé la propagande de l’organisation Etat islamique, s’ouvre jeudi à Paris. » 20 Minutes : « Cette ancienne figure de l’État islamique, seule femme à figurer sur la liste noire des Etats-Unis, est jugée à partir de ce jeudi devant la cour d’assises spécialement composée. »",
-          "model": "**Chapô publié par Le Monde :** Le procès de cette « revenante",
+          "src": "Titre : Des laits infantiles vendus en France sont contaminés par des PFAS interdits et cancérogènes\n\nLe Monde : « Pour la première fois, des analyses sur des laits infantiles vendus en France révèlent la présence de polluants éternels, et à des niveaux qui exposent les nourrissons à des dépassements de la dose hebdomadaire tolérable fixée par les autor […] » franceinfo : « Sur 652 échantillons alimentaires analysés en France, 21% contiennent au moins un composé per- et polyfluoroalkylé (PFAS), réglementé ou non, selon une étude menée par l'association. »",
+          "model": "**Chapô publié par Le Monde :** Pour la première fois, des analyses sur des laits infantiles vendus en France révèlent la présence de polluants éternels, et à des niveaux qui exposent les nourrissons à des dépassements de la dose hebdomadaire tolérable fixée par les autor […]",
           "crit": [
             "Il donne l'essentiel (qui, quoi, où, quand)",
             "Il fait moins de 300 signes",
