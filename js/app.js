@@ -180,7 +180,10 @@
     }
     if (EXT.lessons[kind]) return EXT.lessons[kind](key, a, b);   // leçons fournies par les modules (annales, entraînements)
     if (kind === 'review') {
-      const items = shuffle(S.review).slice(0, 10);
+      // une question d'actu est reprise dans sa version actuelle de l'édition : si elle a été corrigée depuis
+      // (ex. les « 750 000 Rohingyas » du 26/11), l'élève ne révise jamais l'ancienne version fausse
+      const fresh = i => { const m = String(i.id).match(/^day:(\d{4}-\d{2}-\d{2}):(\d+):(\d+)$/), d = m && DAYS[m[1]]; const ex = d && d.lessons[+m[2]] && d.lessons[+m[2]].exercises[+m[3]]; return ex && ex.t === i.ex.t ? { ...i, ex } : i; };
+      const items = shuffle(S.review).slice(0, 10).map(fresh);
       if (!items.length) return null;
       const ctxOf = i => {   // question d'actu : son sujet (sans réponse), comme dans la leçon du jour
         const m = String(i.id).match(/^day:(\d{4}-\d{2}-\d{2}):/), d = m && DAYS[m[1]];
