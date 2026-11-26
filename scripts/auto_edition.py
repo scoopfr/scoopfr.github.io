@@ -832,6 +832,7 @@ WORDS = [
     ("Éditorial", "Article d'opinion qui engage la rédaction d'un média, distinct de l'information."),
 ]
 TAG_RULES = [
+    ("Monde", r"ukrain|russ|israël|israel|gaza|iran|chine|états-unis|etats-unis|libye|syrie|onu|otan|guerre|trump|netanyahu"),
     ("Justice", r"tribunal|procès|juge|condamn|justice|parquet|cour |mis en examen|prison"),
     ("Médias", r"média|journal|presse|télévision|réseaux sociaux|tiktok|journaliste"),
     ("Climat", r"climat|cop\d|réchauffement|émission|biodiversité|écolog|énergie|météo|tempête|inondation"),
@@ -839,7 +840,6 @@ TAG_RULES = [
     ("Europe", r"union européenne|bruxelles|commission européenne|parlement européen|\bue\b|européen"),
     ("Politique", r"gouvernement|assemblée|sénat|ministre|présidentielle|élection|premier ministre|député|macron|parti"),
     ("Culture", r"cinéma|film|festival|musique|livre|prix |exposition|série|théâtre|concert"),
-    ("Monde", r"ukrain|russ|israël|israel|gaza|iran|chine|états-unis|etats-unis|libye|syrie|onu|otan|guerre|trump|netanyahu"),
     ("Société", r"école|santé|logement|retraite|immigration|police|manifest|grève|famille|incendie|football|ligue des champions|match|sport"),
 ]
 
@@ -863,7 +863,11 @@ def cut(t, n):
     return " ".join(parts)
 
 
+EMOJI_RX = re.compile("[\U0001F300-\U0001FAFF\u2600-\u27BF\u2B50\u2B55\u23E9-\u23FA]")
+
+
 def first_sentences(d, n=2, cap=330):
+    d = EMOJI_RX.sub("", d).strip()
     sents = re.findall(r"[^.!?]+[.!?]", d)
     out = " ".join(x.strip() for x in sents[:n]) if sents else d
     out = cut(out, cap)
@@ -882,6 +886,8 @@ def basic_stories(clusters, want, used_urls=()):
         if its[0]["src"] not in FR_SOURCES:
             continue   # aucun titre en français : on ne publie pas une info en anglais
         first = its[0]
+        if re.search(r"\b(EN DIRECT|LIVE)\b", first["title"]):
+            continue
         text_parts = [first_sentences(i["desc"] or i["title"], 1) for i in its[:2] if i["src"] in FR_SOURCES]
         tag = guess_tag(first["title"], first["desc"])
         out.append({"tag": tag, "title": cut(first["title"], 140), "text": " ".join(dict.fromkeys(text_parts)),
@@ -895,7 +901,10 @@ def basic_stories(clusters, want, used_urls=()):
 def blank_word(title):
     """Texte à trous : retire un mot propre (majuscule) ou un nombre du titre."""
     words = title.split()
-    cands = [k for k, w in enumerate(words) if k > 0 and re.match(r"^[A-ZÉÈÀÂÎÔ][\wÀ-ÿ’'-]{3,}$", w.strip("«»\"',.:;")) or re.match(r"^\d[\d.,]*$", w)]
+    if re.search(r"\b(EN DIRECT|LIVE|DIRECT)\b", title):
+        return None
+    cands = [k for k, w in enumerate(words) if k > 0 and not w.isupper() and not w.startswith(("«", '"'))
+             and (re.match(r"^[A-ZÉÈÀÂÎÔ][a-zà-ÿ’'-]{3,}$", w.strip("«»\"',.:;")) or re.match(r"^\d[\d.,]*$", w))]
     if not cands:
         return None
     k = random.choice(cands)
@@ -918,7 +927,7 @@ def basic_lessons(stories, day):
         ch = [s["title"][:110]] + [w[:110] for w in wrong[:3]]
         if len(ch) < 3:
             continue
-        exs_tag.append({"t": "qcm", "q": f"Laquelle de ces infos relève de la rubrique « {s['tag']} » dans l'édition du jour ?", "c": ch, "a": 0, "x": f"Rubrique {s['tag']} : {s['title']}"})
+        pass   # (QCM « quelle rubrique » supprimés : la rubrique est devinée, donc pas assez fiable pour un quiz)
     tags = {}
     for s in stories:
         tags.setdefault(s["tag"], s)
