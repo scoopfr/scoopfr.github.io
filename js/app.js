@@ -1199,7 +1199,7 @@
 
   // ---------- Variété des questions ----------
   // Chaque question est comptée (S.qseen). 1re fois : formulation d'origine. Ensuite : reformulée (cadre de phrase, QCM → vrai/faux,
-  // « exact/inexact »). À partir de 3 passages : plus de choix, il faut taper la réponse. À partir de 5 : il faut l'expliquer par écrit.
+  // « exact/inexact »). À partir de 3 passages : plus de choix, il faut taper la réponse.
   const TEXT_AFTER = 3, WRITE_AFTER = 5;
   const qHash = ex => { const t = norm(ex.q || ''); let h = 5381; for (let i = 0; i < t.length; i++) h = ((h << 5) + h + t.charCodeAt(i)) | 0; return 'q' + (h >>> 0).toString(36); };
   const seenCount = ex => (S.qseen && S.qseen[qHash(ex)]) || 0;
@@ -1222,8 +1222,7 @@
     const ex = it.ex, n = seenCount(ex);
     if (ex.t === 'qcm' && Array.isArray(ex.c) && ex.c[ex.a] != null) {
       const good = ex.c[ex.a];
-      if (n >= WRITE_AFTER) return { t: 'write', q: `✍️ Explique en une ou deux phrases : ${ex.q}`, src: '', placeholder: 'Écris ta réponse, sans les choix… (Ctrl+Entrée pour valider)',
-        model: `**${good}.** ${ex.x || ''}`, crit: [`Ma réponse donne la bonne information (${good})`, 'Elle est précise : un nom, une date ou un chiffre quand il le faut', 'Je l\'ai formulée avec mes mots'], rows: 3 };
+      // (pas de « Explique en une ou deux phrases : <question> » : la formulation ne collait pas à toutes les questions)
       if (n >= TEXT_AFTER) return { ...ex, t: 'qcmfree', again: true };
       if (n >= 1 && !it.retry) {
         if (Math.random() < 0.45 && ex.c.length > 1) {   // QCM → vrai/faux sur une proposition de réponse
