@@ -1,5 +1,4 @@
-// SCOOP:REGENERER
-/* Scoop — édition du 2026-11-26 (générée automatiquement, sans IA) */
+/* Scoop — édition du 2026-11-26 (avec recommandation) */
 window.SCOOP_DAYS = window.SCOOP_DAYS || {};
 window.SCOOP_DAYS['2026-11-26'] = {
   "date": "2026-11-26",
@@ -239,25 +238,25 @@ window.SCOOP_DAYS['2026-11-26'] = {
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « En Egypte, un incendie dans l'agglomération du Caire fait au moins _____ morts »",
+          "q": "Complète le titre d'une info du jour : « En Egypte, un incendie dans l'agglomération du _____ fait au moins 30 morts »",
           "a": [
-            "30"
+            "Caire"
           ],
           "x": "Titre complet : En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Teddy Riner affirme, à propos de la guerre en _____ que la France doit « arrêter de donner de l’argent » qu’elle n’a pas »",
+          "q": "Complète le titre d'une info du jour : « Teddy Riner affirme, à propos de la guerre en Ukraine, que la _____ doit « arrêter de donner de l’argent » qu’elle n’a pas »",
           "a": [
-            "Ukraine"
+            "France"
           ],
           "x": "Titre complet : Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a pas"
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Violences du 17 octobre à _____ : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan »",
+          "q": "Complète le titre d'une info du jour : « Violences du _____ octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan »",
           "a": [
-            "Marseille"
+            "17"
           ],
           "x": "Titre complet : Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
         },
@@ -342,17 +341,17 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "exercises": [
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Donald _____ persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque électorale »",
+          "q": "Complète le titre d'une info du jour : « Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la _____ malgré la claque électorale »",
           "a": [
-            "Trump"
+            "Chine"
           ],
           "x": "Titre complet : Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque électorale"
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Ligue des champions : le LOSC renverse le Bayern _____ et se relance dans la course à la qualification »",
+          "q": "Complète le titre d'une info du jour : « Ligue des champions : le _____ renverse le Bayern Münich et se relance dans la course à la qualification »",
           "a": [
-            "Münich"
+            "LOSC"
           ],
           "x": "Titre complet : Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
         },
@@ -366,7 +365,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Andy Taylor, ex-guitariste du groupe britannique Duran _____ est mort à 65 ans »",
+          "q": "Complète le titre d'une info du jour : « Andy Taylor, ex-guitariste du groupe britannique _____ Duran, est mort à 65 ans »",
           "a": [
             "Duran"
           ],
@@ -466,9 +465,9 @@ window.SCOOP_DAYS['2026-11-26'] = {
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en _____ »",
+          "q": "Complète le titre d'une info du jour : « Comment l’Ukraine perturbe les opérations russes en _____ en frappant des navires de transport d’armes en Méditerranée »",
           "a": [
-            "Méditerranée"
+            "Afrique"
           ],
           "x": "Titre complet : Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Méditerranée"
         },
@@ -488,5 +487,15 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     }
   ],
-  "shorts": []
+  "shorts": [],
+  "reco": [
+    {
+      "type": "film",
+      "title": "The China Hustle",
+      "by": "Alex Gibney",
+      "year": 2017,
+      "story": 4,
+      "why": "Le film expose les fraudes et les pratiques douteuses dans le commerce international, illustrant les tensions commerciales entre les États-Unis et la Chine. Il met en lumière comment les politiques douanières peuvent avoir des répercussions économiques majeures, en lien direct avec la décision de Trump de réintroduire des droits de douane."
+    }
+  ]
 };
