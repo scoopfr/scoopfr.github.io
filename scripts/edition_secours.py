@@ -124,8 +124,8 @@ def quote(desc, cap=320):
 TAG_SAFE = [
     ("Justice", r"\btribunal|\bprocès|\bjuge[sr]?\b|condamné|\bparquet\b|mis en examen|cour d'assises|cour criminelle|perpétuité"),
     ("Médias", r"journalis|\barcom\b|\bcnews\b|\bbfm|france télévisions|radio france|audiovisuel|liberté de la presse|reporters sans frontières"),
-    ("Politique", r"présidentielle|\bdéputés?\b|\bsénat|assemblée nationale|\bcandidat|premier ministre|gouvernement français|\bélysée|\bprimaire"),
-    ("Économie", r"droits? de douane|\binflation|\bbourse\b|croissance économique|\bchômage|\bbudget\b|entreprises?\b|\bsalaires?\b"),
+    ("Politique", r"bardella|rassemblement national|\brn\b|président du r|présidentielle|\bdéputés?\b|\bsénat|assemblée nationale|\bcandidat|premier ministre|gouvernement français|\bélysée|\bprimaire"),
+    ("Économie", r"droits? de douane|\binflation|\bbourse\b|croissance économique|\bchômage|\bbudget\b|\bsalaires?\b|\bpib\b|\bexportations?\b"),
     ("Climat", r"\bclimat|\bcop\d|réchauffement|biodiversité|émissions de|sécheresse|canicule|inondations?"),
     ("Culture", r"\bcinéma|\bfilm\b|\bfestival|\bmusique|\bmusée|\bexposition|\bthéâtre|\bécrivain|\bchanteu|\bgroupe de rock|guitariste"),
     ("Société", r"\bgrippe|\bépidémie|\bécole|\blogement|\bretraites?\b|\bgrève|\bsanté publique"),
@@ -162,7 +162,7 @@ def story_of_group(g):
         if b not in seen:
             seen.add(b)
             sources.append({"name": A.display_name(it["src"]), "url": it["link"]})
-    return {"tag": tag, "title": lead["title"], "text": text, "why": "", "sources": sources[:4],
+    return {"tag": tag, "title": A.EMOJI_RX.sub("", lead["title"]).strip(), "text": text, "why": "", "sources": sources[:4],
             "_lead": A.display_name(lead["src"]),
             "_exclude": {A.display_name(i["src"]) for i in g["all"]} | {A.media_base(i["src"]) for i in g["all"]}}
 

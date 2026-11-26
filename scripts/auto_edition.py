@@ -903,13 +903,18 @@ def blank_word(title):
     words = title.split()
     if re.search(r"\b(EN DIRECT|LIVE|DIRECT)\b", title):
         return None
+    def isnum(w):
+        return bool(re.match(r"^\d[\d.,]*$", w.strip("«»\"',.:;")))
+
+    # un nombre écrit en plusieurs morceaux (« 11 000 ») n'est jamais coupé
     cands = [k for k, w in enumerate(words) if k > 0 and not w.isupper() and not w.startswith(("«", '"'))
-             and (re.match(r"^[A-ZÉÈÀÂÎÔ][a-zà-ÿ’'-]{3,}$", w.strip("«»\"',.:;")) or re.match(r"^\d[\d.,]*$", w))]
+             and (re.match(r"^[A-ZÉÈÀÂÎÔ][a-zà-ÿ’'-]{3,}$", w.strip("«»\"',.:;"))
+                  or (isnum(w) and not (k + 1 < len(words) and isnum(words[k + 1])) and not isnum(words[k - 1])))]
     if not cands:
         return None
     k = random.choice(cands)
     ans = words[k].strip("«»\"',.:;")
-    q = " ".join(words[:k] + ["_____"] + words[k + 1:])
+    q = " ".join(words[:k] + [words[k].replace(ans, "_____")] + words[k + 1:])   # la ponctuation autour du mot reste en place
     return q, ans
 
 
