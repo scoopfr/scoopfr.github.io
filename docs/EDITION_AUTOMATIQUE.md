@@ -16,16 +16,17 @@ Rien à publier = aucun commit. Un échec de contrôle = rien n'est publié et l
 
 1. Les **titres** viennent des flux RSS de ~24 rédactions, regroupés par sujet (au moins 2 rédactions différentes).
 2. Les **sources et liens** de chaque info viennent du code, jamais de l'IA.
-3. Les **textes et les quiz** sont rédigés par une IA gratuite, dans cet ordre :
-   - **Gemini** si le secret `GEMINI_API_KEY` existe (clé gratuite sur aistudio.google.com, sans carte). Recommandé : limites plus larges.
-   - sinon **GitHub Models**, inclus avec GitHub (permission `models: read` du workflow). Si l'organisation `scoopfr` n'a pas activé « Models » (Settings → Models), cette voie est refusée.
-   - sinon **mode de secours sans aucune IA** : extraits des dépêches, quiz automatiques (titres à compléter, rubriques, associations) et un exercice d'écriture. Moins riche, mais l'application ne reste jamais sans édition.
+3. Les **textes et les quiz** sont rédigés par une IA gratuite à clé (un secret GitHub, au choix) :
+   - **Mistral** (`MISTRAL_API_KEY`, console.mistral.ai, entreprise française, niveau gratuit « Experiment »), **Groq** (`GROQ_API_KEY`), **Gemini** (`GEMINI_API_KEY`, le niveau gratuit dépend du pays/compte) ou **OpenRouter** (`OPENROUTER_API_KEY`, modèles gratuits). La première clé trouvée est utilisée.
+   - GitHub Models et les IA sans clé ont été essayés : inutilisables depuis GitHub Actions.
+   - sans clé : **mode de secours sans aucune IA** (extraits des dépêches, quiz automatiques : titres à compléter, rubriques, associations, un exercice d'écriture). Moins riche, mais l'application ne reste jamais sans édition.
 4. `scripts/check-edition.js` vérifie le résultat ; les exercices dont la réponse n'est pas dans le brief sont retirés.
 
-## Ajouter la clé Gemini (facultatif, 2 minutes)
+## Ajouter une clé gratuite (2 minutes)
 
-1. aistudio.google.com → « Get API key » (gratuit).
-2. GitHub → dépôt `scoopfr/scoopfr.github.io` → Settings → Secrets and variables → Actions → New repository secret → nom `GEMINI_API_KEY`.
+1. Crée la clé : console.mistral.ai → API Keys → Create new key (compte gratuit, choisis l'offre « Experiment »).
+2. GitHub → dépôt `scoopfr/scoopfr.github.io` → Settings → Secrets and variables → Actions → New repository secret → nom `MISTRAL_API_KEY`, valeur = la clé.
+3. Actions → « Édition automatique » → Run workflow avec l'option `--force`.
 
 ## Lancer à la main
 
