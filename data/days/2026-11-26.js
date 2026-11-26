@@ -1,4 +1,3 @@
-// SCOOP:REGENERER
 /* Scoop — édition du 2026-11-26 (avec recommandation) */
 window.SCOOP_DAYS = window.SCOOP_DAYS || {};
 window.SCOOP_DAYS['2026-11-26'] = {
@@ -15,7 +14,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
     "Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans",
     "Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Méditerranée",
-    "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque é"
+    "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
   ],
   "stories": [
     {
@@ -115,30 +114,6 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
-      "tag": "Économie",
-      "title": "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque électorale",
-      "text": "L’administration américaine a annoncé, mercredi 25 novembre, la mise en place de nouvelles taxes sur les importations qui affectent 14 partenaires commerciaux des Etats, dont l’Union européenne et la Chine. Neuf mois après avoir été désavoué par la Cour suprême états-unienne, Donald Trump réinstaure sa politique douanière à l’égard des principaux partenaires commerciaux de Washington.",
-      "why": "Un fait relayé par 4 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/economie/article/2026/11/25/donald-trump-persiste-avec-une-nouvelle-salve-de-droits-de-douane-malgre-la-claque-electorale_6815108_3234.html"
-        },
-        {
-          "name": "Mediapart",
-          "url": "https://www.mediapart.fr/journal/international/251126/apres-la-debacle-des-midterms-donald-trump-acte-le-retour-de-sa-politique-de-droits-de-douane"
-        },
-        {
-          "name": "Le Temps",
-          "url": "https://www.letemps.ch/monde/au-diable-l-inflation-qui-s-accelere-donald-trump-veut-de-nouveaux-droits-de-douane"
-        },
-        {
-          "name": "RFI",
-          "url": "https://www.rfi.fr/fr/am%C3%A9riques/20261125-l-administration-trump-veut-instaurer-de-nouveaux-droits-de-douane-contre-ses-principaux-partenaires-commerciaux"
-        }
-      ]
-    },
-    {
       "tag": "Médias",
       "title": "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
       "text": "Le feu s'est déclaré lorsqu'un camion chargé de carburant s'est renversé sur une autoroute très fréquentée, selon les médias d'État. Un incendie s'est déclaré mercredi dans l'agglomération du Caire, en Égypte, lorsqu'un camion chargé de carburant s'est renversé sur une autoroute très fréquentée.",
@@ -159,6 +134,26 @@ window.SCOOP_DAYS['2026-11-26'] = {
         {
           "name": "Ouest-France",
           "url": "https://www.ouest-france.fr/monde/egypte/un-incendie-sur-une-autoroute-fait-au-moins-31-morts-en-egypte-20277922-e922-11f1-86c1-70195b4d2e52?utm_source=fluxpublicactu&utm_medium=fluxrss&utm_campaign=banquedecontenu"
+        }
+      ]
+    },
+    {
+      "tag": "Économie",
+      "title": "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque électorale",
+      "text": "L’administration américaine a annoncé, mercredi 25 novembre, la mise en place de nouvelles taxes sur les importations qui affectent 14 partenaires commerciaux des Etats, dont l’Union européenne et la Chine. Neuf mois après avoir été désavoué par la Cour suprême états-unienne, Donald Trump réinstaure sa politique douanière à l’égard des principaux partenaires commerciaux de Washington.",
+      "why": "Un fait relayé par 3 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/economie/article/2026/11/25/donald-trump-persiste-avec-une-nouvelle-salve-de-droits-de-douane-malgre-la-claque-electorale_6815108_3234.html"
+        },
+        {
+          "name": "Mediapart",
+          "url": "https://www.mediapart.fr/journal/international/251126/apres-la-debacle-des-midterms-donald-trump-acte-le-retour-de-sa-politique-de-droits-de-douane"
+        },
+        {
+          "name": "Le Temps",
+          "url": "https://www.letemps.ch/monde/au-diable-l-inflation-qui-s-accelere-donald-trump-veut-de-nouveaux-droits-de-douane"
         }
       ]
     },
@@ -203,22 +198,22 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
-      "tag": "Monde",
-      "title": "Israeli judges recommend dropping most serious charges against Netanyahu",
-      "text": "The Israeli PM says his trial should end after judges said there was little chance of conviction in one of three cases. Prime Minister Benjamin Netanyahu is accused of bribery, fraud and breach of trust in a long-running trial that has divided the country.",
+      "tag": "Économie",
+      "title": "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
+      "text": "C'est l'un des grands enjeux pour les candidats à la présidentielle française de 2027 : obtenir les fameux 500 parrainages d'élus de maires, députés, conseillers départementaux et régionaux. DÉCRYPTAGE - Confirmé avec 72,06 % des voix, le maire de Cannes promet de défendre les territoires durant la campagne présidentielle, dans laquelle il s’engage sous les couleurs de son mouvement, Nouvelle Énergie.",
       "why": "Un fait relayé par 3 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
       "sources": [
         {
-          "name": "BBC News",
-          "url": "https://www.bbc.co.uk/news/articles/cxj05mv723r2o?at_medium=RSS&at_campaign=rss"
+          "name": "RFI",
+          "url": "https://www.rfi.fr/fr/podcasts/reportage-france/20261125-pr%C3%A9sidentielle-2027-pour-les-candidats-comme-pour-les-maires-la-gal%C3%A8re-des-parrainages"
         },
         {
-          "name": "The New York Times",
-          "url": "https://www.nytimes.com/2026/11/25/world/middleeast/judges-israel-corruption-case-netanyahu.html"
+          "name": "Le Figaro",
+          "url": "https://www.lefigaro.fr/elections/presidentielles/presidentielle-2027-reelu-sans-appel-a-la-tete-des-maires-de-france-david-lisnard-poursuit-sa-campagne-20261125"
         },
         {
-          "name": "France 24",
-          "url": "https://www.france24.com/en/in-boost-for-netanyahu-judges-question-corruption-trial-charges"
+          "name": "20 Minutes",
+          "url": "https://www.20minutes.fr/politique/4265748-20261125-presidentielle-2027-fan-vais-parrainer-comment-candidats-tentent-seduire-maires?at_medium=display&at_campaign=149"
         }
       ]
     }
@@ -231,11 +226,11 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "exercises": [
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Israeli judges recommend dropping most serious charges against _____ »",
+          "q": "Complète le titre d'une info du jour : « \"La démocratie, c’est du vote\", déclare _____ Lisnard, qui refuse la proposition d’Edouard Philippe de débattre à la place d'une primaire »",
           "a": [
-            "Netanyahu"
+            "David"
           ],
-          "x": "Titre complet : Israeli judges recommend dropping most serious charges against Netanyahu"
+          "x": "Titre complet : \"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattre à la place d'une primaire"
         },
         {
           "t": "input",
@@ -247,27 +242,27 @@ window.SCOOP_DAYS['2026-11-26'] = {
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Teddy Riner affirme, à propos de la guerre en Ukraine, que la _____ doit « arrêter de donner de l’argent » qu’elle n’a pas »",
+          "q": "Complète le titre d'une info du jour : « Teddy _____ affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a pas »",
           "a": [
-            "France"
+            "Riner"
           ],
           "x": "Titre complet : Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a pas"
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Violences du _____ octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan »",
+          "q": "Complète le titre d'une info du jour : « Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la _____ malgré la claque électorale »",
           "a": [
-            "17"
+            "Chine"
           ],
-          "x": "Titre complet : Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
+          "x": "Titre complet : Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque électorale"
         },
         {
           "t": "qcm",
           "q": "Laquelle de ces infos relève de la rubrique « Politique » dans l'édition du jour ?",
           "c": [
             "\"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattr",
-            "Israeli judges recommend dropping most serious charges against Netanyahu",
-            "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
+            "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
+            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
             "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
           ],
           "a": 0,
@@ -279,7 +274,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "c": [
             "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan",
             "\"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattr",
-            "Israeli judges recommend dropping most serious charges against Netanyahu",
+            "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
             "Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans"
           ],
           "a": 0,
@@ -287,15 +282,15 @@ window.SCOOP_DAYS['2026-11-26'] = {
         },
         {
           "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Médias » dans l'édition du jour ?",
+          "q": "Laquelle de ces infos relève de la rubrique « Économie » dans l'édition du jour ?",
           "c": [
-            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
-            "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan",
             "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
+            "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan",
+            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
             "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
           ],
           "a": 0,
-          "x": "Rubrique Médias : En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
+          "x": "Rubrique Économie : Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque électorale"
         },
         {
           "t": "match",
@@ -314,8 +309,8 @@ window.SCOOP_DAYS['2026-11-26'] = {
               "Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de tra"
             ],
             [
-              "Économie",
-              "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE e"
+              "Médias",
+              "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
             ]
           ],
           "x": "Une rubrique, une info de l'édition."
@@ -342,59 +337,59 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "exercises": [
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la _____ malgré la claque électorale »",
+          "q": "Complète le titre d'une info du jour : « Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon _____ Payan »",
           "a": [
-            "Chine"
+            "Benoît"
           ],
-          "x": "Titre complet : Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque électorale"
+          "x": "Titre complet : Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Ligue des champions : le _____ renverse le Bayern Münich et se relance dans la course à la qualification »",
+          "q": "Complète le titre d'une info du jour : « Andy _____ ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans »",
           "a": [
-            "LOSC"
+            "Taylor"
+          ],
+          "x": "Titre complet : Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans"
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre d'une info du jour : « Ligue des champions : le LOSC renverse le _____ Münich et se relance dans la course à la qualification »",
+          "a": [
+            "Bayern"
           ],
           "x": "Titre complet : Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « \"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard _____ de débattre à la place d'une primaire »",
+          "q": "Complète le titre d'une info du jour : « Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en _____ »",
           "a": [
-            "Philippe"
+            "Méditerranée"
           ],
-          "x": "Titre complet : \"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattre à la place d'une primaire"
+          "x": "Titre complet : Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Méditerranée"
         },
         {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « Andy Taylor, ex-guitariste du groupe britannique _____ Duran, est mort à 65 ans »",
-          "a": [
-            "Duran"
+          "t": "qcm",
+          "q": "Laquelle de ces infos relève de la rubrique « Médias » dans l'édition du jour ?",
+          "c": [
+            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
+            "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
+            "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
+            "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu"
           ],
-          "x": "Titre complet : Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans"
+          "a": 0,
+          "x": "Rubrique Médias : En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
         },
         {
           "t": "qcm",
           "q": "Laquelle de ces infos relève de la rubrique « Économie » dans l'édition du jour ?",
           "c": [
-            "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
-            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
-            "Israeli judges recommend dropping most serious charges against Netanyahu",
-            "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu"
-          ],
-          "a": 0,
-          "x": "Rubrique Économie : Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque électorale"
-        },
-        {
-          "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Monde » dans l'édition du jour ?",
-          "c": [
-            "Israeli judges recommend dropping most serious charges against Netanyahu",
+            "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
             "Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Mé",
             "Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans",
-            "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l"
+            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
           ],
           "a": 0,
-          "x": "Rubrique Monde : Israeli judges recommend dropping most serious charges against Netanyahu"
+          "x": "Rubrique Économie : Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages"
         },
         {
           "t": "qcm",
@@ -402,7 +397,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "c": [
             "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
             "\"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattr",
-            "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
+            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
             "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
           ],
           "a": 0,
@@ -434,8 +429,8 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "c": [
             "Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Mé",
             "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
-            "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
-            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
+            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
+            "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l"
           ],
           "a": 0,
           "x": "Rubrique Monde : Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Méditerranée"
@@ -446,7 +441,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "c": [
             "Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans",
             "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
-            "Israeli judges recommend dropping most serious charges against Netanyahu",
+            "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
             "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu"
           ],
           "a": 0,
@@ -457,20 +452,12 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "q": "Laquelle de ces infos relève de la rubrique « Politique » dans l'édition du jour ?",
           "c": [
             "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu",
-            "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
-            "Israeli judges recommend dropping most serious charges against Netanyahu",
+            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
+            "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
             "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
           ],
           "a": 0,
           "x": "Rubrique Politique : Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a pas"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « Comment l’Ukraine perturbe les opérations russes en _____ en frappant des navires de transport d’armes en Méditerranée »",
-          "a": [
-            "Afrique"
-          ],
-          "x": "Titre complet : Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Méditerranée"
         },
         {
           "t": "write",
@@ -492,11 +479,11 @@ window.SCOOP_DAYS['2026-11-26'] = {
   "reco": [
     {
       "type": "film",
-      "title": "The China Hustle",
-      "by": "Alex Gibney",
-      "year": 2017,
-      "story": 4,
-      "why": "Le film expose les fraudes et les pratiques douteuses dans le commerce international, illustrant les tensions commerciales entre les États-Unis et la Chine. Il met en lumière comment les politiques douanières peuvent avoir des répercussions économiques majeures, en lien direct avec la décision de Trump de réintroduire des droits de douane."
+      "title": "The Hurt Locker",
+      "by": "Kathryn Bigelow",
+      "year": 2008,
+      "story": 0,
+      "why": "Le film dépeint la tension et les risques d’une mission de déminage en Irak, illustrant les dilemmes militaires et les coûts humains de la guerre, tout comme la critique de Teddy Riner sur l’engagement français en Ukraine."
     }
   ]
 };
