@@ -197,20 +197,19 @@ def llm(system, user, max_tokens=3500):
             raise RuntimeError("réponse Gemini inattendue : " + json.dumps(r, ensure_ascii=False)[:300])
     if gh:
         last = None
-        for model in [os.environ.get("SCOOP_MODEL")] + ["openai/gpt-4.1-mini", "openai/gpt-4o-mini", "meta/Llama-3.3-70B-Instruct"]:
-            if not model:
-                continue
+        tries = [("https://models.github.ai/inference/chat/completions", m) for m in (os.environ.get("SCOOP_MODEL"), "openai/gpt-4.1-mini", "openai/gpt-4o-mini") if m]
+        tries += [("https://models.inference.ai.azure.com/chat/completions", m) for m in ("gpt-4o-mini", "Meta-Llama-3.1-70B-Instruct")]
+        for url, model in tries:
             try:
-                r = _post("https://models.github.ai/inference/chat/completions",
-                          {"model": model, "temperature": 0.3, "max_tokens": min(max_tokens, 4000), "response_format": {"type": "json_object"},
-                           "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]},
+                r = _post(url, {"model": model, "temperature": 0.3, "max_tokens": min(max_tokens, 4000), "response_format": {"type": "json_object"},
+                                "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]},
                           {"Authorization": f"Bearer {gh}", "Accept": "application/vnd.github+json", "X-GitHub-Api-Version": "2022-11-28"})
                 content = (r.get("choices") or [{}])[0].get("message", {}).get("content") or ""
                 if not content.strip():
                     raise RuntimeError("réponse vide : " + json.dumps(r, ensure_ascii=False)[:300])
                 return parse_json(content)
             except Exception as e:
-                last = e; log(f"  (modèle {model} indisponible : {str(e)[:120]})")
+                last = e; log(f"  ({url.split('/')[2]} · {model} : {str(e)[:160]})")
         raise NoLLM(str(last))
     raise NoLLM("aucune clé ni jeton")
 
