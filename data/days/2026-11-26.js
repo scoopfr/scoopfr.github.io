@@ -176,6 +176,43 @@ window.SCOOP_DAYS['2026-11-26'] = {
         { name: 'Le Monde', url: 'https://www.lemonde.fr/culture/article/2026/11/26/simon-abkarian-va-succeder-a-ariane-mnouchkine-au-theatre-du-soleil_6815485_3246.html' },
         { name: 'Le Figaro', url: 'https://www.lefigaro.fr/culture/simon-abkarian-prendra-la-tete-du-theatre-du-soleil-a-l-automne-2027-20261126' }
       ]
+    },
+    {
+      tag: 'Culture',
+      title: 'Lilia Hassaine remporte le prix Goncourt des lycéens 2026 avec « JE »',
+      sujet: "Le Goncourt des lycéens 2026",
+      text: 'La romancière **Lilia Hassaine** a remporté jeudi le **Goncourt des lycéens 2026** pour **« JE »** (Gallimard), annoncé à **Rennes**. Son roman reprend le classique de **Charlotte Brontë**, *Jane Eyre*, en s’attachant à **Bertha**, la première épouse de Rochester. Désignée parmi **16 finalistes**, elle a été choisie par un jury national ; une cinquantaine d’établissements scolaires étaient mobilisés pour cette **39e édition**. C’est le dernier des prix d’automne.',
+      why: 'Un prix littéraire se raconte par le lauréat, le livre et le jury : ici, ce sont des lycéens qui décident, ce qui en fait l’un des prix les plus prescripteurs.',
+      sources: [
+        { name: 'Le Figaro', url: 'https://www.lefigaro.fr/livres/lilia-hassaine-remporte-le-prix-goncourt-des-lyceens-2026-20261126' },
+        { name: 'Libération', url: 'https://www.liberation.fr/culture/livres/le-goncourt-des-lyceens-2026-attribue-a-lilia-hassaine-pour-je-20261126_6RX2ZYSZ3VA4XGH2VMQ74WVSRE/' },
+        { name: 'Ouest-France', url: 'https://www.ouest-france.fr/culture/livres/goncourt-des-lyceens-2026-lilia-hassaine-remporte-le-prix-pour-son-roman-je-2d6c3aa4-e978-11f1-9b33-2f81462d3339' }
+      ]
+    },
+    {
+      tag: 'Europe',
+      title: 'Royaume-Uni : l’immigration nette chute de 62 %, son plus bas niveau depuis 1997',
+      sujet: "L’immigration nette au plus bas au Royaume-Uni",
+      text: 'À la fin **juin 2026**, l’**immigration nette** au Royaume-Uni avait chuté de **62 %** sur un an, selon l’Office national des statistiques (**ONS**). C’est son plus bas niveau depuis **1997**, hors période du Covid-19. Le gouvernement du premier ministre **Andy Burnham**, qui mène une politique migratoire restrictive dans la lignée de celle de **Keir Starmer**, s’est félicité d’avoir « **rétabli le contrôle** ».',
+      why: 'Un chiffre officiel se présente avec sa source (l’ONS), sa période (fin juin 2026) et sa comparaison (un an plus tôt) ; la réaction du gouvernement vient ensuite.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/international/article/2026/11/26/royaume-uni-l-immigration-nette-enregistre-sa-plus-forte-baisse-depuis-1997-hors-periode-du-covid-19_6815526_3210.html' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/europe/20261126-royaume-uni-l-immigration-l%C3%A9gale-nette-au-plus-bas-depuis-1997-hors-p%C3%A9riode-du-covid-19' },
+        { name: 'Le Temps', url: 'https://www.letemps.ch/monde/europe/au-royaume-uni-l-immigration-nette-tombe-au-plus-bas-depuis-1997-hors-periode-du-covid' }
+      ]
+    },
+    {
+      tag: 'Monde',
+      title: 'Thaïlande : une explosion dans un dépôt pétrolier de Bangkok fait des blessés',
+      sujet: "Une explosion sur un site pétrolier en Asie du Sud-Est",
+      text: 'Une **explosion** a secoué jeudi un **dépôt pétrolier** de la capitale thaïlandaise, **Bangkok**, en zone urbaine. Une épaisse fumée noire s’est élevée au-dessus de la ville et des **ordres d’évacuation** ont été donnés. Le bilan provisoire varie selon les médias : **sept blessés** selon Le Monde et la BBC (dont quatre dans un état critique selon la BBC), **neuf** selon Ouest-France. Selon les autorités, l’incendie est « **désormais maîtrisé** ».',
+      why: 'En direct, les bilans évoluent et diffèrent d’un média à l’autre : on écrit « au moins », on cite la source du chiffre et on distingue le bilan provisoire du bilan définitif.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/international/article/2026/11/26/thailande-une-explosion-dans-un-depot-petrolier-de-bangkok-fait-provisoirement-sept-blesses_6815511_3210.html' },
+        { name: 'Ouest-France', url: 'https://www.ouest-france.fr/monde/thailande/sept-blesses-dont-quatre-dans-un-etat-grave-dans-lexplosion-dun-site-petrolier-a-bangkok-en-thailande-9a4baf9a-e97a-11f1-86c1-70195b4d2e52' },
+        { name: 'Euronews', url: 'https://fr.euronews.com/video/2026/11/26/explosion-sur-le-site-petrolier-bangchak-a-bangkok-epais-panaches-de-fumee' },
+        { name: 'BBC News', url: 'https://www.bbc.co.uk/news/articles/crx209kwk4kzo' }
+      ]
     }
   ],
   memo: [
@@ -236,9 +273,20 @@ window.SCOOP_DAYS['2026-11-26'] = {
         { t: 'qcm', q: 'Qui succédera à Ariane Mnouchkine à la tête du Théâtre du Soleil ?', c: ['Simon Abkarian', 'Antonin Baudry', 'Ariane Ascaride', 'Olivier Py'], a: 0, x: '**Simon Abkarian** prendra la tête du théâtre à l’automne 2027.', qv: ["Qui prendra la tête du Théâtre du Soleil à l’automne 2027 ?", "À qui Ariane Mnouchkine et sa troupe ont-elles décidé de confier la direction du Théâtre du Soleil ?", "Qui va succéder à Ariane Mnouchkine, qui prend sa retraite ?", "Quel comédien, qui incarne de Gaulle dans « La Bataille de Gaulle », dirigera le Théâtre du Soleil ?"] },
         { t: 'write', max: 300, q: '✍️ Chapô · « Simon Abkarian succédera à Ariane Mnouchkine au Théâtre du Soleil »', src: 'Dépêche :\n\nLe comédien et metteur en scène Simon Abkarian prendra la tête du Théâtre du Soleil à l’automne 2027. Il succède à Ariane Mnouchkine, qui prend sa retraite. Le théâtre existe depuis 1964.\n\nRédige un **chapô** (300 signes maximum).', model: '**Chapô possible :** Simon Abkarian, comédien et metteur en scène, prendra la tête du Théâtre du Soleil à l’automne 2027. Il succède à Ariane Mnouchkine, qui prend sa retraite, à la tête de cette institution théâtrale née en 1964.', crit: ['Il nomme le successeur et la personne remplacée', 'Il donne la date (automne 2027)', 'Il nomme le Théâtre du Soleil', 'Il fait moins de 300 signes'] }
       ]
+    },
+    {
+      title: '⚡ Flash de 14 h', icon: '⚡', desc: 'Mise à jour', exercises: [
+        { t: 'qcm', q: 'Qui a remporté le Goncourt des lycéens 2026 ?', c: ['Lilia Hassaine', 'Charlotte Brontë', 'Michaela Wiegel', 'Ariane Mnouchkine'], a: 0, x: '**Lilia Hassaine** a été récompensée pour « JE » (Gallimard).' },
+        { t: 'input', q: 'Complète : le roman « JE » s’attache à Bertha, première épouse de Rochester dans le classique _____ de Charlotte Brontë.', a: ['Jane Eyre', 'jane eyre'], hint: 'Un prénom et un nom.', x: 'Le roman reprend **Jane Eyre**, de Charlotte Brontë.' },
+        { t: 'qcm', q: 'De quel pourcentage l’immigration nette au Royaume-Uni a-t-elle chuté sur un an à fin juin 2026 ?', c: ['62 %', '12 %', '26 %', '90 %'], a: 0, x: 'Elle a chuté de **62 %**, selon l’ONS.' },
+        { t: 'vf', q: 'Ce niveau d’immigration nette est le plus bas depuis 1997, hors période du Covid-19.', a: true, x: 'C’est bien le plus bas niveau depuis **1997**, hors période du Covid-19.' },
+        { t: 'qcm', q: 'Dans quelle ville a eu lieu l’explosion d’un dépôt pétrolier jeudi ?', c: ['Bangkok', 'Jakarta', 'Manille', 'Hanoï'], a: 0, x: 'L’explosion a eu lieu à **Bangkok**, en Thaïlande.' },
+        { t: 'vf', q: 'Tous les médias donnent exactement le même bilan de blessés pour l’explosion de Bangkok.', a: false, x: 'Le bilan provisoire varie : **sept** blessés selon Le Monde et la BBC, **neuf** selon Ouest-France.' },
+        { t: 'write', max: 300, q: '✍️ Chapô · « Royaume-Uni : l’immigration nette chute de 62 % »', src: 'Dépêche :\n\nÀ la fin juin 2026, l’immigration nette au Royaume-Uni avait chuté de 62 % sur un an, son plus bas niveau depuis 1997 hors période du Covid-19, a annoncé jeudi l’Office national des statistiques (ONS). Le gouvernement d’Andy Burnham s’est félicité d’avoir « rétabli le contrôle ».\n\nRédige un **chapô** (300 signes maximum).', model: '**Chapô possible :** L’immigration nette au Royaume-Uni a chuté de 62 % sur un an à fin juin 2026, son plus bas niveau depuis 1997 hors Covid-19, selon l’ONS. Le gouvernement d’Andy Burnham dit avoir « rétabli le contrôle ».', crit: ['Il donne le chiffre (62 %) et la période', 'Il cite la source (l’ONS)', 'Il mentionne la réaction du gouvernement', 'Il fait moins de 300 signes'] }
+      ]
     }
   ],
-  updates: [{ at: '11:00', stories: [10, 11, 12] }],
+  updates: [{ at: '11:00', stories: [10, 11, 12] }, { at: '14:00', stories: [13, 14, 15] }],
   reco: [{ type: 'film', title: 'Les Hommes du président', by: 'Alan J. Pakula', year: 1976, story: 0, why: 'Deux journalistes du Washington Post enquêtent sur le scandale du Watergate. Un classique sur le journalisme d’investigation et la protection des sources, au cœur des nouvelles révélations de Mediapart et du Monde.' }],
   shorts: []
 };
