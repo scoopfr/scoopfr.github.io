@@ -1,537 +1,185 @@
-/* Scoop — édition du 2026-11-26 (édition de secours sans IA : citations exactes des rédactions) */
+/* Scoop — édition du 2026-11-26 (actualité du mercredi 25 et du jeudi 26 novembre 2026) — rédigée et relue à la main */
 window.SCOOP_DAYS = window.SCOOP_DAYS || {};
 window.SCOOP_DAYS['2026-11-26'] = {
-  "date": "2026-11-26",
-  "title": "Revue de presse : Espagne : un pétrolier chargé de diesel coule au large",
-  "intro": "Les informations du jour confirmées par au moins deux rédactions, citées telles qu'elles ont été publiées.",
-  "word": {
-    "term": "Dépêche",
-    "def": "Texte court et factuel diffusé par une agence de presse (AFP, Reuters) que les médias reprennent."
+  date: '2026-11-26',
+  title: 'Bardella face à de nouvelles révélations, la Sécu sans accord, König jugée',
+  intro: 'Le Monde et Mediapart publient de nouveaux messages antisémites attribués à Jordan Bardella, qui dénonce une « entreprise de persécution », tandis que députés et sénateurs échouent à s’accorder sur le budget de la Sécurité sociale. À Paris s’ouvre le procès d’Émilie König, figure française de l’État islamique.',
+  word: {
+    term: 'Commission mixte paritaire',
+    def: 'Réunion de **sept députés et sept sénateurs** chargée de proposer un texte commun quand l’Assemblée nationale et le Sénat ne votent pas la même version d’une loi. Si elle échoue, le texte repart en **nouvelle lecture** devant chaque assemblée, et le gouvernement peut ensuite demander à l’Assemblée nationale d’avoir le **dernier mot**.'
   },
-  "glossary": [],
-  "memo": [
-    "Espagne : un pétrolier chargé de diesel coule au large d’Ibiza, faisant un mort",
-    "Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité",
-    "Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans",
-    "Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants",
-    "Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord"
+  glossary: [
+    { term: 'PFAS', def: 'Substances per- et polyfluoroalkylées : une famille de milliers de composés chimiques très difficiles à dégrader, d’où leur surnom de « polluants éternels ».', cat: 'Climat', aliases: ['PFAS', 'polluants éternels'] },
+    { term: 'cour d’assises spéciale', def: 'Cour d’assises composée uniquement de magistrats professionnels, sans jurés tirés au sort. Elle juge notamment les crimes terroristes.', cat: 'Justice', aliases: ['cour d’assises spéciale', 'cour d’assises spéciales'] },
+    { term: 'association de malfaiteurs terroriste', def: 'Infraction qui punit le fait de participer à un groupe formé pour préparer des actes de terrorisme, même si aucun attentat n’a été commis.', cat: 'Justice', aliases: ['association de malfaiteurs terroriste'] },
+    { term: 'nouvelle lecture', def: 'Nouvel examen d’un texte par chaque assemblée après l’échec d’une commission mixte paritaire, avant une éventuelle lecture définitive à l’Assemblée nationale.', cat: 'Institutions', aliases: ['nouvelle lecture'] }
   ],
-  "stories": [
+  tagColors: { 'Politique': '#3A86FF', 'Climat': '#2B9348', 'Monde': '#0FA3B1', 'Économie': '#F4A261', 'Médias': '#E63946', 'Justice': '#8E44AD', 'Europe': '#4361EE', 'Société': '#D6336C', 'Culture': '#7B2CBF' },
+  stories: [
     {
-      "tag": "Monde",
-      "title": "Espagne : un pétrolier chargé de diesel coule au large d’Ibiza, faisant un mort",
-      "text": "Le Monde : « L’équipage de 17 membres a été secouru, mais l’un d’entre eux a ensuite été déclaré mort à l’hôpital, à Ibiza, selon les secours de l’archipel des Baléares. Les dommages environnementaux sont en cours d’évaluation. » franceinfo : « Les éventuels dommages environnementaux sont en cours d'évaluation, selon les secours. » Information également rapportée par Le Figaro, Libération.",
-      "why": "",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/international/article/2026/11/26/espagne-un-petrolier-charge-de-diesel-coule-au-large-d-ibiza-faisant-un-mort_6815505_3210.html"
-        },
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/monde/espagne/un-navire-transportant-jusqu-a-7-000-tonnes-de-diesel-coule-au-large-de-l-ile-espagnole-d-ibiza-faisant-un-mort-parmi-les-membres-de-l-equipage_8300973.html#xtor=RSS-3-[lestitres]"
-        },
-        {
-          "name": "Le Figaro",
-          "url": "https://www.lefigaro.fr/international/espagne-un-cargo-avec-1-2-million-de-litres-de-petrole-coule-au-large-d-ibiza-un-membre-de-l-equipage-est-mort-20261126"
-        },
-        {
-          "name": "Libération",
-          "url": "https://www.liberation.fr/international/europe/un-petrolier-fait-naufrage-au-large-dibiza-lespagne-active-son-plan-durgence-contre-la-pollution-marine-20261126_MYWTLSFZ3JCPTIOQV74DQQJCVA/"
-        }
+      tag: 'Politique',
+      title: 'Écrits antisémites : nouvelles révélations sur Jordan Bardella, qui dénonce une « entreprise de persécution »',
+      text: 'Deux mois après les premières révélations de **Mediapart**, le site d’investigation et **Le Monde** publient jeudi de nouveaux messages antisémites attribués à **Jordan Bardella**, président du Rassemblement national. Ils datent de **2013**, quand il était lycéen et jeune militant du Front national, et ont été échangés sur Messenger avec un ancien camarade de lycée. On y lit notamment que « les sionistes sont à la tête des banques ». Jordan Bardella réfute ces accusations et dénonce une « entreprise de persécution ».',
+      why: 'Un cas d’école de journalisme d’investigation : Mediapart explique avoir pu publier de nouveaux messages parce qu’une de ses sources l’a accepté. La protection des sources est un principe clé du métier.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/politique/article/2026/11/26/les-sionistes-sont-a-la-tete-des-banques-tout-est-lie-nouvelles-revelations-sur-les-propos-antisemites-de-jordan-bardella_6815484_823448.html' },
+        { name: 'Mediapart', url: 'https://www.mediapart.fr/journal/politique/261126/des-nouveaux-messages-revelent-le-torrent-antisemite-deverse-par-jordan-bardella' },
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/politique/jordan-bardella/le-monde-et-mediapart-publient-de-nouveaux-elements-de-preuve-sur-les-ecrits-antisemites-attribues-a-jordan-bardella_8300856.html' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/france/20261126-%C3%A9crits-antis%C3%A9mites-le-monde-et-mediapart-r%C3%A9v%C3%A8lent-de-nouveaux-%C3%A9l%C3%A9ments-compromettants-pour-jordan-bardella' },
+        { name: 'Le Figaro', url: 'https://www.lefigaro.fr/politique/ecrits-antisemites-de-nouveaux-elements-compromettants-attribues-a-jordan-bardella-par-le-monde-et-mediapart-20261126' }
       ]
     },
     {
-      "tag": "Monde",
-      "title": "Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité",
-      "text": "Le Monde : « Au total, quarante-sept djihadistes français, transférés de Syrie vers l’Irak l’an dernier, doivent être jugés par une cour criminelle de Bagdad. » France 24 : « Huit Français ont été condamnés à la prison à perpétuité jeudi par la justice irakienne pour leur appartenance au groupe État islamique (EI). » Information également rapportée par Libération, Euronews.",
-      "why": "",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/international/article/2026/11/26/irak-huit-nouveaux-djihadistes-francais-dont-romain-garnier-condamnes-a-la-perpetuite_6815494_3210.html"
-        },
-        {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/moyen-orient/20261126-en-irak-huit-nouveaux-jihadistes-fran%C3%A7ais-condamn%C3%A9s-%C3%A0-la-perp%C3%A9tuit%C3%A9"
-        },
-        {
-          "name": "Libération",
-          "url": "https://www.liberation.fr/international/moyen-orient/irak-romain-garnier-et-sept-autres-francais-condamnes-a-perpetuite-pour-leur-affiliation-a-letat-islamique-20261126_D7RVUD7OSJDRJIYYERDEROG4S4/"
-        },
-        {
-          "name": "Euronews",
-          "url": "https://fr.euronews.com/2026/11/26/irak-huit-ressortissants-francais-condamnes-a-la-prison-a-vie-pour-avoir-rejoint-lei"
-        }
+      tag: 'Politique',
+      title: 'Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord',
+      text: 'Réunis jeudi matin en **commission mixte paritaire**, sept députés et sept sénateurs ne sont pas parvenus à s’entendre sur le projet de budget de la Sécurité sociale pour 2027. Ils ont préféré arrêter rapidement les discussions pour éviter « un texte non adoptable par les deux chambres ». Le texte repart donc en **nouvelle lecture** à l’Assemblée nationale.',
+      why: 'Révise la navette parlementaire : quand l’Assemblée et le Sénat ne s’accordent pas, une commission mixte paritaire cherche un compromis ; en cas d’échec, le gouvernement peut donner le dernier mot à l’Assemblée nationale.',
+      sources: [
+        { name: 'AFP (via Le Figaro)', url: 'https://www.lefigaro.fr/social/budget-de-la-securite-sociale-2027-deputes-et-senateurs-echouent-a-trouver-un-accord-20261126' },
+        { name: 'Libération', url: 'https://www.liberation.fr/politique/projet-de-budget-de-la-secu-deputes-et-senateurs-echouent-a-saccorder-le-texte-va-repartir-a-lassemblee-20261126_FZQE3QSPMZAMFM5CXFHZWB5LBM/' },
+        { name: 'Ouest-France', url: 'https://www.ouest-france.fr/economie/budget-collectivites-etat/budget-de-la-secu-2027-deputes-et-senateurs-echouent-a-trouver-un-accord-le-texte-renvoye-en-nouvelle-lecture-a-lassemblee-2a4e3726-e975-11f1-86c1-70195b4d2e52' },
+        { name: 'La Croix', url: 'https://www.la-croix.com/economie/budget-de-la-securite-sociale-deputes-et-senateurs-echouent-a-trouver-un-accord-20261126' }
       ]
     },
     {
-      "tag": "Culture",
-      "title": "Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans",
-      "text": "Le Monde : « Le guitariste originel de la formation britannique de new wave avait quitté le groupe au milieu des années 1980, après de nombreux tubes. » Libération : « L’artiste britannique est mort lundi 23 novembre 2026 d’un cancer, selon un communiqué conjoint de sa famille et de ses anciens camarades de groupe publié mercredi 25 novembre. » Information également rapportée par La Croix, Radio-Canada.",
-      "why": "",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/disparitions/article/2026/11/26/andy-taylor-guitariste-historique-du-groupe-duran-duran-est-mort-a-65-ans_6815296_3382.html"
-        },
-        {
-          "name": "Libération",
-          "url": "https://www.liberation.fr/culture/musique/duran-duran-andy-taylor-guitariste-et-compositeur-du-groupe-est-mort-a-65-ans-20261126_SLA7SRUR6RCMNJCEXHOPDESYDI/"
-        },
-        {
-          "name": "La Croix",
-          "url": "https://www.la-croix.com/culture/mort-d-andy-taylor-ancien-guitariste-du-groupe-britannique-duran-duran-20261126"
-        },
-        {
-          "name": "Radio-Canada",
-          "url": "https://ici.radio-canada.ca/article/info/2303112/deces-andy-taylor-ex-guitariste-duran-duran"
-        }
+      tag: 'Justice',
+      title: 'Le procès d’Émilie König, figure française de l’État islamique, s’ouvre à Paris',
+      text: 'La Bretonne **Émilie König**, 41 ans, est jugée à partir de jeudi et pendant quatre jours par la **cour d’assises spéciale** de Paris pour **association de malfaiteurs terroriste**. Partie rejoindre l’État islamique en Syrie, elle en est devenue une propagandiste ; elle est aussi soupçonnée d’avoir joué les recruteuses. Seule femme inscrite sur la liste noire des États-Unis, elle encourt 30 ans de réclusion criminelle. Au premier jour de son procès, elle a déclaré : « Je voudrais m’excuser auprès de toute la nation française ».',
+      why: 'La cour d’assises spéciale, composée uniquement de magistrats professionnels, juge notamment les crimes terroristes. C’est utile pour distinguer les juridictions pénales.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/societe/article/2026/11/26/emilie-konig-la-plus-mediatique-des-djihadistes-francaises-devant-la-justice_6815463_3224.html' },
+        { name: 'France 24', url: 'https://www.france24.com/fr/france/20261126-le-proc%C3%A8s-d-%C3%A9milie-k%C3%B6nig-propagandiste-du-jihad-s-ouvre-devant-la-cour-d-assises-sp%C3%A9ciale-de-paris' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/france/20261126-france-le-proc%C3%A8s-d-%C3%A9milie-k%C3%B6nig-%C3%A9g%C3%A9rie-du-jihad-commence-aux-assises-%C3%A0-paris' },
+        { name: 'Le Figaro', url: 'https://www.lefigaro.fr/faits-divers/je-voudrais-m-excuser-aupres-de-toute-la-nation-francaise-declare-emilie-koenig-revenante-de-daech-au-premier-jour-de-son-proces-20261126' },
+        { name: '20 Minutes', url: 'https://www.20minutes.fr/justice/4265072-20261125-emilie-konig-ancienne-egerie-daesh-accusee-avoir-joue-recruteuses-devant-assises' }
       ]
     },
     {
-      "tag": "Politique",
-      "title": "Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants",
-      "text": "franceinfo : « Les deux médias ont eu accès à une conversation où un ancien camarade de lycée de Jordan Bardella reçoit des messages affirmant notamment que \"ce sont les sionistes qui sont à la tête des banques\". » RFI : « Deux mois après les premières révélations de Mediapart sur des écrits antisémites de jeunesse attribués à Jordan Bardella, le site d'investigation et Le Monde publient, jeudi 26 novembre, de nouveaux éléments indiquant que le président du R […] » Information également rapportée par France 24, Le Figaro.",
-      "why": "",
-      "sources": [
-        {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/france/20261126-%C3%A9crits-antis%C3%A9mites-de-nouveaux-%C3%A9l%C3%A9ments-accablent-jordan-bardella"
-        },
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/politique/jordan-bardella/le-monde-et-mediapart-publient-de-nouveaux-elements-de-preuve-sur-les-ecrits-antisemites-attribues-a-jordan-bardella_8300856.html#xtor=RSS-3-[lestitres]"
-        },
-        {
-          "name": "RFI",
-          "url": "https://www.rfi.fr/fr/france/20261126-%C3%A9crits-antis%C3%A9mites-le-monde-et-mediapart-r%C3%A9v%C3%A8lent-de-nouveaux-%C3%A9l%C3%A9ments-compromettants-pour-jordan-bardella"
-        },
-        {
-          "name": "Le Figaro",
-          "url": "https://www.lefigaro.fr/politique/ecrits-antisemites-de-nouveaux-elements-compromettants-attribues-a-jordan-bardella-par-le-monde-et-mediapart-20261126"
-        }
+      tag: 'Monde',
+      title: 'Irak : huit djihadistes français, dont Romain Garnier, condamnés à la perpétuité',
+      text: 'La justice irakienne a condamné jeudi **huit Français** à la prison à perpétuité pour leur appartenance au groupe État islamique, parmi lesquels **Romain Garnier**. Deux autres ont été condamnés à **15 ans** de prison. Ils font partie des **47 ressortissants français** transférés de Syrie vers l’Irak pour y être jugés par une cour criminelle de Bagdad. Paris a rapatrié des centaines de membres de familles de djihadistes, mais refuse de le faire pour la plupart des hommes.',
+      why: 'La question du jugement des djihadistes étrangers oppose deux logiques : les juger là où les crimes ont été commis, ou les rapatrier pour les juger dans leur pays.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/international/article/2026/11/26/irak-huit-nouveaux-djihadistes-francais-dont-romain-garnier-condamnes-a-la-perpetuite_6815494_3210.html' },
+        { name: 'France 24', url: 'https://www.france24.com/fr/moyen-orient/20261126-en-irak-huit-nouveaux-jihadistes-fran%C3%A7ais-condamn%C3%A9s-%C3%A0-la-perp%C3%A9tuit%C3%A9' },
+        { name: 'Libération', url: 'https://www.liberation.fr/international/moyen-orient/irak-romain-garnier-et-sept-autres-francais-condamnes-a-perpetuite-pour-leur-affiliation-a-letat-islamique-20261126_D7RVUD7OSJDRJIYYERDEROG4S4/' },
+        { name: 'Euronews', url: 'https://fr.euronews.com/2026/11/26/irak-huit-ressortissants-francais-condamnes-a-la-prison-a-vie-pour-avoir-rejoint-lei' }
       ]
     },
     {
-      "tag": "Politique",
-      "title": "Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord",
-      "text": "AFP (via Le Figaro) : « Réunis jeudi matin en commission mixte paritaire, sept députés et sept sénateurs ne sont pas parvenus à s’entendre sur ce texte. Il repart donc en nouvelle lecture à l’Assemblée nationale. » Libération : « Les élus des deux chambres réunis ce jeudi en commission mixte paritaire (CMP) ont préféré mettre fin rapidement aux discussions, voulant éviter «un texte non adoptable par les deux chambres». » Information également rapportée par Ouest-France, La Croix.",
-      "why": "",
-      "sources": [
-        {
-          "name": "AFP (via Le Figaro)",
-          "url": "https://www.lefigaro.fr/social/budget-de-la-securite-sociale-2027-deputes-et-senateurs-echouent-a-trouver-un-accord-20261126"
-        },
-        {
-          "name": "Libération",
-          "url": "https://www.liberation.fr/politique/projet-de-budget-de-la-secu-deputes-et-senateurs-echouent-a-saccorder-le-texte-va-repartir-a-lassemblee-20261126_FZQE3QSPMZAMFM5CXFHZWB5LBM/"
-        },
-        {
-          "name": "Ouest-France",
-          "url": "https://www.ouest-france.fr/economie/budget-collectivites-etat/budget-de-la-secu-2027-deputes-et-senateurs-echouent-a-trouver-un-accord-le-texte-renvoye-en-nouvelle-lecture-a-lassemblee-2a4e3726-e975-11f1-86c1-70195b4d2e52?utm_source=fluxpublicactu&utm_medium=fluxrss&utm_campaign=banquedecontenu"
-        },
-        {
-          "name": "La Croix",
-          "url": "https://www.la-croix.com/economie/budget-de-la-securite-sociale-deputes-et-senateurs-echouent-a-trouver-un-accord-20261126"
-        }
+      tag: 'Médias',
+      title: 'Reporters sans frontières demande à l’Arcom de suspendre CNews pendant un mois',
+      text: 'L’ONG **Reporters sans frontières** (RSF) saisit une nouvelle fois l’**Arcom**, le régulateur de l’audiovisuel, et réclame la suspension de **CNews** pendant un mois. Après avoir analysé **61 heures** de programmes diffusés en septembre sur la chaîne contrôlée par **Vincent Bolloré**, elle dénonce de nouveau un « défaut de pluralisme ».',
+      why: 'Le pluralisme est une obligation des chaînes de télévision, contrôlée par l’Arcom. C’est une notion centrale des épreuves sur les médias.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/economie/article/2026/11/26/reporters-sans-frontieres-demande-la-suspension-de-cnews-pour-une-duree-d-un-mois_6815475_3234.html' },
+        { name: 'Mediapart', url: 'https://www.mediapart.fr/journal/culture-et-idees/261126/reporters-sans-frontieres-reclame-la-suspension-de-cnews-pendant-un-mois' }
       ]
     },
     {
-      "tag": "Économie",
-      "title": "L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains",
-      "text": "France 24 : « La nouvelle série de droits de douane annoncée par l'administration Trump, mercredi, a suscité la colère de ses principaux partenaires commerciaux – dont la Chine, le Brésil, l'Union européenne et le Japon. » franceinfo : « Washington accuse les pays visés de recourir à des subventions qui occasionnent une surproduction et pénalisent les entreprises américaines. » Information également rapportée par RFI.",
-      "why": "",
-      "sources": [
-        {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/am%C3%A9riques/20261126-l-ue-la-chine-et-d-autres-pays-s-indignent-des-nouveaux-droits-de-douane-am%C3%A9ricains"
-        },
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/monde/usa/droits-de-douane/inacceptables-regrettables-pretexte-a-la-manipulation-politique-les-pays-vises-s-indignent-face-aux-nouveaux-droits-de-douane-americains_8300712.html#xtor=RSS-3-[lestitres]"
-        },
-        {
-          "name": "RFI",
-          "url": "https://www.rfi.fr/fr/monde/20261126-l-annonce-de-nouveaux-droits-de-douane-am%C3%A9ricains-par-washington-suscite-l-indignation-des-pays-vis%C3%A9s"
-        }
+      tag: 'Climat',
+      title: 'Des PFAS, les « polluants éternels », détectés dans des laits infantiles vendus en France',
+      text: 'Pour la première fois, des analyses de laits infantiles vendus en France révèlent la présence de **PFAS**, surnommés « polluants éternels », à des niveaux qui exposent les nourrissons à des dépassements de la dose hebdomadaire tolérable, rapporte **Le Monde**. L’ONG **Générations futures** a, de son côté, analysé **652 échantillons alimentaires** en France : **21 %** contiennent au moins un PFAS. Elle dénonce des « failles » réglementaires.',
+      why: 'Les PFAS sont un sujet récurrent de santé publique et d’environnement : savoir expliquer simplement ce qu’est un « polluant éternel » est un bon réflexe de journaliste.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/planete/article/2026/11/26/des-laits-infantiles-vendus-en-france-sont-contamines-par-des-pfas-interdits-et-cancerogenes_6815474_3244.html' },
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/environnement/pollution/pfas/l-ong-generations-futures-denonce-des-failles-reglementaires-pour-limiter-la-presence-de-pfas-dans-les-aliments_8300646.html' }
       ]
     },
     {
-      "tag": "Justice",
-      "title": "Emilie König, la plus médiatique des djihadistes françaises, devant la justice",
-      "text": "Le Monde : « Le procès de cette « revenante » de Syrie, âgée de 41 ans et mère de cinq enfants, accusée d’association de malfaiteurs terroriste notamment pour avoir relayé la propagande de l’organisation Etat islamique, s’ouvre jeudi à Paris. » 20 Minutes : « Cette ancienne figure de l’État islamique, seule femme à figurer sur la liste noire des Etats-Unis, est jugée à partir de ce jeudi devant la cour d’assises spécialement composée. »",
-      "why": "",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/societe/article/2026/11/26/emilie-konig-la-plus-mediatique-des-djihadistes-francaises-devant-la-justice_6815463_3224.html"
-        },
-        {
-          "name": "20 Minutes",
-          "url": "https://www.20minutes.fr/justice/4265072-20261125-emilie-konig-ancienne-egerie-daesh-accusee-avoir-joue-recruteuses-devant-assises?at_medium=display&at_campaign=149"
-        }
+      tag: 'Monde',
+      title: 'Guerre en Ukraine : Donald Trump et le chef de l’OTAN appellent la Russie à ne pas « étendre la guerre »',
+      text: 'Le président américain **Donald Trump** et le secrétaire général de l’OTAN, **Mark Rutte**, ont appelé la Russie à ne pas « étendre la guerre » en Ukraine. Leur déclaration commune a été publiée mercredi, après une rencontre dans la résidence de Donald Trump en **Floride**.',
+      why: 'L’OTAN, alliance militaire créée en 1949, est dirigée par un secrétaire général. Savoir qui l’occupe et quel est son rôle est attendu en culture générale.',
+      sources: [
+        { name: 'France 24', url: 'https://www.france24.com/fr/europe/20261126-en-direct-ukraine-russie-ue-sommet-aide-zelensky-poutine' },
+        { name: '20 Minutes', url: 'https://www.20minutes.fr/monde/ukraine/4265844-20261126-direct-guerre-ukraine-trump-chef-otan-appellent-russie-etendre-guerre' },
+        { name: 'France 24 English', url: 'https://www.france24.com/en/europe/20261126-live-eu-leaders-face-showdown-over-ukraine-funding-as-divisions-deepen' }
       ]
     },
     {
-      "tag": "Monde",
-      "title": "Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite",
-      "text": "Le Monde : « Dans cette ancienne place forte socialiste du sud de l’Espagne et à quelques jours des élections législatives anticipées du dimanche 29 novembre, les partisans du Parti populaire et de Vox expriment leur détermination à chasser du pouvoir P […] » RFI : « Aux Canaries, le débat électoral s'est beaucoup focalisé sur la question migratoire. Une nouvelle loi permet normalement une répartition des migrants mineurs entre régions. »",
-      "why": "",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/international/article/2026/11/26/elections-legislatives-en-espagne-l-andalousie-laboratoire-de-l-alliance-entre-la-droite-et-l-extreme-droite_6815491_3210.html"
-        },
-        {
-          "name": "RFI",
-          "url": "https://www.rfi.fr/fr/podcasts/reportage-international/20261125-l%C3%A9gislatives-en-espagne-les-canaries-redoutent-une-crise-migratoire-en-cas-de-victoire-de-la-droite-dure"
-        }
+      tag: 'Europe',
+      title: 'Espagne : législatives anticipées le 29 novembre, la droite et l’extrême droite face à Pedro Sánchez',
+      text: 'L’Espagne vote le **dimanche 29 novembre** pour des **élections législatives anticipées**. En Andalousie, ancienne place forte socialiste, les partisans du **Parti populaire** (droite) et de **Vox** (extrême droite) affichent leur détermination à chasser du pouvoir le Premier ministre socialiste **Pedro Sánchez**. Vox, dirigé par **Santiago Abascal**, séduit une part croissante des jeunes, surtout des hommes. Aux Canaries, la campagne s’est concentrée sur la question migratoire.',
+      why: 'Des élections anticipées interviennent avant la fin normale de la législature. L’alliance entre droite et extrême droite est un enjeu politique dans plusieurs pays européens.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/international/article/2026/11/26/elections-legislatives-en-espagne-l-andalousie-laboratoire-de-l-alliance-entre-la-droite-et-l-extreme-droite_6815491_3210.html' },
+        { name: 'France 24', url: 'https://www.france24.com/fr/europe/20261126-en-espagne-l-extr%C3%AAme-droite-s%C3%A9duit-une-partie-de-la-jeunesse-en-surfant-sur-sa-d%C3%A9tresse' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/podcasts/reportage-international/20261125-l%C3%A9gislatives-en-espagne-les-canaries-redoutent-une-crise-migratoire-en-cas-de-victoire-de-la-droite-dure' }
       ]
     },
     {
-      "tag": "Société",
-      "title": "Des laits infantiles vendus en France sont contaminés par des PFAS interdits et cancérogènes",
-      "text": "Le Monde : « Pour la première fois, des analyses sur des laits infantiles vendus en France révèlent la présence de polluants éternels, et à des niveaux qui exposent les nourrissons à des dépassements de la dose hebdomadaire tolérable fixée par les autor […] » franceinfo : « Sur 652 échantillons alimentaires analysés en France, 21% contiennent au moins un composé per- et polyfluoroalkylé (PFAS), réglementé ou non, selon une étude menée par l'association. »",
-      "why": "",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/planete/article/2026/11/26/des-laits-infantiles-vendus-en-france-sont-contamines-par-des-pfas-interdits-et-cancerogenes_6815474_3244.html"
-        },
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/environnement/pollution/pfas/l-ong-generations-futures-denonce-des-failles-reglementaires-pour-limiter-la-presence-de-pfas-dans-les-aliments_8300646.html#xtor=RSS-3-[lestitres]"
-        }
+      tag: 'Justice',
+      title: 'Génocide des Rohingyas : la Birmanie refuse une partie des exigences de la CIJ',
+      text: 'La **Cour internationale de justice** (CIJ) a établi la responsabilité de l’État birman dans le **génocide des Rohingyas**. Elle a notamment ordonné le rapatriement de **750 000 Rohingyas** et leur indemnisation. Mercredi, le dirigeant birman **Min Aung Hlaing** a affirmé que son pays ne se conformerait pas aux exigences qu’il juge « inappropriées ».',
+      why: 'Ne pas confondre la CIJ, qui juge les différends entre États, et la Cour pénale internationale, qui juge des individus. Toutes deux siègent à La Haye.',
+      sources: [
+        { name: 'France 24', url: 'https://www.france24.com/fr/asie-pacifique/20261126-genocide-rohingya-birmanie-ne-se-conformera-pas-exigences-cij-inappropriees' },
+        { name: 'Le Temps', url: 'https://www.letemps.ch/monde/asie-oceanie/coupable-de-genocide-birmanie-ne-se-conformera-pas-a-toutes-les-exigences-de-la-cour-internationale-de-justice' }
       ]
     },
     {
-      "tag": "Médias",
-      "title": "Reporters sans frontières demande à l’Arcom la suspension de CNews pour une durée d’un mois",
-      "text": "Le Monde : « Après avoir examiné soixante et une heures de programmes diffusés en septembre sur la chaîne contrôlée par Vincent Bolloré, l’ONG dénonce de nouveau un « défaut de pluralisme » et saisit une nouvelle fois l’Autorité de régulation de la comm […] » Mediapart : « L’ONG dépose une nouvelle saisine auprès de l’Arcom pour défaut de pluralisme. »",
-      "why": "",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/economie/article/2026/11/26/reporters-sans-frontieres-demande-la-suspension-de-cnews-pour-une-duree-d-un-mois_6815475_3234.html"
-        },
-        {
-          "name": "Mediapart",
-          "url": "https://www.mediapart.fr/journal/culture-et-idees/261126/reporters-sans-frontieres-reclame-la-suspension-de-cnews-pendant-un-mois"
-        }
+      tag: 'Culture',
+      title: 'Andy Taylor, guitariste historique de Duran Duran, est mort à 65 ans',
+      text: 'Le guitariste britannique **Andy Taylor**, membre originel du groupe de **new wave Duran Duran**, est mort lundi à 65 ans d’un **cancer de la prostate**. Sa famille et le groupe ont annoncé son décès mercredi 25 novembre. Il avait quitté Duran Duran au milieu des années 1980, après de nombreux tubes, comme **« Rio »** et **« Save a Prayer »**.',
+      why: 'Les nécrologies sont un exercice journalistique à part entière : retracer une carrière en quelques lignes, avec des faits précis et vérifiés.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/disparitions/article/2026/11/26/andy-taylor-guitariste-historique-du-groupe-duran-duran-est-mort-a-65-ans_6815296_3382.html' },
+        { name: 'La Croix', url: 'https://www.la-croix.com/culture/mort-d-andy-taylor-ancien-guitariste-du-groupe-britannique-duran-duran-20261126' },
+        { name: 'Radio-Canada', url: 'https://ici.radio-canada.ca/article/info/2303112/deces-andy-taylor-ex-guitariste-duran-duran' },
+        { name: 'BBC News', url: 'https://www.bbc.co.uk/news/articles/cmp3vk6vr44po' }
       ]
     }
   ],
-  "lessons": [
+  memo: [
+    'Jordan Bardella : nouveaux messages antisémites de **2013** publiés par **Le Monde** et **Mediapart** ; il dénonce une « entreprise de persécution ».',
+    'Budget de la Sécurité sociale 2027 : échec de la **commission mixte paritaire** (7 députés, 7 sénateurs) ; **nouvelle lecture** à l’Assemblée.',
+    'Émilie König, 41 ans, jugée par la **cour d’assises spéciale** de Paris ; elle encourt **30 ans** de réclusion.',
+    'Irak : **8 Français** condamnés à la perpétuité, dont Romain Garnier ; **47** ressortissants transférés de Syrie.',
+    'Espagne : législatives anticipées le **29 novembre** ; Pedro Sánchez face au Parti populaire et à Vox.'
+  ],
+  lessons: [
     {
-      "title": "Le quiz de la une",
-      "icon": "☕",
-      "desc": "Les titres du jour",
-      "exercises": [
-        {
-          "t": "vf",
-          "q": "Le Monde a publié ce titre : « Emilie König, la plus médiatique des djihadistes françaises, devant la justice »",
-          "a": true,
-          "x": "C'est le titre exact."
-        },
-        {
-          "t": "qcm",
-          "q": "Quelle rédaction a publié ce titre : « Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans » ?",
-          "c": [
-            "Le Monde",
-            "20 Minutes",
-            "France 24",
-            "RFI"
-          ],
-          "a": 0,
-          "x": "Titre publié par Le Monde."
-        },
-        {
-          "t": "qcm",
-          "q": "Quelle rédaction a publié ce titre : « Emilie König, la plus médiatique des djihadistes françaises, devant la justice » ?",
-          "c": [
-            "Le Monde",
-            "AFP (via Le Figaro)",
-            "franceinfo",
-            "RFI"
-          ],
-          "a": 0,
-          "x": "Titre publié par Le Monde."
-        },
-        {
-          "t": "vf",
-          "q": "Le Monde a publié ce titre : « Reporters sans frontières demande à l’Arcom la suspension de CNews pour une durée d’un mois »",
-          "a": true,
-          "x": "C'est le titre exact."
-        },
-        {
-          "t": "vf",
-          "q": "AFP (via Le Figaro) a publié ce titre : « Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord »",
-          "a": true,
-          "x": "C'est le titre exact."
-        },
-        {
-          "t": "qcm",
-          "q": "Quelle rédaction a publié ce titre : « L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains » ?",
-          "c": [
-            "France 24",
-            "Radio-Canada",
-            "20 Minutes",
-            "Le Monde"
-          ],
-          "a": 0,
-          "x": "Titre publié par France 24."
-        },
-        {
-          "t": "vf",
-          "q": "France 24 a publié ce titre : « L'UE, la Taylor et d'autres pays s'indignent des nouveaux droits de douane américains »",
-          "a": false,
-          "x": "Le titre exact est : « L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains »"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre publié par France 24 : « Écrits antisémites : _____ Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »",
-          "a": [
-            "Jordan"
-          ],
-          "x": "Titre exact : « Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »"
-        },
-        {
-          "t": "match",
-          "q": "Associe chaque titre à la rédaction qui l'a publié",
-          "pairs": [
-            [
-              "Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans",
-              "Le Monde"
-            ],
-            [
-              "Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\"",
-              "France 24"
-            ],
-            [
-              "Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver",
-              "AFP (via Le Figaro)"
-            ]
-          ],
-          "x": "Chaque titre est cité tel qu'il a été publié."
-        },
-        {
-          "t": "write",
-          "max": 300,
-          "q": "✍️ Écris un chapô de 300 signes maximum pour cette info (l'essentiel : qui, quoi, où, quand)",
-          "src": "Titre : Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans\n\nLe Monde : « Le guitariste originel de la formation britannique de new wave avait quitté le groupe au milieu des années 1980, après de nombreux tubes. » Libération : « L’artiste britannique est mort lundi 23 novembre 2026 d’un cancer, selon un communiqué conjoint de sa famille et de ses anciens camarades de groupe publié mercredi 25 novembre. » Information également rapportée par La Croix, Radio-Canada.",
-          "model": "**Chapô publié par Le Monde :** Le guitariste originel de la formation britannique de new wave avait quitté le groupe au milieu des années 1980, après de nombreux tubes.",
-          "crit": [
-            "Il donne l'essentiel (qui, quoi, où, quand)",
-            "Il fait moins de 300 signes",
-            "Il ne recopie pas le titre",
-            "Tout ce qui est écrit figure dans les citations"
-          ]
-        }
+      title: 'Le quiz de la une', icon: '☕', desc: 'Politique, justice et santé en France', exercises: [
+        { t: 'qcm', q: 'Quels médias publient de nouveaux messages antisémites attribués à Jordan Bardella ?', c: ['Le Monde et Mediapart', 'Libération et Le Figaro', 'France Inter et franceinfo', 'L’Express et Le Point'], a: 0, x: 'Mediapart avait fait les premières révélations deux mois plus tôt ; il les complète jeudi avec **Le Monde**.' },
+        { t: 'qcm', q: 'De quelle année datent les messages antisémites attribués à Jordan Bardella et publiés jeudi ?', c: ['2013', '2017', '2020', '2008'], a: 0, x: 'Ils datent de **2013** : Jordan Bardella était alors lycéen et jeune militant du Front national.' },
+        { t: 'vf', q: 'Jordan Bardella reconnaît être l’auteur des messages antisémites qui lui sont attribués.', a: false, x: 'Il **réfute** ces accusations et dénonce une « entreprise de persécution ».' },
+        { t: 'qcm', q: 'Combien de parlementaires composent la commission mixte paritaire réunie sur le budget de la Sécurité sociale ?', c: ['Sept députés et sept sénateurs', 'Dix députés et cinq sénateurs', 'Cinq députés et cinq sénateurs', 'Tous les députés et tous les sénateurs'], a: 0, x: 'Une commission mixte paritaire réunit **sept députés et sept sénateurs**.' },
+        { t: 'input', q: 'Complète : après l’échec de la commission mixte paritaire, le budget de la Sécurité sociale repart à l’Assemblée nationale en nouvelle _____.', a: ['lecture', 'nouvelle lecture'], hint: 'Un seul mot.', x: 'Le texte repart en **nouvelle lecture** à l’Assemblée nationale.' },
+        { t: 'qcm', q: 'Quelle juridiction juge Émilie König à Paris ?', c: ['La cour d’assises spéciale', 'Le tribunal correctionnel', 'La Cour de cassation', 'Le Conseil d’État'], a: 0, x: 'La **cour d’assises spéciale**, composée uniquement de magistrats professionnels, juge notamment les crimes terroristes.' },
+        { t: 'vf', q: 'Émilie König encourt 30 ans de réclusion criminelle.', a: true, x: 'Elle est jugée pour association de malfaiteurs terroriste et encourt **30 ans** de réclusion criminelle.' },
+        { t: 'qcm', q: 'Selon l’ONG Générations futures, quelle part des 652 échantillons alimentaires analysés en France contient au moins un PFAS ?', c: ['21 %', '5 %', '50 %', '75 %'], a: 0, x: '**21 %** des 652 échantillons contiennent au moins un PFAS, selon Générations futures.' },
+        { t: 'match', q: 'Associe chaque personne à l’info du jour qui la concerne', pairs: [['Jordan Bardella', 'Écrits antisémites'], ['Émilie König', 'Procès à Paris'], ['Romain Garnier', 'Condamné en Irak'], ['Vincent Bolloré', 'Contrôle CNews']], x: 'Quatre noms à retenir pour l’actualité du jour.' },
+        { t: 'write', max: 300, q: '✍️ Chapô · « Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord »', src: 'Dépêche :\n\nRéunis jeudi matin en commission mixte paritaire, sept députés et sept sénateurs ne sont pas parvenus à s’entendre sur le projet de budget de la Sécurité sociale pour 2027. Ils ont préféré arrêter rapidement les discussions pour éviter « un texte non adoptable par les deux chambres ». Le texte repart donc en nouvelle lecture à l’Assemblée nationale.\n\nRédige un **chapô** (300 signes maximum) : qui, quoi, quand, et la conséquence.', model: '**Chapô possible :** Réunis jeudi en commission mixte paritaire, sept députés et sept sénateurs n’ont pas réussi à s’entendre sur le budget de la Sécurité sociale pour 2027. Le texte repart en nouvelle lecture à l’Assemblée nationale.', crit: ['Il dit qui (députés et sénateurs) et quoi (pas d’accord)', 'Il donne la conséquence (nouvelle lecture à l’Assemblée)', 'Il fait moins de 300 signes', 'Il n’ajoute rien qui ne soit dans la dépêche'] }
       ]
     },
     {
-      "title": "Le tour du monde",
-      "icon": "🌍",
-      "desc": "International et Europe",
-      "exercises": [
-        {
-          "t": "vf",
-          "q": "Le Monde a publié ce titre : « Irak : huit nouveaux djihadistes français, dont Romain Chine, condamnés à la perpétuité »",
-          "a": false,
-          "x": "Le titre exact est : « Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité »"
-        },
-        {
-          "t": "qcm",
-          "q": "Quelle rédaction a publié ce titre : « Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité » ?",
-          "c": [
-            "Le Monde",
-            "Ouest-France",
-            "Mediapart",
-            "Radio-Canada"
-          ],
-          "a": 0,
-          "x": "Titre publié par Le Monde."
-        },
-        {
-          "t": "qcm",
-          "q": "Quelle rédaction a publié ce titre : « Espagne : un pétrolier chargé de diesel coule au large d’Ibiza, faisant un mort » ?",
-          "c": [
-            "Le Monde",
-            "RFI",
-            "AFP (via Le Figaro)",
-            "Radio-Canada"
-          ],
-          "a": 0,
-          "x": "Titre publié par Le Monde."
-        },
-        {
-          "t": "vf",
-          "q": "Le Monde a publié ce titre : « Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite »",
-          "a": true,
-          "x": "C'est le titre exact."
-        },
-        {
-          "t": "vf",
-          "q": "Le Monde a publié ce titre : « Espagne : un pétrolier chargé de diesel coule au large d’Ibiza, faisant un mort »",
-          "a": true,
-          "x": "C'est le titre exact."
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre publié par Le Monde : « Elections législatives en _____ : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite »",
-          "a": [
-            "Espagne"
-          ],
-          "x": "Titre exact : « Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite »"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre publié par Le Monde : « Irak : huit nouveaux djihadistes français, dont _____ Garnier, condamnés à la perpétuité »",
-          "a": [
-            "Romain"
-          ],
-          "x": "Titre exact : « Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité »"
-        },
-        {
-          "t": "qcm",
-          "q": "Quelle rédaction a publié ce titre : « Elections législatives en Espagne : l’Andalousie, laboratoire de l’alliance entre la droite et l’extrême droite » ?",
-          "c": [
-            "Le Monde",
-            "France 24",
-            "La Croix",
-            "Libération"
-          ],
-          "a": 0,
-          "x": "Titre publié par Le Monde."
-        },
-        {
-          "t": "write",
-          "max": 300,
-          "q": "✍️ Écris un chapô de 300 signes maximum pour cette info (l'essentiel : qui, quoi, où, quand)",
-          "src": "Titre : Espagne : un pétrolier chargé de diesel coule au large d’Ibiza, faisant un mort\n\nLe Monde : « L’équipage de 17 membres a été secouru, mais l’un d’entre eux a ensuite été déclaré mort à l’hôpital, à Ibiza, selon les secours de l’archipel des Baléares. Les dommages environnementaux sont en cours d’évaluation. » franceinfo : « Les éventuels dommages environnementaux sont en cours d'évaluation, selon les secours. » Information également rapportée par Le Figaro, Libération.",
-          "model": "**Chapô publié par Le Monde :** L’équipage de 17 membres a été secouru, mais l’un d’entre eux a ensuite été déclaré mort à l’hôpital, à Ibiza, selon les secours de l’archipel des Baléares. Les dommages environnementaux sont en cours d’évaluation.",
-          "crit": [
-            "Il donne l'essentiel (qui, quoi, où, quand)",
-            "Il fait moins de 300 signes",
-            "Il ne recopie pas le titre",
-            "Tout ce qui est écrit figure dans les citations"
-          ]
-        }
+      title: 'Le tour du monde', icon: '🌍', desc: 'Irak, Ukraine, Espagne, Birmanie', exercises: [
+        { t: 'qcm', q: 'Combien de Français la justice irakienne a-t-elle condamnés jeudi à la prison à perpétuité ?', c: ['Huit', 'Deux', 'Quinze', 'Quarante-sept'], a: 0, x: '**Huit** Français ont été condamnés à la perpétuité ; deux autres à 15 ans de prison.' },
+        { t: 'vf', q: 'Ces Français avaient été transférés de Syrie vers l’Irak pour y être jugés.', a: true, x: 'Ils font partie des **47 ressortissants français** transférés de Syrie vers l’Irak pour être jugés par une cour criminelle de Bagdad.' },
+        { t: 'qcm', q: 'Qui a appelé la Russie, avec Donald Trump, à ne pas « étendre la guerre » en Ukraine ?', c: ['Mark Rutte, secrétaire général de l’OTAN', 'Emmanuel Macron, président de la République', 'Volodymyr Zelensky, président ukrainien', 'Antonio Guterres, secrétaire général de l’ONU'], a: 0, x: 'La déclaration commune est signée par Donald Trump et **Mark Rutte**, secrétaire général de l’OTAN.' },
+        { t: 'qcm', q: 'Où Donald Trump et Mark Rutte se sont-ils rencontrés ?', c: ['En Floride, dans la résidence de Donald Trump', 'À Bruxelles, au siège de l’OTAN', 'À Kiev', 'À Washington, à la Maison-Blanche'], a: 0, x: 'La rencontre a eu lieu dans la résidence de Donald Trump en **Floride**.' },
+        { t: 'input', q: 'Quel jour de novembre les Espagnols votent-ils pour les élections législatives anticipées ?', a: ['29', '29 novembre', 'le 29 novembre', 'dimanche 29 novembre'], hint: 'Un nombre.', x: 'Les législatives anticipées ont lieu le **dimanche 29 novembre**.' },
+        { t: 'qcm', q: 'Quel parti d’extrême droite espagnol, dirigé par Santiago Abascal, séduit une part croissante des jeunes ?', c: ['Vox', 'Le Parti populaire', 'Podemos', 'Le Parti socialiste'], a: 0, x: '**Vox** est le parti d’extrême droite ; le Parti populaire est le grand parti de droite.' },
+        { t: 'vf', q: 'La Birmanie annonce qu’elle se conformera à toutes les exigences de la Cour internationale de justice.', a: false, x: 'Son dirigeant **Min Aung Hlaing** affirme que la Birmanie ne se conformera pas aux exigences qu’il juge « inappropriées ».' },
+        { t: 'qcm', q: 'Combien de Rohingyas la CIJ a-t-elle ordonné de rapatrier ?', c: ['750 000', '75 000', '7 500', '7,5 millions'], a: 0, x: 'La CIJ a ordonné le rapatriement de **750 000 Rohingyas** et leur indemnisation.' },
+        { t: 'match', q: 'Associe chaque pays à l’info du jour', pairs: [['Irak', 'Huit Français condamnés à la perpétuité'], ['Espagne', 'Législatives anticipées le 29 novembre'], ['Birmanie', 'Génocide des Rohingyas jugé par la CIJ'], ['États-Unis', 'Rencontre entre Donald Trump et Mark Rutte en Floride']], x: 'Un pays, une info : la base du tour du monde.' },
+        { t: 'write', max: 80, q: '🏷️ Titre : « Irak : huit djihadistes français condamnés à la perpétuité »', src: 'Dépêche :\n\nLa justice irakienne a condamné jeudi huit Français à la prison à perpétuité pour leur appartenance au groupe État islamique, parmi lesquels Romain Garnier. Deux autres ont été condamnés à 15 ans de prison.\n\nÉcris un **titre informatif** de 80 signes maximum, avec un verbe.', model: '**Titre de la rédaction :** Irak : huit djihadistes français, dont Romain Garnier, condamnés à la perpétuité', crit: ['On comprend le fait (qui, quoi, où)', 'Il contient un verbe et reste sous 80 signes', 'Il ne promet rien que le texte ne donne pas', 'Il évite les adjectifs de jugement'] }
       ]
     },
     {
-      "title": "Médias & atelier",
-      "icon": "🎙️",
-      "desc": "Qui a publié quoi, et à toi d'écrire",
-      "exercises": [
-        {
-          "t": "input",
-          "q": "Complète le titre publié par France 24 : « L'UE, la _____ et d'autres pays s'indignent des nouveaux droits de douane américains »",
-          "a": [
-            "Chine"
-          ],
-          "x": "Titre exact : « L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains »"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre publié par Le Monde : « Emilie _____, la plus médiatique des djihadistes françaises, devant la justice »",
-          "a": [
-            "König"
-          ],
-          "x": "Titre exact : « Emilie König, la plus médiatique des djihadistes françaises, devant la justice »"
-        },
-        {
-          "t": "vf",
-          "q": "France 24 a publié ce titre : « L'UE, la Chine et d'autres pays s'indignent des nouveaux droits de douane américains »",
-          "a": true,
-          "x": "C'est le titre exact."
-        },
-        {
-          "t": "qcm",
-          "q": "Quelle rédaction a publié ce titre : « Des laits infantiles vendus en France sont contaminés par des PFAS interdits et cancérogènes » ?",
-          "c": [
-            "Le Monde",
-            "Ouest-France",
-            "20 Minutes",
-            "Libération"
-          ],
-          "a": 0,
-          "x": "Titre publié par Le Monde."
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre publié par Le Monde : « Des laits infantiles vendus en _____ sont contaminés par des PFAS interdits et cancérogènes »",
-          "a": [
-            "France"
-          ],
-          "x": "Titre exact : « Des laits infantiles vendus en France sont contaminés par des PFAS interdits et cancérogènes »"
-        },
-        {
-          "t": "vf",
-          "q": "Le Monde a publié ce titre : « Andy Taylor, guitariste historique du groupe Romain Duran, est mort à 65 ans »",
-          "a": false,
-          "x": "Le titre exact est : « Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans »"
-        },
-        {
-          "t": "vf",
-          "q": "France 24 a publié ce titre : « Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\" après la publication de nouveaux éléments accablants »",
-          "a": true,
-          "x": "C'est le titre exact."
-        },
-        {
-          "t": "vf",
-          "q": "AFP (via Le Figaro) a publié ce titre : « Budget de la Duran sociale 2027 : députés et sénateurs échouent à trouver un accord »",
-          "a": false,
-          "x": "Le titre exact est : « Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord »"
-        },
-        {
-          "t": "match",
-          "q": "Associe chaque titre à la rédaction qui l'a publié",
-          "pairs": [
-            [
-              "Emilie König, la plus médiatique des djihadistes françaises, devant la justice",
-              "Le Monde"
-            ],
-            [
-              "Écrits antisémites : Jordan Bardella dénonce une \"entreprise de persécution\"",
-              "France 24"
-            ],
-            [
-              "Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver",
-              "AFP (via Le Figaro)"
-            ]
-          ],
-          "x": "Chaque titre est cité tel qu'il a été publié."
-        },
-        {
-          "t": "write",
-          "max": 300,
-          "q": "✍️ Écris un chapô de 300 signes maximum pour cette info (l'essentiel : qui, quoi, où, quand)",
-          "src": "Titre : Emilie König, la plus médiatique des djihadistes françaises, devant la justice\n\nLe Monde : « Le procès de cette « revenante » de Syrie, âgée de 41 ans et mère de cinq enfants, accusée d’association de malfaiteurs terroriste notamment pour avoir relayé la propagande de l’organisation Etat islamique, s’ouvre jeudi à Paris. » 20 Minutes : « Cette ancienne figure de l’État islamique, seule femme à figurer sur la liste noire des Etats-Unis, est jugée à partir de ce jeudi devant la cour d’assises spécialement composée. »",
-          "model": "**Chapô publié par Le Monde :** Le procès de cette « revenante",
-          "crit": [
-            "Il donne l'essentiel (qui, quoi, où, quand)",
-            "Il fait moins de 300 signes",
-            "Il ne recopie pas le titre",
-            "Tout ce qui est écrit figure dans les citations"
-          ]
-        },
-        {
-          "t": "write",
-          "max": 300,
-          "q": "✍️ Écris un chapô de 300 signes maximum pour cette info (l'essentiel : qui, quoi, où, quand)",
-          "src": "Titre : Des laits infantiles vendus en France sont contaminés par des PFAS interdits et cancérogènes\n\nLe Monde : « Pour la première fois, des analyses sur des laits infantiles vendus en France révèlent la présence de polluants éternels, et à des niveaux qui exposent les nourrissons à des dépassements de la dose hebdomadaire tolérable fixée par les autor […] » franceinfo : « Sur 652 échantillons alimentaires analysés en France, 21% contiennent au moins un composé per- et polyfluoroalkylé (PFAS), réglementé ou non, selon une étude menée par l'association. »",
-          "model": "**Chapô publié par Le Monde :** Pour la première fois, des analyses sur des laits infantiles vendus en France révèlent la présence de polluants éternels, et à des niveaux qui exposent les nourrissons à des dépassements de la dose hebdomadaire tolérable fixée par les autor […]",
-          "crit": [
-            "Il donne l'essentiel (qui, quoi, où, quand)",
-            "Il fait moins de 300 signes",
-            "Il ne recopie pas le titre",
-            "Tout ce qui est écrit figure dans les citations"
-          ]
-        }
+      title: 'Médias & atelier', icon: '🎙️', desc: 'Pluralisme, investigation et écriture', exercises: [
+        { t: 'qcm', q: 'Quelle ONG demande à l’Arcom de suspendre CNews pendant un mois ?', c: ['Reporters sans frontières', 'Amnesty International', 'Transparency International', 'Greenpeace'], a: 0, x: '**Reporters sans frontières** (RSF) saisit une nouvelle fois l’Arcom.' },
+        { t: 'qcm', q: 'Que reproche Reporters sans frontières à CNews ?', c: ['Un « défaut de pluralisme »', 'Des publicités cachées', 'Un manque de programmes pour la jeunesse', 'Des retards de diffusion'], a: 0, x: 'RSF dénonce de nouveau un « **défaut de pluralisme** », après avoir analysé 61 heures de programmes.' },
+        { t: 'input', q: 'Combien d’heures de programmes de CNews Reporters sans frontières a-t-elle analysées ?', a: ['61', '61 heures', 'soixante et une'], hint: 'Un nombre.', x: 'RSF a analysé **61 heures** de programmes diffusés en septembre.' },
+        { t: 'vf', q: 'L’Arcom est le régulateur de l’audiovisuel.', a: true, x: 'L’**Arcom** veille notamment au respect du pluralisme par les chaînes de télévision.' },
+        { t: 'qcm', q: 'Qui contrôle la chaîne CNews ?', c: ['Vincent Bolloré', 'Xavier Niel', 'Martin Bouygues', 'Bernard Arnault'], a: 0, x: 'CNews est contrôlée par **Vincent Bolloré**.' },
+        { t: 'qcm', q: 'De quel groupe de new wave Andy Taylor était-il le guitariste ?', c: ['Duran Duran', 'Depeche Mode', 'The Cure', 'Spandau Ballet'], a: 0, x: 'Andy Taylor était le guitariste originel de **Duran Duran**, auteur de tubes comme « Rio ».' },
+        { t: 'write', max: 280, q: '🎯 Attaque · « Écrits antisémites : nouvelles révélations sur Jordan Bardella »', src: 'Dépêche :\n\nDeux mois après les premières révélations de Mediapart, le site d’investigation et Le Monde publient jeudi de nouveaux messages antisémites attribués à Jordan Bardella, président du Rassemblement national. Ils datent de 2013. Jordan Bardella réfute ces accusations et dénonce une « entreprise de persécution ».\n\nRédige l’**attaque** de l’article (une ou deux phrases, 280 signes maximum). Attention : les messages lui sont **attribués**, il les conteste.', model: '**Attaque possible :** Le Monde et Mediapart publient ce jeudi de nouveaux messages antisémites, datés de 2013, attribués à Jordan Bardella. Le président du Rassemblement national réfute ces accusations et dénonce une « entreprise de persécution ».', crit: ['Elle donne le fait principal d’emblée', 'Elle emploie « attribués » : pas de culpabilité affirmée', 'Elle donne la réaction de Jordan Bardella', 'Elle fait moins de 280 signes'] },
+        { t: 'write', max: 300, q: '✍️ Chapô · « Des PFAS détectés dans des laits infantiles vendus en France »', src: 'Dépêche :\n\nPour la première fois, des analyses de laits infantiles vendus en France révèlent la présence de PFAS, surnommés « polluants éternels », à des niveaux qui exposent les nourrissons à des dépassements de la dose hebdomadaire tolérable, rapporte Le Monde. L’ONG Générations futures a analysé 652 échantillons alimentaires en France : 21 % contiennent au moins un PFAS.\n\nRédige un **chapô** (300 signes maximum), en expliquant ce que sont les PFAS en quelques mots.', model: '**Chapô possible :** Des PFAS, ces « polluants éternels », ont été détectés pour la première fois dans des laits infantiles vendus en France, à des niveaux qui dépassent pour les nourrissons la dose hebdomadaire tolérable, selon Le Monde.', crit: ['Il donne le fait principal (PFAS dans des laits infantiles)', 'Il explique « polluants éternels » en quelques mots', 'Il cite la source (Le Monde ou Générations futures)', 'Il fait moins de 300 signes'] }
       ]
     }
   ],
-  "shorts": []
+  reco: [{ type: 'film', title: 'Les Hommes du président', by: 'Alan J. Pakula', year: 1976, story: 0, why: 'Deux journalistes du Washington Post enquêtent sur le scandale du Watergate. Un classique sur le journalisme d’investigation et la protection des sources, au cœur des nouvelles révélations de Mediapart et du Monde.' }],
+  shorts: []
 };
