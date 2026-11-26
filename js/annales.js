@@ -52,9 +52,9 @@
       let groups = Object.values(byTag).filter(g => g.length >= 2).sort((a, b) => b.length - a.length).slice(0, 2).map(g => g.slice(0, 3));
       if (!groups.length) groups = [stories.slice(0, 3)];
       const exs = groups.map((g, i) => ({
-        t: 'write', max: 300,
+        t: 'write', max: 380, stories: g,
         q: `🧩 Synthèse de dépêches n°${i + 1} · rubrique ${g[0].tag}`,
-        src: `Écris un **titre** (80 signes max) puis un **chapô** de 300 signes maximum qui relie ces dépêches, sans rien ajouter qui n'y figure pas.\n\n` + g.map((s, k) => `**Dépêche ${k + 1} : ${s.title}**\n${plain(s.text)}`).join('\n\n'),
+        src: `Écris un **titre** (80 signes max) puis un **chapô** de 300 signes maximum qui relie ces dépêches, sans rien ajouter qui n'y figure pas (380 signes au total).\n\n` + g.map((s, k) => `**Dépêche ${k + 1}** · ${s.tag}\n${plain(s.text)}`).join('\n\n'),
         model: `**Titre :** ${g[0].title}\n**Chapô :** ${g.map(s => clip(firstSentence(s.text, 400), 95)).join(' ')}`,
         crit: ['Le titre est informatif et fait moins de 80 signes', 'Le chapô donne l\'essentiel (qui, quoi, où, quand) en moins de 300 signes', 'Tout ce que tu écris figure dans les dépêches (rien d\'inventé)', 'Les dépêches sont reliées entre elles, pas simplement juxtaposées'],
         facts: g.flatMap(s => keyFacts(s, 2)).slice(0, 6)

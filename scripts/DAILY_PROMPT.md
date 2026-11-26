@@ -39,6 +39,7 @@ Trois règles passent avant tout le reste :
      1. « Le quiz de la une » ☕ (France), 9 ou 10 exercices.
      2. « Le tour du monde » 🌍 (international et Europe), 8 ou 9 exercices.
      3. « Médias & atelier » 🎙️, 7 ou 8 exercices, dont **2 `write`** (titrer une dépêche, rédiger une attaque ou un chapô) construits sur une vraie info du jour.
+     - **Forme d'un `write`** : `q` = le type d'exercice seulement (« ✍️ Chapô », « 🏷️ Titre », « 🎯 Attaque »…), **jamais le titre de l'info** (pour un exercice de titre, c'est la réponse). `src` = `'Dépêche :\n\n<texte>\n\n<consigne>'`, la consigne en dernier paragraphe, avec un mot en **gras**. Toute limite chiffrée de la consigne va aussi dans `max` (en signes) : l'app bloque la saisie à cette limite. L'app affiche à côté le dossier de l'info : la dépêche et l'article de chaque rédaction de `sources`.
      - **Écriture dans chaque leçon** : les leçons 1 et 2 comptent aussi **1 `write`** chacune (résumer une dépêche en 2 phrases, trouver un angle de reportage, écrire 3 questions d'interview). L'application en ajoute elle-même un si tu l'oublies, mais un exercice choisi par toi est meilleur.
      - **Reformulations (OBLIGATOIRES)** : l'élève parcourt **toutes les formulations d'une question avant d'en revoir une** (test, Fil, 2e chance). Quand toutes ont servi, le cycle recommence, avec une réponse à taper. Plus tu écris de variantes, plus la répétition arrive tard. Il doit répondre parce qu'il a compris l'info, pas parce qu'il reconnaît la phrase. L'application ne fabrique aucune reformulation : c'est à toi de les écrire, **4 de plus par question** (5 formulations en tout).
        - `qcm` et `input` : `qv: ['formulation 2', 'formulation 3', 'formulation 4', 'formulation 5']`, avec **la même bonne réponse** et les mêmes choix. Change l'angle, pas seulement les mots : par la cause, la conséquence, le chiffre, l'acteur… Exemple : « Quelle ONG demande la suspension de CNews ? » devient « Qui a saisi l'Arcom contre CNews ? », puis « L'appel à suspendre CNews un mois émane de quelle organisation ? ».
@@ -66,7 +67,8 @@ Trois règles passent avant tout le reste :
    - Ne pose **aucune question de quiz sur le contenu d'une vidéo** : tu n'en connais que le titre.
    - Si le script échoue, mets `shorts: []`.
 6. Mets à jour `data/days/index.js` : ajoute `{ date: '<date>', title: '<title>', lessons: 3 }` **en tête**, ou remplace l'entrée existante en cas de régénération.
-7. **Vérification obligatoire** : `node scripts/check-edition.js data/days/<date>.js`.
+7. **Articles du dossier** : lance `python3 scripts/sources_extraits.py <date>`. Il ajoute à chaque source le titre et le chapeau de son article (lus dans `news-today.txt`), affichés dans les ateliers d'écriture. Les adresses des `sources` doivent donc être celles de `news-today.txt`, recopiées telles quelles.
+8. **Vérification obligatoire** : `node scripts/check-edition.js data/days/<date>.js`.
    - Le script contrôle la syntaxe, la structure, le recoupement (2 sources différentes avec URL par info) et la présence des réponses dans le brief.
    - Tant qu'il affiche `ÉCHEC`, corrige le fichier : ajoute la 2e source, réécris le texte ou le `why`, ou remplace la question, puis relance-le.
    - **Ne publie jamais une édition en échec.** Si tu n'y arrives pas, n'écris pas d'édition et explique pourquoi dans ton résumé.
@@ -91,7 +93,7 @@ Quand l'édition du jour **existe déjà** (sans marqueur `SCOOP:REGENERER`), tu
    - `type` : `'film'`, `'série'`, `'docu'` ou `'podcast'`. `story` : l'index de l'info du jour qu'elle prolonge (choisis l'événement le plus marquant de la journée). `why` : 2 phrases qui expliquent le lien avec l'actu.
    - **Aucune invention.** Ne cite qu'une œuvre que tu connais **avec certitude** : titre exact, réalisateur ou auteur, année. Le sujet de l'œuvre doit réellement faire écho à l'info (même thème, même institution, même type d'événement). Si tu n'es pas sûr d'une œuvre, choisis-en une plus connue. N'écris ni lien ni plateforme de diffusion : l'application propose une recherche.
    - Préfère des œuvres reconnues (films et séries primés, documentaires de référence, podcasts de médias établis comme France Culture ou France Inter) et variées d'un jour à l'autre : relis `grep -h -A1 "reco:" data/days/*.js` (ou la fin des éditions récentes) pour ne pas répéter une recommandation récente.
-10. Lance `node scripts/check-edition.js data/days/<date>.js` (il doit afficher OK), puis publie l'édition, `index.js` et `scripts/topics-seen.txt` : `git commit -m "Mise à jour de <HH> h"`.
+10. Lance `python3 scripts/sources_extraits.py <date>` (titre et chapeau des articles), puis `node scripts/check-edition.js data/days/<date>.js` (il doit afficher OK), puis publie l'édition, `index.js` et `scripts/topics-seen.txt` : `git commit -m "Mise à jour de <HH> h"`.
 
 ## Variété des questions (côté application, rien à faire)
 
@@ -105,7 +107,7 @@ vf    {t:'vf', q:'affirmation', a:true|false, x, vv:[4 × {q:'autre affirmation'
 input {t:'input', q, a:['réponse', 'variante'], hint?, x, qv:[4 autres formulations]}
 order {t:'order', q, items:[dans le BON ordre], x}
 match {t:'match', q, pairs:[[gauche, droite], x4], x}
-write {t:'write', q, src, model, crit:[4 critères]}
+write {t:'write', q:'✍️ Chapô' (sans le titre de l'info), src:'Dépêche :\n\n…\n\n<consigne>', max:<signes>, model, crit:[4 critères]}
 ```
 
 L'application mélange elle-même les choix et les éléments. Mets toujours la bonne réponse où tu veux, en indiquant son index dans `a`.

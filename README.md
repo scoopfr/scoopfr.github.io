@@ -4,7 +4,7 @@
 
 - **L'appli en ligne** : https://scoopfr.github.io/
 - **Le code** : https://github.com/scoopfr/scoopfr.github.io (ce dépôt)
-- **Dernière mise à jour de ce document** : 26 novembre 2026, version **v52** de l'appli.
+- **Dernière mise à jour de ce document** : 26 novembre 2026, version **v53** de l'appli.
 
 Ce document a deux parties :
 1. **Pour tout le monde** : à quoi sert l'appli, comment elle marche, sans jargon.
@@ -23,7 +23,7 @@ Pour entrer dans une école de journalisme (CFJ, ESJ Lille, IPJ, CELSA…), il f
   - **Une question change de formulation à chaque fois** qu'on rouvre un test, pour qu'on réponde parce qu'on a compris l'info, pas par habitude. Quand toutes ses formulations ont servi, il faut taper la réponse.
   - Une courte phrase au-dessus de chaque question rappelle de quoi on parle, **sans jamais donner la réponse**.
 - **L'actu en vidéo**, façon Shorts : une vidéo d'une rédaction, puis **le résumé de l'info dont elle parle**, 5 fois de suite, puis un quiz sur ces 5 infos.
-- **De l'entraînement à l'écriture** : écrire un titre, un chapô ou une attaque, puis comparer avec une proposition.
+- **De l'entraînement à l'écriture** : écrire un titre, un chapô ou une attaque à partir d'un dossier (la dépêche et les articles de plusieurs rédactions), puis comparer avec une proposition. La zone d'écriture s'arrête à la limite donnée par la consigne.
 - **De la culture générale**, un **glossaire**, le **mot du jour** et une **recommandation** (film, série, docu, podcast) en écho à l'actu.
 - **La préparation aux concours** : fiches des écoles, annales, simulation d'oral.
 - **Le côté jeu** : points d'expérience (XP), série de jours d'affilée 🔥, niveaux, objectif quotidien, rappels par notification.
@@ -170,7 +170,7 @@ Le projet est préparé mais n'est pas publié : les comptes développeur sont p
 - Pas de `gh` sur le PC. Pour lancer un workflow à la main, passe par le navigateur (GitHub, Actions, Run workflow).
 - Après une modification, le navigateur de test peut garder l'ancien code en cache, même avec le même `?v=`. Avant de conclure qu'un correctif ne marche pas, désinscris le service worker et vide les caches.
 
-### Où on en est (26/11/2026, v52)
+### Où on en est (26/11/2026, v53)
 
 **Fait récemment :**
 - v44 : plus de reformulation « Explique en une ou deux phrases ».
@@ -191,6 +191,11 @@ Le projet est préparé mais n'est pas publié : les comptes développeur sont p
   - **le fil vidéo ne montre que des paires « vidéo → résumé de son info »**, 5 paires puis un quiz sur ces 5 infos. Plus de résumé seul (« L'essentiel ») ni de vidéo sans résumé. Une vidéo n'est associée à une info que si son titre partage avec le titre (ou le `sujet`) de l'info 3 mots-clés, ou 2 dont un nom propre ou un sigle (`vidScore` dans `js/app.js`, même règle dans `scripts/update-live.mjs`). Sur le 25/11, l'ancienne règle avait fait 3 erreurs sur 11 (législatives espagnoles reliées au départ d'Abrego Garcia pour l'Espagne, etc.) ;
   - **garde-fou question par question** (`safeLabel`) : le sujet disparaît s'il contient un mot ou un chiffre de la bonne réponse absent de la question, ou s'il reprend un vrai/faux (3 mots-clés communs, ou des chiffres de part et d'autre) ;
   - les éditions du 24 et du 25/11 ont reçu un sujet par info, relu question par question.
+- v53 :
+  - **les sources s'affichent avec la réponse** de chaque question (leçons, Rappel, révisions, quiz du fil), avec un lien vers chaque article ;
+  - **ateliers d'écriture sur un seul écran** : la consigne en haut (jamais le titre de l'info, qui était la réponse d'un exercice « titre »), puis le dossier et la zone d'écriture côte à côte (l'un sous l'autre sur téléphone). Le dossier contient la dépêche et, pour chaque rédaction, le titre et le chapeau de son article. Voir `writeDossier` et `RENDER.write` dans `js/app.js` ;
+  - `scripts/sources_extraits.py <date>` ajoute `titre` et `extrait` (chapeau RSS publié par le média) aux `sources`, à partir de `news-today.txt`. La routine le lance avant la vérification, et le secours sans IA aussi. Les éditions du 24 et du 25/11 n'en ont pas (revue de presse plus disponible) : leurs ateliers listent seulement les liens ;
+  - **limite physique** : `max` (signes) devient un `maxlength`. Une limite en mots écrite dans la consigne (« 12 mots maximum ») bloque la frappe au mot suivant et coupe un collage trop long. Les ateliers « questions », « angle » et la justification d'un vrai/faux ont maintenant une limite chiffrée.
 - L'édition du 26/11 a été rédigée et relue à la main, puis complétée par la mise à jour de 11 h, relue elle aussi. Ses 28 questions ont 5 formulations chacune, et ses 13 infos ont un sujet.
 - Architecture de publication sur 3 niveaux en place.
 

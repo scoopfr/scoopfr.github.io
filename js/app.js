@@ -203,10 +203,11 @@
       return best;
     };
     const rows = exs.map((ex, i) => {
-      if (ex.t === 'write') { const k = which(ex); return { ex, i, rank: 3, s: k, ctx: { kind: 'write', label: k >= 0 ? st[k].title : 'Atelier d’écriture', tag: k >= 0 ? st[k].tag : '' } }; }
+      // atelier : jamais le titre de l'info en tête (c'est souvent la réponse attendue) ; le dossier est affiché dans l'exercice
+      if (ex.t === 'write') { const k = which(ex); return { ex, i, rank: 3, s: k, ctx: { kind: 'write', label: '', tag: k >= 0 ? st[k].tag : '', n: k, date: day && day.date } }; }
       if (ex.t === 'match') return { ex, i, rank: 2, s: 999, ctx: { kind: 'recap', label: 'Récap : plusieurs infos du jour', tag: '' } };
       const k = which(ex);
-      return { ex, i, rank: k >= 0 ? 1 : 2, s: k >= 0 ? k : 998, ctx: k >= 0 ? { kind: 'story', label: storyHint(day, k), tag: st[k].tag, n: k } : { kind: 'recap', label: 'Les infos du jour', tag: '' } };
+      return { ex, i, rank: k >= 0 ? 1 : 2, s: k >= 0 ? k : 998, ctx: k >= 0 ? { kind: 'story', label: storyHint(day, k), tag: st[k].tag, n: k, date: day && day.date } : { kind: 'recap', label: 'Les infos du jour', tag: '' } };
     });
     return rows.sort((x, y) => x.rank - y.rank || x.s - y.s || x.i - y.i);
   }
@@ -313,6 +314,33 @@
       ${prim.length ? '<span class="verif prim-ok">📜 Source primaire</span>' : ''}
       ${list.map(x => x.url && /^https?:\/\//.test(x.url) ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)} ↗</a>` : `<span>${esc(x.name)}</span>`).join('')}
     </div>${primaryBlock(s, prim, date, idx)}`;
+  }
+  // Dossier d'un atelier d'écriture : la consigne d'un côté, la matière de l'autre (la dépêche, puis l'article
+  // de chaque rédaction qui a couvert l'info : son titre, son chapeau, le lien). Jamais le titre de l'info en tête :
+  // pour un exercice « trouve le titre », c'était la réponse. null si l'exercice ne porte pas sur une info.
+  const CONSIGNE_RX = /(^|[\s.])(Rédige|Écris|Résume|Propose|Réponds|Tu dois|Trouve)\b/;
+  function writeDossier(ex) {
+    const stories = (Array.isArray(ex.stories) ? ex.stories : ex.story ? [ex.story] : []).filter(Boolean);
+    if (!stories.length) return null;
+    const head = String(ex.q || '').replace(/\s*[·:]\s*«[^»]*»\s*$/, '').trim();
+    const askTitle = /titre/i.test(head + ' ' + (ex.src || '').split(/\n\s*\n/).filter(p => CONSIGNE_RX.test(p)).join(' '));
+    const consigne = [], material = [];
+    String(ex.src || '').split(/\n\s*\n/).map(p => p.trim()).filter(Boolean).forEach(p => {
+      if (/^(Dépêche|Notes du reporter)\s*:$/i.test(p)) return;   // simple intitulé
+      if (CONSIGNE_RX.test(p) && /\*\*/.test(p)) consigne.push(p.replace(/^(Voici la dépêche\.|Le sujet est posé\.)\s*/, ''));
+      else material.push(p);
+    });
+    const plainTxt = t => String(t || '').replace(/\*\*|\*/g, '');
+    const depeche = material.length ? material.join('\n\n') : stories.map(s => plainTxt(s.text)).join('\n\n');
+    const arts = stories.flatMap(s => storySources(s));
+    const withText = arts.filter(a => a.extrait);
+    const card = a => `<article class="wr-doc"><div class="wr-src">${esc(a.name)}${a.url && /^https?:\/\//.test(a.url) ? ` <a href="${esc(a.url)}" target="_blank" rel="noopener">article ↗</a>` : ''}</div>
+      ${a.titre && !askTitle ? `<p class="wr-t">${esc(a.titre)}</p>` : ''}<p>${esc(a.extrait)}</p></article>`;
+    const html = `<div class="wr-lab">📂 Le dossier</div>
+      <article class="wr-doc wr-main"><div class="wr-src">📰 La dépêche${stories.length > 1 ? 's' : ''} Scoop · recoupée${stories.length > 1 ? 's' : ''} par ${arts.length} article${arts.length > 1 ? 's' : ''}</div><p>${rich(depeche)}</p></article>
+      ${withText.length ? `<div class="wr-lab">🗞️ Ce qu'écrivent les rédactions</div>${withText.map(card).join('')}` : ''}
+      ${arts.length > withText.length ? `<div class="wr-more">${withText.length ? 'Autres articles : ' : 'Les articles : '}${arts.filter(a => !a.extrait).map(a => a.url && /^https?:\/\//.test(a.url) ? `<a href="${esc(a.url)}" target="_blank" rel="noopener">${esc(a.name)} ↗</a>` : esc(a.name)).join(' · ')}</div>` : ''}`;
+    return { head, consigne: consigne.join(' '), html };
   }
   // mots à taper pour chercher le document d'origine : noms propres et chiffres du titre
   const KW_STOP = new Set('Le La Les Un Une Des Du De Au Aux En Dans Sur Pour Par Avec Sans Selon Après Avant Mort Retour Fin Premier Première Nouveau Nouvelle Procès Annonce'.split(' '));
@@ -1070,7 +1098,9 @@
     if (!it.v) it.v = variantize(it);   // reformulation / réponse rédigée selon le nombre de passages
     const render = RENDER[it.v.t];
     if (!render) { L.resolved++; next(); return; }
-    L.check = render(it.v, body, ready => { if (L && L.state === 'answer') $('#check').disabled = !ready; });
+    // atelier d'écriture d'une leçon d'actu : on lui joint l'info visée, pour afficher son dossier (dépêche + articles)
+    const shownV = it.v.t === 'write' && it.ctx && it.ctx.kind === 'write' && !it.v.story && !it.v.stories && itStory(it) ? { ...it.v, story: itStory(it) } : it.v;
+    L.check = render(shownV, body, ready => { if (L && L.state === 'answer') $('#check').disabled = !ready; });
     if (it.ctx) {
       const c = it.ctx, col = (L.cfg.date && DAYS[L.cfg.date] && (DAYS[L.cfg.date].tagColors || {})[c.tag]) || 'var(--red)';
       const head = c.kind === 'story' ? `📰 Info${c.tag ? ' · ' + esc(c.tag) : ''}` : c.kind === 'write' ? '✍️ À toi d’écrire' : '🧩 Récap';
@@ -1092,6 +1122,17 @@
       + '&body=' + encodeURIComponent(clean(detail) + '\n\nPage : ' + location.href + '\n\nCe qui est faux ou imprécis (et la source qui le montre) :\n');
     return `<a class="report" href="${esc(url)}" target="_blank" rel="noopener">⚑ Signaler une erreur</a>`;
   };   // glossaire : les mots juridiques ou techniques deviennent cliquables
+  // L'info qu'une question concerne (repérée par orderByStory ou le module mémoire), pour citer ses sources
+  function itStory(it) {
+    const c = it && it.ctx, d = c && c.date && DAYS[c.date];
+    return d && c.n != null && c.n >= 0 ? d.stories[c.n] || null : null;
+  }
+  // Sources de la réponse : chaque rédaction qui a publié l'info, avec le lien vers son article
+  function answerSources(s) {
+    const list = s ? storySources(s) : [];
+    if (!list.length) return '';
+    return `<p class="ans-src">📎 Sources : ${list.map(x => x.url && /^https?:\/\//.test(x.url) ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)} ↗</a>` : esc(x.name)).join(' · ')}</p>`;
+  }
   function grade(it, ok, sol, free) {
     S.stats.answered++; answered(ok, L.cfg.mode, it);
     if (!it.retry || it.again) bumpSeen(it.ex);
@@ -1121,6 +1162,7 @@
       // réponse libre jugée fausse : tu peux la compter juste si c'était la bonne, mal formulée
       if (free) { L.overrideCtx = { it }; $('#override').hidden = false; }
     }
+    $('#fb-text').insertAdjacentHTML('beforeend', answerSources(itStory(it)));
     const asked = (it.v && it.v.q) || it.ex.q;
     $('#fb-text').insertAdjacentHTML('beforeend', `<p class="report-row">${reportLink(asked, `Question de quiz (${(L.cfg && L.cfg.context) || 'entraînement'}) : ${asked}\n${solutionOf(shown)}`)}</p>`);
     L.state = 'feedback';
@@ -1142,7 +1184,7 @@
     L.combo++; L.maxCombo = Math.max(L.maxCombo, L.combo);
     L.xp += it.retry ? 5 : 10;
     sfx.ok();
-    setBar('ok', 'Compté juste 👍', '', it.ex.x ? linkTerms(rich(it.ex.x)) : '', '✓');
+    setBar('ok', 'Compté juste 👍', '', (it.ex.x ? linkTerms(rich(it.ex.x)) : '') + answerSources(itStory(it)), '✓');
     L.state = 'feedback';
     updateProgress(); save();
   }
@@ -1314,7 +1356,7 @@
     } else if (ex.t === 'vf') {
       const alt = turn([{ q: ex.q, a: ex.a, x: ex.x }, ...(ex.vv || [])], n);
       const v = { ...ex, q: alt.q, a: alt.a, x: alt.x || ex.x };
-      if (typed) return { t: 'write', q: '✍️ Vrai ou faux ? Tranche, puis justifie en une phrase', src: v.q, placeholder: 'Vrai ou faux, et pourquoi… (Ctrl+Entrée pour valider)',
+      if (typed) return { t: 'write', max: 200, q: '✍️ Vrai ou faux ? Tranche, puis justifie en une phrase (200 signes maximum)', src: v.q, placeholder: 'Vrai ou faux, et pourquoi… (Ctrl+Entrée pour valider)',
         model: `**${v.a ? 'Vrai' : 'Faux'}.** ${v.x || ''}`, crit: ['J\'ai tranché clairement : vrai ou faux', 'Ma justification s\'appuie sur un fait précis', 'Je n\'ai rien inventé'], rows: 3 };
       return n >= 1 ? { ...v, ...pickOne(VF_STYLES) } : v;
     } else if (ex.t === 'input') {
@@ -1544,16 +1586,60 @@
     },
 
     write(ex, el, ready) {
-      el.innerHTML = `<div class="ex-type">✍️ Atelier d'écriture</div><h2 class="ex-q">${rich(ex.q)}</h2>
-        ${ex.src ? `<blockquote class="src">${rich(ex.src)}</blockquote>` : ''}
-        ${Array.isArray(ex.links) && ex.links.length ? `<div class="prim-trail ex-links">${ex.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.name)}<small>${esc(l.what || '')}</small></a>`).join('')}</div>` : ''}
-        <textarea class="text-area" rows="${ex.rows || 3}" placeholder="${esc(ex.placeholder || 'Écris ta proposition… (Ctrl+Entrée pour valider)')}" aria-label="Ta proposition"></textarea>
-        <div class="self"></div>`;
+      // limite chiffrée lue dans la consigne quand l'exercice ne la donne pas (« 12 mots maximum », « 300 signes max »)
+      const said = `${ex.q || ''} ${String(ex.src || '').split(/\n\s*\n/).filter(p => CONSIGNE_RX.test(p)).join(' ')}`;
+      const mW = said.match(/(\d+)\s*mots\s*(?:au\s*)?max/i), mS = said.match(/(\d[\d\s ]*)\s*signes\s*max/i);
+      if (!ex.max && !mW && mS) ex = { ...ex, max: +mS[1].replace(/\D/g, '') };
+      const maxW = !ex.max && mW ? +mW[1] : 0;
+      const d = writeDossier(ex);
+      const links = Array.isArray(ex.links) && ex.links.length ? `<div class="prim-trail ex-links">${ex.links.map(l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.name)}<small>${esc(l.what || '')}</small></a>`).join('')}</div>` : '';
+      const area = `<textarea class="text-area" rows="${ex.rows || (ex.max && ex.max <= 100 ? 2 : 4)}" ${ex.max ? `maxlength="${ex.max}"` : ''} placeholder="${esc(ex.placeholder || 'Écris ta proposition… (Ctrl+Entrée pour valider)')}" aria-label="Ta proposition"></textarea>`;
+      if (d) {
+        // tout sur un écran : la consigne en haut, le dossier (dépêche + articles des rédactions) et la zone d'écriture côte à côte
+        el.classList.add('ex-wide');
+        el.innerHTML = `<div class="ex-type">✍️ Atelier d'écriture</div>
+          <div class="wr-task"><h2 class="wr-head">${rich(d.head)}${/max/i.test(d.head) ? '' : ex.max ?` <span class="wr-max">${ex.max} signes max</span>` : maxW ? ` <span class="wr-max">${maxW} mots max</span>` : ''}</h2>${d.consigne ? `<p class="wr-consigne">${rich(d.consigne)}</p>` : ''}</div>
+          <div class="wr-grid">
+            <section class="wr-dossier" aria-label="Le dossier">${d.html}</section>
+            <div class="wr-pane">${links}${area}<div class="self"></div></div>
+          </div>`;
+      } else {
+        el.innerHTML = `<div class="ex-type">✍️ Atelier d'écriture</div><h2 class="ex-q">${rich(ex.q)}</h2>
+          ${ex.src ? `<blockquote class="src">${rich(ex.src)}</blockquote>` : ''}
+          ${links}${area}
+          <div class="self"></div>`;
+      }
       const ta = $('textarea', el), selfEl = $('.self', el);
-      // compteur de signes (ex.max) : titre et chapô ont une longueur imposée aux concours
+      // limite de signes (ex.max) : imposée par la consigne, la zone n'accepte rien au-delà (maxlength)
       let counter = null;
-      if (ex.max) { ta.insertAdjacentHTML('afterend', `<div class="sign-count"></div>`); counter = $('.sign-count', el); }
-      const upCount = () => { if (counter) { const n = ta.value.length; counter.textContent = `${n} / ${ex.max} signes`; counter.classList.toggle('over', n > ex.max); } };
+      if (ex.max || maxW) { ta.insertAdjacentHTML('afterend', `<div class="sign-count"></div>`); counter = $('.sign-count', el); }
+      const words = t => (t.match(/\S+/g) || []).length;
+      let lastOk = '';
+      // limite en mots : toute frappe ou tout collage qui ferait commencer un mot de trop est refusé
+      if (maxW) ta.addEventListener('beforeinput', e => {
+        if (!/^insert/.test(e.inputType || '')) return;
+        const data = e.data != null ? e.data : (e.dataTransfer ? e.dataTransfer.getData('text/plain') : '');
+        const next = ta.value.slice(0, ta.selectionStart) + (data || '') + ta.value.slice(ta.selectionEnd);
+        if (words(next) <= maxW) return;
+        e.preventDefault();
+        // collage (ou saisie de plusieurs caractères d'un coup) : on garde les mots autorisés, on coupe le reste
+        if ((data || '').length > 1) {
+          const m = next.match(new RegExp(`^\\s*(?:\\S+\\s+){${maxW - 1}}\\S+`));
+          if (m) { ta.value = lastOk = m[0]; ta.setSelectionRange(m[0].length, m[0].length); ta.dispatchEvent(new Event('input')); }
+        }
+      });
+      const upCount = () => {
+        if (!counter) return;
+        // limite en mots : au-delà du dernier mot autorisé, la saisie est coupée (frappe ou collage)
+        // (filet si le navigateur n'a pas pu refuser la frappe, ex. clavier Android) : retour au dernier texte valide
+        if (maxW) {
+          if (words(ta.value) > maxW) { const at = Math.min(ta.selectionStart, lastOk.length); ta.value = lastOk; try { ta.setSelectionRange(at, at); } catch (e) { /* ignore */ } }
+          else lastOk = ta.value;
+        }
+        const n = maxW ? words(ta.value) : ta.value.length, lim = maxW || ex.max, unit = maxW ? 'mots' : 'signes', full = n >= lim;
+        counter.textContent = `${n} / ${lim} ${unit}${full ? ' · limite atteinte' : ''}`;
+        counter.classList.toggle('over', full);
+      };
       upCount();
       ta.addEventListener('input', () => { ready(ta.value.trim().length >= 3); upCount(); });
       setTimeout(() => ta.focus(), 60);
@@ -1665,7 +1751,7 @@
         seq.push({ type: 'story', s: p.s, i: p.i, color: p.color });
       });
       const qs = blockQuiz(date, day, grp, showAll);
-      qs.forEach((q, n) => seq.push({ type: 'quiz', ex: flashOf(q.ex), orig: q.ex, id: q.id, block: b, n: n + 1, of: qs.length }));
+      qs.forEach((q, n) => seq.push({ type: 'quiz', ex: flashOf(q.ex), orig: q.ex, id: q.id, story: q.story, block: b, n: n + 1, of: qs.length }));
     }
     seq.push({ type: 'end' });
     return seq;
@@ -1692,12 +1778,12 @@
     const used = new Set(), out = [];
     grp.forEach(sub => {
       const c = cand.filter(x => x.story === sub.i && !used.has(x.id)).sort((a, b) => b.score - a.score)[0];
-      if (c) { used.add(c.id); out.push({ ex: c.ex, id: c.id }); return; }
+      if (c) { used.add(c.id); out.push({ ex: c.ex, id: c.id, story: sub.i }); return; }
       const txt = plain(sub.s.text), m1 = txt.match(/^.*?[.!?](?=\s|$)/), first = (m1 ? m1[0] : txt).slice(0, 230);
       const others = shuffle(day.stories.filter((_, j) => j !== sub.i)).slice(0, 3).map(s => s.title);
       if (others.length < 2) return;
       const choices = shuffle([sub.s.title, ...others]);
-      out.push({ id: `auto:${date}:${sub.i}`, ex: { t: 'qcm', q: `Quelle info correspond à ce résumé ? « ${first} »`, c: choices, a: choices.indexOf(sub.s.title), x: `C'était : ${sub.s.title}.` } });
+      out.push({ id: `auto:${date}:${sub.i}`, story: sub.i, ex: { t: 'qcm', q: `Quelle info correspond à ce résumé ? « ${first} »`, c: choices, a: choices.indexOf(sub.s.title), x: `C'était : ${sub.s.title}.` } });
     });
     return out;
   }
@@ -2052,7 +2138,7 @@
       if (ok) b.right++;
       if (it.n === it.of) score = `<br><b>🏁 Score du quiz : ${b.right}/${it.of}</b>`;
     }
-    ex_.innerHTML = `<b>${ok ? '✓ Bien vu !' : '✕ Raté, la question part dans « À revoir ».'}</b>${ex.x ? ' ' + linkTerms(rich(ex.x)) : ''}${score}`;
+    ex_.innerHTML = `<b>${ok ? '✓ Bien vu !' : '✕ Raté, la question part dans « À revoir ».'}</b>${ex.x ? ' ' + linkTerms(rich(ex.x)) : ''}${answerSources(it.story != null ? F.day.stories[it.story] : null)}${score}`;
     ex_.hidden = false;
   }
 

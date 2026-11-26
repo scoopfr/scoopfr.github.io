@@ -351,6 +351,7 @@ def main():
         index = [e for e in index if e.get("date") != date]
         index.insert(0, {"date": date, "title": day["title"], "lessons": len(day["lessons"])})
         A.write_index(index)
+        subprocess.run([sys.executable, str(A.ROOT / "scripts" / "sources_extraits.py"), date], check=False)  # titre + chapeau des articles (ateliers)
         log(f"Édition de secours du {date} publiée : {len(day['stories'])} infos, {len(day['lessons'])} leçons")
     else:
         day = A.node_json(path)
@@ -367,6 +368,7 @@ def main():
             if e.get("date") == date:
                 e["lessons"] = len(day["lessons"])
         A.write_index(index)
+        subprocess.run([sys.executable, str(A.ROOT / "scripts" / "sources_extraits.py"), date], check=False)  # titre + chapeau des articles (ateliers)
         log(f"Mise à jour de secours de {hour} h publiée : {len(day['stories'])} infos")
     return 0
 
