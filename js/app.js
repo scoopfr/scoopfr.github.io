@@ -1323,6 +1323,8 @@
     // les nombres (dates, chiffres) doivent être exacts
     const dx = x.match(/\d+/g) || [], du = u.match(/\d+/g) || [];
     if (dx.length && !dx.every(d => du.includes(d))) return false;
+    // réponse attendue = un nombre : le bon nombre suffit (« 61h », « 61 heures », « le 29 »), sans autre nombre en trop
+    if (dx.length && /^[\d\s.,%]+$/.test(x) && du.length === dx.length) return true;
     if (simil(u, x) >= 0.8) return true;                       // faute de frappe sur l'ensemble
     const keyX = x.split(' ').filter(w => (w.length >= 4 || /\d/.test(w)) && !FREE_STOP.has(w));
     const wordsU = u.split(' ');
@@ -1367,9 +1369,13 @@
       setTimeout(() => inp.focus(), 60);
       return () => {
         const v = norm(inp.value); if (!v) return null;
-        const ok = ex.a.some(a => norm(a) === v);
+        // même correction tolérante que la réponse libre : accents, petites fautes, mot en moins (« Garnier » pour « Romain Garnier »),
+        // mais les chiffres doivent être exacts ; si c'est juste mais incomplet, on affiche la réponse complète
+        const exact = ex.a.some(a => norm(a) === v);
+        const ok = exact || ex.a.some(a => answerOk(inp.value, a));
         inp.classList.add(ok ? 'right' : 'wrong'); inp.disabled = true;
-        return { ok, sol: ok ? '' : `Réponse attendue : ${ex.a[0]}` };
+        if (ok && !exact) el.insertAdjacentHTML('beforeend', `<p class="hint">Juste ! Réponse complète : <b>${rich(ex.a[0])}</b></p>`);
+        return { ok, sol: ok ? '' : `Réponse attendue : ${ex.a[0]}`, free: true };   // « J'avais juste » reste possible
       };
     },
 
