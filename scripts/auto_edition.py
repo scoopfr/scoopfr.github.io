@@ -539,6 +539,102 @@ def wrong_kind(e):
     return False
 
 
+def sentences_of(stories):
+    out = []
+    for st in stories:
+        for t in (st["title"], st["text"]):
+            for x in re.split(r"(?<=[.!?»])\s+", t):
+                if x.strip():
+                    out.append(x)
+    return out
+
+
+def best_sentence(sents, text, must=""):
+    """Phrase des infos qui contient `must` (la réponse) et le plus de mots de `text` (la question). Renvoie la part des mots retrouvés."""
+    tok = norm_tokens(text)
+    m = plain_norm(must)
+    best = 0.0
+    for x in sents:
+        if m and m not in plain_norm(x):
+            continue
+        xt = norm_tokens(x)
+        if not tok:
+            return 1.0
+        best = max(best, len(tok & xt) / len(tok))
+    return best
+
+
+QWORDS = set("""nom noms quel quelle quels quelles combien personne personnes organisme organismes pays ville villes region
+quoi quand titre complete info infos jour edition annonce annonces etait sont selon parmi suivant suivante suivants
+principal principale objectif lequel laquelle lesquels designe appelle appele chiffre nombre date annee mois
+associe correspond correspondant correspondants element elements fait faits vrai faux affirmation""".split())
+
+
+def toks(t):
+    """Mots porteurs de sens, apostrophes séparées (« d'une » -> « une »)."""
+    return norm_tokens(re.sub(r"[’']", " ", str(t or "")))
+
+
+def content_tokens(t):
+    return {w for w in toks(t) if w not in QWORDS}
+
+
+def story_of(stories, text, must=""):
+    """L'info qui contient la réponse (`must`) et le plus de mots de `text`."""
+    m = plain_norm(must)
+    best, score = None, -1
+    tok = content_tokens(text)
+    for st in stories:
+        body = st["title"] + " " + st["text"]
+        bt = toks(body)
+        if m and m not in plain_norm(body) and not (content_tokens(must) and content_tokens(must) <= bt):
+            continue   # la réponse doit figurer dans l'info (telle quelle, ou tous ses mots)
+        sc = len(tok & bt)
+        if sc > score:
+            best, score = st, sc
+    return best
+
+
+def all_words_in(text, story, tolerance=0):
+    """Tous les mots porteurs de sens de `text` figurent dans l'info (au plus `tolerance` absents)."""
+    if not story:
+        return False
+    body = toks(story["title"] + " " + story["text"])
+    stems = {b[:6] for b in body if len(b) >= 6}
+
+    def has(w):   # même mot, ou même racine pour les mots longs (« demandé » / « demander »)
+        return w in body or (len(w) >= 6 and w[:6] in stems)
+    missing = [w for w in content_tokens(text) if not has(w)]
+    return len(missing) <= tolerance
+
+
+def strict_ok(stories, e):
+    """Ancrage mécanique, sans IA : la question n'emploie que des mots de l'info concernée et la réponse y figure telle quelle.
+    Une question qui invente un mot (« journaliste », « a reçu ») ou un lien (« Pays-Bas ») est rejetée."""
+    t = e.get("t")
+    if t == "qcm":
+        good = e["c"][e["a"]]
+        st = story_of(stories, str(e.get("q")), good)
+        return all_words_in(str(e.get("q")), st, 0)
+    if t == "input":
+        good = (e.get("a") or [""])[0]
+        st = story_of(stories, str(e.get("q")), good)
+        return all_words_in(str(e.get("q")), st, 0)
+    if t == "vf":
+        st = story_of(stories, str(e.get("q")))
+        if e.get("a") is True:
+            return all_words_in(str(e.get("q")), st, 0)       # une affirmation VRAIE : aucun mot ajouté
+        return st is not None and len(content_tokens(str(e.get("q"))) & toks(st["title"] + " " + st["text"])) >= 2
+    if t == "match":
+        for left, right in e.get("pairs") or []:
+            if not any(all_words_in(f"{left} {right}", st, 0) for st in stories):
+                return False
+        return True
+    if t == "order":
+        return all(any(all_words_in(it, st, 1) for st in stories) for it in e.get("items") or [])
+    return True
+
+
 def check_exercises(stories, exs):
     """Contrôles automatiques simples, avant la relecture par l'IA."""
     corpus = plain_norm(" ".join(s["title"] + " " + s["text"] + " " + s.get("why", "") for s in stories))
@@ -576,6 +672,9 @@ def check_exercises(stories, exs):
             tok = norm_tokens(str(e.get("q")))
             if tok and len([w for w in tok if w in corpus]) / len(tok) < 0.7:
                 continue
+        if t != "write" and not strict_ok(stories, e):
+            log(f"  exercice retiré (non ancré dans une phrase des infos) : {str(e.get('q'))[:80]}")
+            continue
         keep.append(e)
     QUALITY["exercices retirés (contrôles)"] += len(exs) - len(keep)
     return keep
@@ -699,7 +798,7 @@ def llm_lesson2(stories, spec):
     uniq, seen = [], []
     for e in ex:
         tq = norm_tokens(str(e.get("q", "")))
-        if e.get("t") != "write" and any(tq and len(tq & o) / max(1, len(tq | o)) >= 0.6 for o in seen):
+        if e.get("t") != "write" and any(tq and len(tq & o) / max(1, min(len(tq), len(o))) >= 0.7 for o in seen):
             continue
         seen.append(tq)
         uniq.append(e)
@@ -771,14 +870,19 @@ def first_sentences(d, n=2, cap=330):
     return out if out.endswith((".", "!", "?")) else out + "."
 
 
+FR_SOURCES = {name for name, _url, lang in __import__("fetch_news").FEEDS if lang == "fr"}
+
+
 def basic_stories(clusters, want, used_urls=()):
     out = []
     for c in clusters:
         if any(i["link"] in used_urls for i in c["items"]):
             continue
-        its = c["items"]
+        its = [i for i in c["items"] if i["src"] in FR_SOURCES] + [i for i in c["items"] if i["src"] not in FR_SOURCES]
+        if its[0]["src"] not in FR_SOURCES:
+            continue   # aucun titre en français : on ne publie pas une info en anglais
         first = its[0]
-        text_parts = [first_sentences(i["desc"] or i["title"], 1) for i in its[:2]]
+        text_parts = [first_sentences(i["desc"] or i["title"], 1) for i in its[:2] if i["src"] in FR_SOURCES]
         tag = guess_tag(first["title"], first["desc"])
         out.append({"tag": tag, "title": cut(first["title"], 140), "text": " ".join(dict.fromkeys(text_parts)),
                     "why": f"Un fait relayé par {len(c['bases']) if 'bases' in c else len({media_base(i['src']) for i in its})} rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
@@ -894,7 +998,7 @@ def build_full(date, clusters):
             keep = []
             for e in l["exercises"]:
                 tq = norm_tokens(str(e.get("q", "")))
-                if e.get("t") != "write" and any(tq and len(tq & o) / max(1, len(tq | o)) >= 0.6 for o in seen_q):
+                if e.get("t") != "write" and any(tq and len(tq & o) / max(1, min(len(tq), len(o))) >= 0.7 for o in seen_q):
                     QUALITY["exercices retirés (contrôles)"] += 1
                     continue
                 seen_q.append(tq)
