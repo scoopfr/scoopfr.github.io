@@ -179,7 +179,10 @@
     }
     const used = p => (ctx.usedUp && ctx.usedUp(p.ex, p.id) ? 1 : 0);   // formulations encore jamais vues d'abord
     const pick = shuffle(items).sort((a, b) => used(a) - used(b)).slice(0, 6);
-    return { key, mode: 'drill', title: s.title.length > 46 ? s.title.slice(0, 44) + '…' : s.title, color: '#2BA84A', context: 'Tester cette info', exercises: pick.map(p => p.ex), ids: pick.map(p => p.id) };
+    // contexte : le sujet de l'info pour ses questions ; rien de plus pour les fiches (la phrase à trous situe déjà l'info)
+    const hint = ctx.storyHint ? ctx.storyHint(day, i) : '';
+    return { key, mode: 'drill', title: s.title.length > 46 ? s.title.slice(0, 44) + '…' : s.title, color: '#2BA84A', context: 'Tester cette info', exercises: pick.map(p => p.ex), ids: pick.map(p => p.id),
+      ctx: pick.map(p => ({ kind: 'story', label: /^day:/.test(p.id) ? hint : '', tag: s.tag, n: i })) };
   });
 
   // =========================================================== SÉANCE « NOMS, DATES, CHIFFRES »
@@ -211,7 +214,13 @@
     const rv = new Set(S().review.map(r => r.id)), rec = S().recall || {};
     const used = p => (ctx.usedUp && ctx.usedUp(p.ex, p.id) ? 4 : 0);   // formulations encore jamais vues d'abord
     const pool = shuffle(prevQs).sort((a, b) => (used(a) - used(b)) +((rv.has(b.id) ? 2 : 0) - (rv.has(a.id) ? 2 : 0)) + ((rec[a.id] || 0) - (rec[b.id] || 0)) * 0.5).slice(0, 8);
-    return { key, mode: 'review', title: 'Rappel des jours précédents', color: '#2BA84A', exercises: pool.map(p => p.ex), ids: pool.map(p => p.id), context: 'Actu des éditions précédentes' };
+    // contexte : la date de l'édition + le sujet de l'info (sans réponse)
+    const ctxOf = p => {
+      const day = ctx.DAYS[p.date], k = exMap(p.date).get(p.id), st = day && k != null ? day.stories[k] : null;
+      const when = `Le ${frDate(p.date, { day: 'numeric', month: 'long' })}`;
+      return st ? { kind: 'story', label: `${when} · ${ctx.storyHint ? ctx.storyHint(day, k) : ''}`.replace(/ · $/, ''), tag: st.tag, n: k } : { kind: 'recap', label: when, tag: '' };
+    };
+    return { key, mode: 'review', title: 'Rappel des jours précédents', color: '#2BA84A', exercises: pool.map(p => p.ex), ids: pool.map(p => p.id), ctx: pool.map(ctxOf), context: 'Actu des éditions précédentes' };
   });
 
   // cartes d'entraînement (page « S'entraîner » et sous les quiz de l'actu)

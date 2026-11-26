@@ -19,6 +19,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Politique',
       title: 'Écrits antisémites : nouvelles révélations sur Jordan Bardella, qui dénonce une « entreprise de persécution »',
+      sujet: "De nouveaux messages antisémites attribués à Jordan Bardella sont publiés",
       text: 'Deux mois après les premières révélations de **Mediapart**, le site d’investigation et **Le Monde** publient jeudi de nouveaux messages antisémites attribués à **Jordan Bardella**, président du Rassemblement national. Ils datent de **2013**, quand il était lycéen et jeune militant du Front national, et ont été échangés sur Messenger avec un ancien camarade de lycée. On y lit notamment que « les sionistes sont à la tête des banques ». Jordan Bardella réfute ces accusations et dénonce une « entreprise de persécution ».',
       why: 'Un cas d’école de journalisme d’investigation : Mediapart explique avoir pu publier de nouveaux messages parce qu’une de ses sources l’a accepté. La protection des sources est un principe clé du métier.',
       sources: [
@@ -32,6 +33,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Politique',
       title: 'Budget de la Sécurité sociale 2027 : députés et sénateurs échouent à trouver un accord',
+      sujet: "Budget de la Sécurité sociale 2027 : pas d’accord entre l’Assemblée et le Sénat",
       text: 'Réunis jeudi matin en **commission mixte paritaire**, sept députés et sept sénateurs ne sont pas parvenus à s’entendre sur le projet de budget de la Sécurité sociale pour 2027. Ils ont préféré arrêter rapidement les discussions pour éviter « un texte non adoptable par les deux chambres ». Le texte repart donc en **nouvelle lecture** à l’Assemblée nationale.',
       why: 'Révise la navette parlementaire : quand l’Assemblée et le Sénat ne s’accordent pas, une commission mixte paritaire cherche un compromis ; en cas d’échec, le gouvernement peut donner le dernier mot à l’Assemblée nationale.',
       sources: [
@@ -44,6 +46,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Justice',
       title: 'Le procès d’Émilie König, figure française de l’État islamique, s’ouvre à Paris',
+      sujet: "Une Française partie rejoindre l’État islamique est jugée à Paris",
       text: 'La Bretonne **Émilie König**, 41 ans, est jugée à partir de jeudi et pendant quatre jours par la **cour d’assises spéciale** de Paris pour **association de malfaiteurs terroriste**. Partie rejoindre l’État islamique en Syrie, elle en est devenue une propagandiste ; elle est aussi soupçonnée d’avoir joué les recruteuses. Seule femme inscrite sur la liste noire des États-Unis, elle encourt 30 ans de réclusion criminelle. Au premier jour de son procès, elle a déclaré : « Je voudrais m’excuser auprès de toute la nation française ».',
       why: 'La cour d’assises spéciale, composée uniquement de magistrats professionnels, juge notamment les crimes terroristes. C’est utile pour distinguer les juridictions pénales.',
       sources: [
@@ -57,6 +60,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Monde',
       title: 'Irak : huit djihadistes français, dont Romain Garnier, condamnés à la perpétuité',
+      sujet: "Des djihadistes français condamnés pour leur appartenance à l’État islamique",
       text: 'La justice irakienne a condamné jeudi **huit Français** à la prison à perpétuité pour leur appartenance au groupe État islamique, parmi lesquels **Romain Garnier**. Deux autres ont été condamnés à **15 ans** de prison. Ils font partie des **47 ressortissants français** transférés de Syrie vers l’Irak pour y être jugés par une cour criminelle de Bagdad. Paris a rapatrié des centaines de membres de familles de djihadistes, mais refuse de le faire pour la plupart des hommes.',
       why: 'La question du jugement des djihadistes étrangers oppose deux logiques : les juger là où les crimes ont été commis, ou les rapatrier pour les juger dans leur pays.',
       sources: [
@@ -69,6 +73,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Médias',
       title: 'Reporters sans frontières demande à l’Arcom de suspendre CNews pendant un mois',
+      sujet: "La chaîne CNews visée par une demande de suspension",
       text: 'L’ONG **Reporters sans frontières** (RSF) saisit une nouvelle fois l’**Arcom**, le régulateur de l’audiovisuel, et réclame la suspension de **CNews** pendant un mois. Après avoir analysé **61 heures** de programmes diffusés en septembre sur la chaîne contrôlée par **Vincent Bolloré**, elle dénonce de nouveau un « défaut de pluralisme ».',
       why: 'Le pluralisme est une obligation des chaînes de télévision, contrôlée par l’Arcom. C’est une notion centrale des épreuves sur les médias.',
       sources: [
@@ -79,6 +84,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Climat',
       title: 'Des PFAS, les « polluants éternels », détectés dans des laits infantiles vendus en France',
+      sujet: "Des « polluants éternels » détectés dans des laits infantiles et des aliments",
       text: 'Pour la première fois, des analyses de laits infantiles vendus en France révèlent la présence de **PFAS**, surnommés « polluants éternels », à des niveaux qui exposent les nourrissons à des dépassements de la dose hebdomadaire tolérable, rapporte **Le Monde**. L’ONG **Générations futures** a, de son côté, analysé **652 échantillons alimentaires** en France : **21 %** contiennent au moins un PFAS. Elle dénonce des « failles » réglementaires.',
       why: 'Les PFAS sont un sujet récurrent de santé publique et d’environnement : savoir expliquer simplement ce qu’est un « polluant éternel » est un bon réflexe de journaliste.',
       sources: [
@@ -89,6 +95,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Monde',
       title: 'Guerre en Ukraine : Donald Trump et le chef de l’OTAN appellent la Russie à ne pas « étendre la guerre »',
+      sujet: "Guerre en Ukraine : un appel lancé à la Russie pour qu’elle n’étende pas le conflit",
       text: 'Le président américain **Donald Trump** et le secrétaire général de l’OTAN, **Mark Rutte**, ont appelé la Russie à ne pas « étendre la guerre » en Ukraine. Leur déclaration commune a été publiée mercredi, après une rencontre dans la résidence de Donald Trump en **Floride**.',
       why: 'L’OTAN, alliance militaire créée en 1949, est dirigée par un secrétaire général. Savoir qui l’occupe et quel est son rôle est attendu en culture générale.',
       sources: [
@@ -100,6 +107,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Europe',
       title: 'Espagne : législatives anticipées le 29 novembre, la droite et l’extrême droite face à Pedro Sánchez',
+      sujet: "Espagne : des législatives anticipées où la droite et l’extrême droite défient Pedro Sánchez",
       text: 'L’Espagne vote le **dimanche 29 novembre** pour des **élections législatives anticipées**. En Andalousie, ancienne place forte socialiste, les partisans du **Parti populaire** (droite) et de **Vox** (extrême droite) affichent leur détermination à chasser du pouvoir le Premier ministre socialiste **Pedro Sánchez**. Vox, dirigé par **Santiago Abascal**, séduit une part croissante des jeunes, surtout des hommes. Aux Canaries, la campagne s’est concentrée sur la question migratoire.',
       why: 'Des élections anticipées interviennent avant la fin normale de la législature. L’alliance entre droite et extrême droite est un enjeu politique dans plusieurs pays européens.',
       sources: [
@@ -111,6 +119,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Justice',
       title: 'Génocide des Rohingyas : la Birmanie refuse une partie des exigences de la CIJ',
+      sujet: "Génocide des Rohingyas : la Birmanie et la justice internationale",
       text: 'La **Cour internationale de justice** (CIJ) a établi la responsabilité de l’État birman dans le **génocide des Rohingyas**. Elle a notamment ordonné le rapatriement de **750 000 Rohingyas** et leur indemnisation. Mercredi, le dirigeant birman **Min Aung Hlaing** a affirmé que son pays ne se conformerait pas aux exigences qu’il juge « inappropriées ».',
       why: 'Ne pas confondre la CIJ, qui juge les différends entre États, et la Cour pénale internationale, qui juge des individus. Toutes deux siègent à La Haye.',
       sources: [
@@ -121,6 +130,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Culture',
       title: 'Andy Taylor, guitariste historique de Duran Duran, est mort à 65 ans',
+      sujet: "Mort d’Andy Taylor, guitariste d’un groupe phare des années 1980",
       text: 'Le guitariste britannique **Andy Taylor**, membre originel du groupe de **new wave Duran Duran**, est mort lundi à 65 ans d’un **cancer de la prostate**. Sa famille et le groupe ont annoncé son décès mercredi 25 novembre. Il avait quitté Duran Duran au milieu des années 1980, après de nombreux tubes, comme **« Rio »** et **« Save a Prayer »**.',
       why: 'Les nécrologies sont un exercice journalistique à part entière : retracer une carrière en quelques lignes, avec des faits précis et vérifiés.',
       sources: [
@@ -133,6 +143,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Économie',
       title: 'Nouveaux droits de douane américains : l’UE, la Chine et le Brésil s’indignent',
+      sujet: "De nouveaux droits de douane américains font réagir de nombreux pays",
       text: 'L’administration de **Donald Trump** a annoncé mercredi une nouvelle série de **droits de douane** pouvant atteindre **20 %**, après une enquête sur une prétendue **surproduction mondiale**. Washington accuse les pays visés de recourir à des **subventions** qui pénalisent les entreprises américaines. L’**Union européenne**, la **Chine**, le **Brésil**, le **Japon**, l’Inde ou Singapour dénoncent ces mesures : le Brésil les juge « inacceptables », Pékin parle de « manipulation politique ». Mediapart rappelle que cette politique douanière avait été désavouée par la **Cour suprême** américaine il y a neuf mois.',
       why: 'Les droits de douane sont des taxes sur les produits importés. Ils peuvent provoquer des mesures de rétorsion et une guerre commerciale.',
       sources: [
@@ -145,6 +156,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Europe',
       title: 'Un navire chargé de diesel coule au large d’Ibiza, un marin meurt',
+      sujet: "Un naufrage au large d’Ibiza, en Méditerranée",
       text: 'Le **Med Emre**, un navire transportant jusqu’à **7 000 tonnes de diesel**, a coulé jeudi à une quarantaine de kilomètres de l’île espagnole d’**Ibiza**, en Méditerranée. Les **17 membres** d’équipage ont été secourus, mais l’un d’eux est mort à l’hôpital. Les autorités espagnoles ont activé le **plan d’urgence contre la pollution maritime** et déployé un navire antipollution. Les dommages environnementaux sont en cours d’évaluation.',
       why: 'Face à un risque de marée noire, les premières heures comptent : on distingue le bilan humain, le risque écologique et l’enquête sur les causes, encore inconnues.',
       sources: [
@@ -157,6 +169,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Culture',
       title: 'Simon Abkarian succédera à Ariane Mnouchkine à la tête du Théâtre du Soleil',
+      sujet: "Le Théâtre du Soleil change de direction",
       text: 'Le comédien et metteur en scène **Simon Abkarian** prendra la tête du **Théâtre du Soleil** à l’automne **2027**. Il succède à **Ariane Mnouchkine** : la metteuse en scène, qui prend sa retraite, et sa troupe ont décidé de lui confier la direction. L’acteur, vu en 2026 dans **« La Bataille de Gaulle »** d’Antonin Baudry, où il incarne le général de Gaulle, a passé plusieurs années de jeunesse à la **Cartoucherie**. Le théâtre existe depuis **1964**.',
       why: 'Une succession à la tête d’une institution culturelle est une info « nomination » classique : qui, pour remplacer qui, et à partir de quand.',
       sources: [

@@ -182,7 +182,11 @@
     if (kind === 'review') {
       const items = shuffle(S.review).slice(0, 10);
       if (!items.length) return null;
-      return { key, mode: 'review', title: 'Révisions', color: '#3A86FF', exercises: items.map(i => i.ex), ids: items.map(i => i.id), context: 'À revoir' };
+      const ctxOf = i => {   // question d'actu : son sujet (sans réponse), comme dans la leçon du jour
+        const m = String(i.id).match(/^day:(\d{4}-\d{2}-\d{2}):/), d = m && DAYS[m[1]];
+        return d ? orderByStory(d, [i.ex])[0].ctx : null;
+      };
+      return { key, mode: 'review', title: 'Révisions', color: '#3A86FF', exercises: items.map(i => i.ex), ids: items.map(i => i.id), ctx: items.map(ctxOf), context: 'À revoir' };
     }
     return null;
   }
@@ -202,9 +206,34 @@
       if (ex.t === 'write') { const k = which(ex); return { ex, i, rank: 3, s: k, ctx: { kind: 'write', label: k >= 0 ? st[k].title : 'Atelier d’écriture', tag: k >= 0 ? st[k].tag : '' } }; }
       if (ex.t === 'match') return { ex, i, rank: 2, s: 999, ctx: { kind: 'recap', label: 'Récap : plusieurs infos du jour', tag: '' } };
       const k = which(ex);
-      return { ex, i, rank: k >= 0 ? 1 : 2, s: k >= 0 ? k : 998, ctx: k >= 0 ? { kind: 'story', label: st[k].title, tag: st[k].tag, n: k } : { kind: 'recap', label: 'Les infos du jour', tag: '' } };
+      return { ex, i, rank: k >= 0 ? 1 : 2, s: k >= 0 ? k : 998, ctx: k >= 0 ? { kind: 'story', label: storyHint(day, k), tag: st[k].tag, n: k } : { kind: 'recap', label: 'Les infos du jour', tag: '' } };
     });
     return rows.sort((x, y) => x.rank - y.rank || x.s - y.s || x.i - y.i);
+  }
+  // Contexte affiché au-dessus d'une question : situer l'info SANS donner de réponse.
+  // 1. le « sujet » rédigé et relu pour ça (story.sujet), contrôlé par check-edition.js ;
+  // 2. à défaut (anciennes éditions, secours sans IA) : le titre de l'info, dont on masque chaque nom et chaque chiffre
+  //    qui figure dans une bonne réponse du jour ; s'il ne reste presque rien de lisible, seule la rubrique s'affiche.
+  const hintCache = {};
+  function storyHint(day, k) {
+    const s = day && day.stories && day.stories[k]; if (!s) return '';
+    if (s.sujet) return s.sujet;
+    const key = `${day.date}:${k}`; if (key in hintCache) return hintCache[key];
+    const ans = new Set();
+    (day.lessons || []).forEach(l => (l.exercises || []).forEach(ex => {
+      const good = ex.t === 'qcm' ? [ex.c && ex.c[ex.a]] : ex.t === 'input' ? ex.a : ex.t === 'order' ? ex.items : [];
+      (good || []).forEach(a => norm(a || '').split(' ').forEach(w => { if (w.length >= 3 && !FREE_STOP.has(w)) ans.add(w); }));
+    }));
+    let hidden = 0, kept = 0;
+    const words = String(s.title).split(/\s+/).map(w => {
+      const parts = norm(w).split(' ').filter(Boolean);
+      if (!parts.length) return w;
+      if (parts.some(p => /\d/.test(p) || ans.has(p))) { hidden++; return '…'; }
+      if (parts.some(p => p.length >= 3 && !FREE_STOP.has(p))) kept++;
+      return w;
+    });
+    const txt = words.join(' ').replace(/…(\s+…)+/g, '…');
+    return (hintCache[key] = hidden && kept < 3 ? '' : txt);
   }
   const lessonState = key => S.lessons[key] || null;
   const starStr = n => '★'.repeat(n) + '☆'.repeat(3 - n);
@@ -1043,8 +1072,8 @@
       const c = it.ctx, col = (L.cfg.date && DAYS[L.cfg.date] && (DAYS[L.cfg.date].tagColors || {})[c.tag]) || 'var(--red)';
       const head = c.kind === 'story' ? `📰 Info${c.tag ? ' · ' + esc(c.tag) : ''}` : c.kind === 'write' ? '✍️ À toi d’écrire' : '🧩 Récap';
       const prev = L.queue[L.pos - 1], fresh = !prev || !prev.ctx || prev.ctx.label !== c.label;
-      // seulement la rubrique : le titre de l'info donnait la réponse (« Reporters sans frontières demande à l'Arcom… » au-dessus de « Quelle ONG… ? »)
-      body.insertAdjacentHTML('afterbegin', `<div class="ex-ctx ${fresh ? 'fresh' : ''}" style="--ctx:${esc(col)}"><small>${head}</small></div>`);
+      // la rubrique + le sujet (jamais le titre brut : « Reporters sans frontières demande à l'Arcom… » au-dessus de « Quelle ONG… ? » donnait la réponse)
+      body.insertAdjacentHTML('afterbegin', `<div class="ex-ctx ${fresh ? 'fresh' : ''}" style="--ctx:${esc(col)}"><small>${head}</small>${c.label ? `<span>${esc(c.label)}</span>` : ''}</div>`);
     }
     if (it.retry) body.insertAdjacentHTML('afterbegin', '<div class="retry-tag">↻ Deuxième chance</div>');
     $('.lesson-body').scrollTop = 0;
@@ -2141,7 +2170,7 @@
   const ctx = {
     $, $$, esc, rich, shuffle, norm, pad, ymd, parseYmd, addDays, frDate, TODAY, DATE_RE, sfx, confetti,
     get S() { return S; }, save, addXp, markActive, renderChrome, route, level,
-    PREPA, UNITS, startLesson: k => startLesson(k), usedUp: (ex, id) => usedUp(ex, id),
+    PREPA, UNITS, startLesson: k => startLesson(k), usedUp: (ex, id) => usedUp(ex, id), storyHint: (day, k) => storyHint(day, k),
     currentDay: () => (CURRENT && DAYS[CURRENT]) || null,
     // ajoute un onglet à la Prépa (après l'onglet `after`) ; view() renvoie le HTML
     addPrepaTab(id, ico, label, view, after) {

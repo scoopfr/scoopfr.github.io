@@ -74,6 +74,30 @@
 
     // 2. Leçons
     const lessons = Array.isArray(day.lessons) ? day.lessons : [];
+
+    // « sujet » de chaque info : affiché au-dessus des questions pour situer l'info, il ne doit donner AUCUNE réponse.
+    // Refusé s'il contient une bonne réponse (qcm, input) entière, un de ses chiffres, ou un de ses noms propres
+    // absent de la question elle-même (et de ses reformulations).
+    const goods = [];
+    lessons.forEach(l => (Array.isArray(l.exercises) ? l.exercises : []).forEach(ex => {
+      const qs = norm([ex.q, ...(Array.isArray(ex.qv) ? ex.qv : [])].join(' '));
+      const list = ex.t === 'qcm' && Array.isArray(ex.c) ? [ex.c[ex.a]] : ex.t === 'input' && Array.isArray(ex.a) ? ex.a : [];
+      list.filter(Boolean).forEach(a => goods.push({ a: String(a), qs }));
+    }));
+    stories.forEach((s, i) => {
+      const where = `Info ${i} « ${String(s.title || '').slice(0, 50)} »`;
+      if (!s.sujet) { W(`${where} : pas de « sujet » (l'app affichera le titre en masquant les réponses)`); return; }
+      const sj = ' ' + norm(s.sujet) + ' ';
+      if (norm(s.sujet) === norm(s.title)) E(`${where} : le sujet ne doit pas recopier le titre`);
+      goods.forEach(({ a, qs }) => {
+        const na = norm(a);
+        const leaks = [];
+        if (na.length >= 3 && sj.includes(' ' + na + ' ')) leaks.push(a);
+        (na.match(/\d+(?:[.,]\d+)?/g) || []).forEach(n => { if (sj.includes(' ' + n + ' ') && !(' ' + qs + ' ').includes(' ' + n + ' ')) leaks.push(n); });
+        (String(a).match(/[A-ZÉÈÀ][\p{L}’'-]{3,}/gu) || []).map(norm).forEach(t => { if (sj.includes(' ' + t + ' ') && !(' ' + qs + ' ').includes(' ' + t + ' ')) leaks.push(t); });
+        if (leaks.length) E(`${where} : le sujet donne une réponse (${[...new Set(leaks)].join(', ')})`);
+      });
+    });
     // 3 leçons le matin, puis une leçon « Flash » par mise à jour
     if (lessons.length < 3 || lessons.length > 9) E(`Il faut 3 leçons, plus une par mise à jour (actuellement ${lessons.length})`);
     if (lessons.length > 3 && (day.updates || []).length !== lessons.length - 3) W(`${lessons.length - 3} leçon(s) Flash pour ${(day.updates || []).length} mise(s) à jour`);
