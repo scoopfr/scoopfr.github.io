@@ -412,6 +412,7 @@ def llm_lesson(stories, spec, n_ex=None, title=None, icon=None, desc=None):
 
 PARTS = [
     ("Fais exactement 5 exercices courts (qcm, vf ou input), sans exercice write.", ),
+    ("Fais exactement 3 autres exercices courts (qcm, vf ou input) sur d'autres infos que les précédents, sans exercice write.", ),
     ("Fais exactement 3 exercices : 1 match (4 paires) ou 1 order, 1 qcm, et 1 exercice write construit sur une vraie info du brief.", ),
 ]
 
