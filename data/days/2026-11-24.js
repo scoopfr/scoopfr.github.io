@@ -123,6 +123,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
       tag: 'Société',
       title: "47 000 femmes tuées par des proches dans le monde en 2025",
       sujet: "Féminicides : un rapport de l’ONU sur les femmes tuées par des proches",
+      primary: [{"name": "ONU Info", "url": "https://news.un.org/fr/story/2026/11/1159900", "title": "Féminicides : chaque heure, cinq femmes dans le monde tuées par leur conjoint ou un parent"}],
       text: "Quelque **47 000 femmes et filles** ont été tuées par des proches en 2025 dans le monde, soit environ cinq par heure, selon l'ONU. Ce chiffre reste stable depuis plusieurs années, entre 45 000 et 51 000 victimes. Les femmes représentent 19 % des victimes d'homicides, mais 60 % d'entre elles ont été tuées dans la sphère privée, contre 11 % des hommes victimes d'homicide.",
       why: "Ces chiffres, issus de l'ONU, servent à mesurer les violences faites aux femmes. En journalisme, on cite toujours l'organisme qui produit un chiffre : ici, l'ONU.",
       sources: [

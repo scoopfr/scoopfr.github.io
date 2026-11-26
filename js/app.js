@@ -368,6 +368,31 @@
     if (lp && lp.items && date != null && idx != null) (lp.items[`${date}:${idx}`] || []).forEach(x => add(x, 'match'));
     return out;
   }
+  // Source primaire d'une QUESTION : le document d'origine vérifié (champ `primary` de l'édition, ou site officiel cité
+  // parmi les sources). Les rapprochements automatiques (« match ») sont exclus : trop d'erreurs (un discours de
+  // von der Leyen relié au débat Philippe-Lisnard). À défaut, une recherche sur les sites officiels de la rubrique,
+  // avec les mots du sujet (pas du titre, qui contient souvent la réponse).
+  function questionPrimary(s, date, idx) {
+    const docs = primarySources(s, date, idx).filter(x => x.kind !== 'match');
+    const kw = storyKeywords({ title: s.sujet || s.title });
+    const trail = TRAIL[s.tag] || [['data.gouv.fr', 'data.gouv.fr'], ['sites de l\'État', 'gouv.fr']];
+    const search = `https://www.google.com/search?q=${encodeURIComponent(`${(kw.length ? kw : [s.sujet || s.title]).join(' ')} (${trail.map(t => 'site:' + t[1]).join(' OR ')})`)}`;
+    return { docs, search, trail };
+  }
+  // avant la réponse : un lien neutre (aucun nom d'institution, qui pourrait être la réponse)
+  function primaryAsk(s, date, idx) {
+    if (!s) return '';
+    const p = questionPrimary(s, date, idx);
+    return p.docs.length
+      ? `<div class="ex-prim">📜 <a href="${esc(p.docs[0].url)}" target="_blank" rel="noopener">Lire la source primaire ↗</a>${p.docs.slice(1, 3).map((d, k) => ` · <a href="${esc(d.url)}" target="_blank" rel="noopener">document ${k + 2} ↗</a>`).join('')}<small>Le document d'origine : cherche la réponse dedans.</small></div>`
+      : `<div class="ex-prim">📜 <a href="${esc(p.search)}" target="_blank" rel="noopener">Chercher la source primaire ↗</a><small>Pas encore de document d'origine lié : recherche sur les sites officiels.</small></div>`;
+  }
+  // après la réponse : le document nommé
+  function primaryAfter(s, date, idx) {
+    if (!s) return '';
+    const p = questionPrimary(s, date, idx);
+    return p.docs.length ? `<p class="ans-src">📜 Source primaire : ${p.docs.map(d => `<a href="${esc(d.url)}" target="_blank" rel="noopener">${esc(d.title || d.name)} ↗</a>`).join(' · ')}</p>` : '';
+  }
   // Pistes : portails officiels selon la rubrique (à vérifier : ce ne sont pas des liens vers le document exact)
   // Par rubrique : [nom du site, domaine pour la recherche, ce qu'on y trouve]
   const TRAIL = {
@@ -1109,6 +1134,9 @@
       const label = c.kind === 'story' ? [c.pre, safeLabel(c.label, it.v, it.ex)].filter(Boolean).join(' · ') : c.label;
       body.insertAdjacentHTML('afterbegin', `<div class="ex-ctx ${fresh ? 'fresh' : ''}" style="--ctx:${esc(col)}"><small>${head}</small>${label ? `<span>${esc(label)}</span>` : ''}</div>`);
     }
+    // la source primaire de l'info, dans chaque question d'actu (lien neutre : aucune réponse dans le libellé)
+    const pst = itStory(it);
+    if (pst) { const chip = $('.ex-ctx', body), ph = primaryAsk(pst, it.ctx.date, it.ctx.n); if (chip) chip.insertAdjacentHTML('afterend', ph); else body.insertAdjacentHTML('afterbegin', ph); }
     if (it.retry) body.insertAdjacentHTML('afterbegin', '<div class="retry-tag">↻ Deuxième chance</div>');
     $('.lesson-body').scrollTop = 0;
   }
@@ -1133,6 +1161,7 @@
     if (!list.length) return '';
     return `<p class="ans-src">📎 Sources : ${list.map(x => x.url && /^https?:\/\//.test(x.url) ? `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)} ↗</a>` : esc(x.name)).join(' · ')}</p>`;
   }
+  const answerRefs = it => { const s = itStory(it); return s ? primaryAfter(s, it.ctx.date, it.ctx.n) + answerSources(s) : ''; };
   function grade(it, ok, sol, free) {
     S.stats.answered++; answered(ok, L.cfg.mode, it);
     if (!it.retry || it.again) bumpSeen(it.ex);
@@ -1162,7 +1191,7 @@
       // réponse libre jugée fausse : tu peux la compter juste si c'était la bonne, mal formulée
       if (free) { L.overrideCtx = { it }; $('#override').hidden = false; }
     }
-    $('#fb-text').insertAdjacentHTML('beforeend', answerSources(itStory(it)));
+    $('#fb-text').insertAdjacentHTML('beforeend', answerRefs(it));
     const asked = (it.v && it.v.q) || it.ex.q;
     $('#fb-text').insertAdjacentHTML('beforeend', `<p class="report-row">${reportLink(asked, `Question de quiz (${(L.cfg && L.cfg.context) || 'entraînement'}) : ${asked}\n${solutionOf(shown)}`)}</p>`);
     L.state = 'feedback';
@@ -1184,7 +1213,7 @@
     L.combo++; L.maxCombo = Math.max(L.maxCombo, L.combo);
     L.xp += it.retry ? 5 : 10;
     sfx.ok();
-    setBar('ok', 'Compté juste 👍', '', (it.ex.x ? linkTerms(rich(it.ex.x)) : '') + answerSources(itStory(it)), '✓');
+    setBar('ok', 'Compté juste 👍', '', (it.ex.x ? linkTerms(rich(it.ex.x)) : '') + answerRefs(it), '✓');
     L.state = 'feedback';
     updateProgress(); save();
   }
@@ -1877,6 +1906,7 @@
         <div class="f-kick">${it.block != null ? `🧠 Quiz · ce que tu viens de voir · ${it.n}/${it.of}` : '⚡ Question flash'} · +5 XP</div>
         <h2>${vf ? 'Vrai ou faux ?' : rich(ex.q)}</h2>
         ${vf ? `<blockquote class="f-state">${rich(ex.q)}</blockquote>` : ''}
+        ${it.story != null ? primaryAsk(F.day.stories[it.story], F.date, it.story) : ''}
         <div class="f-choices ${vf ? 'two' : ''}">${choices.map(([c, i]) => `<button class="f-choice" data-c="${i}">${rich(c)}</button>`).join('')}</div>
         <div class="f-expl" hidden></div>
       </div></section>`;
@@ -2139,7 +2169,7 @@
       if (ok) b.right++;
       if (it.n === it.of) score = `<br><b>🏁 Score du quiz : ${b.right}/${it.of}</b>`;
     }
-    ex_.innerHTML = `<b>${ok ? '✓ Bien vu !' : '✕ Raté, la question part dans « À revoir ».'}</b>${ex.x ? ' ' + linkTerms(rich(ex.x)) : ''}${answerSources(it.story != null ? F.day.stories[it.story] : null)}${score}`;
+    ex_.innerHTML = `<b>${ok ? '✓ Bien vu !' : '✕ Raté, la question part dans « À revoir ».'}</b>${ex.x ? ' ' + linkTerms(rich(ex.x)) : ''}${it.story != null ? primaryAfter(F.day.stories[it.story], F.date, it.story) + answerSources(F.day.stories[it.story]) : ''}${score}`;
     ex_.hidden = false;
   }
 

@@ -120,6 +120,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
       tag: 'Justice',
       title: 'Génocide des Rohingyas : la Birmanie refuse une partie des exigences de la CIJ',
       sujet: "Génocide des Rohingyas : la Birmanie et la justice internationale",
+      primary: [{"name": "ONU Info", "url": "https://news.un.org/fr/story/2026/11/1159874", "title": "La CIJ reconnaît le Myanmar coupable de génocide à l’encontre des Rohingyas"}],
       text: 'La **Cour internationale de justice** (CIJ) a établi la responsabilité de l’État birman dans le **génocide des Rohingyas**. Elle a notamment ordonné le rapatriement de **750 000 Rohingyas** et leur indemnisation. Mercredi, le dirigeant birman **Min Aung Hlaing** a affirmé que son pays ne se conformerait pas aux exigences qu’il juge « inappropriées ».',
       why: 'Ne pas confondre la CIJ, qui juge les différends entre États, et la Cour pénale internationale, qui juge des individus. Toutes deux siègent à La Haye.',
       sources: [
@@ -181,6 +182,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
       tag: 'Culture',
       title: 'Lilia Hassaine remporte le prix Goncourt des lycéens 2026 avec « JE »',
       sujet: "Le Goncourt des lycéens 2026",
+      primary: [{"name": "Ministère de l’Éducation nationale", "url": "https://www.education.gouv.fr/le-prix-goncourt-des-lyceens-2026-est-decerne-lilia-hassaine-pour-son-roman-je-506985", "title": "Le Prix Goncourt des lycéens 2026 est décerné à Lilia Hassaine pour son roman Je"}],
       text: 'La romancière **Lilia Hassaine** a remporté jeudi le **Goncourt des lycéens 2026** pour **« JE »** (Gallimard), annoncé à **Rennes**. Son roman reprend le classique de **Charlotte Brontë**, *Jane Eyre*, en s’attachant à **Bertha**, la première épouse de Rochester. Désignée parmi **16 finalistes**, elle a été choisie par un jury national ; une cinquantaine d’établissements scolaires étaient mobilisés pour cette **39e édition**. C’est le dernier des prix d’automne.',
       why: 'Un prix littéraire se raconte par le lauréat, le livre et le jury : ici, ce sont des lycéens qui décident, ce qui en fait l’un des prix les plus prescripteurs.',
       sources: [
@@ -193,6 +195,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
       tag: 'Europe',
       title: 'Royaume-Uni : l’immigration nette chute de 62 %, son plus bas niveau depuis 1997',
       sujet: "Royaume-Uni : de nouveaux chiffres sur l’immigration",
+      primary: [{"name": "Office national des statistiques (ONS)", "url": "https://www.ons.gov.uk/releases/longterminternationalmigrationprovisionalyearendingjune2026", "title": "Long-term international migration, provisional: year ending June 2026"}],
       text: 'À la fin **juin 2026**, l’**immigration nette** au Royaume-Uni avait chuté de **62 %** sur un an, selon l’Office national des statistiques (**ONS**). C’est son plus bas niveau depuis **1997**, hors période du Covid-19. Le gouvernement du premier ministre **Andy Burnham**, qui mène une politique migratoire restrictive dans la lignée de celle de **Keir Starmer**, s’est félicité d’avoir « **rétabli le contrôle** ».',
       why: 'Un chiffre officiel se présente avec sa source (l’ONS), sa période (fin juin 2026) et sa comparaison (un an plus tôt) ; la réaction du gouvernement vient ensuite.',
       sources: [

@@ -4,7 +4,7 @@
 
 - **L'appli en ligne** : https://scoopfr.github.io/
 - **Le code** : https://github.com/scoopfr/scoopfr.github.io (ce dépôt)
-- **Dernière mise à jour de ce document** : 26 novembre 2026, version **v54** de l'appli.
+- **Dernière mise à jour de ce document** : 26 novembre 2026, version **v55** de l'appli.
 
 Ce document a deux parties :
 1. **Pour tout le monde** : à quoi sert l'appli, comment elle marche, sans jargon.
@@ -170,7 +170,7 @@ Le projet est préparé mais n'est pas publié : les comptes développeur sont p
 - Pas de `gh` sur le PC. Pour lancer un workflow à la main, passe par le navigateur (GitHub, Actions, Run workflow).
 - Après une modification, le navigateur de test peut garder l'ancien code en cache, même avec le même `?v=`. Avant de conclure qu'un correctif ne marche pas, désinscris le service worker et vide les caches.
 
-### Où on en est (26/11/2026, v54)
+### Où on en est (26/11/2026, v55)
 
 **Fait récemment :**
 - v44 : plus de reformulation « Explique en une ou deux phrases ».
@@ -197,6 +197,7 @@ Le projet est préparé mais n'est pas publié : les comptes développeur sont p
   - `scripts/sources_extraits.py <date>` ajoute `titre` et `extrait` (chapeau RSS publié par le média) aux `sources`, à partir de `news-today.txt`. La routine le lance avant la vérification, et le secours sans IA aussi. Les éditions du 24 et du 25/11 n'en ont pas (revue de presse plus disponible) : leurs ateliers listent seulement les liens ;
   - **limite physique** : `max` (signes) devient un `maxlength`. Une limite en mots écrite dans la consigne (« 12 mots maximum ») bloque la frappe au mot suivant et coupe un collage trop long. Les ateliers « questions », « angle » et la justification d'un vrai/faux ont maintenant une limite chiffrée.
 - v54 : quand l'élève place « Je pense avoir retenu » à **100 %** sous une info, le test de cette info (« Me tester ») ne pose plus que des questions **à réponse tapée** (QCM sans choix, champs à remplir, vrai/faux à justifier par écrit). Les quiz globaux ne changent pas : l'élève y garde le bouton « Choix ». Voir `typedOnly` dans `js/memoire.js` et `variantize` dans `js/app.js`.
+- v55 : **chaque question d'actu affiche sa source primaire**. Si l'info a un document d'origine vérifié (champ `primary` de l'édition, ou site officiel parmi les `sources`), un lien « Lire la source primaire » ; sinon un lien de recherche sur les sites officiels de la rubrique. Le libellé est neutre avant la réponse (le nom de l'institution peut être la réponse), puis le document est nommé avec la correction. Les rapprochements automatiques de `data/live/primary.js` ne sont pas utilisés dans les questions : sur le 25/11, ils reliaient par exemple un discours de von der Leyen au débat Philippe-Lisnard. Voir `questionPrimary`, `primaryAsk` et `primaryAfter` dans `js/app.js`. Documents vérifiés ajoutés : ONS (Royaume-Uni), ministère de l'Éducation (Goncourt des lycéens), ONU Info (CIJ et Rohingyas, féminicides du 24/11).
 - L'édition du 26/11 a été rédigée et relue à la main, puis complétée par la mise à jour de 11 h, relue elle aussi. Ses 28 questions ont 5 formulations chacune, et ses 13 infos ont un sujet.
 - Architecture de publication sur 3 niveaux en place.
 

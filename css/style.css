@@ -1004,3 +1004,10 @@ body.in-welcome { overflow: hidden; }
 .ans-src { margin: 6px 0 0; font-size: 13px; }
 .ans-src a { color: var(--blue); font-weight: 700; text-decoration: none; white-space: nowrap; }
 .f-expl .ans-src { opacity: .95; }
+/* source primaire dans chaque question d'actu */
+.ex-prim { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; margin: -6px 0 14px; padding: 7px 11px; border-radius: 11px; border: 1.5px dashed var(--line); font-size: 13.5px; font-weight: 700; }
+.ex-prim a { color: var(--blue); text-decoration: none; }
+.ex-prim small { flex-basis: 100%; font-weight: 500; font-size: 12px; color: var(--muted); }
+.f-quiz .ex-prim { margin: 0 0 14px; border-color: rgba(255,255,255,.3); }
+.f-quiz .ex-prim a { color: #8fc1ff; }
+.f-quiz .ex-prim small { color: rgba(255,255,255,.7); }
