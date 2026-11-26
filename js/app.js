@@ -214,26 +214,29 @@
   // 1. le « sujet » rédigé et relu pour ça (story.sujet), contrôlé par check-edition.js ;
   // 2. à défaut (anciennes éditions, secours sans IA) : le titre de l'info, dont on masque chaque nom et chaque chiffre
   //    qui figure dans une bonne réponse du jour ; s'il ne reste presque rien de lisible, seule la rubrique s'affiche.
-  const hintCache = {};
+  // Sans « sujet » rédigé, rien d'autre que la rubrique : un titre, même à trous, donnait encore la réponse
+  // (« Colombie : tous les otages libérés après l'assaut » au-dessus du vrai/faux sur… la libération des otages).
   function storyHint(day, k) {
-    const s = day && day.stories && day.stories[k]; if (!s) return '';
-    if (s.sujet) return s.sujet;
-    const key = `${day.date}:${k}`; if (key in hintCache) return hintCache[key];
-    const ans = new Set();
-    (day.lessons || []).forEach(l => (l.exercises || []).forEach(ex => {
-      const good = ex.t === 'qcm' ? [ex.c && ex.c[ex.a]] : ex.t === 'input' ? ex.a : ex.t === 'order' ? ex.items : [];
-      (good || []).forEach(a => norm(a || '').split(' ').forEach(w => { if (w.length >= 3 && !FREE_STOP.has(w)) ans.add(w); }));
-    }));
-    let hidden = 0, kept = 0;
-    const words = String(s.title).split(/\s+/).map(w => {
-      const parts = norm(w).split(' ').filter(Boolean);
-      if (!parts.length) return w;
-      if (parts.some(p => /\d/.test(p) || ans.has(p))) { hidden++; return '…'; }
-      if (parts.some(p => p.length >= 3 && !FREE_STOP.has(p))) kept++;
-      return w;
-    });
-    const txt = words.join(' ').replace(/…(\s+…)+/g, '…');
-    return (hintCache[key] = hidden && kept < 3 ? '' : txt);
+    const s = day && day.stories && day.stories[k];
+    return s && s.sujet ? s.sujet : '';
+  }
+  // Dernier garde-fou, question par question (dans la formulation affichée) : l'indication disparaît
+  // si elle contient un mot ou un chiffre de la bonne réponse absent de la question,
+  // ou, pour un vrai/faux, si elle reprend l'affirmation (3 mots-clés communs, ou un chiffre de part et d'autre).
+  function safeLabel(label, v, ex) {
+    if (!label || !ex) return label || '';
+    const tk = t => new Set(norm(t || '').split(' ').filter(w => /\d/.test(w) || (w.length >= 3 && !FREE_STOP.has(w))));
+    const lab = tk(label), num = set => [...set].some(w => /\d/.test(w));
+    const asked = tk(`${(v && v.q) || ex.q} ${(v && v.src) || ''}`);
+    const good = ex.t === 'qcm' ? [ex.c && ex.c[ex.a]] : ex.t === 'input' ? ex.a : ex.t === 'order' ? ex.items : [];
+    const goodTk = tk((good || []).join(' '));
+    for (const w of lab) if (goodTk.has(w) && !asked.has(w)) return '';
+    const statement = v && v.t === 'vf' ? v.q : v && v.t === 'write' && ex.t === 'vf' ? v.src : ex.t === 'vf' && !v ? ex.q : '';
+    if (statement) {
+      const st = tk(statement); let n = 0; for (const w of lab) if (st.has(w)) n++;
+      if (n >= 3 || (num(lab) && num(st))) return '';
+    }
+    return label;
   }
   const lessonState = key => S.lessons[key] || null;
   const starStr = n => '★'.repeat(n) + '☆'.repeat(3 - n);
@@ -414,7 +417,7 @@
     const day = CURRENT && DAYS[CURRENT];
     if (day) {
       const nv = newFeedVideos(CURRENT, day).length, nu = tl.filter(x => !isRead(x.day.date, x.i)).length;
-      if (nv || nu) return { ico: '🎬', title: "Regarder l'actu en vidéo", sub: `${nv ? nv + ' vidéo' + (nv > 1 ? 's' : '') + ' · ' : ''}${nu} info${nu > 1 ? 's' : ''} à découvrir · 3 min`, href: `#/feed/${CURRENT}` };
+      if (nv) return { ico: '🎬', title: "Regarder l'actu en vidéo", sub: `${nv} vidéo${nv > 1 ? 's' : ''} + ${nv > 1 ? 'leurs résumés' : 'son résumé'}, puis un quiz · ${Math.max(2, nv)} min`, href: `#/feed/${CURRENT}` };
       const li = day.lessons.findIndex((_, i) => !lessonState(`day:${CURRENT}:${i}`));
       if (li >= 0) return { ico: '🧠', title: li === 0 ? 'Quiz du jour' : 'Continuer le quiz', sub: `${day.lessons[li].exercises.length} questions · ~4 min`, start: `day:${CURRENT}:${li}` };
     }
@@ -1073,7 +1076,8 @@
       const head = c.kind === 'story' ? `📰 Info${c.tag ? ' · ' + esc(c.tag) : ''}` : c.kind === 'write' ? '✍️ À toi d’écrire' : '🧩 Récap';
       const prev = L.queue[L.pos - 1], fresh = !prev || !prev.ctx || prev.ctx.label !== c.label;
       // la rubrique + le sujet (jamais le titre brut : « Reporters sans frontières demande à l'Arcom… » au-dessus de « Quelle ONG… ? » donnait la réponse)
-      body.insertAdjacentHTML('afterbegin', `<div class="ex-ctx ${fresh ? 'fresh' : ''}" style="--ctx:${esc(col)}"><small>${head}</small>${c.label ? `<span>${esc(c.label)}</span>` : ''}</div>`);
+      const label = c.kind === 'story' ? [c.pre, safeLabel(c.label, it.v, it.ex)].filter(Boolean).join(' · ') : c.label;
+      body.insertAdjacentHTML('afterbegin', `<div class="ex-ctx ${fresh ? 'fresh' : ''}" style="--ctx:${esc(col)}"><small>${head}</small>${label ? `<span>${esc(label)}</span>` : ''}</div>`);
     }
     if (it.retry) body.insertAdjacentHTML('afterbegin', '<div class="retry-tag">↻ Deuxième chance</div>');
     $('.lesson-body').scrollTop = 0;
@@ -1598,6 +1602,24 @@
   const FEED_STOP = new Set('le la les un une des du de au aux et ou en dans sur pour par avec sans sous chez apres avant ce cette ces son sa ses leur leurs qui que dont est sont ont fait plus moins pas ne se il elle ils elles on comme mais aussi tres tout tous entre contre vers selon depuis encore deja alors quand comment pourquoi quel quelle voici video'.split(' '));
   const feedTok = s => new Set(String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(w => w.length >= 4 && !FEED_STOP.has(w)));
   const sameTopic = (a, b) => { let n = 0; for (const x of a) if (b.has(x)) n++; return n >= 2; };
+  // Une vidéo n'est suivie d'un résumé que si elle parle VRAIMENT de cette info : au moins 2 mots-clés
+  // en commun entre le titre de la vidéo et le titre (ou le sujet) de l'info. Le texte complet ne compte pas :
+  // « Législatives en Espagne » était relié à tort à « Abrego Garcia quitte le pays pour l'Espagne ».
+  const VID_ALIAS = { ukrainien: 'ukraine', ukrainienne: 'ukraine', ukrainiens: 'ukraine', ukrainiennes: 'ukraine', russe: 'russie', russes: 'russie', libyen: 'libye', libyens: 'libye', israelien: 'israel', israelienne: 'israel', americain: 'etats', americaine: 'etats', americains: 'etats', bateaux: 'navires', navire: 'navires', liberation: 'liberes', libere: 'liberes', liberee: 'liberes', liberees: 'liberes', espagnol: 'espagne', espagnole: 'espagne', espagnols: 'espagne' };
+  const vidTok = s => {
+    const t = new Set([...feedTok(s)].map(w => VID_ALIAS[w] || w));
+    (String(s || '').match(/\b[A-Z]{3}\b/g) || []).forEach(a => t.add(a.toLowerCase()));   // sigles : CAN, RSF, BYD, CIJ…
+    return t;
+  };
+  // noms propres et sigles du titre de la vidéo (mot à majuscule qui n'ouvre pas le titre)
+  const vidProper = s => { const t = new Set(); String(s || '').split(/\s+/).slice(1).forEach(w => { if (/^[A-ZÉÈÀÂÎÔÛÇ]/.test(w)) vidTok(w).forEach(x => t.add(x)); }); (String(s || '').match(/\b[A-Z]{3}\b/g) || []).forEach(a => t.add(a.toLowerCase())); return t; };
+  // score retenu : 3 mots-clés communs, ou 2 dont au moins un nom propre ; sinon 0
+  // (« Espace : premier astronaute pakistanais… mission » n'a que « espace » et « mission » en commun avec la mission Hera)
+  const vidScore = (v, s) => {
+    const a = vidTok(v.title), b = vidTok(`${s.title} ${s.sujet || ''}`), p = vidProper(v.title);
+    let n = 0, prop = false; for (const x of a) if (b.has(x)) { n++; if (p.has(x)) prop = true; }
+    return n >= 3 || (n === 2 && prop) ? n : 0;
+  };
 
   // Toutes les vidéos disponibles : celles choisies par la rédaction le matin, puis le flux mis à jour toutes les heures
   function feedVideoPool(date, day, live) {
@@ -1611,53 +1633,40 @@
     return out;
   }
 
-  // Un sujet = une carte. Une info avec vidéo devient une carte unique « vidéo + l'essentiel » ;
-  // ce qui a déjà été vu n'est plus montré (sauf « Revoir tout »).
+  // Le fil = des paires « vidéo → son résumé », 5 de suite, puis un quiz sur ces 5 infos, et ainsi de suite.
+  // Jamais de résumé sans vidéo, jamais de vidéo sans résumé. Ce qui a déjà été vu ne revient pas (sauf « Tout revoir »).
   function buildFeed(date, day, live, showAll) {
     const seen = seenStore(), colors = day.tagColors || {};
     const color = s => s.color || colors[s.tag] || '#E63946';
-    const pool = feedVideoPool(date, day, live);
     const isNewV = v => showAll || !seen.v[v.id];
-    const storyTok = day.stories.map(s => feedTok(s.title + ' ' + s.text));
 
-    // vidéos reliées à une info : une seule par info (la première non vue)
+    // chaque vidéo va à l'info dont elle parle vraiment (lien proposé par la rédaction ou par le flux, revérifié ici,
+    // sinon la meilleure info au sens des mots-clés) ; une vidéo qui ne parle d'aucune info du jour n'est pas montrée
     const byStory = {};
-    pool.filter(v => v.story != null).forEach(v => { (byStory[v.story] = byStory[v.story] || []).push(v); });
-    // vidéos hors édition : une seule par sujet, et pas sur un sujet déjà couvert par une info
-    // sujets déjà vus (mots-clés des vidéos regardées) : une nouvelle vidéo sur le même sujet est ignorée
-    const seenTopics = showAll ? [] : Object.values(seen.vt).map(s => new Set(String(s).split(' ')));
-    const loose = [];
-    pool.filter(v => v.story == null).forEach(v => {
-      v.tok = feedTok(v.title);
-      if (storyTok.some(t => sameTopic(t, v.tok))) return;
-      if (loose.some(l => sameTopic(l.tok, v.tok))) return;
-      if (!seen.v[v.id] && seenTopics.some(t => sameTopic(t, v.tok))) return;
-      loose.push(v);
+    feedVideoPool(date, day, live).forEach(v => {
+      let k = v.story != null && vidScore(v, day.stories[v.story]) >= 2 ? v.story : -1;
+      if (k < 0) { let bs = 1; day.stories.forEach((s, i) => { const sc = vidScore(v, s); if (sc > bs) { bs = sc; k = i; } }); }
+      if (k >= 0) (byStory[k] = byStory[k] || []).push(v);
     });
 
-    // sujets à voir : une info déjà résumée dans le fil ne revient pas
-    const subjects = [];
+    // une paire par info : la première vidéo pas encore vue ; une info déjà résumée dans le fil ne revient pas
+    const pairs = [];
     day.stories.forEach((s, i) => {
       if (!showAll && seen.s[`${date}:${i}`]) return;
-      subjects.push({ i, s, v: (byStory[i] || []).find(isNewV), color: color(s) });
+      const v = (byStory[i] || []).find(isNewV);
+      if (v) pairs.push({ i, s, v, color: color(s) });
     });
-    // les sujets avec vidéo d'abord : le rythme « vidéo → résumé » domine, les résumés seuls viennent ensuite
-    subjects.sort((a, b) => (b.v ? 1 : 0) - (a.v ? 1 : 0) || a.i - b.i);
-    // vidéos hors édition : sans résumé rédigé, elles ne viennent qu'en bonus, à la fin
-    const extras = loose.filter(isNewV).slice(0, 5).map(v => ({ type: 'video', v, story: null }));
 
-    // assemblage : [vidéo → résumé] × 5, puis un quiz sur ce qu'on vient de voir, et ainsi de suite
     const seq = [{ type: 'intro' }];
-    for (let b = 0, k = 0; k < subjects.length; b++, k += FEED_BLOCK) {
-      const grp = subjects.slice(k, k + FEED_BLOCK);
-      grp.forEach(sub => {
-        if (sub.v) seq.push({ type: 'video', v: sub.v, story: sub.i, s: sub.s, color: sub.color });
-        seq.push({ type: 'story', s: sub.s, i: sub.i, color: sub.color, fromVideo: !!sub.v });
+    for (let b = 0, k = 0; k < pairs.length; b++, k += FEED_BLOCK) {
+      const grp = pairs.slice(k, k + FEED_BLOCK);
+      grp.forEach(p => {
+        seq.push({ type: 'video', v: p.v, story: p.i, s: p.s, color: p.color });
+        seq.push({ type: 'story', s: p.s, i: p.i, color: p.color });
       });
       const qs = blockQuiz(date, day, grp, showAll);
       qs.forEach((q, n) => seq.push({ type: 'quiz', ex: flashOf(q.ex), orig: q.ex, id: q.id, block: b, n: n + 1, of: qs.length }));
     }
-    seq.push(...extras);
     seq.push({ type: 'end' });
     return seq;
   }
@@ -1706,24 +1715,23 @@
   function feedCard(it, k, date, day) {
     if (it.type === 'intro') {
       const vids = F.seq.filter(x => x.type === 'video'), srcs = [...new Set(vids.map(x => x.v.source))];
-      const subjects = F.seq.filter(x => x.type === 'video' || x.type === 'story').length;
       const nq = F.seq.filter(x => x.type === 'quiz').length;
       const live = window.SCOOP_LIVE, upd = live && live.updated ? ago(live.updated) : '';
-      if (!subjects && !nq) {
+      if (!vids.length) {
         return `<section class="fcard f-intro" data-k="${k}"><div class="f-inner">
           <div class="f-kick">L'actu en vidéo du ${esc(frDate(date))}</div>
-          <h1>Tu es à jour 🎉</h1>
-          <p class="f-sources" style="font-size:16px;margin-top:14px">Tu as déjà vu toutes les vidéos et les infos du moment. Les vidéos sont mises à jour toutes les heuresutes${upd ? ` (dernière mise à jour ${esc(upd)})` : ''}. Reviens un peu plus tard !</p>
-          <div class="f-endbtns" style="margin-top:24px"><button class="btn primary" data-feed-replay>↺ Tout revoir</button><button class="btn ghost f-ghost" data-feed-close>Retour à l'accueil</button></div>
+          <h1>${F.all ? 'Pas encore de vidéo' : 'Tu es à jour 🎉'}</h1>
+          <p class="f-sources" style="font-size:16px;margin-top:14px">${F.all ? 'Aucune vidéo ne traite encore des infos de cette édition.' : 'Tu as déjà vu toutes les vidéos sur les infos du moment.'} Les vidéos sont mises à jour toutes les heures${upd ? ` (dernière mise à jour ${esc(upd)})` : ''}. Reviens un peu plus tard !</p>
+          <div class="f-endbtns" style="margin-top:24px">${F.all ? '' : '<button class="btn primary" data-feed-replay>↺ Tout revoir</button>'}<button class="btn ghost f-ghost" data-feed-close>Retour à l'accueil</button></div>
         </div></section>`;
       }
       return `<section class="fcard f-intro" data-k="${k}"><div class="f-inner">
         <div class="f-kick">L'actu en vidéo du ${esc(frDate(date))}${F.all ? ' · tout revoir' : ''}</div>
-        <h1>${subjects} sujet${subjects > 1 ? 's' : ''} ${F.all ? 'au total' : 'pour toi'}</h1>
+        <h1>${vids.length} vidéo${vids.length > 1 ? 's' : ''} ${F.all ? 'au total' : 'pour toi'}</h1>
         <ul class="f-counts">
-          ${vids.length ? `<li><b>${vids.length}</b> vidéo${vids.length > 1 ? 's' : ''} ${F.all ? '' : 'pas encore vue' + (vids.length > 1 ? 's' : '')}, de ${srcs.length} rédaction${srcs.length > 1 ? 's' : ''}</li>` : ''}
+          <li>De ${srcs.length} rédaction${srcs.length > 1 ? 's' : ''}, chacune sur une info du jour</li>
           <li>Chaque vidéo est suivie de son <b>résumé</b>, recoupé par plusieurs médias</li>
-          ${nq ? `<li>Un <b>quiz de ${nq > FEED_BLOCK ? FEED_BLOCK : nq} questions</b> tous les ${FEED_BLOCK} sujets, sur ce que tu viens de voir (+5 XP chacune)</li>` : ''}
+          ${nq ? `<li>Toutes les ${FEED_BLOCK} vidéos, un <b>quiz</b> sur ce que tu viens de voir (+5 XP par question)</li>` : ''}
         </ul>
         ${upd ? `<p class="f-sources">🔄 Vidéos mises à jour ${esc(upd)} · toutes les heures</p>` : ''}
         ${srcs.length ? `<p class="f-sources">${srcs.map(esc).join(' · ')}</p>` : ''}
@@ -1734,7 +1742,7 @@
       const s = it.s, sv = isSaved(date, it.i);
       return `<section class="fcard f-story" data-k="${k}" style="--c:${esc(it.color)}">
         <div class="f-inner">
-          <div class="f-kick">${it.fromVideo ? '📝 Résumé de la vidéo' : '📝 L\'essentiel'}</div>
+          <div class="f-kick">📝 Le résumé de cette vidéo</div>
           <span class="f-tag">${esc(s.tag)}</span>${newBadge(F.day, it.i)}
           ${storyImage(F.date, it.i, true)}
           <h2>${esc(s.title)}</h2>
@@ -1795,7 +1803,7 @@
         <button class="btn ghost f-ghost" data-feed-replay>↺ Tout revoir</button>
         <button class="btn ghost f-ghost" data-feed-close>Retour à l'accueil</button>
       </div>
-      <p class="f-sources" style="margin-top:14px">Les vidéos se renouvellent toutes les heuresutes : celles que tu as vues ne reviendront pas.</p>
+      <p class="f-sources" style="margin-top:14px">Les vidéos se renouvellent toutes les heures : celles que tu as vues ne reviendront pas.</p>
     </div></section>`;
   }
 

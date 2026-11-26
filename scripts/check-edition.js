@@ -79,6 +79,8 @@
     // Refusé s'il contient une bonne réponse (qcm, input) entière, un de ses chiffres, ou un de ses noms propres
     // absent de la question elle-même (et de ses reformulations).
     const goods = [];
+    // mots courants qui prennent une majuscule en début de réponse (« Pour des raisons… ») : pas des noms propres
+    const CAP_STOP = new Set('pour dans avec sans selon entre vers contre depuis apres avant plus moins elle elles leur leurs dont quand cette tous toutes trouver'.split(' '));
     lessons.forEach(l => (Array.isArray(l.exercises) ? l.exercises : []).forEach(ex => {
       const qs = norm([ex.q, ...(Array.isArray(ex.qv) ? ex.qv : [])].join(' '));
       const list = ex.t === 'qcm' && Array.isArray(ex.c) ? [ex.c[ex.a]] : ex.t === 'input' && Array.isArray(ex.a) ? ex.a : [];
@@ -86,7 +88,7 @@
     }));
     stories.forEach((s, i) => {
       const where = `Info ${i} « ${String(s.title || '').slice(0, 50)} »`;
-      if (!s.sujet) { W(`${where} : pas de « sujet » (l'app affichera le titre en masquant les réponses)`); return; }
+      if (!s.sujet) { W(`${where} : pas de « sujet » (l'app n'affichera que la rubrique au-dessus des questions)`); return; }
       const sj = ' ' + norm(s.sujet) + ' ';
       if (norm(s.sujet) === norm(s.title)) E(`${where} : le sujet ne doit pas recopier le titre`);
       goods.forEach(({ a, qs }) => {
@@ -94,7 +96,7 @@
         const leaks = [];
         if (na.length >= 3 && sj.includes(' ' + na + ' ')) leaks.push(a);
         (na.match(/\d+(?:[.,]\d+)?/g) || []).forEach(n => { if (sj.includes(' ' + n + ' ') && !(' ' + qs + ' ').includes(' ' + n + ' ')) leaks.push(n); });
-        (String(a).match(/[A-ZÉÈÀ][\p{L}’'-]{3,}/gu) || []).map(norm).forEach(t => { if (sj.includes(' ' + t + ' ') && !(' ' + qs + ' ').includes(' ' + t + ' ')) leaks.push(t); });
+        (String(a).match(/[A-ZÉÈÀ][\p{L}’'-]{3,}/gu) || []).map(norm).filter(t => !CAP_STOP.has(t)).forEach(t => { if (sj.includes(' ' + t + ' ') && !(' ' + qs + ' ').includes(' ' + t + ' ')) leaks.push(t); });
         if (leaks.length) E(`${where} : le sujet donne une réponse (${[...new Set(leaks)].join(', ')})`);
       });
     });

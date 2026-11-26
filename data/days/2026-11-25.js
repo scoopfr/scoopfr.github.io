@@ -13,6 +13,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Politique',
       title: 'Présidentielle 2027 : Édouard Philippe propose un débat télévisé à David Lisnard',
+      sujet: "Présidentielle : David Lisnard invité à un débat télévisé",
       text: 'Au Salon des maires, le candidat **Horizons Édouard Philippe** a appelé le maire de Cannes **David Lisnard**, candidat Nouvelle Énergie, à clarifier sa position vis-à-vis du Rassemblement national. Invité de LCI mardi soir, il lui propose un débat télévisé plutôt qu’une primaire et dénonce une frontière « poreuse » avec l’extrême droite. David Lisnard brigue aussi la présidence de l’**Association des maires de France** (AMF), dont le résultat est attendu mercredi avant 14 h. Par ailleurs, la justice ouvre une nouvelle enquête sur la communauté urbaine du Havre, que dirige Édouard Philippe, pour de possibles détournements de fonds publics ; il dénonce une « vendetta judiciaire ».',
       why: 'La campagne présidentielle suppose de maîtriser les rôles des candidats, des maires (parrainages) et la séparation entre débat politique et procédure judiciaire (présomption d’innocence).',
       sources: [
@@ -26,6 +27,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Société',
       title: 'Logement : l’Assemblée adopte la loi avec les voix du RN',
+      sujet: "L’Assemblée adopte un projet de loi grâce aux voix du RN",
       text: 'L’Assemblée nationale a largement adopté le projet de loi « de relance et de décentralisation » du logement, grâce aux voix de la droite et de l’extrême droite. Le Rassemblement national a obtenu un amendement qui met fin à l’**interdiction de louer les passoires thermiques**. Le ministre du logement, **Vincent Jeanbrun**, mise sur la suppression de cet amendement lors de la **commission mixte paritaire de décembre**.',
       why: 'Révise le parcours d’une loi : vote à l’Assemblée, puis commission mixte paritaire (CMP) quand les deux chambres divergent.',
       sources: [
@@ -36,6 +38,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Monde',
       title: 'Libye : deux militaires libyens meurent après les frappes ukrainiennes sur des navires russes',
+      sujet: "Libye : des militaires libyens meurent après des frappes sur des navires russes",
       text: 'Deux militaires libyens ont succombé à leurs blessures après les attaques du 22 novembre contre des navires russes à **Benghazi**, revendiquées par l’Ukraine, ont annoncé les autorités de l’Est libyen. **Saddam Haftar** dénonce une « attaque criminelle » contre la base navale. Selon le Guardian, le service de sécurité ukrainien affirme avoir lancé sept drones navals depuis un navire-mère, ce qui a coulé le navire de guerre russe **Merkury**. L’Italie, à quelques centaines de kilomètres de là, s’inquiète de l’attaque.',
       why: 'La guerre en Ukraine s’étend à la Méditerranée et pose la question de la souveraineté libyenne et de la sécurité de l’Europe du Sud.',
       sources: [
@@ -49,6 +52,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Monde',
       title: 'États-Unis : Kilmar Abrego Garcia quitte le pays pour l’Espagne',
+      sujet: "États-Unis : Kilmar Abrego Garcia quitte le pays",
       text: 'Le Salvadorien **Kilmar Abrego Garcia**, habitant du Maryland et marié à une Américaine, a quitté les États-Unis de son plein gré pour l’Espagne. Expulsé en mars 2025 vers le Salvador, il avait été ramené aux États-Unis après une décision de la Cour suprême, puis inculpé par la justice fédérale. Devenu un symbole de la politique migratoire de **Donald Trump**, il part après une longue bataille judiciaire. Le sénateur démocrate **Chris Van Hollen** se réjouit de le voir voyager « en homme libre ».',
       why: 'C’est un cas d’école sur la séparation des pouvoirs aux États-Unis : la Cour suprême et les juges fédéraux face à l’exécutif.',
       sources: [
@@ -61,6 +65,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Justice',
       title: 'Huawei reconnu coupable de vol de secrets industriels aux États-Unis',
+      sujet: "Huawei condamné par un jury de New York",
       text: 'Un jury fédéral de New York a reconnu mardi le géant chinois **Huawei** coupable de vol de secrets industriels et de fraude bancaire, après huit ans de procédure. Le groupe était notamment accusé d’avoir tenté de recruter des salariés d’entreprises américaines de télécommunications pour obtenir des informations technologiques. Il a en revanche été **acquitté du chef de racket** (association de malfaiteurs). Huawei estime que cet acquittement « valide » sa position constante depuis huit ans.',
       why: 'C’est un épisode de la rivalité technologique et judiciaire entre les États-Unis et la Chine, à relier aux embargos sur les puces.',
       sources: [
@@ -73,6 +78,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Économie',
       title: 'BYD va s’implanter en France, à Hambach (Moselle)',
+      sujet: "Le constructeur chinois BYD va produire en France",
       text: 'Le constructeur chinois **BYD**, numéro un mondial des voitures électriques, a annoncé mardi son projet de rachat d’une usine à **Hambach, en Moselle**. Des négociations exclusives sont lancées pour cette première usine d’Europe de l’Ouest du groupe. BYD cherche depuis un an à produire ses véhicules en Europe pour contourner les droits de douane.',
       why: 'Révise la logique des droits de douane et des relocalisations industrielles : produire sur place permet d’éviter les taxes à l’importation.',
       sources: [
@@ -83,6 +89,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Médias',
       title: 'Présidentielle : l’Arcom impose le pluralisme aux créateurs de contenu',
+      sujet: "Présidentielle : de nouvelles règles pour les créateurs de contenu",
       text: 'L’**Arcom** a annoncé jeudi 19 novembre que les influenceurs et podcasteurs qui reçoivent des personnalités politiques devront, comme les télévisions et les radios, se soumettre à des règles de **pluralisme** pendant la campagne de 2027. Le régulateur veut que les principaux créateurs de contenu, comme HugoDécrypte ou Guillaume Pley, respectent des règles de **temps de parole** et de déontologie. Plusieurs créateurs contestent ces règles.',
       why: 'Le pluralisme, le rôle de l’Arcom et le poids croissant des créateurs de contenu dans l’accès à l’information politique sont des sujets d’oral très probables.',
       sources: [
@@ -93,6 +100,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Société',
       title: 'Violences conjugales : quitter son foyer coûte presque un an de salaire',
+      sujet: "Violences conjugales : ce que coûte le départ du foyer",
       text: 'À l’occasion de la **journée internationale de lutte contre les violences faites aux femmes**, mercredi 25 novembre, la **Fondation des femmes** a publié un rapport qui chiffre le coût du départ du foyer pour une victime de violences conjugales. Logement, justice et soins représentent presque une année de salaire. Selon l’ONU, quelque 840 millions de femmes, soit près d’une femme sur trois, ont subi des violences conjugales.',
       why: 'Les violences faites aux femmes sont un grand sujet de société : savoir citer un rapport associatif et un chiffre de l’ONU est un atout à l’oral.',
       sources: [
@@ -103,6 +111,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Justice',
       title: 'Fausse rétractation de Takieddine : Sarkozy sera jugé fin 2027',
+      sujet: "Fausse rétractation de Takieddine : la date du procès de Nicolas Sarkozy est connue",
       text: 'Onze personnes sont renvoyées devant le tribunal correctionnel dans l’affaire de la fausse rétractation de **Ziad Takieddine**, l’opération « Sauver Sarko ». **Nicolas Sarkozy** et son épouse **Carla Bruni** comparaîtront fin 2027 pour association de malfaiteurs et recel de subornation de témoin. Cette affaire s’inscrit dans celle du financement libyen présumé de sa campagne.',
       why: 'Révise les infractions (association de malfaiteurs, subornation de témoin) et la procédure : renvoi devant le tribunal correctionnel.',
       sources: [
@@ -113,6 +122,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Société',
       title: 'CAN 2025 : le Tribunal arbitral du sport rend le titre au Sénégal',
+      sujet: "Football : rebondissement pour le titre de la CAN 2025",
       text: 'Le **Tribunal arbitral du sport** (TAS) a tranché mardi 24 novembre : il a contredit le jury d’appel de la Confédération africaine de football qui, le 17 mars, avait déchu le Sénégal du titre de la CAN 2025. Le Sénégal est donc réinstallé champion d’Afrique, dix mois après une finale houleuse à Rabat. Le Sénégal célèbre, tandis que le Maroc se montre fataliste.',
       why: 'Le TAS est l’instance suprême de la justice sportive : savoir le distinguer d’une juridiction d’État est utile pour les sujets sport et droit.',
       sources: [
@@ -124,6 +134,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Économie',
       title: 'Eurostar : une grève surprise perturbe le trafic entre Paris et Londres',
+      sujet: "Eurostar : des trains perturbés par une grève",
       text: 'Une **grève imprévue** chez Eurostar provoque mercredi 25 novembre des annulations et d’importantes perturbations entre Paris et Londres, et aussi vers Bruxelles. L’opérateur ne précise ni qui fait grève ni pourquoi, et appelle les organisations syndicales « à poursuivre les discussions ». Les clients peuvent modifier leur voyage ou obtenir un remboursement intégral, et il leur est demandé de ne pas se rendre en gare en cas d’annulation.',
       why: 'Un préavis de grève est en principe public : une grève « surprise » dont les motifs ne sont pas donnés pose la question de l’information des voyageurs, un angle classique en économie et transports.',
       sources: [
@@ -136,6 +147,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Économie',
       title: 'Nvidia : Jensen Huang s’excuse après son retour, des républicains s’inquiètent',
+      sujet: "Nvidia : Jensen Huang face aux critiques de républicains",
       text: 'Onze jours après avoir été écarté de la présidence de **Nvidia** pour une liaison avec une espionne chinoise présumée, **Jensen Huang** a retrouvé sa place le 23 novembre, grâce à l’intervention de Donald Trump. Devant les salariés, il s’est excusé pour ses infidélités (« J’ai commis de graves erreurs ») et dit suivre une thérapie. Des républicains critiquent ce retour au nom de la sécurité nationale, et l’action Nvidia a reculé mardi, les investisseurs se recentrant sur les risques politiques et de gouvernance.',
       why: 'Le dossier mêle gouvernance d’entreprise, sécurité nationale et rapports entre grands patrons de la tech et pouvoir politique : un cas d’école pour questionner l’indépendance des décisions économiques.',
       sources: [
@@ -148,6 +160,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Monde',
       title: 'Colombie : tous les otages libérés après l’assaut à Carthagène',
+      sujet: "Colombie : une prise d’otages à Carthagène",
       text: 'Tous les otages retenus depuis mardi 24 novembre, pendant près de 17 heures, dans un **supermarché de Carthagène** ont été libérés après un assaut de la police et de l’armée, mercredi 25 novembre. Le président colombien a annoncé qu’un des preneurs d’otages avait été tué dans l’opération. La ville est très touristique.',
       why: 'Pour couvrir une prise d’otages, il faut distinguer le bilan officiel annoncé par les autorités des informations non confirmées, et dater précisément chaque étape.',
       sources: [
@@ -159,6 +172,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Europe',
       title: 'L’Union européenne dévoile son « Quantum Act » et un fonds de 50 milliards d’euros',
+      sujet: "L’Union européenne présente un plan pour l’informatique quantique",
       text: 'La Commission européenne a présenté, mercredi 25 novembre, le **Quantum Act**, une stratégie pour accélérer le passage de l’informatique quantique à l’usage industriel. Le plan prévoit un **fonds souverain de 50 milliards d’euros** pour investir dans le quantique et l’intelligence artificielle. L’Europe a une avance en recherche mais peine à la traduire en activités commerciales, face aux États-Unis et à la Chine.',
       why: 'Un chiffre de plan d’investissement doit être attribué (qui l’annonce, quand) et accompagné de son contexte : ici, le retard commercial de l’Europe sur ses concurrents.',
       sources: [
@@ -170,6 +184,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'France',
       title: 'Apprentissage : la Cour des comptes alerte sur des fraudes et des abus',
+      sujet: "Apprentissage : un rapport alerte sur des fraudes et des abus",
       text: 'Dans un rapport publié mercredi 25 novembre, la **Cour des comptes** pointe de nombreuses défaillances dans les aides à l’apprentissage, dont le budget a fortement augmenté. Selon franceinfo, **10 à 20 %** de l’argent public dépensé seraient concernés par des risques de fraude et d’abus (contrats fictifs, nombre excessif d’apprentis par maître d’apprentissage). Libération évoque entre **1,5 et 3 milliards d’euros** détournés chaque année et une « faille systémique dans le contrôle ».',
       why: 'Quand deux médias présentent un chiffre différemment (part du budget ou montant en euros), il faut préciser ce qu’il mesure et attribuer chaque donnée à sa source.',
       sources: [
@@ -181,6 +196,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Économie',
       title: 'Droits de douane : Washington vise 14 partenaires, dont l’UE et la Chine',
+      sujet: "Droits de douane : Washington vise plusieurs partenaires commerciaux",
       text: 'L’administration de **Donald Trump** a annoncé, mercredi 25 novembre, une nouvelle série de **droits de douane** visant **14 partenaires commerciaux** des États-Unis, dont l’**Union européenne** et la **Chine**. Washington les accuse de subventionner leurs industries et de favoriser la surproduction. Ces surtaxes concluent une enquête lancée en mars par le représentant américain au Commerce, **Jamieson Greer**. L’Union européenne « conteste fermement » leur bien-fondé.',
       why: 'Un droit de douane est une taxe sur les importations : il renchérit les produits étrangers pour protéger la production nationale, c’est le principe du protectionnisme. L’annonce intervient malgré la défaite électorale de Donald Trump aux élections de mi-mandat.',
       sources: [
@@ -194,6 +210,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Justice',
       title: 'Israël : des juges suggèrent d’abandonner l’un des dossiers de corruption contre Nétanyahou',
+      sujet: "Israël : rebondissement dans les affaires de corruption visant Benyamin Nétanyahou",
       text: 'Dans le procès pour corruption de **Benyamin Nétanyahou**, les juges ont recommandé, mercredi 25 novembre, à l’accusation d’abandonner l’un des dossiers dans lesquels il est accusé de corruption. Le premier ministre sortant est poursuivi pour corruption, fraude et abus de confiance ; il **nie tout acte répréhensible** et affirme que son procès « doit prendre fin ». Plusieurs médias y voient un coup de pouce pour sa défense, alors qu’il joue son avenir politique.',
       why: 'Dans un procès, les **juges** et l’**accusation** (le parquet) ont des rôles distincts : ici, les juges recommandent à l’accusation d’abandonner un dossier. Un journaliste qui rend compte d’un tel procès rappelle la **présomption d’innocence** : la personne poursuivie est présumée innocente, et sa position (ici, il nie les faits) doit figurer dans l’article.',
       sources: [
@@ -206,6 +223,7 @@ window.SCOOP_DAYS['2026-11-25'] = {
     {
       tag: 'Europe',
       title: 'Espace : la mission européenne Hera dévoile le chaos de l’astéroïde Dimorphos',
+      sujet: "Espace : la mission Hera observe l’astéroïde Dimorphos",
       text: 'L’**Agence spatiale européenne** (ESA) a publié, mercredi 25 novembre, les premières images de **Dimorphos**, l’astéroïde percuté volontairement il y a quatre ans par la sonde américaine **DART** de la NASA, dans une première expérience de défense spatiale. Dans le cadre de sa mission **Hera**, elle montre une vaste zone d’impact et des centaines de roches à la dérive près de la surface. Selon Le Temps, ce nuage de rochers « de la taille d’une machine à laver » est un imprévu qui complique la mission.',
       why: 'L’ESA est une organisation **distincte de l’Union européenne** : elle réunit des États qui coordonnent leurs programmes spatiaux. Le Figaro, Euronews et Le Temps couvrent le même événement : un fait scientifique se recoupe comme un fait politique, en comparant ce que chaque média rapporte.',
       sources: [

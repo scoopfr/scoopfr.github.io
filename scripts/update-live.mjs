@@ -126,13 +126,23 @@ async function main() {
   console.log(`Actualité : ${news.length}, intégrables : ${usable.length}`);
 
   // 3. Recoupement avec les infos du jour
-  const storyTok = ed.stories.map(s => tokens(`${s.title} ${s.text}`));
+  // titre (et sujet) de l'info seulement, pas son texte : sinon une vidéo sur les législatives espagnoles
+  // était reliée à « Abrego Garcia quitte les États-Unis pour l'Espagne ». Les sigles (CAN, RSF, BYD…) comptent.
+  const keyTok = s => { const t = tokens(s); (String(s || '').match(/\b[A-Z]{3}\b/g) || []).forEach(a => t.add(a.toLowerCase())); return t; };
+  const storyTok = ed.stories.map(s => keyTok(`${s.title} ${s.sujet || ''}`));
   for (const v of usable) {
-    v.tok = tokens(v.title);
+    v.tok = keyTok(v.title);
     const cur = ed.shorts.find(c => c && c.id === v.id);
     if (cur && Number.isInteger(cur.story)) { v.story = cur.story; continue; }
+    // 3 mots-clés communs, ou 2 dont un nom propre / sigle du titre de la vidéo (même règle que l'app)
+    const proper = new Set(); v.title.split(/\s+/).slice(1).forEach(w => { if (/^[A-ZÉÈÀÂÎÔÛÇ]/.test(w)) keyTok(w).forEach(x => proper.add(x)); });
+    (v.title.match(/\b[A-Z]{3}\b/g) || []).forEach(a => proper.add(a.toLowerCase()));
     let best = -1, score = 0;
-    storyTok.forEach((st, i) => { const s = inter(v.tok, st); if (s > score) { score = s; best = i; } });
+    storyTok.forEach((st, i) => {
+      let n = 0, prop = false; for (const x of v.tok) if (st.has(x)) { n++; if (proper.has(x)) prop = true; }
+      const s = n >= 3 || (n === 2 && prop) ? n : 0;
+      if (s > score) { score = s; best = i; }
+    });
     v.story = score >= 2 ? best : null;
   }
 

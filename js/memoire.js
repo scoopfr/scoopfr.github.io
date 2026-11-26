@@ -218,7 +218,7 @@
     const ctxOf = p => {
       const day = ctx.DAYS[p.date], k = exMap(p.date).get(p.id), st = day && k != null ? day.stories[k] : null;
       const when = `Le ${frDate(p.date, { day: 'numeric', month: 'long' })}`;
-      return st ? { kind: 'story', label: `${when} · ${ctx.storyHint ? ctx.storyHint(day, k) : ''}`.replace(/ · $/, ''), tag: st.tag, n: k } : { kind: 'recap', label: when, tag: '' };
+      return st ? { kind: 'story', pre: when, label: ctx.storyHint ? ctx.storyHint(day, k) : '', tag: st.tag, n: k } : { kind: 'recap', label: when, tag: '' };
     };
     return { key, mode: 'review', title: 'Rappel des jours précédents', color: '#2BA84A', exercises: pool.map(p => p.ex), ids: pool.map(p => p.id), ctx: pool.map(ctxOf), context: 'Actu des éditions précédentes' };
   });

@@ -13,6 +13,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Économie',
       title: "Nvidia : Jensen Huang réintégré sous la pression de Trump",
+      sujet: "Jensen Huang retrouve la tête de son entreprise",
       text: "Le conseil d'administration de Nvidia a réintégré lundi 23 novembre **Jensen Huang** comme directeur général, moins de deux semaines après sa démission du 12 novembre, liée à un scandale mêlant adultère et soupçons d'espionnage au profit de la Chine. Son retour a fait bondir l'action de plus de 30 % en Bourse. **Donald Trump** s'est attribué le mérite de ce retour, ce qui suscite des critiques : des parlementaires démocrates annoncent des enquêtes et des républicains s'interrogent sur un risque pour la sécurité nationale. Le ministère américain du Commerce a par ailleurs placé sur liste noire la société singapourienne **Megaspeed**, soupçonnée d'avoir fourni des puces Nvidia à la Chine en contournant l'embargo américain.",
       why: "La rivalité technologique entre les États-Unis et la Chine passe par le contrôle des exportations de puces (embargo). Un conseil d'administration nomme et révoque le directeur général d'une société : ici, il est revenu sur sa décision sous la pression d'un président et des marchés.",
       sources: [
@@ -25,6 +26,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Monde',
       title: "L'Ukraine frappe deux navires russes au port de Benghazi, en Libye",
+      sujet: "Des navires russes visés par une attaque ukrainienne",
       text: "Dimanche 22 novembre, un cargo et une corvette russes ont été visés dans le port de **Benghazi**, fief du maréchal Khalifa Haftar dans l'est de la Libye, par des drones navals. Volodymyr Zelensky a revendiqué l'opération, qui a coulé la corvette selon le New York Times. Les autorités de l'Est libyen ont réclamé lundi à l'ONU une enquête sur la présence de forces ukrainiennes dans l'ouest du pays. Cette frappe étend la guerre jusqu'en Méditerranée.",
       why: "Le maréchal **Khalifa Haftar** est un officier dissident parrainé par Moscou depuis près d'une décennie, ce qui explique la présence de navires russes à Benghazi. La Libye est divisée entre des autorités de l'Est et de l'Ouest (Tripoli).",
       sources: [
@@ -37,6 +39,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Justice',
       title: "Mort de Nahel : un procès pour meurtre ordonné contre le policier",
+      sujet: "Mort de Nahel : la justice se prononce sur le sort du policier",
       text: "Mardi 24 novembre, la cour d'appel de **Versailles** a ordonné que le policier qui a tué Nahel Merzouk, 17 ans, lors d'un contrôle routier à Nanterre en juin 2023, soit jugé pour **meurtre** devant la cour d'assises des Hauts-de-Seine. En mars, la cour d'appel avait requalifié les faits en violences ayant entraîné la mort sans intention de la donner, mais la Cour de cassation avait annulé cet arrêt. Le policier annonce vouloir se pourvoir en cassation.",
       why: "Une cour d'assises juge les crimes. La Cour de cassation ne rejuge pas les faits : elle vérifie que la loi a été bien appliquée, d'où l'annulation d'un arrêt de la cour d'appel puis un nouvel examen.",
       sources: [
@@ -49,6 +52,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Politique',
       title: "Congrès des maires : la présidentielle s'invite, Lisnard contesté",
+      sujet: "Congrès des maires : la présidentielle s’invite dans les débats",
       text: "Le congrès de l'Association des maires de France (AMF) se tient du 24 au 26 novembre à Paris. Les candidats à la présidentielle s'y pressent, en particulier ceux en quête des **500 parrainages** nécessaires pour se présenter. La double candidature de **David Lisnard**, maire de Cannes, à la présidentielle et à la présidence de l'AMF suscite des protestations. Emmanuel Macron, qui avait promis en 2017 de s'y rendre chaque année, n'ira pas cette fois encore, selon Libération. Par ailleurs, les appels à modifier la date de la présidentielle, dont le second tour tombe le lendemain du 1er mai, se multiplient, relève Le Figaro.",
       why: "Pour être candidat à la présidentielle, il faut recueillir 500 parrainages d'élus, dont beaucoup de maires : voilà pourquoi le congrès de l'AMF est un rendez-vous politique majeur.",
       sources: [
@@ -61,6 +65,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Climat',
       title: "La COP31, à Antalya, s'achève sur un échec",
+      sujet: "Climat : la conférence mondiale COP31 se termine",
       text: "La COP31, conférence des Nations unies sur le climat, s'est tenue à **Antalya**, en Turquie. Les pays réunis ont échoué à trouver un accord pour sortir des énergies fossiles. La Chine accuse les pays occidentaux de fuir leurs responsabilités en la tenant pour responsable de cet échec. Le journal turc Yeni Birlik, cité par Courrier international, déplore l'incapacité de certains dirigeants à « s'attaquer aux intérêts économiques et politiques ».",
       why: "Les COP sont les conférences des parties à la convention-cadre de l'ONU sur le climat (1992). L'Accord de Paris date de la COP21, en 2015. Une décision y exige l'accord des États : un seul blocage peut faire échouer le texte.",
       sources: [
@@ -71,6 +76,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Monde',
       title: "Iran : 74 coups de fouet pour la chanteuse Parastoo Ahmadi",
+      sujet: "Iran : une chanteuse condamnée à une peine de coups de fouet",
       text: "Les autorités iraniennes ont infligé lundi 23 novembre **74 coups de fouet** à la chanteuse **Parastoo Ahmadi**, 29 ans, ainsi qu'à des membres de son équipe, à Qom. Elle était condamnée pour avoir donné un concert sans voile, ce que son avocat a fait savoir mardi. France 24 la présente comme une figure du mouvement « Femme, vie, liberté ».",
       why: "Les droits des femmes et la liberté d'expression sont des sujets classiques de géopolitique. « Femme, vie, liberté » est le slogan de la contestation iranienne contre l'obligation du voile.",
       sources: [
@@ -83,6 +89,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Économie',
       title: "Livret A : près de 10 milliards d'euros retirés depuis janvier",
+      sujet: "Livret A : les épargnants retirent leur argent",
       text: "Les épargnants ont retiré près de **10 milliards d'euros** de leur Livret A depuis janvier. Le Monde y voit un record depuis dix ans, tandis que Le Figaro précise que l'encours n'avait jamais autant reculé de janvier à octobre depuis que la **Caisse des dépôts** consolide les données, en 2008. Selon Le Monde, les discussions sur la hausse du plafond du livret, voulue par le gouvernement, sont toujours en cours.",
       why: "Le Livret A est un placement réglementé dont le taux est encadré par les pouvoirs publics et dont les fonds sont centralisés par la Caisse des dépôts. Quand deux médias présentent un même chiffre différemment, on signale la divergence ou on ne garde que ce qui est commun.",
       sources: [
@@ -93,6 +100,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Médias',
       title: "Le retour de Huang étrillé : la presse internationale divisée",
+      sujet: "Le retour de Jensen Huang vu par la presse internationale",
       text: "Le retour de Jensen Huang à Nvidia est étrillé par une partie de la presse. Dans sa revue de presse, *Le Temps* relaie des titres qui évoquent un « dangereux précédent » acté par « une bande d'incompétents » et une capitulation du conseil d'administration face à Donald Trump et aux investisseurs. *Courrier international* titre sur « un triomphe de l'argent sur la morale » : si les employés de Nvidia, les marchés financiers et la Silicon Valley se réjouissent, de nombreux parlementaires, y compris républicains, et une partie de la presse internationale déplorent ce retour.",
       why: "La revue de presse est un texte qui compare comment plusieurs médias traitent un même sujet. Citer des titres entre guillemets permet de rendre compte des points de vue sans les endosser.",
       sources: [
@@ -103,6 +111,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Europe',
       title: "Hongrie : Péter Magyar attendu chez Zelensky en Transcarpatie",
+      sujet: "Hongrie et Ukraine : une visite très attendue",
       text: "Le Premier ministre hongrois **Péter Magyar** doit s'entretenir mardi 24 novembre avec Volodymyr Zelensky et des représentants de la minorité hongroise, en Transcarpatie, dans l'ouest de l'Ukraine. Depuis son arrivée aux affaires en mai, il s'efforce de normaliser les relations avec Kiev, qui s'étaient considérablement dégradées sous le mandat de **Viktor Orban**.",
       why: "Une minorité nationale est un groupe qui vit dans un État voisin de celui dont il partage la langue et la culture. Ici, la Transcarpatie ukrainienne abrite une minorité hongroise, enjeu des relations entre Budapest et Kiev.",
       sources: [
@@ -113,6 +122,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Société',
       title: "47 000 femmes tuées par des proches dans le monde en 2025",
+      sujet: "Féminicides : un rapport de l’ONU sur les femmes tuées par des proches",
       text: "Quelque **47 000 femmes et filles** ont été tuées par des proches en 2025 dans le monde, soit environ cinq par heure, selon l'ONU. Ce chiffre reste stable depuis plusieurs années, entre 45 000 et 51 000 victimes. Les femmes représentent 19 % des victimes d'homicides, mais 60 % d'entre elles ont été tuées dans la sphère privée, contre 11 % des hommes victimes d'homicide.",
       why: "Ces chiffres, issus de l'ONU, servent à mesurer les violences faites aux femmes. En journalisme, on cite toujours l'organisme qui produit un chiffre : ici, l'ONU.",
       sources: [
@@ -123,6 +133,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Justice',
       title: "Takieddine : Nicolas Sarkozy et Carla Bruni renvoyés en procès",
+      sujet: "Nicolas Sarkozy et Carla Bruni renvoyés en procès",
       text: "**Nicolas Sarkozy**, son épouse **Carla Bruni-Sarkozy** et la communicante **Mimi Marchand** sont renvoyés devant le tribunal correctionnel de Paris dans l'affaire de la fausse rétractation de l'intermédiaire **Ziad Takieddine**. Ils sont poursuivis notamment pour association de malfaiteurs en vue de commettre une escroquerie en bande organisée et pour recel de subornation de témoin. Ils seront jugés en 2027. Les juges les soupçonnent d'avoir avalisé, aidé à organiser et mis en œuvre la volte-face de Ziad Takieddine dans l'affaire du financement libyen de la campagne de 2007.",
       why: "Un renvoi est la décision des juges d'instruction qui envoie un mis en examen devant le tribunal correctionnel pour y être jugé. Il ne vaut pas condamnation : la présomption d'innocence s'applique jusqu'au jugement. Le recel de subornation de témoin consiste à profiter d'un témoignage obtenu par pression ou contrepartie.",
       sources: [
@@ -135,6 +146,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Politique',
       title: "Le Havre : enquête ouverte pour détournement de fonds publics",
+      sujet: "Le Havre : une plainte vise l’agglomération",
       text: "Le parquet du Havre a ouvert une enquête pour détournement de fonds publics à l'agglomération du Havre, présidée par **Édouard Philippe**. L'enquête fait suite à un signalement de l'ancienne directrice générale adjointe de la métropole, Cornelia Findeisen. La procureure Soizic Guillaume a expliqué qu'une plainte lui a été adressée via le parquet national financier, initialement saisi, et qu'elle l'a transmise en enquête au commissariat du Havre.",
       why: "Le parquet national financier (PNF) est spécialisé dans les infractions économiques et financières complexes ; il peut transmettre un dossier à un parquet local. L'ouverture d'une enquête n'est pas une mise en cause définitive : la présomption d'innocence s'applique.",
       sources: [
@@ -146,6 +158,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Sport',
       title: "CAN 2025 : le TAS donne le titre au Sénégal, le Maroc déchu",
+      sujet: "Football : rebondissement pour le titre de la CAN 2025",
       text: "Le **Tribunal arbitral du sport** (TAS) a décidé mardi, « à l'unanimité », que le **Sénégal** est le vainqueur de la Coupe d'Afrique des nations 2025, au détriment du **Maroc**. Les Sénégalais s'étaient imposés 1-0 sur le terrain en finale le 18 janvier, mais la Confédération africaine de football avait attribué en mars une victoire 3-0 et le titre au Maroc, après que des joueurs sénégalais avaient quitté la pelouse pour protester contre un penalty. La fédération marocaine « prend acte » mais « conteste » et dit qu'elle engagera « toutes les procédures légales nécessaires » ; elle dispose de 30 jours pour faire appel.",
       why: "Le TAS, basé à Lausanne, est la plus haute instance d'arbitrage du sport international : il tranche les litiges entre fédérations, clubs et athlètes. Ici, il a inversé la décision de la Confédération africaine de football (CAF), qui avait donné le titre au Maroc sur tapis vert, c'est-à-dire par décision administrative et non sur le terrain.",
       sources: [
@@ -159,6 +172,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Justice',
       title: "Éric Zemmour définitivement condamné pour ses propos sur Pétain",
+      sujet: "Éric Zemmour et ses propos sur Pétain : la Cour de cassation tranche",
       text: "La **Cour de cassation** a rejeté mardi le pourvoi d'**Éric Zemmour** : sa condamnation pour « contestation de l'existence de crime contre l'humanité » est définitive. En cause, ses propos tenus sur CNews en 2019, selon lesquels le maréchal Pétain « avait sauvé les juifs français ». La Cour a jugé qu'ils constituaient une « minoration outrancière de la Shoah telle qu'elle a été mise en œuvre sur le territoire français ». Le candidat d'extrême droite à la présidentielle avait été relaxé en première instance et en appel, mais ces décisions avaient été annulées une première fois par la Cour de cassation.",
       why: "La Cour de cassation ne rejuge pas les faits : elle vérifie que la loi a été correctement appliquée. Quand elle rejette un pourvoi, la condamnation devient définitive. La contestation de crime contre l'humanité est un délit en France, qui vise notamment la négation ou la minoration de la Shoah.",
       sources: [
@@ -170,6 +184,7 @@ window.SCOOP_DAYS['2026-11-24'] = {
     {
       tag: 'Économie',
       title: "Sanofi rachète l'américain Insmed pour 41 milliards de dollars",
+      sujet: "Sanofi annonce le rachat d’un laboratoire américain",
       text: "Le groupe pharmaceutique français **Sanofi** a annoncé mardi 24 novembre un accord pour racheter l'américain **Insmed**, spécialiste du traitement des maladies respiratoires, pour **41 milliards de dollars** (environ 37,6 milliards d'euros), en numéraire. C'est sa plus importante acquisition depuis 2004, selon Le Monde. Insmed dispose déjà d'un médicament qui réalise plus de 1 milliard de dollars de recettes annuelles. Pour Euronews, l'opération vise à renforcer le portefeuille de nouveaux médicaments de Sanofi avant la perte d'exclusivité du Dupixent.",
       why: "Racheter une entreprise « en numéraire » signifie la payer en argent comptant, et non en actions. Les laboratoires pharmaceutiques achètent des biotechs pour garnir leur catalogue quand un de leurs médicaments phares perd sa protection et peut être copié.",
       sources: [
