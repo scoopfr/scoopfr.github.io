@@ -1,220 +1,238 @@
-// SCOOP:REGENERER
-/* Scoop — édition du 2026-11-26 (avec recommandation) */
+/* Scoop — édition du 2026-11-26 (générée automatiquement, IA gratuite) */
 window.SCOOP_DAYS = window.SCOOP_DAYS || {};
 window.SCOOP_DAYS['2026-11-26'] = {
   "date": "2026-11-26",
-  "title": "Teddy Riner affirme · Ligue des champions et l'actu du jour",
-  "intro": "Revue de presse du jour : les infos confirmées par au moins deux rédactions.",
+  "title": "Trump, OTAN, droits de douane américains et CNews sous le feu",
+  "intro": "Le président américain et le secrétaire général de l’OTAN ont appelé Moscou à ne pas étendre la guerre. Les États-Unis ont annoncé de nouveaux droits de douane, tandis que Reporters sans frontières demande la suspension d’un mois de CNews.",
   "word": {
-    "term": "Dépêche",
-    "def": "Texte court et factuel diffusé par une agence de presse (AFP, Reuters) que les médias reprennent."
+    "term": "OTAN",
+    "def": "Organisation du Traité de l’Atlantique Nord, alliance militaire intergouvernementale fondée en 1949 pour assurer la défense collective de ses membres."
   },
-  "glossary": [],
+  "glossary": [
+    {
+      "term": "OTAN",
+      "def": "Organisation du Traité de l’Atlantique Nord, alliance militaire intergouvernementale fondée en 1949 pour assurer la défense collective de ses membres.",
+      "cat": "Institutions"
+    },
+    {
+      "term": "droit de douane",
+      "def": "Mesure tarifaire imposée sur les importations ou exportations, visant à protéger les industries nationales ou à générer des revenus.",
+      "cat": "Économie"
+    },
+    {
+      "term": "Reporters sans frontières",
+      "def": "ONG internationale qui défend la liberté de la presse et surveille le respect du pluralisme médiatique.",
+      "cat": "Médias"
+    }
+  ],
   "memo": [
-    "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a ",
-    "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
-    "Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans",
-    "Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Méditerranée",
-    "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
+    "Trump et Mark Rutte ont appelé Moscou à ne pas étendre la guerre en Ukraine",
+    "Les droits de douane américains ont été annoncés mercredi par l’administration Trump",
+    "Reporters sans frontières a saisi l’Arcom pour demander la suspension d’un mois de CNews",
+    "Caire : 31 morts après l’effondrement d’un camion-citerne de carburant"
   ],
   "stories": [
     {
-      "tag": "Politique",
-      "title": "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a pas",
-      "text": "Plus tôt, le candidat à l’élection présidentielle a critiqué le déploiement de soldats français en Ukraine pour des missions non combattantes, déclarant : « Je ne comprends pas qu’on envoie des troupes en Ukraine alors que ce n’est pas notr. Teddy Riner a clarifié son point de vue, mercredi, sur l'aide militaire apportée à l'Ukraine par l'armée française.",
-      "why": "Un fait relayé par 7 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
+      "tag": "Monde",
+      "title": "Trump et le secrétaire général de l’OTAN exhortent Moscou à ne pas étendre la guerre",
+      "text": "Le président américain Donald Trump et le secrétaire général de l’OTAN, Mark Rutte, ont appelé la Russie à ne pas étendre la guerre en Ukraine. La déclaration conjointe a été publiée après une rencontre à huis clos. L’appel vise à éviter toute action qui étendrait délibérément ou involontairement la guerre.",
+      "why": "Comprendre les mécanismes de la diplomatie internationale, le rôle des institutions comme l’OTAN et la façon dont les dirigeants utilisent les déclarations publiques pour influencer les conflits.",
       "sources": [
         {
           "name": "Le Monde",
-          "url": "https://www.lemonde.fr/politique/article/2026/11/25/teddy-riner-affirme-a-propos-de-la-guerre-en-ukraine-que-la-france-doit-arreter-de-donner-de-l-argent-que-nous-n-avons-pas_6815137_823449.html"
+          "url": "https://www.lemonde.fr/international/live/2026/11/26/en-direct-guerre-en-ukraine-donald-trump-et-le-secretaire-general-de-l-otan-mark-rutte-exhortent-moscou-a-ne-pas-etendre-la-guerre-avec-kiev_6814183_3210.html"
         },
         {
           "name": "France 24",
-          "url": "https://www.france24.com/fr/france/20261125-notre-guerre-teddy-riner-exhorte-arr%C3%AAter-donner-argent-ukraine-%C3%A9lection-fran%C3%A7aise-pr%C3%A9sidentielle"
+          "url": "https://www.france24.com/fr/europe/20261126-en-direct-ukraine-russie-ue-sommet-aide-zelensky-poutine"
         },
         {
           "name": "Le Figaro",
-          "url": "https://www.lefigaro.fr/elections/presidentielles/l-ukraine-n-est-pas-notre-guerre-avance-teddy-riner-au-congres-des-maires-de-france-20261125"
+          "url": "https://www.lefigaro.fr/international/guerre-en-ukraine-trump-et-le-secretaire-general-de-l-otan-exhortent-la-russie-a-ne-pas-etendre-la-guerre-avec-kiev-20261126"
         },
         {
           "name": "Libération",
-          "url": "https://www.liberation.fr/sports/lukraine-nest-pas-notre-guerre-teddy-riner-se-prend-les-pieds-dans-le-tatami-avant-de-retropedaler-20261125_7JEBWXSMBRH3VHKPFGQKYILKCM/"
+          "url": "https://www.liberation.fr/international/amerique/donald-trump-et-lotan-exhortent-la-russie-a-eviter-toute-action-susceptible-daggraver-la-guerre-en-ukraine-20261126_R7D7NLQYHNC7ZJQ7CPTTRQDPJ4/"
         }
       ]
     },
     {
-      "tag": "Société",
-      "title": "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
-      "text": "Menés (0-1) après une terne première période, les Lillois ont bien réagi, mercredi 25 novembre, pour remporter une victoire cruciale (2-1) et de prestige face aux Bavarois. Avec désormais quatre points, les Dogues se relancent dans la course à la qualification pour les barrages de la Ligue des champions.",
-      "why": "Un fait relayé par 7 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/sport/article/2026/11/26/ligue-des-champions-le-losc-renverse-le-bayern-munich-et-se-relance-dans-la-course-a-la-qualification_6815230_3242.html"
-        },
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/sports/foot/ligue-des-champions/tombeur-du-bayern-munich-le-losc-signe-sa-premiere-victoire-de-la-saison-en-ligue-des-champions-et-se-relance_8300349.html#xtor=RSS-3-[lestitres]"
-        },
-        {
-          "name": "Le Figaro",
-          "url": "https://www.lefigaro.fr/sports/football/ligue-des-champions/ligue-des-champions-le-reveil-de-lille-qui-s-offre-le-bayern-munich-et-signe-sa-premiere-victoire-20261125"
-        },
-        {
-          "name": "20 Minutes",
-          "url": "https://www.20minutes.fr/sport/football/ligue_des_champions/4265294-20261125-direct-lille-bayern-munich-entends-rieeeeen-capo-enerve-losc-montre-rien-belle-soiree-lille-suivez-match?at_medium=display&at_campaign=149"
-        }
-      ]
-    },
-    {
-      "tag": "Société",
-      "title": "Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans",
-      "text": "\"Andy Taylor, époux, père et grand-père bien-aimé, est décédé des suites d'un long et courageux combat contre un cancer de la prostate\", écrivent mercredi sa famille et le groupe dans un communiqué. L'ex-guitariste du groupe britannique Duran Duran, Andy Taylor, est décédé des suites d'un cancer de la prostate, ont annoncé mercredi 25 novembre sa famille et la formation phare de la new wave des années 1980, dans un communiqué.",
-      "why": "Un fait relayé par 7 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
+      "tag": "Justice",
+      "title": "Écrits antisémites : révélations accablant Jordan Bardella",
+      "text": "Le Monde et Mediapart ont publié de nouveaux éléments de preuve sur des écrits antisémites attribués à Jordan Bardella. Les documents incluent une conversation où un ancien camarade de lycée reçoit des messages antisémites. Les révélations viennent deux mois après les premières révélations de Mediapart.",
+      "why": "Illustration du rôle des médias d’investigation dans la surveillance des personnalités politiques et de la manière dont les preuves écrites peuvent influencer les enquêtes judiciaires.",
       "sources": [
         {
           "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/culture/musique/andy-taylor-ex-guitariste-du-groupe-britannique-duran-duran-est-mort-a-65-ans_8300385.html#xtor=RSS-3-[lestitres]"
+          "url": "https://www.franceinfo.fr/politique/jordan-bardella/le-monde-et-mediapart-publient-de-nouveaux-elements-de-preuve-sur-les-ecrits-antisemites-attribues-a-jordan-bardella_8300856.html#xtor=RSS-3-[lestitres]"
+        },
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/france/20261126-%C3%A9crits-antis%C3%A9mites-de-nouveaux-%C3%A9l%C3%A9ments-accablent-jordan-bardella"
         },
         {
           "name": "RFI",
-          "url": "https://www.rfi.fr/fr/musique/20261125-d%C3%A9c%C3%A8s-%C3%A0-65-ans-d-andy-taylor-ex-guitariste-du-groupe-britannique-duran-duran"
+          "url": "https://www.rfi.fr/fr/france/20261126-%C3%A9crits-antis%C3%A9mites-le-monde-et-mediapart-r%C3%A9v%C3%A8lent-de-nouveaux-%C3%A9l%C3%A9ments-compromettants-pour-jordan-bardella"
         },
         {
-          "name": "AFP (via Le Figaro)",
-          "url": "https://www.lefigaro.fr/musique/mort-a-65-ans-d-andy-taylor-ex-guitariste-du-groupe-britannique-duran-duran-20261125"
-        },
-        {
-          "name": "Ouest-France",
-          "url": "https://www.ouest-france.fr/culture/musiques/deces-a-65-ans-dandy-taylor-ex-guitariste-du-groupe-britannique-duran-duran-2940280e-e91a-11f1-86c1-70195b4d2e52?utm_source=fluxpublicactu&utm_medium=fluxrss&utm_campaign=banquedecontenu"
+          "name": "Le Figaro",
+          "url": "https://www.lefigaro.fr/politique/ecrits-antisemites-de-nouveaux-elements-compromettants-attribues-a-jordan-bardella-par-le-monde-et-mediapart-20261126"
         }
       ]
     },
     {
-      "tag": "Monde",
-      "title": "Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Méditerranée",
-      "text": "Des drones navals ukrainiens ont attaqué, dimanche 22 novembre, deux navires russes dans les eaux libyennes. Pour affaiblir la Russie, l’armée ukrainienne tente de perturber les livraisons d’armes vers les pays africains où Moscou est implanté, et de viser la flotte fantôme qui lui sert à contourner les sanctions.",
-      "why": "Un fait relayé par 5 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
+      "tag": "Économie",
+      "title": "Nouveaux droits de douane américains suscitent l’indignation des partenaires commerciaux",
+      "text": "Washington a annoncé une série de droits de douane qui ont provoqué l’indignation de l’Union européenne, de la Chine, du Brésil et d’autres pays. Les partenaires affirment que ces mesures pénalisent les entreprises américaines et favorisent les subventions. L’annonce a été faite mercredi par l’administration Trump.",
+      "why": "Exemple concret de la politique commerciale internationale, de l’impact des droits de douane sur les relations économiques et de la réaction des partenaires commerciaux.",
       "sources": [
         {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/afrique/article/2026/11/25/comment-l-ukraine-perturbe-les-operations-russes-en-afrique-en-frappant-des-navires-de-transport-d-armes-en-mediterranee_6815117_3212.html"
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/monde/usa/droits-de-douane/inacceptables-regrettables-pretexte-a-la-manipulation-politique-les-pays-vises-s-indignent-face-aux-nouveaux-droits-de-douane-americains_8300712.html#xtor=RSS-3-[lestitres]"
         },
         {
-          "name": "Mediapart",
-          "url": "https://www.mediapart.fr/journal/international/251126/attaque-de-navires-russes-en-libye-l-ukraine-en-guerre-au-dela-de-ses-frontieres"
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/am%C3%A9riques/20261126-l-ue-la-chine-et-d-autres-pays-s-indignent-des-nouveaux-droits-de-douane-am%C3%A9ricains"
         },
         {
-          "name": "The New York Times",
-          "url": "https://www.nytimes.com/2026/11/25/world/middleeast/libya-ukraine-russia-haftar.html"
+          "name": "RFI",
+          "url": "https://www.rfi.fr/fr/monde/20261126-l-annonce-de-nouveaux-droits-de-douane-am%C3%A9ricains-par-washington-suscite-l-indignation-des-pays-vis%C3%A9s"
         },
         {
-          "name": "BBC News",
-          "url": "https://www.bbc.co.uk/news/articles/ck9q8xp5r5pgo?at_medium=RSS&at_campaign=rss"
+          "name": "AFP (via Le Figaro)",
+          "url": "https://www.lefigaro.fr/conjoncture/la-chine-menace-de-riposter-face-a-l-annonce-des-nouveaux-droits-de-douane-americains-20261126"
         }
       ]
     },
     {
       "tag": "Médias",
-      "title": "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
-      "text": "Le feu s'est déclaré lorsqu'un camion chargé de carburant s'est renversé sur une autoroute très fréquentée, selon les médias d'État. Un incendie s'est déclaré mercredi dans l'agglomération du Caire, en Égypte, lorsqu'un camion chargé de carburant s'est renversé sur une autoroute très fréquentée.",
-      "why": "Un fait relayé par 4 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
-      "sources": [
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/monde/afrique/egypte/en-egypte-un-incendie-dans-l-agglomeration-du-caire-fait-au-moins-30-morts_8300229.html#xtor=RSS-3-[lestitres]"
-        },
-        {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/afrique/20261125-en-%C3%A9gypte-un-incendie-sur-une-autoroute-du-caire-fait-une-trentaine-de-morts"
-        },
-        {
-          "name": "Libération",
-          "url": "https://www.liberation.fr/international/afrique/au-moins-30-morts-dans-un-quartier-densement-peuple-du-caire-ravage-par-un-incendie-20261125_BIUTUS5IPJGKDCP7EFIWZVRBZQ/"
-        },
-        {
-          "name": "Ouest-France",
-          "url": "https://www.ouest-france.fr/monde/egypte/un-incendie-sur-une-autoroute-fait-au-moins-31-morts-en-egypte-20277922-e922-11f1-86c1-70195b4d2e52?utm_source=fluxpublicactu&utm_medium=fluxrss&utm_campaign=banquedecontenu"
-        }
-      ]
-    },
-    {
-      "tag": "Économie",
-      "title": "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque électorale",
-      "text": "L’administration américaine a annoncé, mercredi 25 novembre, la mise en place de nouvelles taxes sur les importations qui affectent 14 partenaires commerciaux des Etats, dont l’Union européenne et la Chine. Neuf mois après avoir été désavoué par la Cour suprême états-unienne, Donald Trump réinstaure sa politique douanière à l’égard des principaux partenaires commerciaux de Washington.",
-      "why": "Un fait relayé par 3 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
+      "title": "Reporters sans frontières demande la suspension de CNews pour un mois",
+      "text": "L’ONG Reporters sans frontières a saisi l’Arcom pour demander la suspension d’un mois de la chaîne CNews. L’ONG accuse la chaîne de non‑respect répété du pluralisme et de favoriser l’extrême droite. La demande suit l’examen de soixante‑et‑une heures de programmes diffusés en septembre.",
+      "why": "Met en lumière les mécanismes de régulation des médias, la notion de pluralisme et l’importance de la liberté de la presse dans un système démocratique.",
       "sources": [
         {
           "name": "Le Monde",
-          "url": "https://www.lemonde.fr/economie/article/2026/11/25/donald-trump-persiste-avec-une-nouvelle-salve-de-droits-de-douane-malgre-la-claque-electorale_6815108_3234.html"
+          "url": "https://www.lemonde.fr/economie/article/2026/11/26/reporters-sans-frontieres-demande-la-suspension-de-cnews-pour-une-duree-d-un-mois_6815475_3234.html"
+        },
+        {
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/economie/medias/l-ong-reporters-sans-frontieres-saisit-l-arcom-pour-demander-de-suspendre-cnews-pendant-un-mois_8300685.html#xtor=RSS-3-[lestitres]"
+        },
+        {
+          "name": "La Croix",
+          "url": "https://www.la-croix.com/culture/cnews-reporters-sans-frontieres-demande-la-suspension-de-la-chaine-pendant-un-mois-20261126"
         },
         {
           "name": "Mediapart",
-          "url": "https://www.mediapart.fr/journal/international/251126/apres-la-debacle-des-midterms-donald-trump-acte-le-retour-de-sa-politique-de-droits-de-douane"
-        },
-        {
-          "name": "Le Temps",
-          "url": "https://www.letemps.ch/monde/au-diable-l-inflation-qui-s-accelere-donald-trump-veut-de-nouveaux-droits-de-douane"
-        }
-      ]
-    },
-    {
-      "tag": "Monde",
-      "title": "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan",
-      "text": "Le maire divers gauche de la ville affirme l’avoir constaté à plusieurs reprises en visionnant les enregistrements des caméras de surveillance, dont il dit avoir remis 7 000 heures au procureur de la République de Marseille. Devant la commission d'enquête de l'Assemblée nationale, le maire de Marseille Benoît Payan a déclaré mercredi que la police municipale avait reçu l'ordre de relâcher des pillards interpellés lors des violences du 17 octobre.",
-      "why": "Un fait relayé par 3 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/societe/article/2026/11/25/violences-du-17-octobre-a-marseille-des-ordres-ont-ete-donnes-pour-relacher-des-casseurs-selon-benoit-payan_6815175_3224.html"
-        },
-        {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/france/20261125-france-violences-17-octobre-marseille-ordres-donnes-relacher-casseurs-maire-benoit-payan"
-        },
-        {
-          "name": "20 Minutes",
-          "url": "https://www.20minutes.fr/societe/4265809-20261126-violences-17-octobre-marseille-ordres-donnes-relacher-casseurs-accuse-maire-benoit-payan?at_medium=display&at_campaign=149"
+          "url": "https://www.mediapart.fr/journal/culture-et-idees/261126/reporters-sans-frontieres-reclame-la-suspension-de-cnews-pendant-un-mois"
         }
       ]
     },
     {
       "tag": "Politique",
-      "title": "\"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattre à la place d'une primaire",
-      "text": "Edouard Philippe, candidat Horizons à la présidentielle avait proposé mardi un débat télévisé avec son concurrent de droite, qui ne cesse de monter dans les sondages. INFO LE FIGARO - Face au refus du maire havrais de la primaire, le candidat Les Républicains continue de militer pour une compétition ouverte.",
-      "why": "Un fait relayé par 3 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
+      "title": "David Lisnard séduit les déçus de la droite pour la présidentielle 2027",
+      "text": "Le candidat David Lisnard attire les électeurs mécontents des figures de leur camp dans les Yvelines, les Hauts‑de‑Seine et le Rhône. Il affirme vouloir poursuivre les politiques de Retailleau et Philippe sans changement. Il a accepté d’organiser un débat avec Édouard Philippe sous condition d’une primaire.",
+      "why": "Cette histoire illustre la dynamique des élections françaises, la construction de coalitions et la gestion des primaires, des notions clés pour les concours de journalisme.",
       "sources": [
         {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/elections/video-la-democratie-c-est-du-vote-declare-david-lisnard-qui-refuse-la-proposition-d-edouard-philippe-de-debattre-a-la-place-d-une-primaire_8300295.html#xtor=RSS-3-[lestitres]"
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/politique/article/2026/11/25/comment-le-candidat-david-lisnard-seduit-les-decus-d-une-partie-de-la-droite-avec-retailleau-et-philippe-on-continue-sans-rien-changer_6815170_823448.html"
+        },
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/europe/20261126-en-espagne-l-extr%C3%AAme-droite-s%C3%A9duit-une-partie-de-la-jeunesse-en-surfant-sur-sa-d%C3%A9tresse"
         },
         {
           "name": "Le Figaro",
-          "url": "https://www.lefigaro.fr/politique/ce-n-est-pas-a-lui-de-choisir-ses-adversaires-la-riposte-de-retailleau-apres-la-proposition-de-philippe-de-debattre-avec-lisnard-20261125"
-        },
-        {
-          "name": "20 Minutes",
-          "url": "https://www.20minutes.fr/politique/4265806-20261125-presidentielle-2027-democratie-vote-lisnard-refuse-debat-propose-philippe?at_medium=display&at_campaign=149"
+          "url": "https://www.lefigaro.fr/elections/presidentielles/en-direct-presidentielle-2027-marine-le-pen-se-declare-sereine-face-a-l-emergence-de-david-lisnard-20261126"
         }
       ]
     },
     {
-      "tag": "Économie",
-      "title": "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
-      "text": "C'est l'un des grands enjeux pour les candidats à la présidentielle française de 2027 : obtenir les fameux 500 parrainages d'élus de maires, députés, conseillers départementaux et régionaux. DÉCRYPTAGE - Confirmé avec 72,06 % des voix, le maire de Cannes promet de défendre les territoires durant la campagne présidentielle, dans laquelle il s’engage sous les couleurs de son mouvement, Nouvelle Énergie.",
-      "why": "Un fait relayé par 3 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
+      "tag": "Europe",
+      "title": "Sommet européen à Bruxelles sur budget et aide à l’Ukraine",
+      "text": "Les dirigeants de l’Union européenne se réunissent à Bruxelles pour avancer sur le futur budget des 27 et l’aide à l’Ukraine. Le sommet est décrit comme extraordinaire et tendu. Il se concentre sur un budget de sept ans de 2 000 milliards d’euros.",
+      "why": "Comprendre les mécanismes de décision de l’UE, le rôle des sommets et les enjeux budgétaires est essentiel pour les journalistes couvrant l’Europe.",
       "sources": [
         {
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/monde/europe/union-europeenne/direct-sommet-europeen-les-dirigeants-de-l-ue-reunis-a-bruxelles-pour-avancer-sur-le-futur-budget-des-27-et-l-aide-a-l-ukraine_8300823.html#xtor=RSS-3-[lestitres]"
+        },
+        {
           "name": "RFI",
-          "url": "https://www.rfi.fr/fr/podcasts/reportage-france/20261125-pr%C3%A9sidentielle-2027-pour-les-candidats-comme-pour-les-maires-la-gal%C3%A8re-des-parrainages"
+          "url": "https://www.rfi.fr/fr/europe/20261126-les-dirigeants-de-l-ue-r%C3%A9unis-en-sommet-extraordinaire-pour-discuter-du-budget-et-de-l-aide-%C3%A0-l-ukraine"
         },
         {
-          "name": "Le Figaro",
-          "url": "https://www.lefigaro.fr/elections/presidentielles/presidentielle-2027-reelu-sans-appel-a-la-tete-des-maires-de-france-david-lisnard-poursuit-sa-campagne-20261125"
+          "name": "Euronews",
+          "url": "https://fr.euronews.com/2026/11/26/sommet-de-bruxelles-tendu-sur-budget-europeen-de-2-000-milliards-et-aide-a-lukraine"
+        }
+      ]
+    },
+    {
+      "tag": "Médias",
+      "title": "Caire : 31 morts après l’effondrement d’un camion-citerne de carburant",
+      "text": "Un camion-citerne de carburant s’est renversé sur une route très fréquentée de Caire, déclenchant un incendie qui a fait 31 morts et 15 blessés. L’incident a eu lieu sur une route circulaire autour de la capitale égyptienne. Les autorités locales ont déclaré un drame majeur.",
+      "why": "Les journalistes doivent maîtriser la rédaction d’articles de crise, la vérification des faits et la gestion de la diffusion d’informations sensibles.",
+      "sources": [
+        {
+          "name": "BBC News",
+          "url": "https://www.bbc.co.uk/news/articles/cqy7rn30v314o?at_medium=RSS&at_campaign=rss"
         },
         {
-          "name": "20 Minutes",
-          "url": "https://www.20minutes.fr/politique/4265748-20261125-presidentielle-2027-fan-vais-parrainer-comment-candidats-tentent-seduire-maires?at_medium=display&at_campaign=149"
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/world/2026/nov/25/people-killed-fuel-tanker-crash-ignites-large-fire-cairo-highway"
+        },
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/en/africa/20261126-at-least-31-killed-in-cairo-fire-after-fuel-truck-overturns-on-busy-highway"
+        }
+      ]
+    },
+    {
+      "tag": "Justice",
+      "title": "Huit djihadistes français condamnés à perpétuité en Irak",
+      "text": "Quarante‑sept djihadistes français transférés de Syrie vers l’Irak sont jugés à Bagdad. Huit d’entre eux, dont Romain Garnier, ont été condamnés à la réclusion à perpétuité pour leur appartenance à l’État islamique. Le procès a eu lieu le 26 novembre.",
+      "why": "Cette affaire met en lumière le droit international, la coopération judiciaire entre pays et la lutte contre le terrorisme, des thèmes fréquents dans les concours de journalisme.",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/international/article/2026/11/26/irak-huit-nouveaux-djihadistes-francais-dont-romain-garnier-condamnes-a-la-perpetuite_6815494_3210.html"
+        },
+        {
+          "name": "Ouest-France",
+          "url": "https://www.ouest-france.fr/monde/irak/huit-djihadistes-francais-condamnes-a-la-reclusion-a-perpetuite-en-irak-pour-leur-appartenance-a-letat-islamique-fa401da8-e968-11f1-86c1-70195b4d2e52?utm_source=fluxpublicactu&utm_medium=fluxrss&utm_campaign=banquedecontenu"
+        }
+      ]
+    },
+    {
+      "tag": "Monde",
+      "title": "Kilmar Abrego Garcia, ex-déporté, part en Espagne",
+      "text": "Kilmar Abrego Garcia, Salvadorien expulsé à tort vers le Salvador en 2025, est arrivé en Espagne pour une nouvelle vie. Il a été inculpé aux États-Unis sans suite après son retour. Le départ volontaire vers l’Espagne intervient après une décision de la Cour suprême.",
+      "why": "Illustration des procédures d’expulsion et de réintégration, utile pour comprendre les droits des migrants et le rôle des tribunaux.",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/international/article/2026/11/26/kilmar-abrego-garcia-le-salvadorien-devenu-symbole-des-expulsions-massives-sous-donald-trump-est-arrive-en-espagne-pour-une-nouvelle-vie_6815471_3210.html"
+        },
+        {
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/us-news/2026/nov/24/kilmar-abrego-garcia-leaves-us"
+        }
+      ]
+    },
+    {
+      "tag": "Europe",
+      "title": "Pedro Sanchez refuse d’envisager la défaite aux élections",
+      "text": "Les sondages accordent une majorité à la droite et à l’extrême droite, mais le Premier ministre espagnol ne veut pas envisager une défaite. Les élections législatives approchent alors que la politique nationale est en tension. Le contexte international est également mentionné, notamment les relations avec Washington.",
+      "why": "Permet d’analyser la dynamique électorale espagnole, les stratégies de parti et l’influence des relations internationales.",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/podcasts/article/2026/11/26/elections-en-espagne-le-coup-de-poker-de-pedro-sanchez_6815462_5463015.html"
+        },
+        {
+          "name": "Al Jazeera",
+          "url": "https://www.aljazeera.com/opinions/2026/11/26/who-really-wants-pedro-sanchez-out-of-power?traffic_source=rss"
         }
       ]
     }
@@ -226,107 +244,69 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "desc": "France : politique, société, économie",
       "exercises": [
         {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « \"La démocratie, c’est du vote\", déclare _____ Lisnard, qui refuse la proposition d’Edouard Philippe de débattre à la place d'une primaire »",
-          "a": [
-            "David"
-          ],
-          "x": "Titre complet : \"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattre à la place d'une primaire"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « En Egypte, un incendie dans l'agglomération du _____ fait au moins 30 morts »",
-          "a": [
-            "Caire"
-          ],
-          "x": "Titre complet : En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « Teddy _____ affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a pas »",
-          "a": [
-            "Riner"
-          ],
-          "x": "Titre complet : Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a pas"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la _____ malgré la claque électorale »",
-          "a": [
-            "Chine"
-          ],
-          "x": "Titre complet : Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque électorale"
-        },
-        {
           "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Politique » dans l'édition du jour ?",
+          "q": "Quel organisme a demandé la suspension d’un mois de la chaîne CNews ?",
           "c": [
-            "\"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattr",
-            "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
-            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
-            "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
+            "L’ONU",
+            "Reporters sans frontières",
+            "La CNIL",
+            "L’UNESCO"
           ],
-          "a": 0,
-          "x": "Rubrique Politique : \"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattre à la place d'une primaire"
+          "a": 1,
+          "x": "Reporters sans frontières a saisi l’Arcom pour demander la suspension."
         },
         {
-          "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Monde » dans l'édition du jour ?",
-          "c": [
-            "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan",
-            "\"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattr",
-            "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
-            "Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans"
-          ],
-          "a": 0,
-          "x": "Rubrique Monde : Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
+          "t": "vf",
+          "q": "Le président américain Donald Trump et le secrétaire général de l’OTAN ont appelé Moscou à ne pas étendre la guerre en Ukraine.",
+          "a": true,
+          "x": "La déclaration conjointe a été publiée après une rencontre à huis clos."
         },
         {
-          "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Économie » dans l'édition du jour ?",
-          "c": [
-            "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
-            "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan",
-            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
-            "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
+          "t": "input",
+          "q": "Quel pays a été expulsé à tort vers le Salvador en 2025 et s’est ensuite installé en Espagne ?",
+          "a": [
+            "Kilmar Abrego Garcia"
           ],
-          "a": 0,
-          "x": "Rubrique Économie : Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque électorale"
+          "x": "Kilmar Abrego Garcia, Salvadorien expulsé à tort vers le Salvador en 2025, est arrivé en Espagne."
+        },
+        {
+          "t": "vf",
+          "q": "Le sommet européen à Bruxelles se concentre sur un budget de sept ans de 2 000 milliards d’euros.",
+          "a": true,
+          "x": "Le sommet est décrit comme extraordinaire et tendu. Il se concentre sur un budget de sept ans de 2 000 milliards d’euros."
         },
         {
           "t": "match",
-          "q": "Associe chaque rubrique à une info du jour",
+          "q": "Associe chaque thème à l’élément correspondant dans les informations du jour",
           "pairs": [
             [
-              "Politique",
-              "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de don"
-            ],
-            [
-              "Société",
-              "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la "
-            ],
-            [
               "Monde",
-              "Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de tra"
+              "Trump et le secrétaire général de l’OTAN exhortent Moscou à ne pas étendre la guerre"
+            ],
+            [
+              "Justice",
+              "Écrits antisémites : révélations accablant Jordan Bardella"
+            ],
+            [
+              "Économie",
+              "Nouveaux droits de douane américains suscitent l’indignation des partenaires commerciaux"
             ],
             [
               "Médias",
-              "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
+              "Reporters sans frontières demande la suspension de CNews pour un mois"
             ]
           ],
-          "x": "Une rubrique, une info de l'édition."
+          "x": "Associez chaque thème aux éléments précis mentionnés dans les titres."
         },
         {
           "t": "write",
-          "q": "✍️ Écris un chapô de 300 signes maximum pour cette dépêche",
-          "src": "Plus tôt, le candidat à l’élection présidentielle a critiqué le déploiement de soldats français en Ukraine pour des missions non combattantes, déclarant : « Je ne comprends pas qu’on envoie des troupes en Ukraine alors que ce n’est pas notr. Teddy Riner a clarifié son point de vue, mercredi, sur l'aide militaire apportée à l'Ukraine par l'armée française.",
-          "max": 300,
-          "model": "**Chapô possible :** Plus tôt, le candidat à l’élection présidentielle a critiqué le déploiement de soldats français en Ukraine pour des missions non combattantes, déclarant : « Je ne comprends pas qu’on envoie des troupes en Ukraine alors que ce n’est pas notr. Teddy Riner a clarifié son point de vue, mercredi.",
+          "q": "Rédige un titre, un chapô et une attaque (première phrase) pour une dépêche basée sur l’information suivante : \n\n\"Caire : 31 morts après l’effondrement d’un camion-citerne de carburant\"",
+          "src": "Un camion-citerne de carburant s’est renversé sur une route très fréquentée de Caire, déclenchant un incendie qui a fait 31 morts et 15 blessés. L’incident a eu lieu sur une route circulaire autour de la capitale égyptienne. Les autorités locales ont déclaré un drame majeur.",
+          "model": "Titre : \"31 morts à Caire après l’effondrement d’un camion-citerne de carburant\"\nChapô : \"Un camion-citerne de carburant s’est renversé sur une route très fréquentée de la capitale égyptienne, provoquant un incendie qui a fait 31 morts et 15 blessés.\"\nAttaque : \"Le drame, qui s’est produit sur une route circulaire autour de Caire, a été déclaré majeur par les autorités locales.\"",
           "crit": [
-            "Il donne l'essentiel (qui, quoi, où, quand)",
-            "Il fait moins de 300 signes",
-            "Il ne recopie pas le titre",
-            "Tout ce qui est écrit figure dans la dépêche"
+            "Titre court et informatif",
+            "Chapô résume l’information principale",
+            "Attaque introduit l’incident sans détails superflus"
           ]
         }
       ]
@@ -337,84 +317,70 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "desc": "International et Europe",
       "exercises": [
         {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon _____ Payan »",
-          "a": [
-            "Benoît"
-          ],
-          "x": "Titre complet : Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
+          "t": "vf",
+          "q": "Le sommet européen à Bruxelles se concentre sur un budget de sept ans de 2 000 milliards d’euros.",
+          "a": true,
+          "x": "Le texte indique que le sommet se concentre sur un budget de sept ans de 2 000 milliards d’euros."
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Andy _____ ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans »",
+          "q": "Qui a appelé la Russie à ne pas étendre la guerre en Ukraine ?",
           "a": [
-            "Taylor"
+            "Donald Trump",
+            "Mark Rutte"
           ],
-          "x": "Titre complet : Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « Ligue des champions : le LOSC renverse le _____ Münich et se relance dans la course à la qualification »",
-          "a": [
-            "Bayern"
-          ],
-          "x": "Titre complet : Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en _____ »",
-          "a": [
-            "Méditerranée"
-          ],
-          "x": "Titre complet : Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Méditerranée"
+          "x": "Les deux dirigeants ont appelé la Russie à ne pas étendre la guerre."
         },
         {
           "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Médias » dans l'édition du jour ?",
+          "q": "Combien de morts ont été signalés après l’effondrement du camion-citerne à Caire ?",
           "c": [
-            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
-            "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
-            "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
-            "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu"
+            "15",
+            "31",
+            "46",
+            "0"
           ],
-          "a": 0,
-          "x": "Rubrique Médias : En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
+          "a": 1,
+          "x": "Le texte rapporte 31 morts."
         },
         {
-          "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Économie » dans l'édition du jour ?",
-          "c": [
-            "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
-            "Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Mé",
-            "Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans",
-            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
-          ],
-          "a": 0,
-          "x": "Rubrique Économie : Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages"
+          "t": "vf",
+          "q": "Jordan Bardella a été accusé d’écrits antisémites selon les révélations de Mediapart.",
+          "a": true,
+          "x": "Le texte précise que les révélations viennent deux mois après les premières révélations de Mediapart."
         },
         {
-          "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Société » dans l'édition du jour ?",
-          "c": [
-            "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
-            "\"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattr",
-            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
-            "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
+          "t": "match",
+          "q": "Associe chaque thème aux éléments correspondants",
+          "pairs": [
+            [
+              "Monde",
+              "Trump et le secrétaire général de l’OTAN exhortent Moscou à ne pas étendre la guerre"
+            ],
+            [
+              "Justice",
+              "Écrits antisémites : révélations accablant Jordan Bardella"
+            ],
+            [
+              "Économie",
+              "Nouveaux droits de douane américains suscitent l’indignation des partenaires commerciaux"
+            ],
+            [
+              "Médias",
+              "Reporters sans frontières demande la suspension de CNews pour un mois"
+            ]
           ],
-          "a": 0,
-          "x": "Rubrique Société : Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
+          "x": "Chaque paire relie un domaine d’actualité à un extrait précis du brief."
         },
         {
           "t": "write",
-          "q": "✍️ Écris un chapô de 300 signes maximum pour cette dépêche",
-          "src": "Menés (0-1) après une terne première période, les Lillois ont bien réagi, mercredi 25 novembre, pour remporter une victoire cruciale (2-1) et de prestige face aux Bavarois. Avec désormais quatre points, les Dogues se relancent dans la course à la qualification pour les barrages de la Ligue des champions.",
-          "max": 300,
-          "model": "**Chapô possible :** Menés (0-1) après une terne première période, les Lillois ont bien réagi, mercredi 25 novembre, pour remporter une victoire cruciale (2-1) et de prestige face aux Bavarois. Avec désormais quatre points, les Dogues se relancent dans la course à la qualification pour les barrages de la Ligue.",
+          "q": "Rédige un titre, un chapô et une attaque (première phrase) pour l’article suivant :\n\n\"Caire : 31 morts après l’effondrement d’un camion-citerne de carburant\"",
+          "src": "Un camion-citerne de carburant s’est renversé sur une route très fréquentée de Caire, déclenchant un incendie qui a fait 31 morts et 15 blessés. L’incident a eu lieu sur une route circulaire autour de la capitale égyptienne. Les autorités locales ont déclaré un drame majeur.",
+          "model": "Titre : \"Caire : 31 morts suite à l’effondrement d’un camion-citerne de carburant\"\nChapô : \"Un incendie dévastateur a fait 31 victimes et 15 blessés après le renversement d’un camion-citerne sur une route très fréquentée de la capitale égyptienne.\"\nAttaque : \"Le drame, survenu sur une route circulaire autour de Caire, a été qualifié de majeur par les autorités locales.\"",
           "crit": [
-            "Il donne l'essentiel (qui, quoi, où, quand)",
-            "Il fait moins de 300 signes",
-            "Il ne recopie pas le titre",
-            "Tout ce qui est écrit figure dans la dépêche"
+            "Titre court et informatif",
+            "Chapô résume les faits essentiels",
+            "Attaque introduit l’information principale"
           ]
         }
       ]
@@ -426,65 +392,108 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "exercises": [
         {
           "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Monde » dans l'édition du jour ?",
+          "q": "Quel organisme a demandé la suspension d’un mois de la chaîne CNews ?",
           "c": [
-            "Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Mé",
-            "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
-            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
-            "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l"
+            "Reporters sans frontières",
+            "L’Arcom",
+            "CNews",
+            "L’ONG"
           ],
           "a": 0,
-          "x": "Rubrique Monde : Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Méditerranée"
+          "x": "L’ONG Reporters sans frontières a saisi l’Arcom pour demander la suspension."
+        },
+        {
+          "t": "vf",
+          "q": "Les droits de douane annoncés par Washington ont été salués par l’Union européenne.",
+          "a": false,
+          "x": "L’Union européenne a exprimé son indignation face aux droits de douane américains."
+        },
+        {
+          "t": "input",
+          "q": "Quel est le nom du candidat qui séduit les déçus de la droite pour la présidentielle 2027 ?",
+          "a": [
+            "David Lisnard"
+          ],
+          "x": "Le texte indique que le candidat est David Lisnard."
         },
         {
           "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Société » dans l'édition du jour ?",
+          "q": "Quel pays a subi un effondrement d’un camion-citerne de carburant à Caire ?",
           "c": [
-            "Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans",
-            "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
-            "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
-            "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu"
+            "Le Maroc",
+            "Le Caire",
+            "Le Sénégal",
+            "Le Mali"
           ],
-          "a": 0,
-          "x": "Rubrique Société : Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans"
+          "a": 1,
+          "x": "Le texte mentionne un camion-citerne de carburant à Caire."
         },
         {
-          "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Politique » dans l'édition du jour ?",
-          "c": [
-            "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu",
-            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
-            "Présidentielle 2027: pour les candidats comme pour les maires, la galère des parrainages",
-            "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
+          "t": "vf",
+          "q": "Le sommet européen à Bruxelles se concentre sur un budget de sept ans de 2 000 milliards d’euros.",
+          "a": true,
+          "x": "Le texte précise que le sommet se concentre sur un budget de sept ans de 2 000 milliards d’euros."
+        },
+        {
+          "t": "match",
+          "q": "Associe chaque affirmation à son article correspondant",
+          "pairs": [
+            [
+              "Trump et le secrétaire général de l’OTAN exhortent Moscou à ne pas étendre la guerre",
+              "0"
+            ],
+            [
+              "Écrits antisémites : révélations accablant Jordan Bardella",
+              "1"
+            ],
+            [
+              "Nouveaux droits de douane américains suscitent l’indignation des partenaires commerciaux",
+              "2"
+            ],
+            [
+              "Reporters sans frontières demande la suspension de CNews pour un mois",
+              "3"
+            ],
+            [
+              "David Lisnard séduit les déçus de la droite pour la présidentielle 2027",
+              "4"
+            ],
+            [
+              "Sommet européen à Bruxelles sur budget et aide à l’Ukraine",
+              "5"
+            ],
+            [
+              "Caire : 31 morts après l’effondrement d’un camion-citerne de carburant",
+              "6"
+            ],
+            [
+              "Huit djihadistes français condamnés à perpétuité en Irak",
+              "7"
+            ],
+            [
+              "Kilmar Abrego Garcia, ex-déporté, part en Espagne",
+              "8"
+            ],
+            [
+              "Pedro Sanchez refuse d’envisager la défaite aux élections",
+              "9"
+            ]
           ],
-          "a": 0,
-          "x": "Rubrique Politique : Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a pas"
+          "x": "Associe chaque numéro d’article à son titre."
         },
         {
           "t": "write",
-          "q": "✍️ Écris un chapô de 300 signes maximum pour cette dépêche",
-          "src": "\"Andy Taylor, époux, père et grand-père bien-aimé, est décédé des suites d'un long et courageux combat contre un cancer de la prostate\", écrivent mercredi sa famille et le groupe dans un communiqué. L'ex-guitariste du groupe britannique Duran Duran, Andy Taylor, est décédé des suites d'un cancer de la prostate, ont annoncé mercredi 25 novembre sa famille et la formation phare de la new wave des années 1980, dans un communiqué.",
-          "max": 300,
-          "model": "**Chapô possible :** \"Andy Taylor, époux, père et grand-père bien-aimé, est décédé des suites d'un long et courageux combat contre un cancer de la prostate\", écrivent mercredi sa famille et le groupe dans un communiqué. L'ex-guitariste du groupe britannique Duran Duran, Andy Taylor, est décédé des suites d'un.",
+          "q": "Rédige un titre, un chapô et un résumé d’une dépêche sur l’article 6 : \"Caire : 31 morts après l’effondrement d’un camion-citerne de carburant\".",
+          "src": "Un camion-citerne de carburant s’est renversé sur une route très fréquentée de Caire, déclenchant un incendie qui a fait 31 morts et 15 blessés. L’incident a eu lieu sur une route circulaire autour de la capitale égyptienne. Les autorités locales ont déclaré un drame majeur.",
+          "model": "Titre : \"Caire : 31 morts suite à l’effondrement d’un camion-citerne de carburant\" \nChapô : \"Un incendie déclenché par un camion-citerne renversé a fait 31 victimes et 15 blessés sur la route circulaire de Caire.\" \nRésumé : \"Le camion-citerne, transportant du carburant, s’est renversé sur une route très fréquentée de Caire, provoquant un incendie mortel. Les autorités locales ont qualifié l’incident de drame majeur, déclarant 31 morts et 15 blessés.\"",
           "crit": [
-            "Il donne l'essentiel (qui, quoi, où, quand)",
-            "Il fait moins de 300 signes",
-            "Il ne recopie pas le titre",
-            "Tout ce qui est écrit figure dans la dépêche"
+            "Titre court et informatif",
+            "Chapô accrocheur et précis",
+            "Résumé clair et factuel"
           ]
         }
       ]
     }
   ],
-  "shorts": [],
-  "reco": [
-    {
-      "type": "film",
-      "title": "The Hurt Locker",
-      "by": "Kathryn Bigelow",
-      "year": 2008,
-      "story": 0,
-      "why": "Le film dépeint la tension et les risques d’une mission de déminage en Irak, illustrant les dilemmes militaires et les coûts humains de la guerre, tout comme la critique de Teddy Riner sur l’engagement français en Ukraine."
-    }
-  ]
+  "shorts": []
 };
