@@ -1,34 +1,38 @@
-// SCOOP:REGENERER
 /* Scoop — édition du 2026-11-26 (générée automatiquement, IA gratuite) */
 window.SCOOP_DAYS = window.SCOOP_DAYS || {};
 window.SCOOP_DAYS['2026-11-26'] = {
   "date": "2026-11-26",
-  "title": "Bardella, Trump et l’UE : révélations, diplomatie et sanctions",
-  "intro": "Les médias dévoilent de nouveaux écrits antisémites de Jordan Bardella, tandis que Trump et Rutte appellent Moscou à éviter d’étendre la guerre en Ukraine. Parallèlement, l’UE se penche sur son budget et l’aide à l’Ukraine, et les États-Unis imposent de nouveaux droits de douane.",
+  "title": "Médias, géopolitique et justice : antisémitisme, sanctions et procès de djihadistes",
+  "intro": "Les médias français font face à de nouvelles révélations antisémites et à des appels diplomatiques contre la Russie. En parallèle, les États-Unis imposent des droits de douane, tandis que la justice française et irakienne juge des ressortissants impliqués dans le terrorisme.",
   "word": {
-    "term": "droit de douane",
-    "def": "Mesure fiscale appliquée aux marchandises importées, visant à protéger l’industrie nationale ou à générer des revenus. Les droits de douane peuvent influencer les relations commerciales internationales."
+    "term": "Sanctions",
+    "def": "Mesures économiques ou politiques imposées par un ou plusieurs pays pour influencer le comportement d’un autre État ou d’un individu. Elles peuvent prendre la forme de restrictions commerciales, de gel de biens ou de limitations de voyages."
   },
   "glossary": [
     {
-      "term": "cour internationale de justice",
-      "def": "Tribunal supranational chargé de régler les différends entre États et de rendre des avis consultatifs.",
-      "cat": "Justice"
+      "term": "OTAN",
+      "def": "Organisation du traité de l’Atlantique Nord, alliance militaire intergouvernementale entre 30 pays.",
+      "cat": "International"
+    },
+    {
+      "term": "Arcom",
+      "def": "Autorité de régulation des communications audiovisuelles en France, chargée de veiller au respect de la loi et de la déontologie.",
+      "cat": "Institutions"
     }
   ],
   "memo": [
-    "- 2025 : expulsion de Kilmar Abrego Garcia vers le Salvador",
-    "- 2027 : David Lisnard progresse dans les sondages présidentiels",
     "Jordan Bardella face à de nouveaux écrits antisémites",
-    "Trump et le chef de l’OTAN exhortent Moscou à ne pas « étendre la guerre »",
-    "Les États-Unis annoncent de nouveaux droits de douane, provoquant l’indignation de l’UE et de la Chine"
+    "Trump et Rutte exhortent la Russie à ne pas étendre la guerre en Ukraine",
+    "Les nouveaux droits de douane américains suscitent l’indignation des partenaires commerciaux",
+    "Reporters sans frontières demande la suspension d’un mois de CNews",
+    "Navire diesel coule au large d’Ibiza, un mort"
   ],
   "stories": [
     {
       "tag": "Politique",
       "title": "Jordan Bardella face à de nouveaux écrits antisémites",
-      "text": "Le Monde et Mediapart publient de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella. Les médias ont eu accès à une conversation où un ancien camarade de lycée reçoit des messages affirmant que les sionistes sont responsables. Les révélations renforcent les accusations déjà portées contre le candidat de l’Rassemblement National.",
-      "why": "Comprendre le rôle des médias d’investigation et l’impact des preuves documentées sur la réputation d’un homme politique.",
+      "text": "Le Monde et Mediapart publient de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella. Les médias ont eu accès à une conversation où un ancien camarade de lycée reçoit des messages. Les révélations viennent deux mois après les premières découvertes de Mediapart.",
+      "why": "Illustration de la vérification des faits et de la responsabilité des médias dans la politique française.",
       "sources": [
         {
           "name": "franceinfo",
@@ -50,9 +54,9 @@ window.SCOOP_DAYS['2026-11-26'] = {
     },
     {
       "tag": "Monde",
-      "title": "Trump et le chef de l’OTAN exhortent Moscou à ne pas « étendre la guerre »",
-      "text": "Lors d’une rencontre à huis clos, Donald Trump et Mark Rutte ont appelé la Russie à éviter toute action qui étendrait délibérément ou involontairement la guerre en Ukraine. La déclaration conjointe a été publiée mercredi. Les deux dirigeants ont souligné l’importance de la stabilité régionale.",
-      "why": "Illustrer les mécanismes de la diplomatie internationale et la communication conjointe entre chefs d’État.",
+      "title": "Trump et Rutte exhortent la Russie à ne pas étendre la guerre en Ukraine",
+      "text": "Donald Trump et le secrétaire général de l’OTAN, Mark Rutte, ont appelé la Russie à ne pas « étendre la guerre » avec Kiev. La déclaration conjointe a été publiée après une rencontre à huis clos. Les deux hommes ont discuté de l’importance pour la Russie d’éviter toute action qui étendrait délibérément la guerre.",
+      "why": "Exemple de la diplomatie internationale et des mécanismes de négociation entre États.",
       "sources": [
         {
           "name": "Le Monde",
@@ -74,10 +78,14 @@ window.SCOOP_DAYS['2026-11-26'] = {
     },
     {
       "tag": "Économie",
-      "title": "Les États-Unis annoncent de nouveaux droits de douane, provoquant l’indignation de l’UE et de la Chine",
-      "text": "L’administration Trump a annoncé une série de droits de douane qui a suscité la colère de ses principaux partenaires commerciaux, dont l’Union européenne et la Chine. La Chine a menacé de riposter en prenant des mesures nécessaires. L’annonce a des répercussions sur le commerce international.",
-      "why": "Comprendre les relations commerciales internationales, les droits de douane et leurs effets sur l’économie mondiale.",
+      "title": "Les nouveaux droits de douane américains suscitent l’indignation des partenaires commerciaux",
+      "text": "Washington a annoncé une nouvelle série de droits de douane qui a provoqué la colère de l’Union européenne, de la Chine, de l’Inde, du Brésil et de Singapour. Les pays visés accusent les États-Unis de recourir à des subventions et de pénaliser les entreprises américaines. L’administration Trump a justifié les mesures comme nécessaires pour protéger l’industrie nationale.",
+      "why": "Illustration des mécanismes du commerce international, des droits de douane et de la diplomatie économique.",
       "sources": [
+        {
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/monde/usa/droits-de-douane/inacceptables-regrettables-pretexte-a-la-manipulation-politique-les-pays-vises-s-indignent-face-aux-nouveaux-droits-de-douane-americains_8300712.html#xtor=RSS-3-[lestitres]"
+        },
         {
           "name": "France 24",
           "url": "https://www.france24.com/fr/am%C3%A9riques/20261126-l-ue-la-chine-et-d-autres-pays-s-indignent-des-nouveaux-droits-de-douane-am%C3%A9ricains"
@@ -89,114 +97,138 @@ window.SCOOP_DAYS['2026-11-26'] = {
         {
           "name": "AFP (via Le Figaro)",
           "url": "https://www.lefigaro.fr/conjoncture/la-chine-menace-de-riposter-face-a-l-annonce-des-nouveaux-droits-de-douane-americains-20261126"
-        },
-        {
-          "name": "Le Temps",
-          "url": "https://www.letemps.ch/monde/les-pays-vises-par-les-nouveaux-droits-de-douane-etats-uniens-font-part-de-leur-mecontentement"
         }
       ]
     },
     {
-      "tag": "Politique",
-      "title": "David Lisnard, maire de Cannes, veut débattre avec Édouard Philippe sous condition de primaire",
-      "text": "Le maire de Cannes, David Lisnard, a confirmé son intention de participer à un débat avec Édouard Philippe, mais uniquement si une primaire à droite est organisée. Il souhaite que cette primaire inclue des candidats comme Éric Zemmour et Nicolas Dupont-Aignan. Lisnard est également à la tête de l'Association des maires de France et progresse dans les sondages pour la présidentielle 2027.",
-      "why": "Cette affaire illustre le rôle des institutions locales dans la politique nationale et la dynamique des primaires, concepts essentiels pour comprendre la gouvernance française.",
+      "tag": "Médias",
+      "title": "Reporters sans frontières demande la suspension d’un mois de CNews",
+      "text": "L’ONG a saisi l’Arcom pour demander la suspension d’un mois de CNews après avoir examiné 61 heures de programmes diffusés en septembre. L’ONG accuse la chaîne de non-respect répété du pluralisme et de favoriser l’extrême droite. CNews est contrôlée par Vincent Bolloré.",
+      "why": "Exemple de la régulation des médias, du pluralisme et de la responsabilité éditoriale.",
       "sources": [
         {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/elections/c-est-la-confirmation-de-mon-identite-politique-comment-david-lisnard-compte-utiliser-son-image-de-maire-pour-la-presidentielle_8296046.html#xtor=RSS-3-[lestitres]"
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/economie/article/2026/11/26/reporters-sans-frontieres-demande-la-suspension-de-cnews-pour-une-duree-d-un-mois_6815475_3234.html"
         },
-        {
-          "name": "AFP (via Le Figaro)",
-          "url": "https://www.lefigaro.fr/elections/presidentielles/presidentielle-2027-david-lisnard-dit-oui-a-edouard-philippe-pour-un-debat-mais-avec-une-primaire-20261126"
-        },
-        {
-          "name": "Ouest-France",
-          "url": "https://www.ouest-france.fr/elections/presidentielle/presidentielle-2027-david-lisnard-veut-attirer-des-electeurs-de-tous-horizons-y-compris-le-rn-dc250d74-e972-11f1-86c1-70195b4d2e52?utm_source=fluxpublicactu&utm_medium=fluxrss&utm_campaign=banquedecontenu"
-        }
-      ]
-    },
-    {
-      "tag": "Europe",
-      "title": "Sommet extraordinaire de Bruxelles sur le budget de l'UE et l'aide à l'Ukraine",
-      "text": "Les 27 chefs d’État et de gouvernements de l’Union européenne se réunissent à Bruxelles pour avancer sur le futur budget de l’Union. Le sommet vise également à débloquer les discussions sur l’aide à l’Ukraine. Les dirigeants cherchent à conclure un accord sur le budget de sept ans.",
-      "why": "Comprendre les mécanismes de décision de l’UE et les enjeux budgétaires internationaux est crucial pour les concours portant sur le droit européen et la politique internationale.",
-      "sources": [
         {
           "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/monde/europe/union-europeenne/direct-sommet-europeen-les-dirigeants-de-l-ue-reunis-a-bruxelles-pour-avancer-sur-le-futur-budget-des-27-et-l-aide-a-l-ukraine_8300823.html#xtor=RSS-3-[lestitres]"
+          "url": "https://www.franceinfo.fr/economie/medias/l-ong-reporters-sans-frontieres-saisit-l-arcom-pour-demander-de-suspendre-cnews-pendant-un-mois_8300685.html#xtor=RSS-3-[lestitres]"
         },
         {
-          "name": "RFI",
-          "url": "https://www.rfi.fr/fr/europe/20261126-les-dirigeants-de-l-ue-r%C3%A9unis-en-sommet-extraordinaire-pour-discuter-du-budget-et-de-l-aide-%C3%A0-l-ukraine"
+          "name": "La Croix",
+          "url": "https://www.la-croix.com/culture/cnews-reporters-sans-frontieres-demande-la-suspension-de-la-chaine-pendant-un-mois-20261126"
         },
         {
-          "name": "Euronews",
-          "url": "https://fr.euronews.com/2026/11/26/sommet-de-bruxelles-tendu-sur-budget-europeen-de-2-000-milliards-et-aide-a-lukraine"
+          "name": "Mediapart",
+          "url": "https://www.mediapart.fr/journal/culture-et-idees/261126/reporters-sans-frontieres-reclame-la-suspension-de-cnews-pendant-un-mois"
         }
       ]
     },
     {
       "tag": "Monde",
-      "title": "Kilmar Abrego Garcia, ex-déporté, part en Espagne",
-      "text": "Kilmar Abrego Garcia, Salvadorien expulsé à tort vers le Salvador en 2025, est arrivé en Espagne pour une nouvelle vie. Il a été inculpé sans suite à son retour aux États-Unis. Son départ volontaire vers l’Espagne intervient après une décision de la Cour suprême.",
-      "why": "Illustration de la procédure d’expulsion et des recours judiciaires aux États-Unis, utile pour comprendre les droits des migrants et le rôle des tribunaux.",
+      "title": "Navire diesel coule au large d’Ibiza, un mort",
+      "text": "Un navire transportant jusqu’à 7 000 tonnes de diesel a coulé à une quarantaine de kilomètres d’Ibiza, faisant un mort parmi l’équipage. Les autorités espagnoles ont activé le plan d’urgence contre la pollution maritime et déployé un navire anti‑pollution. Les dommages environnementaux sont en cours d’évaluation.",
+      "why": "Illustration de la gestion des crises environnementales et de la coopération internationale en matière de sécurité maritime.",
       "sources": [
         {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/international/article/2026/11/26/kilmar-abrego-garcia-le-salvadorien-devenu-symbole-des-expulsions-massives-sous-donald-trump-est-arrive-en-espagne-pour-une-nouvelle-vie_6815471_3210.html"
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/monde/espagne/un-navire-transportant-jusqu-a-7-000-tonnes-de-diesel-coule-au-large-de-l-ile-espagnole-d-ibiza-faisant-un-mort-parmi-les-membres-de-l-equipage_8300973.html#xtor=RSS-3-[lestitres]"
         },
         {
-          "name": "The Guardian",
-          "url": "https://www.theguardian.com/us-news/2026/nov/24/kilmar-abrego-garcia-leaves-us"
+          "name": "Le Figaro",
+          "url": "https://www.lefigaro.fr/international/espagne-un-cargo-avec-1-2-million-de-litres-de-petrole-coule-au-large-d-ibiza-un-membre-de-l-equipage-est-mort-20261126"
+        },
+        {
+          "name": "Ouest-France",
+          "url": "https://www.ouest-france.fr/europe/espagne/un-navire-transportant-du-diesel-coule-au-large-dibiza-en-espagne-un-membre-de-lequipage-est-mort-fb7d0dbe-e96f-11f1-86c1-70195b4d2e52?utm_source=fluxpublicactu&utm_medium=fluxrss&utm_campaign=banquedecontenu"
         }
       ]
     },
     {
-      "tag": "Europe",
-      "title": "Pedro Sanchez refuse de céder face aux sondages",
-      "text": "Les sondages favorisent la droite et l’extrême droite, mais le Premier ministre espagnol refuse d’envisager une défaite aux élections législatives. La politique espagnole est mise à l’épreuve par les tensions entre les partis. Le contexte électoral influence la stabilité gouvernementale.",
-      "why": "Permet d’aborder les mécanismes électoraux, la majorité parlementaire et les stratégies politiques en Europe.",
+      "tag": "Monde",
+      "title": "Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans",
+      "text": "Le guitariste originel de la formation britannique de new wave avait quitté le groupe au milieu des années 1980, après de nombreux tubes. Le guitariste britannique Andy Taylor, dont le jeu a contribué à forger le son de Duran Duran, groupe phare de la new wave des années 1980, est décédé, lundi, d'un cancer de la prostate, ont annoncé ses proches mercredi.",
+      "why": "Un fait relayé par 7 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
       "sources": [
         {
           "name": "Le Monde",
-          "url": "https://www.lemonde.fr/podcasts/article/2026/11/26/elections-en-espagne-le-coup-de-poker-de-pedro-sanchez_6815462_5463015.html"
+          "url": "https://www.lemonde.fr/disparitions/article/2026/11/26/andy-taylor-guitariste-historique-du-groupe-duran-duran-est-mort-a-65-ans_6815296_3382.html"
         },
         {
-          "name": "Al Jazeera",
-          "url": "https://www.aljazeera.com/opinions/2026/11/26/who-really-wants-pedro-sanchez-out-of-power?traffic_source=rss"
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/culture/20261125-andy-taylor-ex-guitariste-de-duran-duran-est-d%C3%A9c%C3%A9d%C3%A9-%C3%A0-l-%C3%A2ge-de-65-ans"
+        },
+        {
+          "name": "Libération",
+          "url": "https://www.liberation.fr/culture/musique/duran-duran-andy-taylor-guitariste-et-compositeur-du-groupe-est-mort-a-65-ans-20261126_SLA7SRUR6RCMNJCEXHOPDESYDI/"
+        },
+        {
+          "name": "La Croix",
+          "url": "https://www.la-croix.com/culture/mort-d-andy-taylor-ancien-guitariste-du-groupe-britannique-duran-duran-20261126"
         }
       ]
     },
     {
       "tag": "Justice",
-      "title": "Birmanie refuse de suivre certaines exigences de la CIJ",
-      "text": "La Cour internationale de justice a jugé la Birmanie responsable du génocide des Rohingyas. Le dirigeant Min Aung Hlaing a déclaré que la Birmanie ne suivrait pas les parties du verdict qu’elle juge «inappropriées». Le pays conteste les exigences de la CIJ.",
-      "why": "Exemple de la jurisprudence internationale, de la responsabilité des États et du rôle des institutions judiciaires supranationales.",
+      "title": "Emilie König, la plus médiatique des djihadistes françaises, devant la justice",
+      "text": "Le procès de cette « revenante » de Syrie, âgée de 41 ans et mère de cinq enfants, accusée d’association de malfaiteurs terroriste notamment pour avoir relayé la propagande de l’organisation Etat islamique, s’ouvre jeudi à Paris. Cette ancienne figure de l’État islamique, seule femme à figurer sur la liste noire des Etats-Unis, est jugée à partir de ce jeudi devant la cour d’assises spécialement composée.",
+      "why": "Un fait relayé par 5 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
       "sources": [
         {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/asie-pacifique/20261126-genocide-rohingya-birmanie-ne-se-conformera-pas-exigences-cij-inappropriees"
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/societe/article/2026/11/26/emilie-konig-la-plus-mediatique-des-djihadistes-francaises-devant-la-justice_6815463_3224.html"
         },
         {
-          "name": "Le Temps",
-          "url": "https://www.letemps.ch/monde/asie-oceanie/coupable-de-genocide-birmanie-ne-se-conformera-pas-a-toutes-les-exigences-de-la-cour-internationale-de-justice"
+          "name": "20 Minutes",
+          "url": "https://www.20minutes.fr/justice/4265072-20261125-emilie-konig-ancienne-egerie-daesh-accusee-avoir-joue-recruteuses-devant-assises?at_medium=display&at_campaign=149"
+        },
+        {
+          "name": "La Croix",
+          "url": "https://www.la-croix.com/societe/proces-d-emilie-konig-pourquoi-les-femmes-djihadistes-sont-plus-severement-condamnees-aujourdhui-20261125"
+        },
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/france/20261126-le-proc%C3%A8s-d-%C3%A9milie-k%C3%B6nig-propagandiste-du-jihad-s-ouvre-devant-la-cour-d-assises-sp%C3%A9ciale-de-paris"
         }
       ]
     },
     {
-      "tag": "Europe",
-      "title": "Ligue des champions : PSG accroché par la Roma, Lille bat le Bayern",
-      "text": "Le PSG a obtenu un nul 2-2 contre la Roma, restant deuxième du classement de la Ligue des champions. Lille a remporté un exploit en battant le Bayern. Les performances des clubs influencent les classements européens.",
-      "why": "Illustration du fonctionnement des compétitions sportives européennes, du classement et de l’impact des résultats sur les clubs et les sponsors.",
+      "tag": "Justice",
+      "title": "Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité",
+      "text": "Au total, quarante-sept djihadistes français, transférés de Syrie vers l’Irak l’an dernier, doivent être jugés par une cour criminelle de Bagdad. Au total, 47 ressortissants français ont été jugés depuis septembre après avoir été extradés de Syrie.",
+      "why": "Un fait relayé par 3 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
       "sources": [
         {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/sports/20261125-ligue-des-champions-premi%C3%A8re-difficult%C3%A9-pour-le-psg-lille-signe-un-exploit-face-au-bayern"
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/international/article/2026/11/26/irak-huit-nouveaux-djihadistes-francais-dont-romain-garnier-condamnes-a-la-perpetuite_6815494_3210.html"
         },
         {
-          "name": "RFI",
-          "url": "https://www.rfi.fr/fr/sports/20261125-ligue-des-champions-le-psg-accroch%C3%A9-par-la-roma-lille-s-offre-le-bayern"
+          "name": "Libération",
+          "url": "https://www.liberation.fr/international/moyen-orient/irak-romain-garnier-et-sept-autres-francais-condamnes-a-perpetuite-pour-leur-affiliation-a-letat-islamique-20261126_D7RVUD7OSJDRJIYYERDEROG4S4/"
+        },
+        {
+          "name": "Euronews",
+          "url": "https://fr.euronews.com/2026/11/26/irak-huit-ressortissants-francais-condamnes-a-la-prison-a-vie-pour-avoir-rejoint-lei"
+        }
+      ]
+    },
+    {
+      "tag": "Monde",
+      "title": "Thirty-one killed in massive fire as fuel tanker crashes on Cairo highway",
+      "text": "Another 21 are injured after the tanker reportedly overturns on a busy ring road in the Egyptian capital. Blaze on ring road surrounding Egyptian capital injures at least 21 people and leaves cars and motorcycles charred A crash involving a fuel tanker ignited a huge fire on a highway surrounding Cairo on Wednesday, killing at least 31 people, .",
+      "why": "Un fait relayé par 3 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
+      "sources": [
+        {
+          "name": "BBC News",
+          "url": "https://www.bbc.co.uk/news/articles/cqy7rn30v314o?at_medium=RSS&at_campaign=rss"
+        },
+        {
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/world/2026/nov/25/people-killed-fuel-tanker-crash-ignites-large-fire-cairo-highway"
+        },
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/en/africa/20261126-at-least-31-killed-in-cairo-fire-after-fuel-truck-overturns-on-busy-highway"
         }
       ]
     }
@@ -209,77 +241,69 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "exercises": [
         {
           "t": "qcm",
-          "q": "Quel candidat de l’Rassemblement National est accusé d’écrits antisémites selon Le Monde et Mediapart ?",
+          "q": "Qui a reçu les nouveaux écrits antisémites attribués à Jordan Bardella ?",
           "c": [
-            "Jordan Bardella",
-            "Éric Zemmour",
-            "Nicolas Dupont-Aignan",
-            "David Lisnard"
+            "Un ancien camarade de lycée",
+            "Un journaliste du Monde",
+            "Un membre du Parti Rassemblement National",
+            "Un avocat d'Emilie König"
           ],
           "a": 0,
-          "x": "Le texte indique que les écrits antisémites sont attribués à Jordan Bardella."
+          "x": "Le texte indique qu'un ancien camarade de lycée reçoit les messages."
         },
         {
           "t": "vf",
-          "q": "Les États-Unis ont annoncé de nouveaux droits de douane qui ont provoqué l’indignation de l’Union européenne et de la Chine.",
+          "q": "Les nouveaux droits de douane américains ont été annoncés par l'administration Trump.",
           "a": true,
-          "x": "La phrase du résumé confirme cette affirmation."
+          "x": "Le texte précise que l’administration Trump a justifié les mesures."
+        },
+        {
+          "t": "vf",
+          "q": "Les nouveaux droits de douane américains ont été justifiés par l’administration Trump comme nécessaires pour protéger l’industrie nationale.",
+          "a": true,
+          "x": "L’administration Trump a justifié les mesures comme nécessaires pour protéger l’industrie nationale."
         },
         {
           "t": "input",
-          "q": "Quel dirigeant birmane a déclaré que la Birmanie ne suivrait pas les parties du verdict de la CIJ qu’elle juge «inappropriées» ?",
+          "q": "Quel est le nom de la cour d’assises qui juge Emilie König à Paris ?",
           "a": [
-            "Min Aung Hlaing"
+            "cour d’assises spécialement composée"
           ],
-          "x": "Le résumé précise que c’est Min Aung Hlaing qui a fait cette déclaration."
-        },
-        {
-          "t": "vf",
-          "q": "La Cour internationale de justice a jugé la Birmanie responsable du génocide des Rohingyas.",
-          "a": true,
-          "x": "Le résumé indique que la CIJ a jugé la Birmanie responsable."
+          "x": "La cour d’assises spécialement composée juge Emilie König."
         },
         {
           "t": "match",
-          "q": "Associe chaque acteur à son rôle dans les événements décrits",
+          "q": "Associe chaque élément aux faits correspondants",
           "pairs": [
             [
               "Jordan Bardella",
-              "candidat de l’Rassemblement National"
+              "Écriture antisémites révélées par Le Monde et Mediapart"
             ],
             [
-              "Le Monde",
-              "médias d’investigation"
+              "Washington",
+              "Nouvelle série de droits de douane"
             ],
             [
-              "David Lisnard",
-              "maire de Cannes"
+              "Emilie König",
+              "Procès à Paris pour association de malfaiteurs terroristes"
             ],
             [
-              "Min Aung Hlaing",
-              "dirigeant de la Birmanie"
+              "Romain Garnier",
+              "Condamnation à perpétuité à Bagdad"
             ]
           ],
-          "x": "Chaque paire relie un nom à la fonction ou à la position mentionnée dans le texte."
-        },
-        {
-          "t": "input",
-          "q": "Complète le titre d'une info du jour : « Ligue des champions : PSG accroché par la _____ Lille bat le Bayern »",
-          "a": [
-            "Roma"
-          ],
-          "x": "Titre complet : Ligue des champions : PSG accroché par la Roma, Lille bat le Bayern"
+          "x": "Chaque paire correspond à un fait précis mentionné dans les informations du jour."
         },
         {
           "t": "write",
-          "q": "Rédige un titre accrocheur et un chapô (accroche) pour une dépêche sur la décision de la Birmanie de ne pas suivre certaines exigences de la CIJ. Utilise les informations suivantes : La Cour internationale de justice a jugé la Birmanie responsable du génocide des Rohingyas. Le dirigeant Min Aung Hlaing a déclaré que la Birmanie ne suivrait pas les parties du verdict qu’elle juge «inappropriées». Le pays conteste les exigences de la CIJ. Exemple de la jurisprudence internationale, de la responsabilité des États et du rôle des institutions judiciaires supranationales.",
-          "src": "La Cour internationale de justice a jugé la Birmanie responsable du génocide des Rohingyas. Le dirigeant Min Aung Hlaing a déclaré que la Birmanie ne suivrait pas les parties du verdict qu’elle juge «inappropriées». Le pays conteste les exigences de la CIJ. Exemple de la jurisprudence internationale, de la responsabilité des États et du rôle des institutions judiciaires supranationales.",
-          "model": "Titre : \"Birmanie refuse de respecter les exigences de la CIJ sur le génocide des Rohingyas\" \nChapô : \"Face à la décision de la Cour internationale de justice, le dirigeant Min Aung Hlaing a annoncé que la Birmanie ne suivrait pas les parties du verdict qu’elle juge inappropriées, soulignant ainsi son refus de se conformer aux exigences de la CIJ. Cette décision met en lumière les enjeux de la jurisprudence internationale et la responsabilité des États face aux institutions judiciaires supranationales.\"",
+          "q": "Rédige un titre et un chapô (2 phrases) pour la dépêche concernant Emilie König",
+          "src": "Le procès de cette « revenante » de Syrie, âgée de 41 ans et mère de cinq enfants, accusée d’association de malfaiteurs terroriste notamment pour avoir relayé la propagande de l’organisation Etat islamique, s’ouvre jeudi à Paris. Cette ancienne figure de l’État islamique, seule femme à figurer sur la liste noire des Etats-Unis, est jugée à partir de ce jeudi devant la cour d’assises spécialement composée.",
+          "model": "Titre : Emilie König, figure de l’État islamique, jugée à Paris\nChapô : La cour d’assises de Paris ouvre le procès de la mère de cinq enfants, accusée d’association de malfaiteurs terroristes pour avoir relayé la propagande de l’État islamique.",
           "crit": [
             "Titre court et informatif",
-            "Chapô explicite la décision et son contexte",
-            "Utilisation des termes exacts du brief",
-            "Pas d’invention d’informations"
+            "Chapô explicite le lieu, la date et la nature de l’affaire",
+            "Pas de jugement ou d’opinion",
+            "Utilise uniquement les informations fournies"
           ]
         }
       ]
@@ -290,73 +314,87 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "desc": "International et Europe",
       "exercises": [
         {
-          "t": "vf",
-          "q": "Les États-Unis ont annoncé une série de droits de douane qui a suscité la colère de l'Union européenne et de la Chine.",
-          "a": true,
-          "x": "L’administration Trump a annoncé une série de droits de douane qui a suscité la colère de ses principaux partenaires commerciaux, dont l’Union européenne et la Chine."
+          "t": "qcm",
+          "q": "Quel est le nom du guitariste britannique décédé à 65 ans, ancien membre de Duran Duran ?",
+          "c": [
+            "Andy Taylor",
+            "David Gilmour",
+            "Brian May",
+            "Mick Jagger"
+          ],
+          "a": 0,
+          "x": "Le guitariste originel de la formation britannique de new wave avait quitté le groupe au milieu des années 1980."
         },
         {
           "t": "input",
-          "q": "Quel pays a été expulsé à tort vers le Salvador en 2025 et est maintenant en Espagne ?",
+          "q": "Combien de personnes ont été tuées dans le feu sur la route de Caire causé par un camion-citerne ?",
           "a": [
-            "Kilmar Abrego Garcia"
+            "31",
+            "31 personnes"
           ],
-          "x": "Kilmar Abrego Garcia, Salvadorien expulsé à tort vers le Salvador en 2025, est arrivé en Espagne pour une nouvelle vie."
-        },
-        {
-          "t": "vf",
-          "q": "Le Premier ministre espagnol Pedro Sanchez envisage une défaite aux élections législatives.",
-          "a": false,
-          "x": "Le Premier ministre espagnol refuse d’envisager une défaite aux élections législatives."
+          "x": "Le texte indique que le feu a fait au moins 31 morts."
         },
         {
           "t": "match",
-          "q": "Associe chaque déclaration aux dirigeants qui l’ont faite",
+          "q": "Associe chaque événement à son pays d'origine ou de lieu principal",
           "pairs": [
             [
-              "Trump et Mark Rutte ont appelé la Russie à éviter toute action qui étendrait délibérément ou involontairement la guerre en Ukraine",
-              "Monde"
+              "Trump et Rutte exhortent la Russie à ne pas étendre la guerre",
+              "États-Unis et Pays-Bas"
             ],
             [
-              "Les États-Unis annoncent de nouveaux droits de douane qui ont suscité la colère de l’Union européenne et de la Chine",
-              "Économie"
+              "Les nouveaux droits de douane américains suscitent l’indignation des partenaires commerciaux",
+              "États-Unis"
             ],
             [
-              "Les 27 chefs d’État et de gouvernements de l’Union européenne se réunissent à Bruxelles pour avancer sur le futur budget de l’Union",
-              "Europe"
+              "Navire diesel coule au large d’Ibiza",
+              "Espagne"
+            ],
+            [
+              "Andy Taylor, guitariste historique du groupe Duran Duran, est mort",
+              "Royaume-Uni"
+            ],
+            [
+              "Thirty-one killed in massive fire as fuel tanker crashes on Cairo highway",
+              "Égypte"
             ]
           ],
-          "x": "Associez chaque affirmation à la catégorie d’actualité correspondante."
-        },
-        {
-          "t": "qcm",
-          "q": "Quel est le principal objectif du sommet extraordinaire de Bruxelles mentionné dans l’actualité ?",
-          "c": [
-            "Déterminer le budget de sept ans de l’Union européenne",
-            "Lancer une nouvelle politique commerciale avec la Chine",
-            "Organiser une réunion de crise sur la guerre en Ukraine",
-            "Mettre en place un plan d’expulsion des migrants"
-          ],
-          "a": 0,
-          "x": "Le sommet vise à conclure un accord sur le budget de sept ans de l’Union européenne."
+          "x": "Associez chaque événement à son pays ou lieu principal."
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Pedro _____ refuse de céder face aux sondages »",
+          "q": "Complète le titre d'une info du jour : « Irak : huit nouveaux djihadistes français, dont Romain _____ condamnés à la perpétuité »",
           "a": [
-            "Sanchez"
+            "Garnier"
           ],
-          "x": "Titre complet : Pedro Sanchez refuse de céder face aux sondages"
+          "x": "Titre complet : Irak : huit nouveaux djihadistes français, dont Romain Garnier, condamnés à la perpétuité"
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre d'une info du jour : « Trump et Rutte exhortent la _____ à ne pas étendre la guerre en Ukraine »",
+          "a": [
+            "Russie"
+          ],
+          "x": "Titre complet : Trump et Rutte exhortent la Russie à ne pas étendre la guerre en Ukraine"
+        },
+        {
+          "t": "input",
+          "q": "Complète le titre d'une info du jour : « Thirty-one killed in massive fire as fuel tanker crashes on _____ highway »",
+          "a": [
+            "Cairo"
+          ],
+          "x": "Titre complet : Thirty-one killed in massive fire as fuel tanker crashes on Cairo highway"
         },
         {
           "t": "write",
-          "q": "Rédige un court paragraphe de 3 à 4 phrases (chapô) qui résume la déclaration conjointe de Trump et Mark Rutte concernant la guerre en Ukraine. Utilise les informations exactes fournies dans le brief.",
-          "src": "Trump et le chef de l’OTAN exhortent Moscou à ne pas « étendre la guerre » — Lors d’une rencontre à huis clos, Donald Trump et Mark Rutte ont appelé la Russie à éviter toute action qui étendrait délibérément ou involontairement la guerre en Ukraine. La déclaration conjointe a été publiée mercredi. Les deux dirigeants ont souligné l’importance de la stabilité régionale.",
-          "model": "Trump et Mark Rutte, lors d’une rencontre à huis clos, ont appelé la Russie à éviter toute action qui étendrait délibérément ou involontairement la guerre en Ukraine. La déclaration conjointe, publiée mercredi, souligne l’importance de la stabilité régionale.",
+          "q": "Rédige un titre et un chapô (intro) pour une dépêche sur la mort d’Andy Taylor, en respectant les critères de neutralité et de clarté.",
+          "src": "Andy Taylor, guitariste historique du groupe Duran Duran, est mort à 65 ans — Le guitariste originel de la formation britannique de new wave avait quitté le groupe au milieu des années 1980, après de nombreux tubes. Le guitariste britannique Andy Taylor, dont le jeu a contribué à forger le son de Duran Duran, groupe phare de la new wave des années 1980, est décédé, lundi, d'un cancer de la prostate, ont annoncé ses proches mercredi. Un fait relayé par 7 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
+          "model": "Titre : Andy Taylor, guitariste de Duran Duran, décède à 65 ans\nChapô : Le guitariste britannique Andy Taylor, membre fondateur du groupe de new wave Duran Duran, est décédé lundi d’un cancer de la prostate. Ses proches ont confirmé la nouvelle mercredi. Le groupe, emblématique des années 1980, a vu son fondateur quitter la formation au milieu des années 1980.",
           "crit": [
-            "Utiliser les termes exacts « Trump et Mark Rutte », « éviter toute action qui étendrait délibérément ou involontairement la guerre en Ukraine », « déclaration conjointe », « publiée mercredi », « importance de la stabilité régionale\"",
-            "Respecter la longueur de 3 à 4 phrases",
-            "Éviter toute information non présente dans le brief"
+            "Titre court et informatif",
+            "Chapô précis et factuel",
+            "Respect de la neutralité",
+            "Référence à la date et à la cause de décès"
           ]
         }
       ]
@@ -368,81 +406,75 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "exercises": [
         {
           "t": "qcm",
-          "q": "Quel candidat a reçu des messages antisémites selon les nouveaux éléments de preuve publiés par Le Monde et Mediapart ?",
+          "q": "Quel organisme a demandé la suspension d’un mois de CNews ?",
           "c": [
-            "Jordan Bardella",
-            "David Lisnard",
-            "Édouard Philippe",
-            "Min Aung Hlaing"
+            "La CNIL",
+            "L’Arcom",
+            "L’ONG Reporters sans frontières",
+            "Le Conseil supérieur de l’audiovisuel"
           ],
-          "a": 0,
-          "x": "Les médias ont publié des messages attribués à Jordan Bardella."
+          "a": 2,
+          "x": "Reporters sans frontières a saisi l’Arcom pour demander la suspension."
         },
         {
           "t": "vf",
-          "q": "Le maire de Cannes, David Lisnard, souhaite débattre avec Édouard Philippe uniquement si une primaire à droite est organisée.",
+          "q": "Les médias Le Monde et Mediapart ont publié de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella.",
           "a": true,
-          "x": "La déclaration de Lisnard précise cette condition."
-        },
-        {
-          "t": "qcm",
-          "q": "Quel groupe de candidats souhaite être inclus dans la primaire à droite selon David Lisnard ?",
-          "c": [
-            "Éric Zemmour et Nicolas Dupont-Aignan",
-            "Jordan Bardella et David Lisnard",
-            "Édouard Philippe et Min Aung Hlaing",
-            "Le Monde et Mediapart"
-          ],
-          "a": 0,
-          "x": "Lisnard mentionne spécifiquement Éric Zemmour et Nicolas Dupont-Aignan."
-        },
-        {
-          "t": "vf",
-          "q": "Le verdict de la Cour internationale de justice oblige la Birmanie à suivre toutes les parties du jugement.",
-          "a": false,
-          "x": "Le texte indique que la Birmanie ne suivra pas les parties qu’elle juge «inappropriées»."
+          "x": "Vrai, les deux médias ont publié de nouveaux éléments."
         },
         {
           "t": "input",
-          "q": "Quel média a publié de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella ?",
+          "q": "Quel est le nom de la journaliste accusée d’association de malfaiteurs terroristes et qui est la plus médiatique des djihadistes françaises ?",
           "a": [
-            "Le Monde",
-            "Mediapart"
+            "Emilie König"
           ],
-          "x": "Les deux médias ont publié les éléments de preuve mentionnés dans le résumé."
+          "x": "Le texte indique qu’Emilie König est la plus médiatique des djihadistes françaises."
         },
         {
-          "t": "match",
-          "q": "Associe chaque élément aux informations correspondantes",
-          "pairs": [
-            [
-              "Jordan Bardella",
-              "Les médias ont eu accès à une conversation où un ancien camarade de lycée reçoit des messages affirmant que les sionistes sont responsables"
-            ],
-            [
-              "David Lisnard",
-              "Il souhaite que cette primaire inclue des candidats comme Éric Zemmour et Nicolas Dupont-Aignan"
-            ],
-            [
-              "Birmanie",
-              "Le dirigeant Min Aung Hlaing a déclaré que la Birmanie ne suivrait pas les parties du verdict qu’elle juge «inappropriées»"
-            ],
-            [
-              "Édouard Philippe",
-              "Le maire de Cannes, David Lisnard, a confirmé son intention de participer à un débat avec Édouard Philippe"
-            ]
+          "t": "qcm",
+          "q": "Combien de djihadistes français ont été jugés par la cour criminelle de Bagdad depuis septembre ?",
+          "c": [
+            "47",
+            "39",
+            "52",
+            "61"
           ],
-          "x": "Associez chaque phrase aux éléments de la nouvelle."
+          "a": 0,
+          "x": "Le texte précise que 47 ressortissants français ont été jugés depuis septembre."
+        },
+        {
+          "t": "vf",
+          "q": "Jordan Bardella a reçu des messages d’un ancien camarade de lycée, révélés deux mois après les premières découvertes de Mediapart.",
+          "a": true,
+          "x": "Vrai, la conversation a été révélée deux mois après les premières découvertes."
+        },
+        {
+          "t": "vf",
+          "q": "Le procès d’Émilie König s’ouvre à Paris le jeudi.",
+          "a": true,
+          "x": "Le texte précise que le procès s’ouvre jeudi à Paris."
+        },
+        {
+          "t": "qcm",
+          "q": "Quel organisme a saisi l’Arcom pour demander la suspension d’un mois de CNews ?",
+          "c": [
+            "La CNIL",
+            "L’ONG Reporters sans frontières",
+            "Le Conseil supérieur de l’audiovisuel",
+            "L’Autorité de régulation des médias"
+          ],
+          "a": 1,
+          "x": "L’ONG Reporters sans frontières a saisi l’Arcom."
         },
         {
           "t": "write",
-          "q": "Rédige un court paragraphe (2-3 phrases) qui résume la position de David Lisnard concernant le débat avec Édouard Philippe.",
-          "src": "Le maire de Cannes, David Lisnard, a confirmé son intention de participer à un débat avec Édouard Philippe, mais uniquement si une primaire à droite est organisée. Il souhaite que cette primaire inclue des candidats comme Éric Zemmour et Nicolas Dupont-Aignan. Lisnard est également à la tête de l'Association des maires de France et progresse dans les sondages pour la présidentielle 2027.",
-          "model": "David Lisnard, maire de Cannes, souhaite débattre avec Édouard Philippe uniquement si une primaire à droite est organisée. Il veut que cette primaire inclue des candidats comme Éric Zemmour et Nicolas Dupont-Aignan. En tant que président de l'Association des maires de France, il progresse également dans les sondages pour la présidentielle 2027.",
+          "q": "Rédige un court chapô (3-4 lignes) pour une dépêche sur la suspension de CNews demandée par Reporters sans frontières. Utilise uniquement les informations fournies.",
+          "src": "1",
+          "model": "CNews, la chaîne contrôlée par Vincent Bolloré, fait face à une demande de suspension d’un mois par l’ONG Reporters sans frontières. L’ONG a saisi l’Arcom après avoir examiné 61 heures de programmes diffusés en septembre, les accusant de non-respect répété du pluralisme et de favoritisme envers l’extrême droite. Cette action illustre la régulation des médias et la responsabilité éditoriale en France.",
           "crit": [
-            "Utiliser un ton neutre et factuel",
-            "Ne pas ajouter d'informations non présentes dans le texte",
-            "Respecter la longueur indiquée"
+            "Utilise les faits exacts de l’information 1",
+            "Rédige un texte clair et neutre",
+            "Ne mentionne pas d’informations non présentes dans le brief"
           ]
         }
       ]
