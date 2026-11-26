@@ -158,7 +158,9 @@
       let exs = l.exercises;
       // chaque leçon du jour finit par un exercice d'écriture bâti sur une info de l'édition (si la rédaction n'en a pas mis)
       if (EXT.dayWrite && !exs.some(e => e.t === 'write')) { try { exs = exs.concat(EXT.dayWrite(d, +b) || []); } catch (e) { /* module */ } }
-      return { key, mode: 'day', date: a, title: l.title, color: '#E63946', exercises: exs, context: `Édition du ${frDate(a)}`, bonus: a === TODAY ? 20 : 0 };
+      const ord = orderByStory(d, exs);
+      return { key, mode: 'day', date: a, title: l.title, color: '#E63946', exercises: ord.map(o => o.ex), ids: ord.map(o => `${key}:${o.i}`), ctx: ord.map(o => o.ctx),
+        context: `Édition du ${frDate(a)}`, bonus: a === TODAY ? 20 : 0 };
     }
     if (kind === 'oral' && PREPA) {
       // Simulateur d'oral : 5 questions de jury au hasard, en exercices d'écriture auto-évalués
@@ -183,6 +185,26 @@
       return { key, mode: 'review', title: 'Révisions', color: '#3A86FF', exercises: items.map(i => i.ex), ids: items.map(i => i.id), context: 'À revoir' };
     }
     return null;
+  }
+  // Rattache chaque question à l'info qu'elle concerne, puis range la leçon info par info :
+  // d'abord les questions de la 1re info, puis de la 2e… ; les associations (plusieurs infos) ensuite ; l'écriture à la fin.
+  function orderByStory(day, exs) {
+    const st = (day && day.stories) || [];
+    const toks = t => new Set(norm(t).split(' ').filter(w => w.length >= 4 && !FREE_STOP.has(w)));
+    const stTok = st.map(x => toks(`${x.title} ${x.text}`));
+    const which = ex => {
+      const txt = [ex.q, ...(ex.c || []), ...(Array.isArray(ex.a) ? ex.a : []), ...(ex.items || []), ...[].concat(...(ex.pairs || [])), ex.src || ''].join(' ');
+      const t = toks(txt); let best = -1, sc = 1;
+      stTok.forEach((set, i) => { let n = 0; t.forEach(w => { if (set.has(w)) n++; }); if (n > sc) { sc = n; best = i; } });
+      return best;
+    };
+    const rows = exs.map((ex, i) => {
+      if (ex.t === 'write') { const k = which(ex); return { ex, i, rank: 3, s: k, ctx: { kind: 'write', label: k >= 0 ? st[k].title : 'Atelier d’écriture', tag: k >= 0 ? st[k].tag : '' } }; }
+      if (ex.t === 'match') return { ex, i, rank: 2, s: 999, ctx: { kind: 'recap', label: 'Récap : plusieurs infos du jour', tag: '' } };
+      const k = which(ex);
+      return { ex, i, rank: k >= 0 ? 1 : 2, s: k >= 0 ? k : 998, ctx: k >= 0 ? { kind: 'story', label: st[k].title, tag: st[k].tag, n: k } : { kind: 'recap', label: 'Les infos du jour', tag: '' } };
+    });
+    return rows.sort((x, y) => x.rank - y.rank || x.s - y.s || x.i - y.i);
   }
   const lessonState = key => S.lessons[key] || null;
   const starStr = n => '★'.repeat(n) + '☆'.repeat(3 - n);
@@ -948,7 +970,7 @@
   function startLesson(key) {
     const cfg = lessonFromKey(key);
     if (!cfg) return;
-    const items = cfg.exercises.map((ex, i) => ({ ex, id: cfg.ids ? cfg.ids[i] : `${key}:${i}`, retry: false }));
+    const items = cfg.exercises.map((ex, i) => ({ ex, id: cfg.ids ? cfg.ids[i] : `${key}:${i}`, retry: false, ctx: cfg.ctx ? cfg.ctx[i] : null }));
     L = { cfg, queue: items, pos: 0, total: items.length, resolved: 0, firstOk: 0, xp: 0, combo: 0, maxCombo: 0, t0: Date.now(), state: 'answer', check: null };
     document.body.classList.add('in-lesson');
     $('#lesson').hidden = false;
@@ -973,6 +995,12 @@
   function updateProgress() {
     const p = L.total ? L.resolved / L.total : 0;
     $('#progress-fill').style.width = `${Math.max(p * 100, 2)}%`;
+    // compteur sur le nombre réel de questions ; une question ratée qui revient affiche « 2e chance »
+    const qc = $('#qcount');
+    if (qc) {
+      const cur = L.queue[L.pos];
+      qc.textContent = L.state === 'end' || !cur ? '' : cur.retry ? '2e chance' : `${L.queue.slice(0, L.pos + 1).filter(x => !x.retry).length}/${L.total}`;
+    }
     const c = $('#combo');
     if (L.combo >= 3) { c.hidden = false; c.textContent = `🔥 ${L.combo} d'affilée`; c.style.animation = 'none'; void c.offsetWidth; c.style.animation = ''; }
     else c.hidden = true;
@@ -1009,6 +1037,12 @@
     const render = RENDER[it.v.t];
     if (!render) { L.resolved++; next(); return; }
     L.check = render(it.v, body, ready => { if (L && L.state === 'answer') $('#check').disabled = !ready; });
+    if (it.ctx) {
+      const c = it.ctx, col = (L.cfg.date && DAYS[L.cfg.date] && (DAYS[L.cfg.date].tagColors || {})[c.tag]) || 'var(--red)';
+      const head = c.kind === 'story' ? `📰 Info${c.tag ? ' · ' + esc(c.tag) : ''}` : c.kind === 'write' ? '✍️ À toi d’écrire' : '🧩 Récap';
+      const prev = L.queue[L.pos - 1], fresh = !prev || !prev.ctx || prev.ctx.label !== c.label;
+      body.insertAdjacentHTML('afterbegin', `<div class="ex-ctx ${fresh ? 'fresh' : ''}" style="--ctx:${esc(col)}"><small>${head}</small><span>${esc(c.label)}</span></div>`);
+    }
     if (it.retry) body.insertAdjacentHTML('afterbegin', '<div class="retry-tag">↻ Deuxième chance</div>');
     $('.lesson-body').scrollTop = 0;
   }
@@ -1209,13 +1243,8 @@
     const k = qHash(ex), n = seenCount(ex) + 1; delete S.qseen[k]; S.qseen[k] = n;   // la plus récente passe en dernier
     const ks = Object.keys(S.qseen); if (ks.length > 2500) ks.slice(0, ks.length - 2500).forEach(x => delete S.qseen[x]);
   }
-  const FRAMES = ['{q}', 'Teste-toi : {q}', 'Rappel : {q}', 'Tu t\'en souviens ? {q}', 'À toi : {q}', 'Question d\'examen : {q}', 'Vérifions : {q}'];
-  const VF_STYLES = [
-    { heading: 'Vrai ou faux ?', w: ['Vrai', 'Faux'], label: 'Vrai ou faux' },
-    { heading: 'Exact ou inexact ?', w: ['Exact', 'Inexact'], label: 'Exact ou inexact' },
-    { heading: 'Info ou intox ?', w: ['Info', 'Intox'], label: 'Info ou intox' },
-    { heading: 'Cette affirmation tient-elle ?', w: ['Elle tient', 'Elle ne tient pas'], label: 'Affirmation à vérifier' }
-  ];
+  const FRAMES = ['{q}'];   // la question telle qu'elle a été écrite et relue (plus de « Teste-toi : », « Rappel : »…)
+  const VF_STYLES = [{ heading: 'Vrai ou faux ?', w: ['Vrai', 'Faux'], label: 'Vrai ou faux' }];
   const pickOne = a => a[Math.floor(Math.random() * a.length)];
   const framed = q => pickOne(FRAMES).replace('{q}', q);
   function variantize(it) {
@@ -1227,7 +1256,7 @@
       if (n >= 1 && !it.retry) {
         if (Math.random() < 0.45 && ex.c.length > 1) {   // QCM → vrai/faux sur une proposition de réponse
           const asTrue = Math.random() < 0.5, wrong = ex.c.filter((_, i) => i !== ex.a), shown = asTrue ? good : pickOne(wrong);
-          return { t: 'vf', ...pickOne(VF_STYLES), q: `${ex.q} Réponse proposée : **${shown}**`, a: asTrue, x: (asTrue ? '' : `La bonne réponse est : **${good}**. `) + (ex.x || '') };
+          return { t: 'vf', heading: 'Cette réponse est-elle juste ?', w: ['Juste', 'Fausse'], label: 'Vérifie la réponse', q: `${ex.q}\n\nRéponse proposée : **${shown}**`, a: asTrue, x: (asTrue ? '' : `La bonne réponse est : **${good}**. `) + (ex.x || '') };
         }
         return { ...ex, q: framed(pickOne(ex.qv || [ex.q])) };
       }

@@ -970,3 +970,11 @@ body.in-welcome { overflow: hidden; }
 
 .alert-banner .ab-link{background:none;border:0;cursor:pointer;padding:4px;font:inherit;font-size:13px;font-weight:700;color:var(--blue,#3A86FF)}
 .alert-banner.ask{background:var(--card);border-color:var(--line-2)}
+
+/* Quiz : repère de l'info en cours et compteur de questions */
+.ex-ctx{display:flex;flex-direction:column;gap:2px;border-left:4px solid var(--ctx,var(--red));background:var(--paper-2);border-radius:10px;padding:8px 12px;margin:0 0 14px}
+.ex-ctx small{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ctx,var(--red))}
+.ex-ctx span{font-size:14px;font-weight:700;line-height:1.35;color:var(--ink-2)}
+.ex-ctx.fresh{animation:ctxIn .35s ease}
+@keyframes ctxIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.qcount{font-size:13px;font-weight:800;color:var(--muted);min-width:42px;text-align:right}

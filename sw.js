@@ -1,7 +1,7 @@
 /* Scoop — service worker : appli installable + hors ligne
    - éditions (data/days/*) : réseau d'abord (pour avoir l'actu fraîche), cache en secours
    - reste de l'appli : réseau d'abord aussi, cache en secours hors ligne */
-const VERSION = 'scoop-v44';
+const VERSION = 'scoop-v45';
 importScripts('./js/alertes-core.js');   // choix des rappels (partagé avec l'appli)
 const STATE_CACHE = 'scoop-alert-state';   // état des rappels envoyé par l'appli (survit aux mises à jour du cache principal)
 const STATE_URL = new URL('alert-state', self.registration.scope).href;
