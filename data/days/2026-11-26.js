@@ -255,6 +255,19 @@ window.SCOOP_DAYS['2026-11-26'] = {
         { name: 'Le Figaro', url: 'https://www.lefigaro.fr/elections/presidentielles/presidentielle-2027-la-guerre-en-ukraine-est-notre-guerre-repond-raphael-glucksmann-a-teddy-riner-20261126', titre: 'Présidentielle 2027 : «La guerre en Ukraine est notre guerre», répond Raphaël Glucksmann à Teddy Riner', extrait: 'En déplacement en Mayenne jeudi, le candidat à l’Élysée a défendu la poursuite du soutien à Kiev, estimant que la sécurité de la France et de l’Europe était en jeu.' },
         { name: '20 Minutes', url: 'https://www.20minutes.fr/politique/4265846-20261126-direct-presidentielle-2027-lisnard-veut-convaincre-electeurs-tous-horizons-compris-rn', titre: 'EN DIRECT Présidentielle 2027 : « La guerre en Ukraine est notre guerre », réplique Raphaël Glucksmann à Teddy Riner…', extrait: 'Suivez avec nous les informations de ce jeudi 26 novembre concernant la campagne présidentielle 2027' }
       ]
+    },
+    {
+      tag: 'Justice',
+      title: 'Gérard Depardieu sera jugé pour viol : la cour d’appel de Paris confirme le renvoi en procès',
+      sujet: "Affaire Depardieu : le procès pour viol confirmé",
+      text: 'La **cour d’appel de Paris** a confirmé jeudi le **renvoi en procès** de **Gérard Depardieu**, 77 ans, pour l’un des deux viols dénoncés par la comédienne **Charlotte Arnould**, qui avait **22 ans** au moment des faits présumés, en **août 2018**. La chambre de l’instruction a prononcé un **non-lieu partiel** pour le second viol. L’acteur, qui conteste les accusations, sera jugé par une **cour criminelle départementale** ; la décision est susceptible d’un **pourvoi en cassation**.',
+      why: 'Un renvoi en procès n’est pas une condamnation : on écrit « sera jugé », « accusé de » et on rappelle que l’intéressé nie les faits.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/societe/article/2026/11/26/gerard-depardieu-renvoye-en-proces-pour-une-partie-des-viols-dont-l-accuse-charlotte-arnould_6815543_3224.html', titre: 'Gérard Depardieu renvoyé en procès pour une partie des viols dont l’accuse Charlotte Arnould', extrait: 'Cette décision de la cour, saisie par la défense de l’acteur, qui conteste les accusations, est susceptible d’un pourvoi en cassation.' },
+        { name: 'Mediapart', url: 'https://www.mediapart.fr/journal/france/261126/affaire-depardieu-l-acteur-sera-juge-pour-l-un-des-viols-denonces-par-charlotte-arnould', titre: 'Affaire Depardieu: l’acteur sera jugé pour l’un des viols dénoncés par Charlotte Arnould', extrait: 'La chambre de l’instruction de la cour d’appel de Paris a confirmé, jeudi 26 novembre, le renvoi pour viol de Gérard Depardieu devant la cour criminelle départementale. Mais elle a prononcé un non-lieu partiel pour le second viol dénoncé pa...' },
+        { name: 'Euronews', url: 'https://fr.euronews.com/2026/11/26/gerard-depardieu-sera-bien-juge-pour-viol-sur-la-comedienne-charlotte-arnould', titre: 'Gérard Depardieu sera bien jugé pour viol sur la comédienne Charlotte Arnould', extrait: 'L\'acteur de 77 ans est accusé par la comédienne Charlotte Arnould, qui avait 22 ans au moment des faits, de l\'avoir violée à deux reprises en août 2018. La cour d\'appel a confirmé son renvoi en procès pour l\'un des deux viols présumés.' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/france/20261126-le-renvoi-en-proc%C3%A8s-de-g%C3%A9rard-depardieu-pour-une-partie-des-viols-dont-il-est-accus%C3%A9-confirm%C3%A9-en-appel', titre: 'Le renvoi en procès de Gérard Depardieu pour une partie des viols dont il est accusé confirmé en appel', extrait: 'La cour d’appel de Paris a confirmé, ce jeudi 26 novembre, le renvoi en procès de l’acteur Gérard Depardieu pour une partie des viols dénoncés par la comédienne Charlotte Arnould, a indiqué une source judiciaire à l’AFP.' }
+      ]
     }
   ],
   memo: [
@@ -337,9 +350,19 @@ window.SCOOP_DAYS['2026-11-26'] = {
         { t: 'vf', q: 'Raphaël Glucksmann a répondu à Teddy Riner que la guerre en Ukraine est « notre guerre ».', a: true, x: 'Glucksmann a défendu la poursuite du soutien à Kiev.' },
         { t: 'write', max: 300, q: '✍️ Chapô · « BCE : Pablo Hernandez de Cos succède à Christine Lagarde »', src: 'Dépêche :\n\nLes dirigeants des 21 pays de la zone euro ont désigné jeudi l’Espagnol Pablo Hernandez de Cos, 55 ans, directeur de la Banque des règlements internationaux, pour succéder à Christine Lagarde à la tête de la BCE, selon des sources diplomatiques. Il a été préféré au Néerlandais Klaas Knot.\n\nRédige un **chapô** (300 signes maximum).', model: '**Chapô possible :** L’Espagnol Pablo Hernandez de Cos, 55 ans, va succéder à Christine Lagarde à la tête de la BCE, ont décidé jeudi les dirigeants de la zone euro, selon des sources diplomatiques. Il a été préféré à Klaas Knot.', crit: ['Il nomme le successeur et la personne remplacée', 'Il nomme la BCE', 'Il cite la source (sources diplomatiques)', 'Il fait moins de 300 signes'] }
       ]
+    },
+    {
+      title: '⚡ Flash de 21 h', icon: '⚡', desc: 'Mise à jour', exercises: [
+        { t: 'qcm', q: 'Quelle formation de la cour d’appel a confirmé le renvoi de Gérard Depardieu en procès ?', c: ['La chambre de l’instruction', 'La cour d’assises spéciale', 'La Cour de cassation', 'Le tribunal de commerce'], a: 0, x: 'La **chambre de l’instruction** a confirmé le renvoi jeudi.' },
+        { t: 'qcm', q: 'Pour combien de viols présumés Gérard Depardieu est-il renvoyé en procès ?', c: ['Un seul des deux', 'Les deux', 'Aucun', 'Trois'], a: 0, x: 'La cour a prononcé un **non-lieu partiel** pour le second viol dénoncé.' },
+        { t: 'vf', q: 'La cour d’appel a prononcé un non-lieu partiel pour le second viol dénoncé par Charlotte Arnould.', a: true, x: 'Le renvoi en procès ne concerne que **l’un des deux viols** dénoncés.' },
+        { t: 'input', q: 'Complète : la décision est susceptible d’un pourvoi en _____.', a: ['cassation'], hint: 'Un seul mot.', x: 'Un **pourvoi en cassation** reste possible.' },
+        { t: 'qcm', q: 'Quel âge avait Charlotte Arnould au moment des faits présumés, en août 2018 ?', c: ['22 ans', '18 ans', '30 ans', '15 ans'], a: 0, x: 'Elle avait **22 ans**.' },
+        { t: 'write', max: 300, q: '✍️ Chapô · « Gérard Depardieu sera jugé pour viol »', src: 'Dépêche :\n\nLa cour d’appel de Paris a confirmé jeudi 26 novembre le renvoi en procès de Gérard Depardieu, 77 ans, pour l’un des deux viols dénoncés par la comédienne Charlotte Arnould, qui avait 22 ans en août 2018. Elle a prononcé un non-lieu partiel pour le second viol. L’acteur conteste les accusations ; un pourvoi en cassation est possible.\n\nRédige un **chapô** (300 signes maximum).', model: '**Chapô possible :** La cour d’appel de Paris a confirmé jeudi le renvoi de Gérard Depardieu, 77 ans, en procès pour l’un des deux viols dénoncés par Charlotte Arnould en 2018. L’acteur, qui conteste les accusations, peut encore se pourvoir en cassation.', crit: ['Il nomme la juridiction et la date', 'Il précise « l’un des deux viols »', 'Il rappelle que l’acteur conteste', 'Il fait moins de 300 signes'] }
+      ]
     }
   ],
-  updates: [{ at: '11:00', stories: [10, 11, 12] }, { at: '14:00', stories: [13, 14, 15] }, { at: '18:00', stories: [16, 17, 18] }],
+  updates: [{ at: '11:00', stories: [10, 11, 12] }, { at: '14:00', stories: [13, 14, 15] }, { at: '18:00', stories: [16, 17, 18] }, { at: '21:00', stories: [19] }],
   reco: [{ type: 'film', title: 'Les Hommes du président', by: 'Alan J. Pakula', year: 1976, story: 0, why: 'Deux journalistes du Washington Post enquêtent sur le scandale du Watergate. Un classique sur le journalisme d’investigation et la protection des sources, au cœur des nouvelles révélations de Mediapart et du Monde.' }],
   shorts: []
 };
