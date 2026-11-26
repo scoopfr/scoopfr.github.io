@@ -1,67 +1,38 @@
-// SCOOP:REGENERER
 /* Scoop — édition du 2026-11-26 (générée automatiquement, IA gratuite) */
 window.SCOOP_DAYS = window.SCOOP_DAYS || {};
 window.SCOOP_DAYS['2026-11-26'] = {
   "date": "2026-11-26",
-  "title": "Trump, OTAN, droits de douane américains et CNews sous le feu",
-  "intro": "Le président américain et le secrétaire général de l’OTAN ont appelé Moscou à ne pas étendre la guerre. Les États-Unis ont annoncé de nouveaux droits de douane, tandis que Reporters sans frontières demande la suspension d’un mois de CNews.",
+  "title": "Antisémitisme, diplomatie et droits de douane : enjeux mondiaux et français",
+  "intro": "Les révélations antisémites sur Jordan Bardella soulignent l'importance de la vérification des faits. En parallèle, la diplomatie internationale et les mesures commerciales américaines alimentent les débats politiques.",
   "word": {
-    "term": "OTAN",
-    "def": "Organisation du Traité de l’Atlantique Nord, alliance militaire intergouvernementale fondée en 1949 pour assurer la défense collective de ses membres."
+    "term": "vérification des faits",
+    "def": "Processus d'examen rigoureux des informations avant publication, visant à garantir l'exactitude et la fiabilité des contenus journalistiques."
   },
   "glossary": [
     {
+      "term": "Mediapart",
+      "def": "Média d'investigation français spécialisé dans la publication d'enquêtes et de révélations politiques.",
+      "cat": "Journalisme"
+    },
+    {
       "term": "OTAN",
-      "def": "Organisation du Traité de l’Atlantique Nord, alliance militaire intergouvernementale fondée en 1949 pour assurer la défense collective de ses membres.",
+      "def": "Organisation du Traité de l'Atlantique Nord, alliance militaire intergouvernementale regroupant 31 pays.",
       "cat": "Institutions"
-    },
-    {
-      "term": "droit de douane",
-      "def": "Mesure tarifaire imposée sur les importations ou exportations, visant à protéger les industries nationales ou à générer des revenus.",
-      "cat": "Économie"
-    },
-    {
-      "term": "Reporters sans frontières",
-      "def": "ONG internationale qui défend la liberté de la presse et surveille le respect du pluralisme médiatique.",
-      "cat": "Médias"
     }
   ],
   "memo": [
-    "Trump et Mark Rutte ont appelé Moscou à ne pas étendre la guerre en Ukraine",
-    "Les droits de douane américains ont été annoncés mercredi par l’administration Trump",
-    "Reporters sans frontières a saisi l’Arcom pour demander la suspension d’un mois de CNews",
-    "Caire : 31 morts après l’effondrement d’un camion-citerne de carburant"
+    "Jordan Bardella face à de nouveaux éléments d’écrits antisémites",
+    "Trump et le chef de l’OTAN exhortent Moscou à ne pas « étendre la guerre »",
+    "Les États-Unis imposent de nouveaux droits de douane, provoquant l’indignation des partenaires",
+    "David Lisnard séduit les déçus de la droite pour la présidentielle 2027",
+    "Législatives en Espagne : l’Andalousie, laboratoire de l’alliance droite et extrême droite"
   ],
   "stories": [
     {
-      "tag": "Monde",
-      "title": "Trump et le secrétaire général de l’OTAN exhortent Moscou à ne pas étendre la guerre",
-      "text": "Le président américain Donald Trump et le secrétaire général de l’OTAN, Mark Rutte, ont appelé la Russie à ne pas étendre la guerre en Ukraine. La déclaration conjointe a été publiée après une rencontre à huis clos. L’appel vise à éviter toute action qui étendrait délibérément ou involontairement la guerre.",
-      "why": "Comprendre les mécanismes de la diplomatie internationale, le rôle des institutions comme l’OTAN et la façon dont les dirigeants utilisent les déclarations publiques pour influencer les conflits.",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/international/live/2026/11/26/en-direct-guerre-en-ukraine-donald-trump-et-le-secretaire-general-de-l-otan-mark-rutte-exhortent-moscou-a-ne-pas-etendre-la-guerre-avec-kiev_6814183_3210.html"
-        },
-        {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/europe/20261126-en-direct-ukraine-russie-ue-sommet-aide-zelensky-poutine"
-        },
-        {
-          "name": "Le Figaro",
-          "url": "https://www.lefigaro.fr/international/guerre-en-ukraine-trump-et-le-secretaire-general-de-l-otan-exhortent-la-russie-a-ne-pas-etendre-la-guerre-avec-kiev-20261126"
-        },
-        {
-          "name": "Libération",
-          "url": "https://www.liberation.fr/international/amerique/donald-trump-et-lotan-exhortent-la-russie-a-eviter-toute-action-susceptible-daggraver-la-guerre-en-ukraine-20261126_R7D7NLQYHNC7ZJQ7CPTTRQDPJ4/"
-        }
-      ]
-    },
-    {
-      "tag": "Justice",
-      "title": "Écrits antisémites : révélations accablant Jordan Bardella",
-      "text": "Le Monde et Mediapart ont publié de nouveaux éléments de preuve sur des écrits antisémites attribués à Jordan Bardella. Les documents incluent une conversation où un ancien camarade de lycée reçoit des messages antisémites. Les révélations viennent deux mois après les premières révélations de Mediapart.",
-      "why": "Illustration du rôle des médias d’investigation dans la surveillance des personnalités politiques et de la manière dont les preuves écrites peuvent influencer les enquêtes judiciaires.",
+      "tag": "Politique",
+      "title": "Jordan Bardella face à de nouveaux éléments d’écrits antisémites",
+      "text": "Le Monde et Mediapart ont publié de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella. Les médias ont eu accès à une conversation où un ancien camarade de lycée de Bardella reçoit des messages. Les révélations viennent deux mois après les premières découvertes de Mediapart.",
+      "why": "Ce sujet illustre la responsabilité des médias et la vérification des faits, un concept clé pour les concours de journalisme.",
       "sources": [
         {
           "name": "franceinfo",
@@ -82,10 +53,34 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
+      "tag": "Monde",
+      "title": "Trump et le chef de l’OTAN exhortent Moscou à ne pas « étendre la guerre »",
+      "text": "Lors d’une rencontre à huis clos, Donald Trump et Mark Rutte ont appelé la Russie à ne pas étendre la guerre en Ukraine. La déclaration conjointe a été publiée mercredi. Les deux hommes ont plaidé pour une résolution rapide et pacifique du conflit.",
+      "why": "Il permet d’aborder la diplomatie internationale, les institutions comme l’OTAN et les enjeux géopolitiques, essentiels pour les concours.",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/international/live/2026/11/26/en-direct-guerre-en-ukraine-donald-trump-et-le-secretaire-general-de-l-otan-mark-rutte-exhortent-moscou-a-ne-pas-etendre-la-guerre-avec-kiev_6814183_3210.html"
+        },
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/europe/20261126-en-direct-ukraine-russie-ue-sommet-aide-zelensky-poutine"
+        },
+        {
+          "name": "Le Figaro",
+          "url": "https://www.lefigaro.fr/international/guerre-en-ukraine-trump-et-le-secretaire-general-de-l-otan-exhortent-la-russie-a-ne-pas-etendre-la-guerre-avec-kiev-20261126"
+        },
+        {
+          "name": "Libération",
+          "url": "https://www.liberation.fr/international/amerique/donald-trump-et-lotan-exhortent-la-russie-a-eviter-toute-action-susceptible-daggraver-la-guerre-en-ukraine-20261126_R7D7NLQYHNC7ZJQ7CPTTRQDPJ4/"
+        }
+      ]
+    },
+    {
       "tag": "Économie",
-      "title": "Nouveaux droits de douane américains suscitent l’indignation des partenaires commerciaux",
-      "text": "Washington a annoncé une série de droits de douane qui ont provoqué l’indignation de l’Union européenne, de la Chine, du Brésil et d’autres pays. Les partenaires affirment que ces mesures pénalisent les entreprises américaines et favorisent les subventions. L’annonce a été faite mercredi par l’administration Trump.",
-      "why": "Exemple concret de la politique commerciale internationale, de l’impact des droits de douane sur les relations économiques et de la réaction des partenaires commerciaux.",
+      "title": "Les États-Unis imposent de nouveaux droits de douane, provoquant l’indignation des partenaires",
+      "text": "Washington a annoncé une série de droits de douane qui a suscité la colère de l’Union européenne, de la Chine, du Brésil et d’autres pays. Les partenaires affirment que ces mesures pénalisent les entreprises américaines. Les États-Unis accusent les pays visés de recourir à des subventions.",
+      "why": "Ce sujet introduit les mécanismes du commerce international, les droits de douane et les relations commerciales, des notions fondamentales pour les concours.",
       "sources": [
         {
           "name": "franceinfo",
@@ -106,34 +101,10 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
-      "tag": "Médias",
-      "title": "Reporters sans frontières demande la suspension de CNews pour un mois",
-      "text": "L’ONG Reporters sans frontières a saisi l’Arcom pour demander la suspension d’un mois de la chaîne CNews. L’ONG accuse la chaîne de non‑respect répété du pluralisme et de favoriser l’extrême droite. La demande suit l’examen de soixante‑et‑une heures de programmes diffusés en septembre.",
-      "why": "Met en lumière les mécanismes de régulation des médias, la notion de pluralisme et l’importance de la liberté de la presse dans un système démocratique.",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/economie/article/2026/11/26/reporters-sans-frontieres-demande-la-suspension-de-cnews-pour-une-duree-d-un-mois_6815475_3234.html"
-        },
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/economie/medias/l-ong-reporters-sans-frontieres-saisit-l-arcom-pour-demander-de-suspendre-cnews-pendant-un-mois_8300685.html#xtor=RSS-3-[lestitres]"
-        },
-        {
-          "name": "La Croix",
-          "url": "https://www.la-croix.com/culture/cnews-reporters-sans-frontieres-demande-la-suspension-de-la-chaine-pendant-un-mois-20261126"
-        },
-        {
-          "name": "Mediapart",
-          "url": "https://www.mediapart.fr/journal/culture-et-idees/261126/reporters-sans-frontieres-reclame-la-suspension-de-cnews-pendant-un-mois"
-        }
-      ]
-    },
-    {
       "tag": "Politique",
       "title": "David Lisnard séduit les déçus de la droite pour la présidentielle 2027",
-      "text": "Le candidat David Lisnard attire les électeurs mécontents des figures de leur camp dans les Yvelines, les Hauts‑de‑Seine et le Rhône. Il affirme vouloir poursuivre les politiques de Retailleau et Philippe sans changement. Il a accepté d’organiser un débat avec Édouard Philippe sous condition d’une primaire.",
-      "why": "Cette histoire illustre la dynamique des élections françaises, la construction de coalitions et la gestion des primaires, des notions clés pour les concours de journalisme.",
+      "text": "Le candidat David Lisnard attire les électeurs mécontents des figures de leur camp dans les Yvelines, les Hauts-de-Seine et le Rhône. Il se présente comme un continuateur sans changement avec Retailleau et Philippe. Il propose d’organiser une primaire pour débattre avec Édouard Philippe.",
+      "why": "Cette histoire illustre la dynamique des élections présidentielles françaises, la formation de nouvelles coalitions et la stratégie de campagne, des notions clés pour les concours de journalisme.",
       "sources": [
         {
           "name": "Le Monde",
@@ -150,66 +121,26 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
-      "tag": "Europe",
-      "title": "Sommet européen à Bruxelles sur budget et aide à l’Ukraine",
-      "text": "Les dirigeants de l’Union européenne se réunissent à Bruxelles pour avancer sur le futur budget des 27 et l’aide à l’Ukraine. Le sommet est décrit comme extraordinaire et tendu. Il se concentre sur un budget de sept ans de 2 000 milliards d’euros.",
-      "why": "Comprendre les mécanismes de décision de l’UE, le rôle des sommets et les enjeux budgétaires est essentiel pour les journalistes couvrant l’Europe.",
+      "tag": "Monde",
+      "title": "Législatives en Espagne : l’Andalousie, laboratoire de l’alliance droite et extrême droite",
+      "text": "À l’approche des élections législatives en Espagne, l’Andalousie est un terrain d’essai pour l’alliance entre la droite et l’extrême droite. Les partisans du Parti populaire et de Vox se préparent à un nouveau scrutin. Le contexte est marqué par la montée des forces politiques conservatrices.",
+      "why": "Cette situation montre la montée de l’extrême droite en Europe, un phénomène d’importance pour les concours de journalisme qui examinent les tendances politiques et sociales.",
       "sources": [
         {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/monde/europe/union-europeenne/direct-sommet-europeen-les-dirigeants-de-l-ue-reunis-a-bruxelles-pour-avancer-sur-le-futur-budget-des-27-et-l-aide-a-l-ukraine_8300823.html#xtor=RSS-3-[lestitres]"
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/international/article/2026/11/26/elections-legislatives-en-espagne-l-andalousie-laboratoire-de-l-alliance-entre-la-droite-et-l-extreme-droite_6815491_3210.html"
         },
         {
           "name": "RFI",
-          "url": "https://www.rfi.fr/fr/europe/20261126-les-dirigeants-de-l-ue-r%C3%A9unis-en-sommet-extraordinaire-pour-discuter-du-budget-et-de-l-aide-%C3%A0-l-ukraine"
-        },
-        {
-          "name": "Euronews",
-          "url": "https://fr.euronews.com/2026/11/26/sommet-de-bruxelles-tendu-sur-budget-europeen-de-2-000-milliards-et-aide-a-lukraine"
-        }
-      ]
-    },
-    {
-      "tag": "Médias",
-      "title": "Caire : 31 morts après l’effondrement d’un camion-citerne de carburant",
-      "text": "Un camion-citerne de carburant s’est renversé sur une route très fréquentée de Caire, déclenchant un incendie qui a fait 31 morts et 15 blessés. L’incident a eu lieu sur une route circulaire autour de la capitale égyptienne. Les autorités locales ont déclaré un drame majeur.",
-      "why": "Les journalistes doivent maîtriser la rédaction d’articles de crise, la vérification des faits et la gestion de la diffusion d’informations sensibles.",
-      "sources": [
-        {
-          "name": "BBC News",
-          "url": "https://www.bbc.co.uk/news/articles/cqy7rn30v314o?at_medium=RSS&at_campaign=rss"
-        },
-        {
-          "name": "The Guardian",
-          "url": "https://www.theguardian.com/world/2026/nov/25/people-killed-fuel-tanker-crash-ignites-large-fire-cairo-highway"
-        },
-        {
-          "name": "France 24",
-          "url": "https://www.france24.com/en/africa/20261126-at-least-31-killed-in-cairo-fire-after-fuel-truck-overturns-on-busy-highway"
+          "url": "https://www.rfi.fr/fr/podcasts/reportage-international/20261125-l%C3%A9gislatives-en-espagne-les-canaries-redoutent-une-crise-migratoire-en-cas-de-victoire-de-la-droite-dure"
         }
       ]
     },
     {
       "tag": "Justice",
-      "title": "Huit djihadistes français condamnés à perpétuité en Irak",
-      "text": "Quarante‑sept djihadistes français transférés de Syrie vers l’Irak sont jugés à Bagdad. Huit d’entre eux, dont Romain Garnier, ont été condamnés à la réclusion à perpétuité pour leur appartenance à l’État islamique. Le procès a eu lieu le 26 novembre.",
-      "why": "Cette affaire met en lumière le droit international, la coopération judiciaire entre pays et la lutte contre le terrorisme, des thèmes fréquents dans les concours de journalisme.",
-      "sources": [
-        {
-          "name": "Le Monde",
-          "url": "https://www.lemonde.fr/international/article/2026/11/26/irak-huit-nouveaux-djihadistes-francais-dont-romain-garnier-condamnes-a-la-perpetuite_6815494_3210.html"
-        },
-        {
-          "name": "Ouest-France",
-          "url": "https://www.ouest-france.fr/monde/irak/huit-djihadistes-francais-condamnes-a-la-reclusion-a-perpetuite-en-irak-pour-leur-appartenance-a-letat-islamique-fa401da8-e968-11f1-86c1-70195b4d2e52?utm_source=fluxpublicactu&utm_medium=fluxrss&utm_campaign=banquedecontenu"
-        }
-      ]
-    },
-    {
-      "tag": "Monde",
-      "title": "Kilmar Abrego Garcia, ex-déporté, part en Espagne",
-      "text": "Kilmar Abrego Garcia, Salvadorien expulsé à tort vers le Salvador en 2025, est arrivé en Espagne pour une nouvelle vie. Il a été inculpé aux États-Unis sans suite après son retour. Le départ volontaire vers l’Espagne intervient après une décision de la Cour suprême.",
-      "why": "Illustration des procédures d’expulsion et de réintégration, utile pour comprendre les droits des migrants et le rôle des tribunaux.",
+      "title": "Kilmar Ábrego García, symbole des expulsions massives, part pour l’Espagne",
+      "text": "Le Salvadorien Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne après une décision de la Cour suprême. Il a été inculpé sans suite à son retour aux États-Unis. Son départ illustre les enjeux de la politique migratoire américaine.",
+      "why": "L’histoire met en lumière les procédures d’expulsion, les droits des migrants et les décisions judiciaires, des thèmes fondamentaux pour les concours de journalisme juridique et social.",
       "sources": [
         {
           "name": "Le Monde",
@@ -222,10 +153,10 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
-      "tag": "Europe",
-      "title": "Pedro Sanchez refuse d’envisager la défaite aux élections",
-      "text": "Les sondages accordent une majorité à la droite et à l’extrême droite, mais le Premier ministre espagnol ne veut pas envisager une défaite. Les élections législatives approchent alors que la politique nationale est en tension. Le contexte international est également mentionné, notamment les relations avec Washington.",
-      "why": "Permet d’analyser la dynamique électorale espagnole, les stratégies de parti et l’influence des relations internationales.",
+      "tag": "Monde",
+      "title": "Elections en Espagne : le coup de poker de Pedro Sanchez",
+      "text": "Les sondages favorisent la droite et l’extrême droite, mais le premier ministre refuse d’envisager une défaite. Il cherche à consolider son pouvoir malgré les pressions internationales. Les élections législatives approchent.",
+      "why": "Comprendre les dynamiques électorales et le rôle des partis politiques dans un pays européen, utile pour analyser les stratégies de pouvoir.",
       "sources": [
         {
           "name": "Le Monde",
@@ -234,6 +165,38 @@ window.SCOOP_DAYS['2026-11-26'] = {
         {
           "name": "Al Jazeera",
           "url": "https://www.aljazeera.com/opinions/2026/11/26/who-really-wants-pedro-sanchez-out-of-power?traffic_source=rss"
+        }
+      ]
+    },
+    {
+      "tag": "Europe",
+      "title": "Espagne : les féministes manifestent contre les violences faites aux femmes",
+      "text": "Des milliers de femmes se mobilisent avant les législatives pour dénoncer les violences. Les manifestations coïncident avec la montée de l’extrême droite. Elles exigent des mesures de protection et de justice.",
+      "why": "Illustration des mouvements sociaux en Europe et de leur influence sur les élections, compétence clé pour les concours de journalisme.",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/international/article/2026/11/26/nous-jouons-tout-lors-de-cette-election-en-espagne-les-femmes-manifestent-pour-leurs-droits-avant-les-legislatives-dimanche_6815461_3210.html"
+        },
+        {
+          "name": "Euronews",
+          "url": "https://fr.euronews.com/2026/11/26/espagne-les-feministes-manifestent-contre-les-violences-faites-aux-femmes-a-lapproche-des-"
+        }
+      ]
+    },
+    {
+      "tag": "Justice",
+      "title": "La Birmanie refuse de se conformer aux exigences de la CIJ sur le génocide des Rohingyas",
+      "text": "La Cour internationale de justice a jugé la Birmanie responsable du génocide. Le dirigeant Min Aung Hlaing a déclaré qu’elle ne suivrait pas les parties jugées inappropriées. Le verdict impose des mesures de réparation.",
+      "why": "Comprendre le fonctionnement de la CIJ et les enjeux de la justice internationale, essentiel pour les concours de journalisme international.",
+      "sources": [
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/asie-pacifique/20261126-genocide-rohingya-birmanie-ne-se-conformera-pas-exigences-cij-inappropriees"
+        },
+        {
+          "name": "Le Temps",
+          "url": "https://www.letemps.ch/monde/asie-oceanie/coupable-de-genocide-birmanie-ne-se-conformera-pas-a-toutes-les-exigences-de-la-cour-internationale-de-justice"
         }
       ]
     }
@@ -246,68 +209,98 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "exercises": [
         {
           "t": "qcm",
-          "q": "Quel organisme a demandé la suspension d’un mois de la chaîne CNews ?",
+          "q": "Quel média a publié de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella ?",
           "c": [
-            "L’ONU",
-            "Reporters sans frontières",
-            "La CNIL",
-            "L’UNESCO"
+            "Le Monde",
+            "Mediapart",
+            "Le Figaro",
+            "L'Humanité"
           ],
-          "a": 1,
-          "x": "Reporters sans frontières a saisi l’Arcom pour demander la suspension."
+          "a": 0,
+          "x": "Le Monde et Mediapart ont publié de nouveaux éléments de preuve."
         },
         {
           "t": "vf",
-          "q": "Le président américain Donald Trump et le secrétaire général de l’OTAN ont appelé Moscou à ne pas étendre la guerre en Ukraine.",
+          "q": "Trump et Mark Rutte ont appelé la Russie à ne pas \"étendre la guerre\" en Ukraine.",
           "a": true,
-          "x": "La déclaration conjointe a été publiée après une rencontre à huis clos."
+          "x": "La déclaration conjointe a été publiée mercredi."
+        },
+        {
+          "t": "qcm",
+          "q": "Qui propose d’organiser une primaire pour débattre avec Édouard Philippe ?",
+          "c": [
+            "David Lisnard",
+            "Jordan Bardella",
+            "Mark Rutte",
+            "Pedro Sanchez"
+          ],
+          "a": 0,
+          "x": "David Lisnard propose d’organiser une primaire."
+        },
+        {
+          "t": "vf",
+          "q": "Les manifestations féministes en Espagne ont lieu avant les législatives pour dénoncer les violences faites aux femmes.",
+          "a": true,
+          "x": "Des milliers de femmes se mobilisent avant les législatives."
+        },
+        {
+          "t": "qcm",
+          "q": "Qui a exhorté Moscou à ne pas « étendre la guerre » lors de la rencontre à huis clos ?",
+          "c": [
+            "Donald Trump et Mark Rutte",
+            "Joe Biden et Emmanuel Macron",
+            "Vladimir Poutine et Recep Tayyip Erdoğan",
+            "Angela Merkel et Boris Johnson"
+          ],
+          "a": 0,
+          "x": "Les deux hommes ont plaidé pour une résolution rapide et pacifique du conflit."
+        },
+        {
+          "t": "vf",
+          "q": "Kilmar Ábrego García a été expulsé à tort en 2025.",
+          "a": true,
+          "x": "Le Salvadorien a quitté les États-Unis pour l’Espagne après une décision de la Cour suprême."
         },
         {
           "t": "input",
-          "q": "Quel pays a été expulsé à tort vers le Salvador en 2025 et s’est ensuite installé en Espagne ?",
+          "q": "Quel est le nom de la région espagnole où l’alliance droite et extrême droite se préparent à un nouveau scrutin ?",
           "a": [
-            "Kilmar Abrego Garcia"
+            "Andalousie"
           ],
-          "x": "Kilmar Abrego Garcia, Salvadorien expulsé à tort vers le Salvador en 2025, est arrivé en Espagne."
-        },
-        {
-          "t": "vf",
-          "q": "Le sommet européen à Bruxelles se concentre sur un budget de sept ans de 2 000 milliards d’euros.",
-          "a": true,
-          "x": "Le sommet est décrit comme extraordinaire et tendu. Il se concentre sur un budget de sept ans de 2 000 milliards d’euros."
+          "x": "À l’approche des élections législatives en Espagne, l’Andalousie est un terrain d’essai pour l’alliance entre la droite et l’extrême droite."
         },
         {
           "t": "match",
-          "q": "Associe chaque thème à l’élément correspondant dans les informations du jour",
+          "q": "Associe chaque thème aux éléments clés mentionnés dans les informations du jour",
           "pairs": [
             [
-              "Monde",
-              "Trump et le secrétaire général de l’OTAN exhortent Moscou à ne pas étendre la guerre"
+              "Jordan Bardella",
+              "écrits antisémites"
             ],
             [
-              "Justice",
-              "Écrits antisémites : révélations accablant Jordan Bardella"
+              "Trump et Rutte",
+              "exhorter Moscou à ne pas étendre la guerre"
             ],
             [
-              "Économie",
-              "Nouveaux droits de douane américains suscitent l’indignation des partenaires commerciaux"
+              "David Lisnard",
+              "séduit les déçus de la droite pour la présidentielle 2027"
             ],
             [
-              "Médias",
-              "Reporters sans frontières demande la suspension de CNews pour un mois"
+              "Kilmar Ábrego García",
+              "expulsion à tort et départ pour l’Espagne"
             ]
           ],
-          "x": "Associez chaque thème aux éléments précis mentionnés dans les titres."
+          "x": "Chaque paire relie un sujet à son élément distinctif."
         },
         {
           "t": "write",
-          "q": "Rédige un titre, un chapô et une attaque (première phrase) pour une dépêche basée sur l’information suivante : \n\n\"Caire : 31 morts après l’effondrement d’un camion-citerne de carburant\"",
-          "src": "Un camion-citerne de carburant s’est renversé sur une route très fréquentée de Caire, déclenchant un incendie qui a fait 31 morts et 15 blessés. L’incident a eu lieu sur une route circulaire autour de la capitale égyptienne. Les autorités locales ont déclaré un drame majeur.",
-          "model": "Titre : \"31 morts à Caire après l’effondrement d’un camion-citerne de carburant\"\nChapô : \"Un camion-citerne de carburant s’est renversé sur une route très fréquentée de la capitale égyptienne, provoquant un incendie qui a fait 31 morts et 15 blessés.\"\nAttaque : \"Le drame, qui s’est produit sur une route circulaire autour de Caire, a été déclaré majeur par les autorités locales.\"",
+          "q": "Rédige un titre, un chapô et un résumé d’une dépêche basée sur l’information suivante : \"Le Salvadorien Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne après une décision de la Cour suprême. Il a été inculpé sans suite à son retour aux États-Unis.\"",
+          "src": "Le Salvadorien Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne après une décision de la Cour suprême. Il a été inculpé sans suite à son retour aux États-Unis.",
+          "model": "Titre : Kilmar Ábrego García, expulsé à tort, part pour l’Espagne après décision de la Cour suprême.\nChapô : Le Salvadorien, victime d’une expulsion jugée illégale en 2025, quitte les États-Unis pour l’Espagne après que la Cour suprême ait annulé son inculpation.\nRésumé : Kilmar Ábrego García, expulsé à tort en 2025, se rend en Espagne suite à une décision de la Cour suprême qui a annulé son inculpation. Son départ met en lumière les procédures d’expulsion et les droits des migrants aux États-Unis.",
           "crit": [
             "Titre court et informatif",
-            "Chapô résume l’information principale",
-            "Attaque introduit l’incident sans détails superflus"
+            "Chapô explicite l’événement principal",
+            "Résumé synthétique et sans ambiguïté"
           ]
         }
       ]
@@ -318,70 +311,96 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "desc": "International et Europe",
       "exercises": [
         {
+          "t": "qcm",
+          "q": "Quel pays a annoncé de nouveaux droits de douane qui ont suscité l’indignation de l’Union européenne, de la Chine, du Brésil et d’autres pays ?",
+          "c": [
+            "France",
+            "Allemagne",
+            "Royaume-Uni",
+            "États-Unis"
+          ],
+          "a": 3,
+          "x": "Les États-Unis ont annoncé une série de droits de douane."
+        },
+        {
           "t": "vf",
-          "q": "Le sommet européen à Bruxelles se concentre sur un budget de sept ans de 2 000 milliards d’euros.",
+          "q": "Jordan Bardella a été accusé d’écrits antisémites selon les révélations de Le Monde et Mediapart.",
           "a": true,
-          "x": "Le texte indique que le sommet se concentre sur un budget de sept ans de 2 000 milliards d’euros."
+          "x": "Les médias ont publié de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella."
         },
         {
           "t": "input",
-          "q": "Qui a appelé la Russie à ne pas étendre la guerre en Ukraine ?",
+          "q": "Quel chef d’État a exhorté Moscou à ne pas « étendre la guerre » lors d’une rencontre à huis clos avec Mark Rutte ?",
           "a": [
-            "Donald Trump",
-            "Mark Rutte"
+            "Donald Trump"
           ],
-          "x": "Les deux dirigeants ont appelé la Russie à ne pas étendre la guerre."
+          "x": "Lors d’une rencontre à huis clos, Donald Trump et Mark Rutte ont appelé la Russie à ne pas étendre la guerre."
         },
         {
           "t": "qcm",
-          "q": "Combien de morts ont été signalés après l’effondrement du camion-citerne à Caire ?",
+          "q": "Quel candidat attire les électeurs mécontents des figures de leur camp dans les Yvelines, les Hauts-de-Seine et le Rhône pour la présidentielle 2027 ?",
           "c": [
-            "15",
-            "31",
-            "46",
-            "0"
+            "David Lisnard",
+            "Édouard Philippe",
+            "Nicolas Sarkozy",
+            "Marine Le Pen"
           ],
-          "a": 1,
-          "x": "Le texte rapporte 31 morts."
+          "a": 0,
+          "x": "Le candidat David Lisnard attire les électeurs mécontents des figures de leur camp."
         },
         {
           "t": "vf",
-          "q": "Jordan Bardella a été accusé d’écrits antisémites selon les révélations de Mediapart.",
+          "q": "La Birmanie a accepté de se conformer aux exigences de la Cour internationale de justice sur le génocide des Rohingyas.",
+          "a": false,
+          "x": "La Cour internationale de justice a jugé la Birmanie responsable du génocide, mais le dirigeant Min Aung Hlaing a déclaré qu’elle ne suivrait pas les parties jugées inappropriées."
+        },
+        {
+          "t": "vf",
+          "q": "Le candidat David Lisnard propose d’organiser une primaire avec Édouard Philippe.",
           "a": true,
-          "x": "Le texte précise que les révélations viennent deux mois après les premières révélations de Mediapart."
+          "x": "Il propose d’organiser une primaire pour débattre avec Édouard Philippe."
+        },
+        {
+          "t": "input",
+          "q": "Quel est le nom du Salvadorien expulsé à tort en 2025 qui part pour l’Espagne ?",
+          "a": [
+            "Kilmar Ábrego García"
+          ],
+          "x": "Le Salvadorien Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne."
         },
         {
           "t": "match",
-          "q": "Associe chaque thème aux éléments correspondants",
+          "q": "Associe chaque thème aux éléments correspondants de la nouvelle",
           "pairs": [
             [
-              "Monde",
-              "Trump et le secrétaire général de l’OTAN exhortent Moscou à ne pas étendre la guerre"
+              "Jordan Bardella",
+              "écrits antisémites"
             ],
             [
-              "Justice",
-              "Écrits antisémites : révélations accablant Jordan Bardella"
+              "Trump et Mark Rutte",
+              "exhorter Moscou à ne pas étendre la guerre"
             ],
             [
-              "Économie",
-              "Nouveaux droits de douane américains suscitent l’indignation des partenaires commerciaux"
+              "Les États-Unis",
+              "nouveaux droits de douane"
             ],
             [
-              "Médias",
-              "Reporters sans frontières demande la suspension de CNews pour un mois"
+              "David Lisnard",
+              "séduit les déçus de la droite"
             ]
           ],
-          "x": "Chaque paire relie un domaine d’actualité à un extrait précis du brief."
+          "x": "Chaque paire relie un sujet d’actualité à son événement précis."
         },
         {
           "t": "write",
-          "q": "Rédige un titre, un chapô et une attaque (première phrase) pour l’article suivant :\n\n\"Caire : 31 morts après l’effondrement d’un camion-citerne de carburant\"",
-          "src": "Un camion-citerne de carburant s’est renversé sur une route très fréquentée de Caire, déclenchant un incendie qui a fait 31 morts et 15 blessés. L’incident a eu lieu sur une route circulaire autour de la capitale égyptienne. Les autorités locales ont déclaré un drame majeur.",
-          "model": "Titre : \"Caire : 31 morts suite à l’effondrement d’un camion-citerne de carburant\"\nChapô : \"Un incendie dévastateur a fait 31 victimes et 15 blessés après le renversement d’un camion-citerne sur une route très fréquentée de la capitale égyptienne.\"\nAttaque : \"Le drame, survenu sur une route circulaire autour de Caire, a été qualifié de majeur par les autorités locales.\"",
+          "q": "Rédige un titre et un chapô pour une dépêche sur la décision de la Cour suprême concernant Kilmar Ábrego García.",
+          "src": "Le Salvadorien Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne après une décision de la Cour suprême. Il a été inculpé sans suite à son retour aux États-Unis.",
+          "model": "Titre : Kilmar Ábrego García quitte les États-Unis après décision de la Cour suprême\nChapô : Le Salvadorien, expulsé à tort en 2025, s’envole vers l’Espagne après que la Cour suprême ait annulé son expulsion, mettant en lumière les enjeux de la politique migratoire américaine.",
           "crit": [
             "Titre court et informatif",
-            "Chapô résume les faits essentiels",
-            "Attaque introduit l’information principale"
+            "Chapô résume l’essentiel",
+            "Utilise un ton neutre",
+            "Respecte la structure titre/chapô"
           ]
         }
       ]
@@ -393,104 +412,94 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "exercises": [
         {
           "t": "qcm",
-          "q": "Quel organisme a demandé la suspension d’un mois de la chaîne CNews ?",
+          "q": "Quel média a publié de nouveaux éléments de preuve sur les écrits antisémites attribués à Jordan Bardella ?",
           "c": [
-            "Reporters sans frontières",
-            "L’Arcom",
-            "CNews",
-            "L’ONG"
+            "Le Monde",
+            "Mediapart",
+            "Le Figaro",
+            "Libération"
           ],
           "a": 0,
-          "x": "L’ONG Reporters sans frontières a saisi l’Arcom pour demander la suspension."
+          "x": "Le Monde a publié de nouveaux éléments de preuve."
         },
         {
           "t": "vf",
-          "q": "Les droits de douane annoncés par Washington ont été salués par l’Union européenne.",
+          "q": "Les droits de douane imposés par les États-Unis ont été salués par l'Union européenne.",
           "a": false,
-          "x": "L’Union européenne a exprimé son indignation face aux droits de douane américains."
+          "x": "L'Union européenne a exprimé son indignation."
         },
         {
           "t": "input",
-          "q": "Quel est le nom du candidat qui séduit les déçus de la droite pour la présidentielle 2027 ?",
+          "q": "Quel pays a été mentionné comme partenaire des États-Unis dans la dispute sur les droits de douane ?",
           "a": [
-            "David Lisnard"
+            "Chine"
           ],
-          "x": "Le texte indique que le candidat est David Lisnard."
+          "x": "La Chine est citée comme partenaire."
         },
         {
           "t": "qcm",
-          "q": "Quel pays a subi un effondrement d’un camion-citerne de carburant à Caire ?",
+          "q": "Qui a appelé la Russie à ne pas « étendre la guerre » lors d’une rencontre à huis clos ?",
           "c": [
-            "Le Maroc",
-            "Le Caire",
-            "Le Sénégal",
-            "Le Mali"
+            "Donald Trump et Mark Rutte",
+            "Vladimir Poutine et Angela Merkel",
+            "Joe Biden et Emmanuel Macron",
+            "Xi Jinping et Boris Johnson"
           ],
-          "a": 1,
-          "x": "Le texte mentionne un camion-citerne de carburant à Caire."
+          "a": 0,
+          "x": "Donald Trump et Mark Rutte ont fait cette déclaration."
         },
         {
           "t": "vf",
-          "q": "Le sommet européen à Bruxelles se concentre sur un budget de sept ans de 2 000 milliards d’euros.",
+          "q": "David Lisnard propose d’organiser une primaire pour débattre avec Édouard Philippe.",
           "a": true,
-          "x": "Le texte précise que le sommet se concentre sur un budget de sept ans de 2 000 milliards d’euros."
+          "x": "Il propose d’organiser une primaire pour débattre avec Édouard Philippe."
+        },
+        {
+          "t": "vf",
+          "q": "David Lisnard propose d’organiser une primaire avec Édouard Philippe.",
+          "a": true,
+          "x": "Le candidat David Lisnard propose d’organiser une primaire pour débattre avec Édouard Philippe."
+        },
+        {
+          "t": "input",
+          "q": "Quel est le nom du Salvadorien expulsé à tort en 2025 qui part pour l’Espagne ?",
+          "a": [
+            "Kilmar Ábrego García"
+          ],
+          "x": "Le Salvadorien Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne."
         },
         {
           "t": "match",
-          "q": "Associe chaque affirmation à son article correspondant",
+          "q": "Associe chaque thème aux éléments correspondants de l’actualité du jour",
           "pairs": [
             [
-              "Trump et le secrétaire général de l’OTAN exhortent Moscou à ne pas étendre la guerre",
-              "0"
+              "Écrits antisémites",
+              "Jordan Bardella face à de nouveaux éléments d’écrits antisémites"
             ],
             [
-              "Écrits antisémites : révélations accablant Jordan Bardella",
-              "1"
+              "Diplomatie internationale",
+              "Trump et le chef de l’OTAN exhortent Moscou à ne pas « étendre la guerre »"
             ],
             [
-              "Nouveaux droits de douane américains suscitent l’indignation des partenaires commerciaux",
-              "2"
+              "Commerce international",
+              "Les États-Unis imposent de nouveaux droits de douane"
             ],
             [
-              "Reporters sans frontières demande la suspension de CNews pour un mois",
-              "3"
-            ],
-            [
-              "David Lisnard séduit les déçus de la droite pour la présidentielle 2027",
-              "4"
-            ],
-            [
-              "Sommet européen à Bruxelles sur budget et aide à l’Ukraine",
-              "5"
-            ],
-            [
-              "Caire : 31 morts après l’effondrement d’un camion-citerne de carburant",
-              "6"
-            ],
-            [
-              "Huit djihadistes français condamnés à perpétuité en Irak",
-              "7"
-            ],
-            [
-              "Kilmar Abrego Garcia, ex-déporté, part en Espagne",
-              "8"
-            ],
-            [
-              "Pedro Sanchez refuse d’envisager la défaite aux élections",
-              "9"
+              "Élections espagnoles",
+              "Législatives en Espagne : l’Andalousie, laboratoire de l’alliance droite et extrême droite"
             ]
           ],
-          "x": "Associe chaque numéro d’article à son titre."
+          "x": "Chaque paire relie un sujet général à un article précis du brief."
         },
         {
           "t": "write",
-          "q": "Rédige un titre, un chapô et un résumé d’une dépêche sur l’article 6 : \"Caire : 31 morts après l’effondrement d’un camion-citerne de carburant\".",
-          "src": "Un camion-citerne de carburant s’est renversé sur une route très fréquentée de Caire, déclenchant un incendie qui a fait 31 morts et 15 blessés. L’incident a eu lieu sur une route circulaire autour de la capitale égyptienne. Les autorités locales ont déclaré un drame majeur.",
-          "model": "Titre : \"Caire : 31 morts suite à l’effondrement d’un camion-citerne de carburant\" \nChapô : \"Un incendie déclenché par un camion-citerne renversé a fait 31 victimes et 15 blessés sur la route circulaire de Caire.\" \nRésumé : \"Le camion-citerne, transportant du carburant, s’est renversé sur une route très fréquentée de Caire, provoquant un incendie mortel. Les autorités locales ont qualifié l’incident de drame majeur, déclarant 31 morts et 15 blessés.\"",
+          "q": "Rédige un titre, un chapô et un résumé d’une dépêche sur l’expulsion de Kilmar Ábrego García vers l’Espagne",
+          "src": "Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne après une décision de la Cour suprême. Il a été inculpé sans suite à son retour aux États-Unis.",
+          "model": "Titre : Kilmar Ábrego García part pour l’Espagne après une expulsion contestée\nChapô : Le Salvadorien, expulsé à tort en 2025, s’envole vers l’Espagne suite à une décision de la Cour suprême américaine.\nRésumé : Kilmar Ábrego García, expulsé à tort en 2025, quitte les États-Unis pour l’Espagne après une décision de la Cour suprême. Il a été inculpé sans suite à son retour aux États-Unis.",
           "crit": [
             "Titre court et informatif",
             "Chapô accrocheur et précis",
-            "Résumé clair et factuel"
+            "Résumé fidèle aux faits du brief"
           ]
         }
       ]
