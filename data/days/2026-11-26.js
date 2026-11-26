@@ -1,4 +1,3 @@
-// SCOOP:REGENERER
 /* Scoop — édition du 2026-11-26 (générée automatiquement, sans IA) */
 window.SCOOP_DAYS = window.SCOOP_DAYS || {};
 window.SCOOP_DAYS['2026-11-26'] = {
@@ -139,6 +138,30 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
+      "tag": "Médias",
+      "title": "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
+      "text": "Le feu s'est déclaré lorsqu'un camion chargé de carburant s'est renversé sur une autoroute très fréquentée, selon les médias d'État. Un incendie s'est déclaré mercredi dans l'agglomération du Caire, en Égypte, lorsqu'un camion chargé de carburant s'est renversé sur une autoroute très fréquentée.",
+      "why": "Un fait relayé par 4 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
+      "sources": [
+        {
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/monde/afrique/egypte/en-egypte-un-incendie-dans-l-agglomeration-du-caire-fait-au-moins-30-morts_8300229.html#xtor=RSS-3-[lestitres]"
+        },
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/afrique/20261125-en-%C3%A9gypte-un-incendie-sur-une-autoroute-du-caire-fait-une-trentaine-de-morts"
+        },
+        {
+          "name": "Libération",
+          "url": "https://www.liberation.fr/international/afrique/au-moins-30-morts-dans-un-quartier-densement-peuple-du-caire-ravage-par-un-incendie-20261125_BIUTUS5IPJGKDCP7EFIWZVRBZQ/"
+        },
+        {
+          "name": "Ouest-France",
+          "url": "https://www.ouest-france.fr/monde/egypte/un-incendie-sur-une-autoroute-fait-au-moins-31-morts-en-egypte-20277922-e922-11f1-86c1-70195b4d2e52?utm_source=fluxpublicactu&utm_medium=fluxrss&utm_campaign=banquedecontenu"
+        }
+      ]
+    },
+    {
       "tag": "Monde",
       "title": "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan",
       "text": "Le maire divers gauche de la ville affirme l’avoir constaté à plusieurs reprises en visionnant les enregistrements des caméras de surveillance, dont il dit avoir remis 7 000 heures au procureur de la République de Marseille. Devant la commission d'enquête de l'Assemblée nationale, le maire de Marseille Benoît Payan a déclaré mercredi que la police municipale avait reçu l'ordre de relâcher des pillards interpellés lors des violences du 17 octobre.",
@@ -179,26 +202,6 @@ window.SCOOP_DAYS['2026-11-26'] = {
       ]
     },
     {
-      "tag": "Médias",
-      "title": "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
-      "text": "Le feu s'est déclaré lorsqu'un camion chargé de carburant s'est renversé sur une autoroute très fréquentée, selon les médias d'État. Un incendie s'est déclaré mercredi dans l'agglomération du Caire, en Égypte, lorsqu'un camion chargé de carburant s'est renversé sur une autoroute très fréquentée.",
-      "why": "Un fait relayé par 3 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
-      "sources": [
-        {
-          "name": "franceinfo",
-          "url": "https://www.franceinfo.fr/monde/afrique/egypte/en-egypte-un-incendie-dans-l-agglomeration-du-caire-fait-au-moins-30-morts_8300229.html#xtor=RSS-3-[lestitres]"
-        },
-        {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/afrique/20261125-en-%C3%A9gypte-un-incendie-sur-une-autoroute-du-caire-fait-une-trentaine-de-morts"
-        },
-        {
-          "name": "Libération",
-          "url": "https://www.liberation.fr/international/afrique/au-moins-30-morts-dans-un-quartier-densement-peuple-du-caire-ravage-par-un-incendie-20261125_BIUTUS5IPJGKDCP7EFIWZVRBZQ/"
-        }
-      ]
-    },
-    {
       "tag": "Monde",
       "title": "Israeli judges recommend dropping most serious charges against Netanyahu",
       "text": "The Israeli PM says his trial should end after judges said there was little chance of conviction in one of three cases. Prime Minister Benjamin Netanyahu is accused of bribery, fraud and breach of trust in a long-running trial that has divided the country.",
@@ -235,48 +238,36 @@ window.SCOOP_DAYS['2026-11-26'] = {
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon _____ Payan »",
+          "q": "Complète le titre d'une info du jour : « En Egypte, un incendie dans l'agglomération du Caire fait au moins _____ morts »",
           "a": [
-            "Benoît"
+            "30"
           ],
-          "x": "Titre complet : Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
+          "x": "Titre complet : En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Teddy Riner affirme, à propos de la guerre en Ukraine, que la _____ doit « arrêter de donner de l’argent » qu’elle n’a pas »",
+          "q": "Complète le titre d'une info du jour : « Teddy _____ affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a pas »",
           "a": [
-            "France"
+            "Riner"
           ],
           "x": "Titre complet : Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a pas"
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « \"La démocratie, c’est du vote\", déclare David _____ qui refuse la proposition d’Edouard Philippe de débattre à la place d'une primaire »",
+          "q": "Complète le titre d'une info du jour : « Violences du 17 octobre à _____ : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan »",
           "a": [
-            "Lisnard"
+            "Marseille"
           ],
-          "x": "Titre complet : \"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattre à la place d'une primaire"
-        },
-        {
-          "t": "qcm",
-          "q": "Laquelle de ces infos relève de la rubrique « Médias » dans l'édition du jour ?",
-          "c": [
-            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
-            "Israeli judges recommend dropping most serious charges against Netanyahu",
-            "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
-            "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l"
-          ],
-          "a": 0,
-          "x": "Rubrique Médias : En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
+          "x": "Titre complet : Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
         },
         {
           "t": "qcm",
           "q": "Laquelle de ces infos relève de la rubrique « Politique » dans l'édition du jour ?",
           "c": [
             "\"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattr",
-            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
             "Israeli judges recommend dropping most serious charges against Netanyahu",
-            "Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans"
+            "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
+            "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l"
           ],
           "a": 0,
           "x": "Rubrique Politique : \"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattre à la place d'une primaire"
@@ -287,11 +278,23 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "c": [
             "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan",
             "\"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattr",
+            "Israeli judges recommend dropping most serious charges against Netanyahu",
+            "Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans"
+          ],
+          "a": 0,
+          "x": "Rubrique Monde : Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
+        },
+        {
+          "t": "qcm",
+          "q": "Laquelle de ces infos relève de la rubrique « Médias » dans l'édition du jour ?",
+          "c": [
+            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
+            "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan",
             "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
             "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l"
           ],
           "a": 0,
-          "x": "Rubrique Monde : Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
+          "x": "Rubrique Médias : En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
         },
         {
           "t": "match",
@@ -338,33 +341,33 @@ window.SCOOP_DAYS['2026-11-26'] = {
       "exercises": [
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la _____ malgré la claque électorale »",
+          "q": "Complète le titre d'une info du jour : « Donald _____ persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque électorale »",
           "a": [
-            "Chine"
+            "Trump"
           ],
           "x": "Titre complet : Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque électorale"
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Ligue des champions : le résumé de l’exploit des Lillois face au Bayern _____ et du match nul du PSG face à l’AS Roma »",
+          "q": "Complète le titre d'une info du jour : « Ligue des champions : le résumé de l’exploit des Lillois face au _____ Munich et du match nul du PSG face à l’AS Roma »",
           "a": [
-            "Munich"
+            "Bayern"
           ],
           "x": "Titre complet : Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l’AS Roma"
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « En Egypte, un incendie dans l'agglomération du _____ fait au moins 30 morts »",
+          "q": "Complète le titre d'une info du jour : « \"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard _____ de débattre à la place d'une primaire »",
           "a": [
-            "Caire"
+            "Philippe"
           ],
-          "x": "Titre complet : En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
+          "x": "Titre complet : \"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattre à la place d'une primaire"
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à _____ ans »",
+          "q": "Complète le titre d'une info du jour : « Andy _____ ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans »",
           "a": [
-            "65"
+            "Taylor"
           ],
           "x": "Titre complet : Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans"
         },
@@ -373,7 +376,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "q": "Laquelle de ces infos relève de la rubrique « Économie » dans l'édition du jour ?",
           "c": [
             "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
-            "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan",
+            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
             "Israeli judges recommend dropping most serious charges against Netanyahu",
             "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu"
           ],
@@ -397,9 +400,9 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "q": "Laquelle de ces infos relève de la rubrique « Société » dans l'édition du jour ?",
           "c": [
             "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l",
-            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
+            "\"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattr",
             "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
-            "\"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattr"
+            "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
           ],
           "a": 0,
           "x": "Rubrique Société : Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l’AS Roma"
@@ -431,7 +434,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
             "Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Mé",
             "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l",
             "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
-            "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
+            "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
           ],
           "a": 0,
           "x": "Rubrique Monde : Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Méditerranée"
@@ -462,9 +465,9 @@ window.SCOOP_DAYS['2026-11-26'] = {
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en _____ »",
+          "q": "Complète le titre d'une info du jour : « Comment l’Ukraine perturbe les opérations russes en _____ en frappant des navires de transport d’armes en Méditerranée »",
           "a": [
-            "Méditerranée"
+            "Afrique"
           ],
           "x": "Titre complet : Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Méditerranée"
         },
