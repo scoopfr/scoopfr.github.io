@@ -288,7 +288,9 @@ EX_SPEC = """Types d'exercices (JSON) :
 {"t":"order","q":"Remets dans l'ordre","items":["dans le bon ordre", ...3 à 5],"x":"..."}
 {"t":"match","q":"Associe","pairs":[["gauche","droite"], ... 4 paires aux textes tous différents],"x":"..."}
 {"t":"write","q":"consigne d'écriture (titre, chapô, attaque ou résumé d'une dépêche)","src":"la dépêche à partir de laquelle écrire","model":"proposition de la rédaction","crit":["critère 1","critère 2","critère 3","critère 4"]}
-CONTRAINTE : la bonne réponse de chaque question doit se trouver mot pour mot dans les textes des infos fournies (jamais de savoir extérieur)."""
+CONTRAINTES : la bonne réponse de chaque question doit se trouver mot pour mot dans les textes des infos fournies (jamais de savoir extérieur) ;
+une seule réponse possible (si deux choix sont vrais d'après les infos, change la question) ; ne déforme jamais le sens (qui a fait, proposé ou refusé quoi) ;
+varie les infos interrogées et ne pose jamais deux fois la même question."""
 
 
 # ------------------------------------------------------------------ fichiers d'édition (via Node, qui lit les .js existants)
@@ -453,6 +455,37 @@ def grounded(story, cluster):
     return True, ""
 
 
+LESSON_TAGS = [{"Politique", "Société", "Économie", "Justice", "Culture", "Climat"},
+               {"Monde", "Europe", "Économie", "Climat"},
+               {"Médias", "Culture", "Société", "Justice", "Politique"}]
+
+
+def dedupe_stories(stories):
+    out = []
+    for st in stories:
+        t = norm_tokens(st["title"] + " " + st["text"])
+        if any(len(t & norm_tokens(o["title"] + " " + o["text"])) / max(1, min(len(t), len(norm_tokens(o["title"] + " " + o["text"])))) >= 0.45 for o in out):
+            log(f"  info en doublon retirée : {st['title'][:70]}")
+            continue
+        out.append(st)
+    return out
+
+
+def ambiguous_qcm(stories, e):
+    """Plusieurs choix sont vrais d'après les infos (ex. deux médias ont publié la même révélation) : question ambiguë."""
+    c, a = e.get("c"), e.get("a")
+    if not isinstance(c, list) or not isinstance(a, int) or not 0 <= a < len(c):
+        return True
+    good = plain_norm(c[a])
+    for st in stories:
+        txt = plain_norm(st["title"] + " " + st["text"])
+        if good and good in txt:
+            others = [x for k, x in enumerate(c) if k != a and len(plain_norm(x)) > 2 and plain_norm(x) in txt]
+            if others:
+                return True
+    return False
+
+
 def check_exercises(stories, exs):
     """Contrôles automatiques simples, avant la relecture par l'IA."""
     corpus = plain_norm(" ".join(s["title"] + " " + s["text"] + " " + s.get("why", "") for s in stories))
@@ -473,6 +506,12 @@ def check_exercises(stories, exs):
         if t == "qcm":
             c = e.get("c")
             if not isinstance(c, list) or len(c) < 3 or len({plain_norm(x) for x in c}) != len(c) or not isinstance(e.get("a"), int) or not 0 <= e["a"] < len(c):
+                continue
+            if ambiguous_qcm(stories, e):
+                continue
+        if t == "match":
+            pairs = e.get("pairs")
+            if not isinstance(pairs, list) or len(pairs) < 3 or any(not isinstance(pr, list) or len(pr) != 2 for pr in pairs):
                 continue
         if t == "input":
             a = e.get("a")
@@ -509,7 +548,7 @@ def llm_review(stories, exs):
     lst = "\n".join(f"{k}. {show(e)}" for k, e in enumerate(exs))
     u = (f"Voici les infos du jour (seule référence) :\n{stories_brief(stories)}\n\nVoici des exercices de quiz :\n{lst}\n\n"
          "Tu es correcteur exigeant. Signale chaque exercice dont : la réponse donnée est fausse ou non prouvée par les infos ; la question est ambiguë, "
-         "mal formulée ou incohérente avec la réponse (ex. « quel pays » pour une personne) ; plusieurs choix pourraient être justes ; une affirmation VRAI n'est pas exactement dans les infos. "
+         "mal formulée ou incohérente avec la réponse (ex. « quel pays » pour une personne) ; plusieurs choix pourraient être justes ; une affirmation VRAI n'est pas exactement dans les infos ; la question déforme le sens d'une info (qui a proposé quoi, qui a refusé quoi). "
          'Réponds : {"bad":[{"i":NUMÉRO,"why":"raison courte"}]}  (liste vide si tout est juste)')
     try:
         r = llm(SYSTEM, u, 900)
@@ -602,7 +641,16 @@ def llm_lesson2(stories, spec):
             raise
         except Exception as e:
             log(f"  morceau de leçon « {t} » ignoré ({str(e)[:100]})")
-    ex = llm_review(stories, check_exercises(stories, ex))
+    uniq, seen = [], []
+    for e in ex:
+        tq = norm_tokens(str(e.get("q", "")))
+        if e.get("t") != "write" and any(tq and len(tq & o) / max(1, len(tq | o)) >= 0.6 for o in seen):
+            continue
+        seen.append(tq)
+        uniq.append(e)
+    writes = [e for e in uniq if e.get("t") == "write"]
+    uniq = [e for e in uniq if e.get("t") != "write"] + writes[:2]   # l'exercice d'écriture en fin de leçon
+    ex = llm_review(stories, check_exercises(stories, uniq))
     return {"title": t, "icon": ic, "desc": d, "exercises": ex}
 
 
@@ -772,15 +820,31 @@ def build_full(date, clusters):
                     raise
                 except Exception as e:
                     log(f"  lot d'infos ignoré ({str(e)[:100]})")
-        stories = stories[:10]
-        log(f"  {len(stories)} infos rédigées par l'IA")
+        stories = dedupe_stories(stories)[:10]
+        log(f"  {len(stories)} infos rédigées par l'IA (doublons retirés)")
         if 4 <= len(stories) < 9:   # on complète avec des infos recoupées en extraits (sans IA)
             used = {x["url"] for st in stories for x in st["sources"]}
             stories += basic_stories(clusters, 9 - len(stories), used)
         if len(stories) < 8:
             raise RuntimeError(f"seulement {len(stories)} infos retenues")
         meta = llm_meta(stories)
-        lessons = [llm_lesson2(stories, sp) for sp in LESSONS]
+        lessons = []
+        for k, sp in enumerate(LESSONS):
+            sub = [x for x in stories if x["tag"] in LESSON_TAGS[k]]
+            if len(sub) < 3:
+                sub = stories
+            lessons.append(llm_lesson2(sub, sp))
+        seen_q = []
+        for l in lessons:   # une même question ne revient pas d'une leçon à l'autre
+            keep = []
+            for e in l["exercises"]:
+                tq = norm_tokens(str(e.get("q", "")))
+                if e.get("t") != "write" and any(tq and len(tq & o) / max(1, len(tq | o)) >= 0.6 for o in seen_q):
+                    QUALITY["exercices retirés (contrôles)"] += 1
+                    continue
+                seen_q.append(tq)
+                keep.append(e)
+            l["exercises"] = keep
         basic = basic_lessons(stories, {"date": date})
         for k, l in enumerate(lessons):
             if 3 <= len(l["exercises"]) < 7:   # complément sûr : exercices automatiques tirés des titres
