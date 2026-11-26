@@ -1,0 +1,53 @@
+# Scoop — édition de SECOURS SANS IA (dernier filet de sécurité).
+# Ordre des passages à chaque créneau (heures UTC ; Paris = UTC+1 l'hiver, UTC+2 l'été) :
+#   h:00     routine Claude principale (autre compte)
+#   h+1:00   routine Claude de secours (compte Nico2), seulement si la principale n'a rien publié
+#   h+1:45   CE workflow, seulement si aucune des deux n'a publié ni signalé « rien de nouveau »
+# Il publie une revue de presse sans aucune IA : citations exactes des rédactions et questions exactes par construction.
+name: Édition de secours sans IA
+
+on:
+  schedule:
+    - cron: '45 7,11,14,18,21 * * *'
+  workflow_dispatch:
+    inputs:
+      options:
+        description: 'Options (ex. --force pour publier même si une routine est passée)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+concurrency:
+  group: edition-secours
+  cancel-in-progress: false
+
+jobs:
+  secours:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 50     # pour savoir si une routine Claude a publié récemment
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Publier une mise à jour sans IA si le créneau n'a pas été assuré
+        run: python3 scripts/edition_secours.py --si-rien-depuis 105 ${{ github.event.inputs.options }}
+      - name: Publier si quelque chose a changé
+        run: |
+          git config user.name "Scoop (secours sans IA)"
+          git config user.email "190466635+nicolaschaix34@users.noreply.github.com"
+          git add data/days
+          if git diff --cached --quiet; then
+            echo "Rien à publier."
+          else
+            git commit -m "Secours sans IA $(TZ=Europe/Paris date +'%d/%m %H h')"
+            git pull --rebase origin main
+            git push origin main
+          fi

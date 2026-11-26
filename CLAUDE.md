@@ -18,7 +18,10 @@ Réponds toujours en français.
 
 ## Mettre l'actu à jour
 
-**C'est automatique et indépendant de Claude** : le workflow `.github/workflows/edition-auto.yml` (GitHub Actions, gratuit) lance `scripts/auto_edition.py` plusieurs fois par jour : édition complète le matin, mises à jour dans la journée, recommandation culturelle à partir de 17 h. La rédaction est faite par une IA gratuite (Gemini si le secret `GEMINI_API_KEY` existe, sinon GitHub Models) ; sans IA, un mode de secours fabrique une revue de presse automatique. Aucune routine Claude (cloud ou locale) ne doit tourner. Voir `docs/EDITION_AUTOMATIQUE.md`.
+Trois niveaux (détails : `docs/EDITION_AUTOMATIQUE.md`) :
+1. **Routine Claude principale** (autre compte) à 7 h, 11 h, 14 h, 18 h, 21 h (heure de Paris l'hiver), selon `scripts/DAILY_PROMPT.md`.
+2. **Routine Claude de secours** (compte Nico2) 1 h après : `python3 scripts/deja_fait.py 70`, elle ne fait rien si la principale est passée.
+3. **Secours sans IA** (GitHub Actions, `scripts/edition_secours.py`) 1 h 45 après, seulement si aucune routine n'a publié : revue de presse aux citations exactes et aux questions exactes par construction.
 
 Pour une édition à la main (rare), suis `scripts/DAILY_PROMPT.md` :
 `python scripts/fetch_news.py`, puis `python scripts/new_topics.py AAAA-MM-JJ` (arrête-toi à `RIEN DE NOUVEAU`).

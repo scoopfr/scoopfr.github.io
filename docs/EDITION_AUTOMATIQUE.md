@@ -1,37 +1,37 @@
-# Édition automatique (sans Claude, sans abonnement)
+# Comment l'actu se met à jour
 
-## Comment ça marche
+Trois niveaux, du meilleur au plus sûr. Chaque créneau (7 h, 11 h, 14 h, 18 h, 21 h l'hiver ; une heure plus tard l'été, les horaires étant en UTC) est assuré par le premier niveau qui fonctionne.
 
-`.github/workflows/edition-auto.yml` lance `scripts/auto_edition.py` sur GitHub Actions (gratuit sur un dépôt public), aux heures UTC `05:10/06:10`, `09:10/10:10`, `12:10/13:10`, `15:10/16:10`, `19:10/20:10`. Le script regarde l'heure de Paris et décide seul :
+| Quand (UTC) | Qui | Quoi |
+|---|---|---|
+| h:00 (6, 10, 13, 17, 20) | **Routine Claude principale** (autre compte Claude) | Édition complète ou mise à jour, rédigée et vérifiée selon `scripts/DAILY_PROMPT.md`. |
+| h+1:00 (7, 11, 14, 18, 21) | **Routine Claude de secours** (compte Nico2, `trig_015NVDvZEBRexPYvnGZA8z71`) | Lance `scripts/deja_fait.py 70` : si la principale a publié (ou signalé « rien de nouveau »), elle s'arrête ; sinon elle fait le travail, avec la même qualité. |
+| h+1:45 (7:45, 11:45, 14:45, 18:45, 21:45) | **Secours sans IA** (GitHub Actions, gratuit : `.github/workflows/edition-secours.yml`) | Seulement si aucune routine Claude n'a rien publié depuis 1 h 45 (par exemple plus de crédits Claude). |
 
-| Situation | Action |
-|---|---|
-| Pas d'édition aujourd'hui (à partir de 6 h) | édition complète : 9 infos, 3 leçons, mot du jour, mémo |
-| Édition présente, dernière mise à jour il y a 2 h ou plus (à partir de 10 h) | 1 à 3 infos ajoutées + leçon « ⚡ Flash » |
-| À partir de 17 h, pas encore de recommandation | film, série, docu ou podcast « En écho à l'actu » |
+Un passage « rien de nouveau » compte comme un passage : `scripts/new_topics.py` l'inscrit lui-même dans `scripts/passages.txt` et le publie.
 
-Rien à publier = aucun commit. Un échec de contrôle = rien n'est publié et le workflow passe au rouge (GitHub t'envoie un e-mail).
+## Le secours sans IA (`scripts/edition_secours.py`)
 
-## Qui écrit ?
+Garanti sans invention, parce qu'aucun texte n'y est rédigé par une machine :
 
-1. Les **titres** viennent des flux RSS de ~24 rédactions, regroupés par sujet (au moins 2 rédactions différentes).
-2. Les **sources et liens** de chaque info viennent du code, jamais de l'IA.
-3. Les **textes et les quiz** sont rédigés par une IA gratuite à clé (un secret GitHub, au choix) :
-   - **Mistral** (`MISTRAL_API_KEY`, console.mistral.ai, entreprise française, niveau gratuit « Experiment »), **Groq** (`GROQ_API_KEY`), **Gemini** (`GEMINI_API_KEY`, le niveau gratuit dépend du pays/compte) ou **OpenRouter** (`OPENROUTER_API_KEY`, modèles gratuits). La première clé trouvée est utilisée.
-   - GitHub Models et les IA sans clé ont été essayés : inutilisables depuis GitHub Actions.
-   - sans clé : **mode de secours sans aucune IA** (extraits des dépêches, quiz automatiques : titres à compléter, rubriques, associations, un exercice d'écriture). Moins riche, mais l'application ne reste jamais sans édition.
-4. `scripts/check-edition.js` vérifie le résultat ; les exercices dont la réponse n'est pas dans le brief sont retirés.
+- **Infos** : uniquement les faits publiés par au moins 2 rédactions différentes. Il faut des titres qui partagent au moins 3 mots-clés, dont 2 précis (pas seulement « Ukraine » ou « Trump »), un mot commun qui ne soit pas un nom propre, et des résumés qui se recoupent aussi. Les faits en double sont écartés.
+- **Texte** : le résumé publié par chaque rédaction, **cité mot pour mot** entre guillemets avec son nom, et les liens vers les articles. Pas de « Bon à savoir » (il faudrait l'écrire).
+- **Questions**, exactes par construction :
+  - compléter un nom ou un chiffre d'un titre publié ;
+  - « Quelle rédaction a publié ce titre ? » (les rédactions qui ont publié le même titre ne sont jamais proposées comme mauvaise réponse) ;
+  - vrai/faux sur un titre exact, ou sur un titre volontairement modifié ;
+  - associer des titres à leur rédaction ;
+  - écrire un chapô, comparé au chapô publié.
+- **Mot du jour** : liste de définitions vérifiées. **Mémo** : les titres.
+- `scripts/check-edition.js` doit valider l'édition, sinon rien n'est publié. Moins de 8 faits recoupés le matin : pas d'édition (rien n'est inventé pour compléter).
 
-## Ajouter une clé gratuite (2 minutes)
-
-1. Crée la clé : console.mistral.ai → API Keys → Create new key (compte gratuit, choisis l'offre « Experiment »).
-2. GitHub → dépôt `scoopfr/scoopfr.github.io` → Settings → Secrets and variables → Actions → New repository secret → nom `MISTRAL_API_KEY`, valeur = la clé.
-3. Actions → « Édition automatique » → Run workflow avec l'option `--force`.
+Moins riche qu'une édition Claude (pas d'explication ni de reformulation), mais toujours juste.
 
 ## Lancer à la main
 
-GitHub → Actions → « Édition automatique » → Run workflow. Option `--force` pour ignorer l'heure (utile pour un essai).
+GitHub → Actions → « Édition de secours sans IA » → Run workflow. L'option `--force` publie même si une routine est passée.
 
-## Désactiver Claude
+## Notes
 
-Aucune routine Claude ne doit plus tourner : la routine de secours (compte Nico2) est coupée ; si l'ancienne routine du compte principal existe encore, supprime-la sur claude.ai/code/routines (sinon elle republierait en parallèle).
+- `scripts/auto_edition.py` contient d'anciens essais avec des IA gratuites (Pollinations, Groq, Gemini…). Ils ne sont plus utilisés : leur qualité n'était pas assez fiable. Le secours sans IA s'en sert seulement pour lire les titres et écrire les fichiers.
+- Notifications : `server/README.md` (Cloudflare Worker, 2 rappels par jour).

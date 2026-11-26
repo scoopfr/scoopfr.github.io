@@ -63,6 +63,28 @@ def core_tokens(cluster):
     return core or set(counts)
 
 
+PASSAGES = ROOT / "scripts" / "passages.txt"
+
+
+def signal_passage(date):
+    """Un passage « rien de nouveau » est publié dans scripts/passages.txt : les routines de secours
+    (Claude à +1 h, sans IA à +1 h 45) savent ainsi que le créneau a été assuré et ne font rien.
+    Gratuit (git seulement) ; une erreur ici n'empêche rien."""
+    import datetime
+    import subprocess
+    try:
+        lines = PASSAGES.read_text(encoding="utf-8").splitlines()[-50:] if PASSAGES.exists() else []
+        lines.append(f"{datetime.datetime.utcnow():%Y-%m-%d %H:%M} UTC · {date} · rien de nouveau")
+        PASSAGES.write_text("\n".join(lines) + "\n", encoding="utf-8")
+        git = ["git", "-C", str(ROOT), "-c", "user.name=Scoop", "-c", "user.email=190466635+nicolaschaix34@users.noreply.github.com"]
+        subprocess.run(git + ["add", str(PASSAGES), str(SEEN)], check=False, capture_output=True)
+        subprocess.run(git + ["commit", "-q", "-m", "Passage : rien de nouveau"], check=False, capture_output=True)
+        subprocess.run(git + ["pull", "-q", "--rebase", "origin", "main"], check=False, capture_output=True)
+        subprocess.run(git + ["push", "-q", "origin", "HEAD:refs/heads/main"], check=False, capture_output=True, timeout=60)
+    except Exception:
+        pass
+
+
 def main():
     if len(sys.argv) < 2:
         sys.exit("Usage : python3 scripts/new_topics.py AAAA-MM-JJ")
@@ -95,6 +117,7 @@ def main():
 
     if not candidates:
         OUT.write_text("RIEN DE NOUVEAU\n", encoding="utf-8")
+        signal_passage(date)
         print("RIEN DE NOUVEAU")
         return
     OUT.write_text(
