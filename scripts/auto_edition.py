@@ -179,7 +179,11 @@ def parse_json(txt):
     txt = txt.strip()
     txt = re.sub(r"^```(?:json)?|```$", "", txt, flags=re.M).strip()
     a, b = txt.find("{"), txt.rfind("}")
-    return json.loads(txt[a:b + 1])
+    txt = txt[a:b + 1]
+    try:
+        return json.loads(txt)
+    except json.JSONDecodeError:
+        return json.loads(re.sub(r",\s*([}\]])", r"", txt))   # virgules en trop avant } ou ]
 
 
 def llm(system, user, max_tokens=3500):
@@ -216,11 +220,15 @@ def llm(system, user, max_tokens=3500):
                 return parse_json(content)
             except Exception as e:
                 log(f"  ({env.split('_')[0].lower()} · {model} : {str(e)[:160]})")
-    # dernier recours : IA gratuite sans clé ni compte (qualité et disponibilité variables)
+    # IA gratuite sans clé ni compte (Pollinations) : 1 réponse toutes les 45 s par adresse, donc on espace les appels
     last = None
-    for model in ("openai", "mistral"):
+    for attempt in range(4):
+        gap = 46 - (time.time() - _LAST_FREE[0])
+        if gap > 0:
+            time.sleep(gap)
+        _LAST_FREE[0] = time.time()
         try:
-            r = _post("https://text.pollinations.ai/openai", {"model": model, "temperature": 0.3, "max_tokens": min(max_tokens, 4000),
+            r = _post("https://text.pollinations.ai/openai", {"model": "openai", "temperature": 0.3, "max_tokens": min(max_tokens, 4000),
                                                             "response_format": {"type": "json_object"},
                                                             "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}, {})
             content = (r.get("choices") or [{}])[0].get("message", {}).get("content") or ""
@@ -228,8 +236,14 @@ def llm(system, user, max_tokens=3500):
                 raise RuntimeError("réponse vide")
             return parse_json(content)
         except Exception as e:
-            last = e; log(f"  (pollinations · {model} : {str(e)[:160]})")
+            last = e; log(f"  (IA sans clé, essai {attempt + 1}/4 : {str(e)[:140]})")
+            m = re.search(r"Retry after (\d+)s", str(e))
+            if m:
+                time.sleep(int(m.group(1)) + 2)
     raise NoLLM(str(last))
+
+
+_LAST_FREE = [0.0]
 
 
 SYSTEM = ("Tu es rédacteur en chef d'une application d'actualité pour préparer les concours des écoles de journalisme. "
