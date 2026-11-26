@@ -183,7 +183,37 @@ def parse_json(txt):
     try:
         return json.loads(txt)
     except json.JSONDecodeError:
-        return json.loads(re.sub(r",\s*([}\]])", r"", txt))   # virgules en trop avant } ou ]
+        pass
+    try:
+        return json.loads(re.sub(r",\s*([}\]])", lambda m: m.group(1), txt))   # virgules en trop avant } ou ]
+    except json.JSONDecodeError:
+        return salvage(txt)
+
+
+def salvage(txt):
+    """Réponse coupée en plein milieu : on garde ce qui est complet et on referme les crochets."""
+    for k in [m.end() for m in re.finditer(r"\}", txt)][::-1][:60]:
+        part = txt[:k]
+        stack, in_str, esc = [], False, False
+        for ch in part:
+            if in_str:
+                if esc:
+                    esc = False
+                elif ch == "\\":
+                    esc = True
+                elif ch == '"':
+                    in_str = False
+            elif ch == '"':
+                in_str = True
+            elif ch in "{[":
+                stack.append("}" if ch == "{" else "]")
+            elif ch in "}]" and stack:
+                stack.pop()
+        try:
+            return json.loads(part + "".join(reversed(stack)))
+        except json.JSONDecodeError:
+            continue
+    raise json.JSONDecodeError("réponse inutilisable", txt, 0)
 
 
 def llm(system, user, max_tokens=3500):
@@ -328,12 +358,12 @@ def repair(day, path_writer):
 
 
 # ------------------------------------------------------------------ rédaction par l'IA
-def llm_stories(clusters, want, already=""):
+def llm_stories(clusters, want, already="", per_story="3 à 5 phrases"):
     u = (f"Voici des sujets d'actualité du jour, regroupés par fait (chaque sujet est couvert par au moins 2 rédactions). Identifiants entre crochets.\n\n{brief(clusters)}\n\n"
          f"{already}"
          f"Choisis {want} sujets (équilibre : politique française, international (au moins 3), Europe, économie, climat ou sciences, médias (au moins 1), société, culture ; "
          "écarte les faits divers sans portée générale et les sujets dont les titres ne parlent pas du même fait).\n"
-         'Réponds : {"stories":[{"cluster":ID,"tag":"' + "|".join(TAGS) + '","title":"titre factuel ≤ 90 caractères","text":"3 à 5 phrases factuelles tirées des titres et résumés","why":"1 à 2 phrases : pourquoi c\'est utile pour un concours (notion, institution, définition connue de tous)"}]}')
+         'Réponds : {"stories":[{"cluster":ID,"tag":"' + "|".join(TAGS) + '","title":"titre factuel ≤ 90 caractères","text":"' + per_story + ' factuelles tirées des titres et résumés","why":"1 à 2 phrases : pourquoi c\'est utile pour un concours (notion, institution, définition connue de tous)"}]}')
     r = llm(SYSTEM, u, 3800)
     out, seen = [], set()
     by_id = {c["id"]: c for c in clusters}
@@ -378,6 +408,26 @@ def llm_lesson(stories, spec, n_ex=None, title=None, icon=None, desc=None):
     r = llm(SYSTEM, u, 3800)
     ex = [e for e in r.get("exercises", []) if isinstance(e, dict) and e.get("t") in ("qcm", "vf", "input", "order", "match", "write")]
     return {"title": title or t, "icon": icon or ic, "desc": desc or d, "exercises": ex}
+
+
+PARTS = [
+    ("Fais exactement 5 exercices courts (qcm, vf ou input), sans exercice write.", ),
+    ("Fais exactement 3 exercices : 1 match (4 paires) ou 1 order, 1 qcm, et 1 exercice write construit sur une vraie info du brief.", ),
+]
+
+
+def llm_lesson2(stories, spec):
+    """Leçon en 2 petites demandes (l'IA gratuite coupe les réponses longues)."""
+    t, ic, d, _ = spec
+    ex = []
+    for (consigne,) in PARTS:
+        try:
+            ex += llm_lesson(stories, (t, ic, d, consigne))["exercises"]
+        except NoLLM:
+            raise
+        except Exception as e:
+            log(f"  morceau de leçon « {t} » ignoré ({str(e)[:100]})")
+    return {"title": t, "icon": ic, "desc": d, "exercises": ex}
 
 
 def llm_reco(stories):
@@ -537,11 +587,14 @@ def load_index():
 def build_full(date, clusters):
     want = 9
     try:
-        stories = llm_stories(clusters, want)
+        stories = []
+        for chunk in (clusters[0:6], clusters[6:11], clusters[11:16]):   # petites demandes : l'IA gratuite coupe ses réponses longues
+            if chunk:
+                stories += llm_stories(chunk, 3, per_story="3 phrases")
         if len(stories) < 8:
             raise RuntimeError(f"seulement {len(stories)} infos retenues")
         meta = llm_meta(stories)
-        lessons = [llm_lesson(stories, sp) for sp in LESSONS]
+        lessons = [llm_lesson2(stories, sp) for sp in LESSONS]
         basic = basic_lessons(stories, {"date": date})
         for k, l in enumerate(lessons):
             if len(l["exercises"]) < 5:

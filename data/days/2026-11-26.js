@@ -1,3 +1,4 @@
+// SCOOP:REGENERER
 /* Scoop — édition du 2026-11-26 (avec recommandation) */
 window.SCOOP_DAYS = window.SCOOP_DAYS || {};
 window.SCOOP_DAYS['2026-11-26'] = {
