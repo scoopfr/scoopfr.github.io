@@ -20,6 +20,7 @@ import subprocess
 import sys
 import time
 import urllib.error
+import unicodedata
 import urllib.request
 from zoneinfo import ZoneInfo
 
@@ -375,9 +376,182 @@ def llm_stories(clusters, want, already="", per_story="3 à 5 phrases"):
         c = by_id.get(cid)
         if not c or cid in seen or s.get("tag") not in TAGS or not s.get("title") or not s.get("text"):
             continue
+        story = {"tag": s["tag"], "title": s["title"].strip(), "text": s["text"].strip(), "why": (s.get("why") or "").strip(), "sources": sources_of(c)}
+        ok, reason = grounded(story, c)
+        if not ok:
+            QUALITY["infos rejetées"] += 1
+            log(f"  info rejetée (non conforme aux dépêches : {reason}) : {story['title'][:70]}")
+            continue
         seen.add(cid)
-        out.append({"tag": s["tag"], "title": s["title"].strip(), "text": s["text"].strip(), "why": (s.get("why") or "").strip(), "sources": sources_of(c)})
+        out.append(story)
     return out
+
+
+# ------------------------------------------------------------------ contrôles de fiabilité
+QUALITY = {"infos rejetées": 0, "exercices retirés par la relecture": 0, "exercices retirés (contrôles)": 0, "recommandations refusées": 0}
+NUM_RX = re.compile(r"\d+(?:[.,]\d+)?")
+TAG_NEED = {"Médias": r"média|journal|presse|télévision|chaîne|radio|journaliste|réseaux sociaux|arcom|cnews|france télévisions|audiovisuel",
+            "Justice": r"tribunal|procès|juge|condamn|justice|parquet|cour |mis en examen|prison|enquête|plainte|avocat",
+            "Climat": r"climat|cop\d|réchauffement|émission|biodiversité|écolog|énergie|carbone|sécheresse|inondation",
+            "Culture": r"cinéma|film|festival|musique|livre|exposition|série|théâtre|concert|musée|artiste|chanteu|écrivain"}
+
+
+def plain_norm(t):
+    t = unicodedata.normalize("NFD", str(t or "").lower())
+    return "".join(ch for ch in t if unicodedata.category(ch) != "Mn")
+
+
+def nums(t):
+    return {n.replace(",", ".") for n in NUM_RX.findall(str(t or ""))}
+
+
+def proper_nouns(t):
+    """Mots à majuscule hors début de phrase (noms de personnes, lieux, organisations)."""
+    out = set()
+    for sent in re.split(r"(?<=[.!?:»])\s+", str(t or "")):
+        words = re.findall(r"[A-ZÉÈÀÂÎÔÛÇ][\wÀ-ÿ'’-]{2,}", sent)
+        first = re.match(r"\W*([\wÀ-ÿ'’-]+)", sent)
+        for w in words:
+            if first and w == first.group(1):
+                continue
+            out.add(w)
+    return out
+
+
+def grounded(story, cluster):
+    """Une info n'est publiée que si ses chiffres, ses noms propres et l'essentiel de ses mots viennent des dépêches du groupe."""
+    src = " ".join(i["title"] + " " + (i["desc"] or "") for i in cluster["items"])
+    src_n = plain_norm(src)
+    src_nums = nums(src)
+    body = story["title"] + " " + story["text"]
+    missing = [n for n in nums(body) if n not in src_nums and not (len(n) == 4 and n.startswith("20"))]   # années courantes tolérées
+    if missing:
+        return False, "chiffre absent des sources : " + ", ".join(missing[:3])
+    src_tok = norm_tokens(src)
+    def known(w):
+        return plain_norm(w) in src_n or bool(norm_tokens(w) & src_tok)
+    # un prénom ou un titre est toléré s'il est collé à un nom présent dans les sources (« Donald Trump » quand la source dit « Trump »)
+    seqs = re.findall(r"(?:[A-ZÉÈÀÂÎÔÛÇ][\wÀ-ÿ'’-]+)(?:\s+(?:de |d'|du |la |le )?[A-ZÉÈÀÂÎÔÛÇ][\wÀ-ÿ'’-]+)*", body)
+    ok_words = set()
+    for sq in seqs:
+        parts = re.findall(r"[A-ZÉÈÀÂÎÔÛÇ][\wÀ-ÿ'’-]+", sq)
+        if any(known(x) for x in parts):
+            ok_words |= set(parts)
+    bad_nouns = [w for w in proper_nouns(body) if w not in ok_words and not known(w)]
+    if bad_nouns:
+        return False, "nom absent des sources : " + ", ".join(bad_nouns[:3])
+    tok = norm_tokens(story["text"])
+    if tok and len(tok & src_tok) / len(tok) < 0.45:
+        return False, "texte trop éloigné des dépêches"
+    # « pourquoi c'est utile » : pas de chiffre ni de nom inventé ; sinon on le remplace par une phrase neutre
+    if [n for n in nums(story["why"]) if n not in src_nums] or [w for w in proper_nouns(story["why"]) if plain_norm(w) not in src_n and w not in ("Union", "Europe", "France", "ONU", "OTAN", "État", "États")]:
+        story["why"] = "Un fait confirmé par plusieurs rédactions : savoir le résumer (qui, quoi, où, quand) et en expliquer l'enjeu fait partie de l'épreuve d'actualité."
+    # rubrique plausible
+    need = TAG_NEED.get(story["tag"])
+    if need and not re.search(need, (story["title"] + " " + story["text"]).lower()):
+        story["tag"] = guess_tag(story["title"], story["text"])
+    return True, ""
+
+
+def check_exercises(stories, exs):
+    """Contrôles automatiques simples, avant la relecture par l'IA."""
+    corpus = plain_norm(" ".join(s["title"] + " " + s["text"] + " " + s.get("why", "") for s in stories))
+    corpus_nums = nums(" ".join(s["title"] + " " + s["text"] for s in stories))
+    keep = []
+    for e in exs:
+        t = e.get("t")
+        txt = json.dumps(e, ensure_ascii=False)
+        if [n for n in nums(txt) if n not in corpus_nums and not (len(n) == 4 and n.startswith("20"))] and t != "write":
+            if t == "qcm":   # un mauvais choix peut contenir un chiffre inventé ; la question et la bonne réponse, non
+                good = e.get("c", [None] * 9)[e.get("a", 0)] if isinstance(e.get("c"), list) and isinstance(e.get("a"), int) and 0 <= e.get("a", 0) < len(e.get("c")) else None
+                if good is None or [n for n in nums(str(e.get("q")) + " " + str(good)) if n not in corpus_nums]:
+                    continue
+            elif t == "vf" and e.get("a") is False:
+                pass   # une affirmation fausse peut contenir un chiffre faux
+            else:
+                continue
+        if t == "qcm":
+            c = e.get("c")
+            if not isinstance(c, list) or len(c) < 3 or len({plain_norm(x) for x in c}) != len(c) or not isinstance(e.get("a"), int) or not 0 <= e["a"] < len(c):
+                continue
+        if t == "input":
+            a = e.get("a")
+            if not isinstance(a, list) or not a or len(str(a[0]).split()) > 5 or plain_norm(a[0]) not in corpus:
+                continue
+        if t == "vf" and e.get("a") is True:
+            tok = norm_tokens(str(e.get("q")))
+            if tok and len([w for w in tok if w in corpus]) / len(tok) < 0.7:
+                continue
+        keep.append(e)
+    QUALITY["exercices retirés (contrôles)"] += len(exs) - len(keep)
+    return keep
+
+
+def show(e):
+    t = e.get("t")
+    if t == "qcm":
+        return f"QCM « {e.get('q')} » choix {e.get('c')} → réponse donnée : « {e['c'][e['a']]} »"
+    if t == "vf":
+        return f"VRAI/FAUX « {e.get('q')} » → réponse donnée : {'VRAI' if e.get('a') else 'FAUX'}"
+    if t == "input":
+        return f"RÉPONSE À TAPER « {e.get('q')} » → réponse donnée : « {(e.get('a') or [''])[0]} »"
+    if t == "match":
+        return f"ASSOCIATION « {e.get('q')} » paires {e.get('pairs')}"
+    if t == "order":
+        return f"ORDRE « {e.get('q')} » ordre donné {e.get('items')}"
+    return f"ÉCRITURE « {e.get('q')} »"
+
+
+def llm_review(stories, exs):
+    """Relecture : une 2e passe de l'IA signale les exercices faux, ambigus ou mal formulés ; ils sont retirés."""
+    if not exs:
+        return exs
+    lst = "\n".join(f"{k}. {show(e)}" for k, e in enumerate(exs))
+    u = (f"Voici les infos du jour (seule référence) :\n{stories_brief(stories)}\n\nVoici des exercices de quiz :\n{lst}\n\n"
+         "Tu es correcteur exigeant. Signale chaque exercice dont : la réponse donnée est fausse ou non prouvée par les infos ; la question est ambiguë, "
+         "mal formulée ou incohérente avec la réponse (ex. « quel pays » pour une personne) ; plusieurs choix pourraient être justes ; une affirmation VRAI n'est pas exactement dans les infos. "
+         'Réponds : {"bad":[{"i":NUMÉRO,"why":"raison courte"}]}  (liste vide si tout est juste)')
+    try:
+        r = llm(SYSTEM, u, 900)
+    except NoLLM:
+        raise
+    except Exception as e:
+        log(f"  relecture impossible ({str(e)[:80]}) : exercices gardés après contrôles automatiques")
+        return exs
+    bad = set()
+    for b in r.get("bad", []) or []:
+        try:
+            k = int(b.get("i") if isinstance(b, dict) else b)
+        except Exception:
+            continue
+        if 0 <= k < len(exs) and exs[k].get("t") != "write":
+            bad.add(k)
+            log(f"  relecture : exercice retiré ({(b.get('why') if isinstance(b, dict) else '')[:80]}) : {str(exs[k].get('q'))[:70]}")
+    QUALITY["exercices retirés par la relecture"] += len(bad)
+    return [e for k, e in enumerate(exs) if k not in bad]
+
+
+def wiki_verify(title, by, year):
+    """L'œuvre recommandée existe-t-elle vraiment (titre, auteur, année) ? Vérifié sur Wikipédia (fr puis en)."""
+    import urllib.parse
+    last = plain_norm(str(by or "").split()[-1]) if by else ""
+    tw = [w for w in norm_tokens(title)] or [plain_norm(title)]
+    for lang in ("fr", "en"):
+        try:
+            q = urllib.parse.quote(f"{title} {by or ''}")
+            url = f"https://{lang}.wikipedia.org/w/api.php?action=query&list=search&srsearch={q}&srlimit=3&format=json"
+            req = urllib.request.Request(url, headers={"User-Agent": "scoop-auto-edition/1.0"})
+            hits = json.loads(urllib.request.urlopen(req, timeout=20).read().decode())["query"]["search"]
+            for h in hits:
+                u2 = f"https://{lang}.wikipedia.org/w/api.php?action=query&prop=extracts&exintro=1&explaintext=1&titles={urllib.parse.quote(h['title'])}&format=json"
+                req2 = urllib.request.Request(u2, headers={"User-Agent": "scoop-auto-edition/1.0"})
+                pages = json.loads(urllib.request.urlopen(req2, timeout=20).read().decode())["query"]["pages"]
+                ext = plain_norm(" ".join(pg.get("extract", "") for pg in pages.values()) + " " + h["title"])
+                if all(w in ext for w in tw[:4]) and (not last or last in ext) and (not year or str(year) in ext):
+                    return True
+        except Exception as e:
+            log(f"  (vérification Wikipédia {lang} impossible : {str(e)[:80]})")
+    return False
 
 
 def stories_brief(stories):
@@ -428,6 +602,7 @@ def llm_lesson2(stories, spec):
             raise
         except Exception as e:
             log(f"  morceau de leçon « {t} » ignoré ({str(e)[:100]})")
+    ex = llm_review(stories, check_exercises(stories, ex))
     return {"title": t, "icon": ic, "desc": d, "exercises": ex}
 
 
@@ -608,6 +783,9 @@ def build_full(date, clusters):
         lessons = [llm_lesson2(stories, sp) for sp in LESSONS]
         basic = basic_lessons(stories, {"date": date})
         for k, l in enumerate(lessons):
+            if 3 <= len(l["exercises"]) < 7:   # complément sûr : exercices automatiques tirés des titres
+                extra = [e for e in basic[k]["exercises"] if e["t"] in ("input", "qcm")][:7 - len(l["exercises"])]
+                l["exercises"] = l["exercises"][:-1] + extra + l["exercises"][-1:] if l["exercises"] and l["exercises"][-1]["t"] == "write" else l["exercises"] + extra
             if len(l["exercises"]) < 5:
                 log(f"  leçon {k} trop courte : remplacée par la version automatique"); lessons[k] = basic[k]
         mode = "IA gratuite"
@@ -618,6 +796,14 @@ def build_full(date, clusters):
             raise RuntimeError("pas assez de sujets recoupés pour une édition")
         meta = basic_meta(stories, date)
         mode = "sans IA"
+    if mode == "IA gratuite":
+        corpus = plain_norm(" ".join(x["title"] + " " + x["text"] for x in stories))
+        cnums = nums(" ".join(x["title"] + " " + x["text"] for x in stories))
+        meta["memo"] = [m for m in (meta.get("memo") or []) if isinstance(m, str) and not [n for n in nums(m) if n not in cnums]
+                        and len([w for w in norm_tokens(m) if w in corpus]) >= 0.7 * max(1, len(norm_tokens(m)))]
+        meta["glossary"] = [g for g in (meta.get("glossary") or []) if isinstance(g, dict) and plain_norm(g.get("term", "")) in corpus]
+        if len(meta["memo"]) < 3:
+            meta["memo"] = (meta["memo"] + [x["title"] for x in stories])[:5]
     day = {"date": date, "title": meta.get("title") or "Les infos du jour", "intro": meta.get("intro", ""), "word": meta.get("word") or {},
            "glossary": [g for g in (meta.get("glossary") or []) if isinstance(g, dict) and g.get("term") and g.get("def")][:5],
            "memo": [m for m in (meta.get("memo") or []) if isinstance(m, str)][:5], "stories": stories,
@@ -718,6 +904,10 @@ def main():
     if (hour >= 17 or "--force" in ARGS) and not day.get("reco"):
         try:
             r = llm_reco(day["stories"])
+            if r and not wiki_verify(r.get("title", ""), r.get("by", ""), r.get("year")):
+                QUALITY["recommandations refusées"] += 1
+                log(f"  recommandation refusée (introuvable telle quelle sur Wikipédia) : {r.get('title')} / {r.get('by')} / {r.get('year')}")
+                r = None
             before = json.loads(json.dumps(day))
             if r and r.get("type") in ("film", "série", "docu", "podcast") and r.get("title") and r.get("why") and isinstance(r.get("story"), int) and 0 <= r["story"] < len(day["stories"]):
                 day["reco"] = [{k: r[k] for k in ("type", "title", "by", "year", "story", "why") if k in r}]
@@ -727,6 +917,11 @@ def main():
                     write_day(before, "(inchangée)"); log("  recommandation refusée par le contrôle")
         except Exception as e:
             log(f"  pas de recommandation ({str(e)[:100]})")
+    report = "\n".join(f"- {k} : {v}" for k, v in QUALITY.items())
+    log("Contrôle qualité :\n" + report)
+    if os.environ.get("GITHUB_STEP_SUMMARY"):
+        with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+            f.write(f"### Scoop : contrôle qualité ({date} {hour} h)\n{report}\n")
     return 0
 
 
