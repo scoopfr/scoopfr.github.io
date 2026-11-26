@@ -157,7 +157,7 @@ class NoLLM(Exception):
 def _post(url, body, headers, tries=3):
     last = None
     for k in range(tries):
-        req = urllib.request.Request(url, data=json.dumps(body).encode(), headers={"Content-Type": "application/json", **headers})
+        req = urllib.request.Request(url, data=json.dumps(body).encode(), headers={"Content-Type": "application/json", "User-Agent": "scoop-auto-edition/1.0", **headers})
         try:
             with urllib.request.urlopen(req, timeout=120) as r:
                 raw = r.read().decode("utf-8", "ignore")
@@ -198,7 +198,6 @@ def llm(system, user, max_tokens=3500):
     if gh:
         last = None
         tries = [("https://models.github.ai/inference/chat/completions", m) for m in (os.environ.get("SCOOP_MODEL"), "openai/gpt-4.1-mini", "openai/gpt-4o-mini") if m]
-        tries += [("https://models.inference.ai.azure.com/chat/completions", m) for m in ("gpt-4o-mini", "Meta-Llama-3.1-70B-Instruct")]
         for url, model in tries:
             try:
                 r = _post(url, {"model": model, "temperature": 0.3, "max_tokens": min(max_tokens, 4000), "response_format": {"type": "json_object"},
@@ -210,8 +209,21 @@ def llm(system, user, max_tokens=3500):
                 return parse_json(content)
             except Exception as e:
                 last = e; log(f"  ({url.split('/')[2]} · {model} : {str(e)[:160]})")
-        raise NoLLM(str(last))
-    raise NoLLM("aucune clé ni jeton")
+        log("  GitHub Models indisponible : essai d'une IA gratuite sans clé (Pollinations)")
+    # dernier recours : IA gratuite sans clé ni compte (qualité et disponibilité variables)
+    last = None
+    for model in ("openai", "mistral"):
+        try:
+            r = _post("https://text.pollinations.ai/openai", {"model": model, "temperature": 0.3, "max_tokens": min(max_tokens, 4000),
+                                                            "response_format": {"type": "json_object"},
+                                                            "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}]}, {})
+            content = (r.get("choices") or [{}])[0].get("message", {}).get("content") or ""
+            if not content.strip():
+                raise RuntimeError("réponse vide")
+            return parse_json(content)
+        except Exception as e:
+            last = e; log(f"  (pollinations · {model} : {str(e)[:160]})")
+    raise NoLLM(str(last))
 
 
 SYSTEM = ("Tu es rédacteur en chef d'une application d'actualité pour préparer les concours des écoles de journalisme. "
