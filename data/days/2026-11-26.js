@@ -192,7 +192,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
     {
       tag: 'Europe',
       title: 'Royaume-Uni : l’immigration nette chute de 62 %, son plus bas niveau depuis 1997',
-      sujet: "L’immigration nette au plus bas au Royaume-Uni",
+      sujet: "Royaume-Uni : de nouveaux chiffres sur l’immigration",
       text: 'À la fin **juin 2026**, l’**immigration nette** au Royaume-Uni avait chuté de **62 %** sur un an, selon l’Office national des statistiques (**ONS**). C’est son plus bas niveau depuis **1997**, hors période du Covid-19. Le gouvernement du premier ministre **Andy Burnham**, qui mène une politique migratoire restrictive dans la lignée de celle de **Keir Starmer**, s’est félicité d’avoir « **rétabli le contrôle** ».',
       why: 'Un chiffre officiel se présente avec sa source (l’ONS), sa période (fin juin 2026) et sa comparaison (un an plus tôt) ; la réaction du gouvernement vient ensuite.',
       sources: [
