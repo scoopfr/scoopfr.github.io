@@ -129,6 +129,40 @@ window.SCOOP_DAYS['2026-11-26'] = {
         { name: 'Radio-Canada', url: 'https://ici.radio-canada.ca/article/info/2303112/deces-andy-taylor-ex-guitariste-duran-duran' },
         { name: 'BBC News', url: 'https://www.bbc.co.uk/news/articles/cmp3vk6vr44po' }
       ]
+    },
+    {
+      tag: 'Économie',
+      title: 'Nouveaux droits de douane américains : l’UE, la Chine et le Brésil s’indignent',
+      text: 'L’administration de **Donald Trump** a annoncé mercredi une nouvelle série de **droits de douane** pouvant atteindre **20 %**, après une enquête sur une prétendue **surproduction mondiale**. Washington accuse les pays visés de recourir à des **subventions** qui pénalisent les entreprises américaines. L’**Union européenne**, la **Chine**, le **Brésil**, le **Japon**, l’Inde ou Singapour dénoncent des mesures « inacceptables ». Pékin parle de « manipulation politique ». Mediapart rappelle que cette politique douanière avait été désavouée par la **Cour suprême** américaine il y a neuf mois.',
+      why: 'Les droits de douane sont des taxes sur les produits importés. Ils peuvent provoquer des mesures de rétorsion et une guerre commerciale.',
+      sources: [
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/monde/usa/droits-de-douane/inacceptables-regrettables-pretexte-a-la-manipulation-politique-les-pays-vises-s-indignent-face-aux-nouveaux-droits-de-douane-americains_8300712.html' },
+        { name: 'France 24', url: 'https://www.france24.com/fr/am%C3%A9riques/20261126-l-ue-la-chine-et-d-autres-pays-s-indignent-des-nouveaux-droits-de-douane-am%C3%A9ricains' },
+        { name: 'RFI', url: 'https://www.rfi.fr/fr/monde/20261126-l-annonce-de-nouveaux-droits-de-douane-am%C3%A9ricains-par-washington-suscite-l-indignation-des-pays-vis%C3%A9s' },
+        { name: 'The Guardian', url: 'https://www.theguardian.com/us-news/2026/nov/26/brazil-china-react-to-new-trump-tariffs-threat' }
+      ]
+    },
+    {
+      tag: 'Europe',
+      title: 'Un navire chargé de diesel coule au large d’Ibiza, un marin meurt',
+      text: 'Le **Med Emre**, un navire transportant jusqu’à **7 000 tonnes de diesel**, a coulé jeudi à une quarantaine de kilomètres de l’île espagnole d’**Ibiza**, en Méditerranée. Les **17 membres** d’équipage ont été secourus, mais l’un d’eux est mort à l’hôpital. Les autorités espagnoles ont activé le **plan d’urgence contre la pollution maritime** et déployé un navire antipollution. Les dommages environnementaux sont en cours d’évaluation.',
+      why: 'Face à un risque de marée noire, les premières heures comptent : on distingue le bilan humain, le risque écologique et l’enquête sur les causes, encore inconnues.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/international/article/2026/11/26/espagne-un-petrolier-charge-de-diesel-coule-au-large-d-ibiza-faisant-un-mort_6815505_3210.html' },
+        { name: 'franceinfo', url: 'https://www.franceinfo.fr/monde/espagne/un-navire-transportant-jusqu-a-7-000-tonnes-de-diesel-coule-au-large-de-l-ile-espagnole-d-ibiza-faisant-un-mort-parmi-les-membres-de-l-equipage_8300973.html' },
+        { name: 'Le Figaro', url: 'https://www.lefigaro.fr/international/espagne-un-cargo-avec-1-2-million-de-litres-de-petrole-coule-au-large-d-ibiza-un-membre-de-l-equipage-est-mort-20261126' },
+        { name: '20 Minutes', url: 'https://www.20minutes.fr/monde/espagne/4265863-20261126-espagne-navire-charge-7-000-tonnes-diesel-coule-large-ibiza-mort-parmi-equipage' }
+      ]
+    },
+    {
+      tag: 'Culture',
+      title: 'Simon Abkarian succédera à Ariane Mnouchkine à la tête du Théâtre du Soleil',
+      text: 'Le comédien et metteur en scène **Simon Abkarian** prendra la tête du **Théâtre du Soleil** à l’automne **2027**. Il succède à **Ariane Mnouchkine**, qui prend sa retraite et dont la troupe a décidé de lui confier la direction. L’acteur, vu en 2026 dans **« La Bataille de Gaulle »** d’Antonin Baudry, où il incarne le général de Gaulle, a passé plusieurs années de jeunesse à la **Cartoucherie**. Le théâtre existe depuis **1964**.',
+      why: 'Une succession à la tête d’une institution culturelle est une info « nomination » classique : qui, pour remplacer qui, et à partir de quand.',
+      sources: [
+        { name: 'Le Monde', url: 'https://www.lemonde.fr/culture/article/2026/11/26/simon-abkarian-va-succeder-a-ariane-mnouchkine-au-theatre-du-soleil_6815485_3246.html' },
+        { name: 'Le Figaro', url: 'https://www.lefigaro.fr/culture/simon-abkarian-prendra-la-tete-du-theatre-du-soleil-a-l-automne-2027-20261126' }
+      ]
     }
   ],
   memo: [
@@ -178,8 +212,20 @@ window.SCOOP_DAYS['2026-11-26'] = {
         { t: 'write', max: 280, q: '🎯 Attaque · « Écrits antisémites : nouvelles révélations sur Jordan Bardella »', src: 'Dépêche :\n\nDeux mois après les premières révélations de Mediapart, le site d’investigation et Le Monde publient jeudi de nouveaux messages antisémites attribués à Jordan Bardella, président du Rassemblement national. Ils datent de 2013. Jordan Bardella réfute ces accusations et dénonce une « entreprise de persécution ».\n\nRédige l’**attaque** de l’article (une ou deux phrases, 280 signes maximum). Attention : les messages lui sont **attribués**, il les conteste.', model: '**Attaque possible :** Le Monde et Mediapart publient ce jeudi de nouveaux messages antisémites, datés de 2013, attribués à Jordan Bardella. Le président du Rassemblement national réfute ces accusations et dénonce une « entreprise de persécution ».', crit: ['Elle donne le fait principal d’emblée', 'Elle emploie « attribués » : pas de culpabilité affirmée', 'Elle donne la réaction de Jordan Bardella', 'Elle fait moins de 280 signes'] },
         { t: 'write', max: 300, q: '✍️ Chapô · « Des PFAS détectés dans des laits infantiles vendus en France »', src: 'Dépêche :\n\nPour la première fois, des analyses de laits infantiles vendus en France révèlent la présence de PFAS, surnommés « polluants éternels », à des niveaux qui exposent les nourrissons à des dépassements de la dose hebdomadaire tolérable, rapporte Le Monde. L’ONG Générations futures a analysé 652 échantillons alimentaires en France : 21 % contiennent au moins un PFAS.\n\nRédige un **chapô** (300 signes maximum), en expliquant ce que sont les PFAS en quelques mots.', model: '**Chapô possible :** Des PFAS, ces « polluants éternels », ont été détectés pour la première fois dans des laits infantiles vendus en France, à des niveaux qui dépassent pour les nourrissons la dose hebdomadaire tolérable, selon Le Monde.', crit: ['Il donne le fait principal (PFAS dans des laits infantiles)', 'Il explique « polluants éternels » en quelques mots', 'Il cite la source (Le Monde ou Générations futures)', 'Il fait moins de 300 signes'] }
       ]
+    },
+    {
+      title: '⚡ Flash de 11 h', icon: '⚡', desc: 'Mise à jour', exercises: [
+        { t: 'qcm', q: 'Jusqu’à quel niveau peuvent monter les nouveaux droits de douane annoncés par l’administration Trump ?', c: ['20 %', '5 %', '50 %', '100 %'], a: 0, x: 'Ces surtaxes peuvent atteindre **20 %**.' },
+        { t: 'qcm', q: 'Sur quelle accusation repose cette nouvelle série de droits de douane ?', c: ['Une surproduction mondiale liée à des subventions', 'Un déficit de la balance agricole', 'Une dévaluation monétaire', 'Un embargo sur les terres rares'], a: 0, x: 'Washington accuse les pays visés de **subventions** qui occasionnent une **surproduction**.' },
+        { t: 'vf', q: 'La Chine, l’Union européenne et le Brésil figurent parmi les pays qui dénoncent ces droits de douane.', a: true, x: 'Tous trois dénoncent des mesures « inacceptables ».' },
+        { t: 'qcm', q: 'Quel est le nom du navire qui a coulé au large d’Ibiza ?', c: ['Med Emre', 'Ibiza Star', 'Erika', 'Prestige'], a: 0, x: 'Le **Med Emre** a sombré à une quarantaine de kilomètres d’Ibiza, selon Le Figaro.' },
+        { t: 'input', q: 'Complète : le navire qui a coulé près d’Ibiza transportait jusqu’à 7 000 tonnes de _____.', a: ['diesel'], hint: 'Un carburant.', x: 'Il transportait jusqu’à **7 000 tonnes de diesel**.' },
+        { t: 'qcm', q: 'Qui succédera à Ariane Mnouchkine à la tête du Théâtre du Soleil ?', c: ['Simon Abkarian', 'Antonin Baudry', 'Ariane Ascaride', 'Olivier Py'], a: 0, x: '**Simon Abkarian** prendra la tête du théâtre à l’automne 2027.' },
+        { t: 'write', max: 300, q: '✍️ Chapô · « Simon Abkarian succédera à Ariane Mnouchkine au Théâtre du Soleil »', src: 'Dépêche :\n\nLe comédien et metteur en scène Simon Abkarian prendra la tête du Théâtre du Soleil à l’automne 2027. Il succède à Ariane Mnouchkine, qui prend sa retraite. Le théâtre existe depuis 1964.\n\nRédige un **chapô** (300 signes maximum).', model: '**Chapô possible :** Simon Abkarian, comédien et metteur en scène, prendra la tête du Théâtre du Soleil à l’automne 2027. Il succède à Ariane Mnouchkine, qui prend sa retraite après avoir dirigé depuis 1964 cette institution théâtrale.', crit: ['Il nomme le successeur et la personne remplacée', 'Il donne la date (automne 2027)', 'Il nomme le Théâtre du Soleil', 'Il fait moins de 300 signes'] }
+      ]
     }
   ],
+  updates: [{ at: '11:00', stories: [10, 11, 12] }],
   reco: [{ type: 'film', title: 'Les Hommes du président', by: 'Alan J. Pakula', year: 1976, story: 0, why: 'Deux journalistes du Washington Post enquêtent sur le scandale du Watergate. Un classique sur le journalisme d’investigation et la protection des sources, au cœur des nouvelles révélations de Mediapart et du Monde.' }],
   shorts: []
 };
