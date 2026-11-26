@@ -39,7 +39,10 @@ Trois règles passent avant tout le reste :
      2. « Le tour du monde » 🌍 (international et Europe), 8 ou 9 exercices.
      3. « Médias & atelier » 🎙️, 7 ou 8 exercices, dont **2 `write`** (titrer une dépêche, rédiger une attaque ou un chapô) construits sur une vraie info du jour.
      - **Écriture dans chaque leçon** : les leçons 1 et 2 comptent aussi **1 `write`** chacune (résumer une dépêche en 2 phrases, trouver un angle de reportage, écrire 3 questions d'interview). L'application en ajoute elle-même un si tu l'oublies, mais un exercice choisi par toi est meilleur.
-     - **Reformulations (facultatif)** : sur un `qcm`, tu peux ajouter `qv: ['autre formulation de la question', …]` (même sens, mots différents). L'application s'en sert quand la question revient. Elle ne fabrique aucune reformulation elle-même : sans `qv`, la question revient telle quelle, puis, après 3 passages, elle demande de taper la réponse.
+     - **Reformulations (OBLIGATOIRES)** : quand l'élève rouvre un test, chaque question revient avec la formulation suivante (rotation). Il doit répondre parce qu'il a compris l'info, pas parce qu'il reconnaît la phrase. L'application ne fabrique aucune reformulation : c'est à toi de les écrire.
+       - `qcm` et `input` : `qv: ['formulation 2', 'formulation 3']`, soit **2 formulations de plus**, avec **la même bonne réponse** et les mêmes choix. Change l'angle, pas seulement les mots : par la cause, la conséquence, le chiffre, l'acteur… Exemple : « Quelle ONG demande la suspension de CNews ? » devient « Qui a saisi l'Arcom contre CNews ? », puis « L'appel à suspendre CNews un mois émane de quelle organisation ? ».
+       - `vf` : `vv: [{ q, a, x }, { q, a, x }]`, soit **2 affirmations de plus** sur le même fait, dont **au moins une de vérité inverse** (si l'originale est vraie, une variante fausse, et l'inverse), chacune avec son explication `x`. La variante fausse change un seul élément vérifiable (un chiffre, un acteur, un lieu, le sens d'une décision) et reste plausible.
+       - Relis chaque variante comme une question à part : la réponse est dans le brief, une seule réponse possible, rôles non inversés.
      - **Plus de questions** : vise le haut de la fourchette (10, 9 et 8 exercices), en variant les types (`qcm`, `vf`, `input`, `order`, `match`).
    - **Chaque question porte sur une info du brief.** Ne pose pas de question sur un sujet absent des `stories`, même s'il figure dans `news-today.txt`.
    - **Ne jamais inverser les rôles.** Qui a envoyé ou reçu, qui accuse ou est accusé, qui a proposé ou refusé : la question reprend exactement le sens de la dépêche. Erreur réelle signalée par un élève : « Quel candidat a **reçu** des messages antisémites ? » alors que Jordan Bardella est accusé de les avoir **envoyés**. Si une formulation peut se lire de deux façons, réécris-la.
@@ -95,9 +98,9 @@ Chaque question est comptée dans le navigateur de l'élève : reformulée dès 
 ## Rappels sur les types d'exercices
 
 ```
-qcm   {t:'qcm', q, c:[3 ou 4 choix], a:index_bonne_réponse, x, qv?:['autre formulation', …]}
-vf    {t:'vf', q:'affirmation', a:true|false, x}
-input {t:'input', q, a:['réponse', 'variante'], hint?, x}
+qcm   {t:'qcm', q, c:[3 ou 4 choix], a:index_bonne_réponse, x, qv:['formulation 2', 'formulation 3']}
+vf    {t:'vf', q:'affirmation', a:true|false, x, vv:[{q:'affirmation 2', a:true|false, x}, {q:'affirmation 3', a, x}]}
+input {t:'input', q, a:['réponse', 'variante'], hint?, x, qv:['formulation 2', 'formulation 3']}
 order {t:'order', q, items:[dans le BON ordre], x}
 match {t:'match', q, pairs:[[gauche, droite], x4], x}
 write {t:'write', q, src, model, crit:[4 critères]}

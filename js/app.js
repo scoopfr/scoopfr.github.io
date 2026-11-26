@@ -1247,24 +1247,27 @@
   const VF_STYLES = [{ heading: 'Vrai ou faux ?', w: ['Vrai', 'Faux'], label: 'Vrai ou faux' }];
   const pickOne = a => a[Math.floor(Math.random() * a.length)];
   const framed = q => pickOne(FRAMES).replace('{q}', q);
+  // À chaque réouverture, la formulation SUIVANTE (rotation, pas de hasard) : on répond parce qu'on a compris l'info,
+  // pas parce qu'on reconnaît la phrase. Les variantes sont écrites et relues dans l'édition, jamais fabriquées par l'app :
+  //   qcm / input : qv: ['autre formulation', …] (même réponse) ;
+  //   vf          : vv: [{ q: 'autre affirmation', a: true|false, x: 'explication' }, …] (la réponse peut s'inverser).
+  // Les choix des QCM sont mélangés à chaque fois ; la 2e chance garde la formulation de la 1re tentative (it.v recopié).
+  // (Plus de conversion QCM → « Réponse proposée : X » ni de « Explique en une ou deux phrases » : elles donnaient des phrases absurdes.)
+  const turn = (list, n) => list[n % list.length];
   function variantize(it) {
     const ex = it.ex, n = seenCount(ex);
     if (ex.t === 'qcm' && Array.isArray(ex.c) && ex.c[ex.a] != null) {
-      const good = ex.c[ex.a];
-      // (pas de « Explique en une ou deux phrases : <question> » : la formulation ne collait pas à toutes les questions)
-      if (n >= TEXT_AFTER) return { ...ex, t: 'qcmfree', again: true };
-      if (n >= 1 && !it.retry) {
-        // Plus de conversion QCM → « Cette réponse est-elle juste ? Réponse proposée : X » : elle collait une réponse
-        // piochée parmi les leurres à n'importe quelle question et donnait des cartes absurdes (« Qui ? … Réponse proposée : Édouard Philippe »).
-        // Une question n'est reformulée qu'avec des variantes écrites et relues (ex.qv), jamais fabriquées.
-        return { ...ex, q: framed(pickOne(ex.qv || [ex.q])) };
-      }
+      const q = framed(turn([ex.q, ...(ex.qv || [])], n));
+      if (n >= TEXT_AFTER) return { ...ex, q, t: 'qcmfree', again: true };   // à force de la voir : on tape la réponse
+      return { ...ex, q };
     } else if (ex.t === 'vf') {
-      if (n >= TEXT_AFTER) return { t: 'write', q: '✍️ Vrai ou faux ? Tranche, puis justifie en une phrase', src: ex.q, placeholder: 'Vrai ou faux, et pourquoi… (Ctrl+Entrée pour valider)',
-        model: `**${ex.a ? 'Vrai' : 'Faux'}.** ${ex.x || ''}`, crit: ['J\'ai tranché clairement : vrai ou faux', 'Ma justification s\'appuie sur un fait précis', 'Je n\'ai rien inventé'], rows: 3 };
-      if (n >= 1 && !it.retry) return { ...ex, ...pickOne(VF_STYLES) };
-    } else if (ex.t === 'input' && n >= 1 && !it.retry) {
-      return { ...ex, q: framed(ex.q) };
+      const alt = turn([{ q: ex.q, a: ex.a, x: ex.x }, ...(ex.vv || [])], n);
+      const v = { ...ex, q: alt.q, a: alt.a, x: alt.x || ex.x };
+      if (n >= TEXT_AFTER) return { t: 'write', q: '✍️ Vrai ou faux ? Tranche, puis justifie en une phrase', src: v.q, placeholder: 'Vrai ou faux, et pourquoi… (Ctrl+Entrée pour valider)',
+        model: `**${v.a ? 'Vrai' : 'Faux'}.** ${v.x || ''}`, crit: ['J\'ai tranché clairement : vrai ou faux', 'Ma justification s\'appuie sur un fait précis', 'Je n\'ai rien inventé'], rows: 3 };
+      return n >= 1 ? { ...v, ...pickOne(VF_STYLES) } : v;
+    } else if (ex.t === 'input') {
+      return { ...ex, q: framed(turn([ex.q, ...(ex.qv || [])], n)) };
     }
     return ex;
   }

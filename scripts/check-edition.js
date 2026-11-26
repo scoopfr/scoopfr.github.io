@@ -83,6 +83,18 @@
       exs.forEach((ex, ei) => {
         const where = `Leçon ${li}, exercice ${ei} (${ex.t}) « ${String(ex.q || '').slice(0, 60)} »`;
         let answer = '';
+        // reformulations écrites (affichées à tour de rôle quand le test est rouvert)
+        if (ex.qv != null) {
+          if (!['qcm', 'input'].includes(ex.t)) E(`${where} : qv n'est prévu que pour qcm et input (vf : vv)`);
+          else if (!Array.isArray(ex.qv) || ex.qv.some(v => typeof v !== 'string' || v.trim().length < 8)) E(`${where} : qv doit être une liste de questions rédigées`);
+          else if (new Set([ex.q, ...ex.qv].map(norm)).size !== ex.qv.length + 1) E(`${where} : qv contient une formulation en double`);
+        }
+        if (ex.vv != null) {
+          if (ex.t !== 'vf') E(`${where} : vv n'est prévu que pour vf`);
+          else if (!Array.isArray(ex.vv) || ex.vv.some(v => !v || typeof v.q !== 'string' || v.q.trim().length < 8 || typeof v.a !== 'boolean' || typeof v.x !== 'string' || !v.x.trim())) E(`${where} : vv doit être une liste de { q, a: true|false, x }`);
+          else if (new Set([ex.q, ...ex.vv.map(v => v.q)].map(norm)).size !== ex.vv.length + 1) E(`${where} : vv contient une affirmation en double`);
+        }
+        if (['qcm', 'vf', 'input'].includes(ex.t) && ex.qv == null && ex.vv == null) W(`${where} : aucune reformulation (qv / vv) : la question reviendra mot pour mot`);
         switch (ex.t) {
           case 'qcm':
             if (!Array.isArray(ex.c) || ex.c.length < 3 || ex.c.length > 4) E(`${where} : 3 ou 4 choix attendus`);

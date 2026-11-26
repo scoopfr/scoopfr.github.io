@@ -4,7 +4,7 @@
 
 - **L'appli en ligne** : https://scoopfr.github.io/
 - **Le code** : https://github.com/scoopfr/scoopfr.github.io (ce dépôt)
-- **Dernière mise à jour de ce document** : 26 novembre 2026, version **v47** de l'appli.
+- **Dernière mise à jour de ce document** : 26 novembre 2026, version **v48** de l'appli.
 
 Ce document a deux parties :
 1. **Pour tout le monde** : à quoi sert l'appli, comment elle marche, sans jargon.
@@ -171,6 +171,7 @@ Le projet est préparé mais n'est pas publié : les comptes développeur sont p
   - « Qui ? » ne porte plus que sur une vraie personne (`PERSON_CUE` dans `js/memoire.js`) ;
   - la carte « Cette réponse est-elle juste ? Réponse proposée : X » est supprimée ;
   - les anciennes fiches « Qui ? » enregistrées sont purgées (`mem.v = 3`).
+- v48 : **la formulation change à chaque fois qu'on rouvre un test**. Elle tourne entre l'originale et 2 variantes écrites dans l'édition (`qv` pour qcm et input, `vv` pour vf, dont une affirmation de vérité inverse). Les choix sont mélangés et, après 3 passages, il faut taper la réponse. `check-edition.js` contrôle ces variantes, et `DAILY_PROMPT.md` les rend obligatoires.
 - L'édition du 26/11 a été rédigée et relue à la main, puis complétée par la mise à jour de 11 h, relue elle aussi.
 - Architecture de publication sur 3 niveaux en place.
 
