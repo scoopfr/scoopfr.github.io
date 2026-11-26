@@ -972,7 +972,7 @@ body.in-welcome { overflow: hidden; }
 .alert-banner.ask{background:var(--card);border-color:var(--line-2)}
 
 /* Quiz : repère de l'info en cours et compteur de questions */
-.ex-ctx{display:flex;flex-direction:column;gap:2px;border-left:4px solid var(--ctx,var(--red));background:var(--paper-2);border-radius:10px;padding:8px 12px;margin:0 0 14px}
+.ex-ctx{display:inline-flex;flex-direction:column;gap:2px;border-left:4px solid var(--ctx,var(--red));background:var(--paper-2);border-radius:8px;padding:5px 10px;margin:0 0 12px}
 .ex-ctx small{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ctx,var(--red))}
 .ex-ctx span{font-size:14px;font-weight:700;line-height:1.35;color:var(--ink-2)}
 .ex-ctx.fresh{animation:ctxIn .35s ease}

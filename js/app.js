@@ -1043,7 +1043,8 @@
       const c = it.ctx, col = (L.cfg.date && DAYS[L.cfg.date] && (DAYS[L.cfg.date].tagColors || {})[c.tag]) || 'var(--red)';
       const head = c.kind === 'story' ? `📰 Info${c.tag ? ' · ' + esc(c.tag) : ''}` : c.kind === 'write' ? '✍️ À toi d’écrire' : '🧩 Récap';
       const prev = L.queue[L.pos - 1], fresh = !prev || !prev.ctx || prev.ctx.label !== c.label;
-      body.insertAdjacentHTML('afterbegin', `<div class="ex-ctx ${fresh ? 'fresh' : ''}" style="--ctx:${esc(col)}"><small>${head}</small><span>${esc(c.label)}</span></div>`);
+      // seulement la rubrique : le titre de l'info donnait la réponse (« Reporters sans frontières demande à l'Arcom… » au-dessus de « Quelle ONG… ? »)
+      body.insertAdjacentHTML('afterbegin', `<div class="ex-ctx ${fresh ? 'fresh' : ''}" style="--ctx:${esc(col)}"><small>${head}</small></div>`);
     }
     if (it.retry) body.insertAdjacentHTML('afterbegin', '<div class="retry-tag">↻ Deuxième chance</div>');
     $('.lesson-body').scrollTop = 0;
