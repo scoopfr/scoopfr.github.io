@@ -1,4 +1,3 @@
-// SCOOP:REGENERER
 /* Scoop — édition du 2026-11-26 (générée automatiquement, sans IA) */
 window.SCOOP_DAYS = window.SCOOP_DAYS || {};
 window.SCOOP_DAYS['2026-11-26'] = {
@@ -12,7 +11,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
   "glossary": [],
   "memo": [
     "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a ",
-    "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l’AS Roma",
+    "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
     "Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans",
     "Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Méditerranée",
     "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré la claque é"
@@ -44,25 +43,25 @@ window.SCOOP_DAYS['2026-11-26'] = {
     },
     {
       "tag": "Société",
-      "title": "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l’AS Roma",
-      "text": "Les Lillois ont remporté leur premier match de Ligue des champions, mercredi, en faisant tomber à la surprise générale le Bayern Munich (2-1). Avec désormais quatre points, les Dogues se relancent dans la course à la qualification pour les barrages de la Ligue des champions.",
+      "title": "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
+      "text": "Menés (0-1) après une terne première période, les Lillois ont bien réagi, mercredi 25 novembre, pour remporter une victoire cruciale (2-1) et de prestige face aux Bavarois. Avec désormais quatre points, les Dogues se relancent dans la course à la qualification pour les barrages de la Ligue des champions.",
       "why": "Un fait relayé par 7 rédactions : savoir le situer (qui, où, quand) fait partie de l'épreuve d'actualité.",
       "sources": [
         {
           "name": "Le Monde",
-          "url": "https://www.lemonde.fr/sport/article/2026/11/25/ligue-des-champions-le-resume-de-l-exploit-des-lillois-face-au-bayern-munich-et-du-match-nul-du-psg-face-a-l-as-roma_6815176_3242.html"
+          "url": "https://www.lemonde.fr/sport/article/2026/11/26/ligue-des-champions-le-losc-renverse-le-bayern-munich-et-se-relance-dans-la-course-a-la-qualification_6815230_3242.html"
         },
         {
           "name": "franceinfo",
           "url": "https://www.franceinfo.fr/sports/foot/ligue-des-champions/tombeur-du-bayern-munich-le-losc-signe-sa-premiere-victoire-de-la-saison-en-ligue-des-champions-et-se-relance_8300349.html#xtor=RSS-3-[lestitres]"
         },
         {
-          "name": "France 24",
-          "url": "https://www.france24.com/fr/sports/20261125-ligue-des-champions-premi%C3%A8re-difficult%C3%A9-pour-le-psg-lille-signe-un-exploit-face-au-bayern"
+          "name": "Le Figaro",
+          "url": "https://www.lefigaro.fr/sports/football/ligue-des-champions/ligue-des-champions-le-reveil-de-lille-qui-s-offre-le-bayern-munich-et-signe-sa-premiere-victoire-20261125"
         },
         {
-          "name": "RFI",
-          "url": "https://www.rfi.fr/fr/sports/20261125-ligue-des-champions-le-psg-accroch%C3%A9-par-la-roma-lille-s-offre-le-bayern"
+          "name": "20 Minutes",
+          "url": "https://www.20minutes.fr/sport/football/ligue_des_champions/4265294-20261125-direct-lille-bayern-munich-entends-rieeeeen-capo-enerve-losc-montre-rien-belle-soiree-lille-suivez-match?at_medium=display&at_campaign=149"
         }
       ]
     },
@@ -247,9 +246,9 @@ window.SCOOP_DAYS['2026-11-26'] = {
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Teddy _____ affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a pas »",
+          "q": "Complète le titre d'une info du jour : « Teddy Riner affirme, à propos de la guerre en _____ que la France doit « arrêter de donner de l’argent » qu’elle n’a pas »",
           "a": [
-            "Riner"
+            "Ukraine"
           ],
           "x": "Titre complet : Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a pas"
         },
@@ -268,7 +267,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
             "\"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattr",
             "Israeli judges recommend dropping most serious charges against Netanyahu",
             "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
-            "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l"
+            "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
           ],
           "a": 0,
           "x": "Rubrique Politique : \"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattre à la place d'une primaire"
@@ -292,7 +291,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
             "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts",
             "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan",
             "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
-            "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l"
+            "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
           ],
           "a": 0,
           "x": "Rubrique Médias : En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
@@ -307,7 +306,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
             ],
             [
               "Société",
-              "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match"
+              "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la "
             ],
             [
               "Monde",
@@ -350,11 +349,11 @@ window.SCOOP_DAYS['2026-11-26'] = {
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Ligue des champions : le résumé de l’exploit des Lillois face au _____ Munich et du match nul du PSG face à l’AS Roma »",
+          "q": "Complète le titre d'une info du jour : « Ligue des champions : le LOSC renverse le Bayern _____ et se relance dans la course à la qualification »",
           "a": [
-            "Bayern"
+            "Münich"
           ],
-          "x": "Titre complet : Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l’AS Roma"
+          "x": "Titre complet : Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
         },
         {
           "t": "input",
@@ -366,9 +365,9 @@ window.SCOOP_DAYS['2026-11-26'] = {
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Andy _____ ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans »",
+          "q": "Complète le titre d'une info du jour : « Andy Taylor, ex-guitariste du groupe britannique Duran _____ est mort à 65 ans »",
           "a": [
-            "Taylor"
+            "Duran"
           ],
           "x": "Titre complet : Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans"
         },
@@ -400,20 +399,20 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "t": "qcm",
           "q": "Laquelle de ces infos relève de la rubrique « Société » dans l'édition du jour ?",
           "c": [
-            "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l",
+            "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
             "\"La démocratie, c’est du vote\", déclare David Lisnard, qui refuse la proposition d’Edouard Philippe de débattr",
             "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
             "Violences du 17 octobre à Marseille : des ordres ont été donnés pour relâcher des casseurs, selon Benoît Payan"
           ],
           "a": 0,
-          "x": "Rubrique Société : Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l’AS Roma"
+          "x": "Rubrique Société : Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
         },
         {
           "t": "write",
           "q": "✍️ Écris un chapô de 300 signes maximum pour cette dépêche",
-          "src": "Les Lillois ont remporté leur premier match de Ligue des champions, mercredi, en faisant tomber à la surprise générale le Bayern Munich (2-1). Avec désormais quatre points, les Dogues se relancent dans la course à la qualification pour les barrages de la Ligue des champions.",
+          "src": "Menés (0-1) après une terne première période, les Lillois ont bien réagi, mercredi 25 novembre, pour remporter une victoire cruciale (2-1) et de prestige face aux Bavarois. Avec désormais quatre points, les Dogues se relancent dans la course à la qualification pour les barrages de la Ligue des champions.",
           "max": 300,
-          "model": "**Chapô possible :** Les Lillois ont remporté leur premier match de Ligue des champions, mercredi, en faisant tomber à la surprise générale le Bayern Munich (2-1). Avec désormais quatre points, les Dogues se relancent dans la course à la qualification pour les barrages de la Ligue des champions.",
+          "model": "**Chapô possible :** Menés (0-1) après une terne première période, les Lillois ont bien réagi, mercredi 25 novembre, pour remporter une victoire cruciale (2-1) et de prestige face aux Bavarois. Avec désormais quatre points, les Dogues se relancent dans la course à la qualification pour les barrages de la Ligue.",
           "crit": [
             "Il donne l'essentiel (qui, quoi, où, quand)",
             "Il fait moins de 300 signes",
@@ -433,7 +432,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "q": "Laquelle de ces infos relève de la rubrique « Monde » dans l'édition du jour ?",
           "c": [
             "Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Mé",
-            "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l",
+            "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
             "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
             "En Egypte, un incendie dans l'agglomération du Caire fait au moins 30 morts"
           ],
@@ -445,7 +444,7 @@ window.SCOOP_DAYS['2026-11-26'] = {
           "q": "Laquelle de ces infos relève de la rubrique « Société » dans l'édition du jour ?",
           "c": [
             "Andy Taylor, ex-guitariste du groupe britannique Duran Duran, est mort à 65 ans",
-            "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l",
+            "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification",
             "Israeli judges recommend dropping most serious charges against Netanyahu",
             "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu"
           ],
@@ -459,16 +458,16 @@ window.SCOOP_DAYS['2026-11-26'] = {
             "Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu",
             "Donald Trump persiste avec une nouvelle salve de droits de douane, notamment contre l’UE et la Chine, malgré l",
             "Israeli judges recommend dropping most serious charges against Netanyahu",
-            "Ligue des champions : le résumé de l’exploit des Lillois face au Bayern Munich et du match nul du PSG face à l"
+            "Ligue des champions : le LOSC renverse le Bayern Münich et se relance dans la course à la qualification"
           ],
           "a": 0,
           "x": "Rubrique Politique : Teddy Riner affirme, à propos de la guerre en Ukraine, que la France doit « arrêter de donner de l’argent » qu’elle n’a pas"
         },
         {
           "t": "input",
-          "q": "Complète le titre d'une info du jour : « Comment l’Ukraine perturbe les opérations russes en _____ en frappant des navires de transport d’armes en Méditerranée »",
+          "q": "Complète le titre d'une info du jour : « Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en _____ »",
           "a": [
-            "Afrique"
+            "Méditerranée"
           ],
           "x": "Titre complet : Comment l’Ukraine perturbe les opérations russes en Afrique en frappant des navires de transport d’armes en Méditerranée"
         },
