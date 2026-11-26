@@ -4,7 +4,7 @@
 
 - **L'appli en ligne** : https://scoopfr.github.io/
 - **Le code** : https://github.com/scoopfr/scoopfr.github.io (ce dépôt)
-- **Dernière mise à jour de ce document** : 26 novembre 2026, version **v49** de l'appli.
+- **Dernière mise à jour de ce document** : 26 novembre 2026, version **v51** de l'appli.
 
 Ce document a deux parties :
 1. **Pour tout le monde** : à quoi sert l'appli, comment elle marche, sans jargon.
@@ -20,6 +20,8 @@ Pour entrer dans une école de journalisme (CFJ, ESJ Lille, IPJ, CELSA…), il f
 
 - **L'actu du jour, résumée** : une dizaine d'infos importantes, expliquées simplement. Chacune est vérifiée par **au moins deux médias différents**, avec les liens.
 - **Des quiz** sur ces infos : choix multiples, vrai ou faux, réponses à taper, remises en ordre, associations.
+  - **Une question change de formulation à chaque fois** qu'on rouvre un test, pour qu'on réponde parce qu'on a compris l'info, pas par habitude. Quand toutes ses formulations ont servi, il faut taper la réponse.
+  - Une courte phrase au-dessus de chaque question rappelle de quoi on parle, **sans jamais donner la réponse**.
 - **De l'entraînement à l'écriture** : écrire un titre, un chapô ou une attaque, puis comparer avec une proposition.
 - **De la culture générale**, un **glossaire**, le **mot du jour** et une **recommandation** (film, série, docu, podcast) en écho à l'actu.
 - **La préparation aux concours** : fiches des écoles, annales, simulation d'oral.
@@ -108,10 +110,14 @@ window.SCOOP_DAYS['2026-11-26'] = {
   glossary: [...],                   // termes expliqués
   stories: [                         // 20 infos au maximum
     { tag: 'Politique', title, text /* **gras** autorisé */, why /* « Bon à savoir » concours */,
+      sujet,                         // affiché au-dessus des questions : situe l'info SANS donner de réponse
       sources: [{ name, url }, …] }  // 2 rédactions différentes au minimum
   ],
   memo: [...],                       // l'essentiel en une ligne par info
-  lessons: [{ title, exercises: [...] }],   // les quiz du jour
+  lessons: [{ title, exercises: [    // les quiz du jour, chaque question avec 4 autres formulations :
+    { t: 'qcm', q, c, a, x, qv: [...] },                // qcm et input : qv = 4 autres questions, même réponse
+    { t: 'vf', q, a, x, vv: [{ q, a, x }, …] }          // vf : vv = 4 autres affirmations, dont 2 de réponse inverse
+  ] }],
   updates: [...],                    // mises à jour de la journée (11 h, 14 h…)
   reco: {...},                       // film, série, docu ou podcast en écho à l'actu (ajouté vers 17-18 h)
   shorts: [...]
@@ -148,11 +154,12 @@ Le projet est préparé mais n'est pas publié : les comptes développeur sont p
 1. **Rien d'inventé.** Chaque fait vient des titres récupérés et est confirmé par **au moins 2 rédactions**, avec leurs URL.
 2. **Chaque question se résout en lisant le brief du jour.** Elle a une seule bonne réponse et ne doit pas **inverser les rôles** (qui accuse, qui est accusé, qui envoie, qui reçoit).
 3. **Aucune question fabriquée par l'app sans preuve qu'elle est juste.** Leçon du 26/11 : une fiche automatique a demandé « 👤 Qui ? » à propos d'un **navire**. Avant d'ajouter une génération automatique, teste ce qu'elle produit sur toutes les éditions.
-4. **Ne pas modifier en direct en production.** Teste en local, relis, puis publie. Ne publie jamais une édition en échec.
-5. **À chaque modification du code**, augmente `?v=NN` dans `index.html` (toutes les occurrences) **et** `VERSION` dans `sw.js`. Sinon, les téléphones gardent l'ancienne version en cache.
-6. **Commits** avec l'adresse `190466635+nicolaschaix34@users.noreply.github.com` (l'adresse personnelle reste privée). **Ne jamais pousser** vers l'ancien dépôt `nicolaschaix34/scoop` (remote `ancien`).
-7. **Jamais de clé, de jeton ni de mot de passe** tapé ou copié par Claude : le propriétaire le fait lui-même. **Pas de service payant.**
-8. Toujours répondre **en français**, de façon claire et sans jargon.
+4. **Un quiz ne donne jamais sa réponse, et ne répète pas ses phrases.** Au-dessus d'une question, on affiche le `sujet` de l'info, jamais son titre. Chaque question a 5 formulations, qui passent toutes avant qu'une seule revienne.
+5. **Ne pas modifier en direct en production.** Teste en local, relis, puis publie. Ne publie jamais une édition en échec.
+6. **À chaque modification du code**, augmente `?v=NN` dans `index.html` (toutes les occurrences) **et** `VERSION` dans `sw.js`. Sinon, les téléphones gardent l'ancienne version en cache.
+7. **Commits** avec l'adresse `190466635+nicolaschaix34@users.noreply.github.com` (l'adresse personnelle reste privée). **Ne jamais pousser** vers l'ancien dépôt `nicolaschaix34/scoop` (remote `ancien`).
+8. **Jamais de clé, de jeton ni de mot de passe** tapé ou copié par Claude : le propriétaire le fait lui-même. **Pas de service payant.**
+9. Toujours répondre **en français**, de façon claire et sans jargon.
 
 ### Pièges connus
 
@@ -160,8 +167,9 @@ Le projet est préparé mais n'est pas publié : les comptes développeur sont p
 - Avec `Set-Content`, PowerShell 5.1 change l'encodage et les fins de ligne : passe par Python (`newline=''`) pour un remplacement de texte.
 - L'API publique de GitHub limite le nombre de requêtes : pour savoir si un push est arrivé, utilise `git ls-remote`.
 - Pas de `gh` sur le PC. Pour lancer un workflow à la main, passe par le navigateur (GitHub, Actions, Run workflow).
+- Après une modification, le navigateur de test peut garder l'ancien code en cache, même avec le même `?v=`. Avant de conclure qu'un correctif ne marche pas, désinscris le service worker et vide les caches.
 
-### Où on en est (26/11/2026, v47)
+### Où on en est (26/11/2026, v51)
 
 **Fait récemment :**
 - v44 : plus de reformulation « Explique en une ou deux phrases ».
@@ -173,7 +181,12 @@ Le projet est préparé mais n'est pas publié : les comptes développeur sont p
   - les anciennes fiches « Qui ? » enregistrées sont purgées (`mem.v = 3`).
 - v48 : **la formulation change à chaque fois qu'on rouvre un test**. Elle tourne entre l'originale et 2 variantes écrites dans l'édition (`qv` pour qcm et input, `vv` pour vf, dont une affirmation de vérité inverse). Les choix sont mélangés et, après 3 passages, il faut taper la réponse. `check-edition.js` contrôle ces variantes, et `DAILY_PROMPT.md` les rend obligatoires.
 - v49 : pour une question d'actu (id `day:…`), **toutes les formulations passent avant qu'une seule revienne**, en test, dans le Fil ou en 2e chance. Les questions aux formulations jamais vues sont posées en premier. **Un test se rouvre toujours** : quand tout a servi, le cycle recommence par la formulation la plus ancienne, sans choix (réponse à taper). Voir `usedUp` et `variantize` dans `js/app.js`. `DAILY_PROMPT.md` demande 4 variantes par question. Les fiches « Noms, dates et chiffres » de `memoire.js` restent des fiches de révision, qui reviennent par nature.
-- L'édition du 26/11 a été rédigée et relue à la main, puis complétée par la mise à jour de 11 h, relue elle aussi.
+- v50 : le titre de l'info n'apparaît plus au-dessus des questions, car il donnait la réponse.
+- v51 : **un sujet au-dessus de chaque question situe l'info sans donner la réponse**. Il apparaît dans les leçons, les tests d'une info, le Rappel (avec la date) et les révisions.
+  - Le sujet est rédigé dans l'édition (`sujet`).
+  - À défaut, l'app affiche le titre en masquant chaque nom et chiffre d'une bonne réponse (`storyHint` dans `js/app.js`).
+  - `check-edition.js` refuse un sujet qui contient une bonne réponse ou qui recopie le titre.
+- L'édition du 26/11 a été rédigée et relue à la main, puis complétée par la mise à jour de 11 h, relue elle aussi. Ses 28 questions ont 5 formulations chacune, et ses 13 infos ont un sujet.
 - Architecture de publication sur 3 niveaux en place.
 
 **Pistes ouvertes :**
