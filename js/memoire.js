@@ -177,7 +177,8 @@
       const ch = shuffle([s.title, ...others]);
       items.push({ ex: { t: 'qcm', q: `Quelle info correspond à ce résumé ? « ${first} »`, c: ch, a: ch.indexOf(s.title), x: `C'était : ${s.title}.` }, id: `auto:${date}:${i}` });
     }
-    const pick = shuffle(items).slice(0, 6);
+    const used = p => (ctx.usedUp && ctx.usedUp(p.ex, p.id) ? 1 : 0);   // formulations encore jamais vues d'abord
+    const pick = shuffle(items).sort((a, b) => used(a) - used(b)).slice(0, 6);
     return { key, mode: 'drill', title: s.title.length > 46 ? s.title.slice(0, 44) + '…' : s.title, color: '#2BA84A', context: 'Tester cette info', exercises: pick.map(p => p.ex), ids: pick.map(p => p.id) };
   });
 
@@ -208,7 +209,8 @@
   ctx.addLesson('rappel', key => {
     if (!prevQs.length) return null;
     const rv = new Set(S().review.map(r => r.id)), rec = S().recall || {};
-    const pool = shuffle(prevQs).sort((a, b) => ((rv.has(b.id) ? 2 : 0) - (rv.has(a.id) ? 2 : 0)) + ((rec[a.id] || 0) - (rec[b.id] || 0)) * 0.5).slice(0, 8);
+    const used = p => (ctx.usedUp && ctx.usedUp(p.ex, p.id) ? 4 : 0);   // formulations encore jamais vues d'abord
+    const pool = shuffle(prevQs).sort((a, b) => (used(a) - used(b)) +((rv.has(b.id) ? 2 : 0) - (rv.has(a.id) ? 2 : 0)) + ((rec[a.id] || 0) - (rec[b.id] || 0)) * 0.5).slice(0, 8);
     return { key, mode: 'review', title: 'Rappel des jours précédents', color: '#2BA84A', exercises: pool.map(p => p.ex), ids: pool.map(p => p.id), context: 'Actu des éditions précédentes' };
   });
 

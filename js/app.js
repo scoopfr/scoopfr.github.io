@@ -970,7 +970,9 @@
   function startLesson(key) {
     const cfg = lessonFromKey(key);
     if (!cfg) return;
-    const items = cfg.exercises.map((ex, i) => ({ ex, id: cfg.ids ? cfg.ids[i] : `${key}:${i}`, retry: false, ctx: cfg.ctx ? cfg.ctx[i] : null }));
+    let items = cfg.exercises.map((ex, i) => ({ ex, id: cfg.ids ? cfg.ids[i] : `${key}:${i}`, retry: false, ctx: cfg.ctx ? cfg.ctx[i] : null }));
+    // un test se rouvre toujours ; hors leçon du jour (rangée info par info), les questions aux formulations encore jamais vues passent en premier
+    if (cfg.mode !== 'day') items = [...items.filter(x => !usedUp(x.ex, x.id)), ...items.filter(x => usedUp(x.ex, x.id))];
     L = { cfg, queue: items, pos: 0, total: items.length, resolved: 0, firstOk: 0, xp: 0, combo: 0, maxCombo: 0, t0: Date.now(), state: 'answer', check: null };
     document.body.classList.add('in-lesson');
     $('#lesson').hidden = false;
@@ -1058,8 +1060,9 @@
   };   // glossaire : les mots juridiques ou techniques deviennent cliquables
   function grade(it, ok, sol, free) {
     S.stats.answered++; answered(ok, L.cfg.mode, it);
-    if (!it.retry) bumpSeen(it.ex);
-    const expl = it.ex.x ? linkTerms(rich(it.ex.x)) : '';
+    if (!it.retry || it.again) bumpSeen(it.ex);
+    const shown = (it.v && it.v.t === 'vf') ? it.v : it.ex;   // un vrai/faux reformulé a sa propre réponse et sa propre explication
+    const expl = shown.x ? linkTerms(rich(shown.x)) : '';
     if (ok) {
       S.stats.correct++;
       L.combo++; L.maxCombo = Math.max(L.maxCombo, L.combo);
@@ -1074,7 +1077,8 @@
     } else {
       L.combo = 0;
       if (!it.retry) {
-        L.queue.push({ ...it, retry: true });
+        // 2e chance : pour l'actu, avec la formulation suivante (la plus ancienne si toutes ont servi, et alors à taper)
+        L.queue.push(isNews(it.id) ? { ...it, retry: true, again: true, v: null } : { ...it, retry: true });
         if (!S.review.some(r => r.id === it.id)) S.review.push({ id: it.id, ex: it.ex, from: L.cfg.context, at: TODAY });
         if (S.review.length > 300) S.review.shift();
       } else L.resolved++;
@@ -1083,7 +1087,8 @@
       // réponse libre jugée fausse : tu peux la compter juste si c'était la bonne, mal formulée
       if (free) { L.overrideCtx = { it }; $('#override').hidden = false; }
     }
-    $('#fb-text').insertAdjacentHTML('beforeend', `<p class="report-row">${reportLink(it.ex.q, `Question de quiz (${(L.cfg && L.cfg.context) || 'entraînement'}) : ${it.ex.q}\n${solutionOf(it.ex)}`)}</p>`);
+    const asked = (it.v && it.v.q) || it.ex.q;
+    $('#fb-text').insertAdjacentHTML('beforeend', `<p class="report-row">${reportLink(asked, `Question de quiz (${(L.cfg && L.cfg.context) || 'entraînement'}) : ${asked}\n${solutionOf(shown)}`)}</p>`);
     L.state = 'feedback';
     $('#ex').classList.add('locked');
     updateProgress();
@@ -1138,7 +1143,7 @@
     } else if (L.state === 'self') {
       const n = L.self.count(), tot = L.self.total;
       S.stats.answered++;
-      if (!L.queue[L.pos].retry) bumpSeen(L.queue[L.pos].ex);
+      if (!L.queue[L.pos].retry || L.queue[L.pos].again) bumpSeen(L.queue[L.pos].ex);
       if (n >= Math.ceil(tot / 2)) { S.stats.correct++; L.firstOk++; }
       L.xp += 5 + n * 3;
       L.resolved++;
@@ -1152,8 +1157,8 @@
     if (!L || L.state !== 'answer') return;
     const it = L.queue[L.pos];
     const e = it.v || it.ex;
-    if (e.t === 'write') { if (!it.retry) bumpSeen(it.ex); L.resolved++; next(); return; }
-    grade(it, false, solutionOf(it.ex));
+    if (e.t === 'write') { if (!it.retry || it.again) bumpSeen(it.ex); L.resolved++; next(); return; }
+    grade(it, false, solutionOf(e.t === 'vf' ? e : it.ex));
     // révèle la solution visuellement pour les QCM
     if (e.t === 'qcm' || e.t === 'vf') {
       const a = e.t === 'vf' ? (e.a ? 0 : 1) : e.a;
@@ -1254,16 +1259,28 @@
   // Les choix des QCM sont mélangés à chaque fois ; la 2e chance garde la formulation de la 1re tentative (it.v recopié).
   // (Plus de conversion QCM → « Réponse proposée : X » ni de « Explique en une ou deux phrases » : elles donnaient des phrases absurdes.)
   const turn = (list, n) => list[n % list.length];
+  // Questions d'actu (id « day:… ») : on parcourt TOUTES les formulations écrites avant d'en revoir une (test, Fil, 2e chance).
+  // Un test se rouvre toujours : quand toutes ont servi, le cycle recommence par la plus ancienne, mais sans choix (réponse à taper).
+  const wordings = ex => ex.t === 'vf' ? 1 + (ex.vv || []).length : (ex.t === 'qcm' || ex.t === 'input') ? 1 + (ex.qv || []).length : Infinity;
+  const isNews = id => /^day:/.test(String(id || ''));
+  const usedUp = (ex, id) => isNews(id) && seenCount(ex) >= wordings(ex);
+  function flashOf(ex) {   // le Fil : la formulation suivante, toujours avec des choix
+    const n = seenCount(ex);
+    if (ex.t === 'vf') { const v = turn([{ q: ex.q, a: ex.a, x: ex.x }, ...(ex.vv || [])], n); return { ...ex, q: v.q, a: v.a, x: v.x || ex.x }; }
+    return { ...ex, q: turn([ex.q, ...(ex.qv || [])], n) };
+  }
   function variantize(it) {
     const ex = it.ex, n = seenCount(ex);
+    const w = wordings(ex);
+    const typed = n >= TEXT_AFTER || (w !== Infinity && (n >= w || (n >= 2 && w >= 3)));   // 3e formulation, puis tout nouveau cycle : réponse à taper
     if (ex.t === 'qcm' && Array.isArray(ex.c) && ex.c[ex.a] != null) {
       const q = framed(turn([ex.q, ...(ex.qv || [])], n));
-      if (n >= TEXT_AFTER) return { ...ex, q, t: 'qcmfree', again: true };   // à force de la voir : on tape la réponse
+      if (typed) return { ...ex, q, t: 'qcmfree', again: true };   // on tape la réponse
       return { ...ex, q };
     } else if (ex.t === 'vf') {
       const alt = turn([{ q: ex.q, a: ex.a, x: ex.x }, ...(ex.vv || [])], n);
       const v = { ...ex, q: alt.q, a: alt.a, x: alt.x || ex.x };
-      if (n >= TEXT_AFTER) return { t: 'write', q: '✍️ Vrai ou faux ? Tranche, puis justifie en une phrase', src: v.q, placeholder: 'Vrai ou faux, et pourquoi… (Ctrl+Entrée pour valider)',
+      if (typed) return { t: 'write', q: '✍️ Vrai ou faux ? Tranche, puis justifie en une phrase', src: v.q, placeholder: 'Vrai ou faux, et pourquoi… (Ctrl+Entrée pour valider)',
         model: `**${v.a ? 'Vrai' : 'Faux'}.** ${v.x || ''}`, crit: ['J\'ai tranché clairement : vrai ou faux', 'Ma justification s\'appuie sur un fait précis', 'Je n\'ai rien inventé'], rows: 3 };
       return n >= 1 ? { ...v, ...pickOne(VF_STYLES) } : v;
     } else if (ex.t === 'input') {
@@ -1608,7 +1625,7 @@
         seq.push({ type: 'story', s: sub.s, i: sub.i, color: sub.color, fromVideo: !!sub.v });
       });
       const qs = blockQuiz(date, day, grp, showAll);
-      qs.forEach((q, n) => seq.push({ type: 'quiz', ex: q.ex, id: q.id, block: b, n: n + 1, of: qs.length }));
+      qs.forEach((q, n) => seq.push({ type: 'quiz', ex: flashOf(q.ex), orig: q.ex, id: q.id, block: b, n: n + 1, of: qs.length }));
     }
     seq.push(...extras);
     seq.push({ type: 'end' });
@@ -1982,10 +1999,11 @@
     $$('.f-choice', card).forEach(b => { const c = +b.dataset.c; if (c === good) b.classList.add('right'); else if (c === pick) b.classList.add('wrong'); });
     S.stats.answered++; F.answered++; answered(ok, 'feed', it);
     seenStore().q[it.id] = Date.now();
+    bumpSeen(it.orig || ex);   // cette formulation a servi : la prochaine fois, une autre
     if (ok) { S.stats.correct++; F.right++; F.xp += 5; addXp(5); sfx.ok(); }
     else {
       sfx.ko();
-      if (!S.review.some(r => r.id === it.id)) S.review.push({ id: it.id, ex, from: `Fil du ${frDate(F.date)}`, at: TODAY });
+      if (!S.review.some(r => r.id === it.id)) S.review.push({ id: it.id, ex: it.orig || ex, from: `Fil du ${frDate(F.date)}`, at: TODAY });
     }
     markActive(); save();
     $('#f-xp').textContent = `XP ${F.xp}`;
@@ -2122,7 +2140,7 @@
   const ctx = {
     $, $$, esc, rich, shuffle, norm, pad, ymd, parseYmd, addDays, frDate, TODAY, DATE_RE, sfx, confetti,
     get S() { return S; }, save, addXp, markActive, renderChrome, route, level,
-    PREPA, UNITS, startLesson: k => startLesson(k),
+    PREPA, UNITS, startLesson: k => startLesson(k), usedUp: (ex, id) => usedUp(ex, id),
     currentDay: () => (CURRENT && DAYS[CURRENT]) || null,
     // ajoute un onglet à la Prépa (après l'onglet `after`) ; view() renvoie le HTML
     addPrepaTab(id, ico, label, view, after) {
