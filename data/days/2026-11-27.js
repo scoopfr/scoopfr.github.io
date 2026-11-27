@@ -333,7 +333,88 @@ window.SCOOP_DAYS['2026-11-27'] = {
         }
       ]
     }
-  ],
+,
+    {
+      "tag": "Médias",
+      "title": "Marine Le Pen veut obliger les journalistes à respecter le secret de l’instruction",
+      "sujet": "La candidate du RN annonce vouloir restreindre la publication d’éléments de procédures en cours",
+      "text": "Vendredi, **Marine Le Pen** a renouvelé sa confiance à **Jordan Bardella** après les nouvelles révélations du *Monde* et de *Mediapart* sur des écrits antisémites. La candidate du **Rassemblement national** à l’Élysée a aussi annoncé que, si elle était élue, elle voudrait **obliger les journalistes à respecter le secret de l’instruction**, c’est-à-dire restreindre la publication d’éléments issus de procédures judiciaires en cours. Elle a jugé « scandaleuses » les méthodes des médias qui enquêtent sur le RN.",
+      "why": "Le secret de l’instruction impose en principe la discrétion à ceux qui participent à la procédure judiciaire ; la proposition de Marine Le Pen vise la publication par la presse, ce qui touche directement à la liberté d’informer.",
+      "sources": [
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/france/20261127-marine-le-pen-soutient-bardella-et-veut-obliger-les-journalistes-%C3%A0-respecter-le-secret-des-enqu%C3%AAtes",
+          "titre": "Marine Le Pen soutient Bardella et veut obliger les journalistes à respecter le secret des enquêtes",
+          "extrait": "Vendredi, Marine Le Pen a réitéré sa confiance en Jordan Bardella après la publication de nouveaux éléments lui attribuant des écrits antisémites durant sa jeunesse."
+        },
+        {
+          "name": "Le Figaro",
+          "url": "https://www.lefigaro.fr/elections/presidentielles/presidentielle-2027-si-elle-est-elue-marine-le-pen-affirme-vouloir-obliger-les-journalistes-a-respecter-le-secret-de-l-instruction-20261127",
+          "titre": "Présidentielle 2027 : si elle est élue, Marine Le Pen affirme vouloir obliger les journalistes à respecter le secret de l’instruction",
+          "extrait": "La candidate du Rassemblement national à l’Élysée a annoncé vendredi vouloir restreindre la publication par la presse d’éléments issus de procédures judiciaires en cours."
+        },
+        {
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/elections/direct-presidentielle-2027-marine-le-pen-va-presenter-son-programme-pour-les-outre-mer-en-pleine-tourmente-sur-les-ecrits-antisemites-attribues-a-jordan-bardella_8302521.html",
+          "titre": "Présidentielle 2027 : Marine Le Pen renouvelle sa confiance à Jordan Bardella et veut obliger les journalistes à respecter le secret de l'instruction",
+          "extrait": "Elle a jugé \"scandaleuses\" les méthodes des médias qui enquêtent sur le RN."
+        }
+      ]
+    },
+    {
+      "tag": "Société",
+      "title": "OM-Levski Sofia : deux enquêtes ouvertes après les violences au Vélodrome",
+      "sujet": "Des affrontements entre supporters ont fait des blessés avant le match de Ligue Europa",
+      "text": "Jeudi 26 novembre, des affrontements ont éclaté entre supporters marseillais et bulgares au **stade Vélodrome**, avant le match de Ligue Europa entre l’OM et le **Levski Sofia** (victoire marseillaise 1-0). Au moins 11 blessés sont recensés côté bulgare selon France 24. Le **parquet de Marseille** a ouvert deux enquêtes : l’une pour « violences volontaires aggravées », l’autre pour « incitation à la haine » après des saluts nazis. L’OM est menacé de fortes sanctions de l’**UEFA**.",
+      "why": "Le parquet dirige les enquêtes pénales ; ici, deux procédures distinctes visent des faits différents et des supporters des deux camps.",
+      "sources": [
+        {
+          "name": "France 24",
+          "url": "https://www.france24.com/fr/vid%C3%A9o/20261127-incidents-et-bless%C3%A9s-%C3%A0-marseille-lors-d-om-levski-sofia-ce-que-l-on-sait",
+          "titre": "Incidents et blessés à Marseille lors d'OM-Levski Sofia : ce que l'on sait",
+          "extrait": "De violents affrontements ont éclaté jeudi 26 novembre 2026 au stade Vélodrome avant le match de Ligue Europa entre l'OM et le Levski Sofia (victoire marseillaise 1-0), faisant au moins 11 blessés côté bulgare."
+        },
+        {
+          "name": "Le Figaro",
+          "url": "https://www.lefigaro.fr/marseille/om-levski-sofia-le-parquet-de-marseille-annonce-l-ouverture-d-une-enquete-pour-violences-volontaires-aggravees-20261127",
+          "titre": "OM - Levski Sofia : deux enquêtes ouvertes pour «violences volontaires aggravées» et pour «incitation à la haine» après des saluts nazis",
+          "extrait": "L’OM est sous la menace de fortes sanctions de l’UEFA après les graves incidents qui ont fait plusieurs blessés parmi les supporters bulgares du Levski Sofia."
+        },
+        {
+          "name": "Libération",
+          "url": "https://www.liberation.fr/sports/football/des-supporters-du-levski-sofia-blesses-a-marseille-la-bulgarie-exprime-son-indignation-20261127_FTGUG53OWVB6VIS24O563ZPKKI/",
+          "titre": "Salut nazi, bagarre violente entre supporters… deux enquêtes ouvertes après OM-Levski Sofia",
+          "extrait": "Cinq personnes ont été hospitalisées. Deux enquêtes ont été ouvertes pour «violences» et «incitation à la haine»."
+        }
+      ]
+    },
+    {
+      "tag": "Culture",
+      "title": "Mort de Jean-Claude Vannier, arrangeur de Serge Gainsbourg",
+      "sujet": "Le compositeur, père de l’album « Histoire de Melody Nelson », est mort à 83 ans",
+      "text": "Le compositeur et arrangeur **Jean-Claude Vannier** est mort à 83 ans. Binôme de **Serge Gainsbourg** pour l’album-concept *Histoire de Melody Nelson*, il avait aussi orchestré des chansons de Barbara, Jacques Higelin, Jane Birkin ou Alain Bashung, et travaillé avec Johnny Hallyday et Julien Clerc. Les médias n’indiquent pas tous la même date de décès : jeudi 26 novembre pour Le Monde et Ouest-France, vendredi 27 novembre pour Libération.",
+      "why": "Un arrangeur écrit et orchestre la musique d’une chanson autour de la mélodie : un métier souvent dans l’ombre, que les hommages de la presse mettent ici en lumière.",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/disparitions/article/2026/11/27/jean-claude-vannier-arrangeur-indissociable-de-serge-gainsbourg-et-pere-de-l-album-concept-histoire-de-melody-nelson-est-mort-a-l-age-de-83-ans_6815859_3382.html",
+          "titre": "Jean-Claude Vannier, arrangeur indissociable de Serge Gainsbourg et père de l’album-concept « Histoire de Melody Nelson », est mort à l’âge de 83 ans",
+          "extrait": "Le binôme de Serge Gainsbourg lors de la création de l’album « Histoire de Melody Nelson », est mort jeudi."
+        },
+        {
+          "name": "Libération",
+          "url": "https://www.liberation.fr/culture/musique/mort-de-jean-claude-vannier-arrangeur-historique-de-serge-gainsbourg-20261127_XCWLPFFNIRHQZINVDIFL23IP6I/",
+          "titre": "Mort de Jean-Claude Vannier, arrangeur historique de Serge Gainsbourg",
+          "extrait": "Le musicien, célèbre notamment pour avoir composé les arrangements et orchestré la musique de «l’Histoire de Melody Nelson», est mort ce vendredi 27 novembre à l’âge de 83 ans."
+        },
+        {
+          "name": "RFI",
+          "url": "https://www.rfi.fr/fr/musique/20261127-jean-claude-vannier-mort-d-un-arrangeur-star",
+          "titre": "Jean-Claude Vannier, mort d'un arrangeur star",
+          "extrait": "Souvent dans l’ombre, humble et talentueux, le compositeur et arrangeur Jean-Claude Vannier mettait en lumière les plus grands avec finesse."
+        }
+      ]
+    }  ],
   "shorts": [
     {
       "id": "HGRQYEYTmRU",
@@ -1053,6 +1134,74 @@ window.SCOOP_DAYS['2026-11-27'] = {
         }
       ]
     }
-  ],
-  "updates": [{ "at": "11:00", "stories": [13, 14] }]
+,
+    {
+      "title": "⚡ Flash de 14 h",
+      "icon": "⚡",
+      "desc": "Mise à jour",
+      "exercises": [
+        {
+          "t": "qcm",
+          "q": "Que veut obliger Marine Le Pen, si elle est élue, selon Le Figaro et France 24 ?",
+          "c": [
+            "Les journalistes à respecter le secret de l’instruction",
+            "Les médias à publier leurs sources",
+            "Les chaînes à diffuser des débats",
+            "Les journaux à publier un droit de réponse"
+          ],
+          "a": 0,
+          "x": "Elle veut restreindre la publication d’éléments de procédures judiciaires en cours."
+        },
+        {
+          "t": "vf",
+          "q": "Marine Le Pen a retiré sa confiance à Jordan Bardella après les nouvelles révélations.",
+          "a": false,
+          "x": "Elle a au contraire renouvelé sa confiance au président du RN."
+        },
+        {
+          "t": "qcm",
+          "q": "Quelles enquêtes le parquet de Marseille a-t-il ouvertes après OM-Levski Sofia ?",
+          "c": [
+            "Violences volontaires aggravées et incitation à la haine",
+            "Fraude et corruption",
+            "Dégradations et vol",
+            "Seulement une enquête pour violences"
+          ],
+          "a": 0,
+          "x": "Figaro et Libération : deux enquêtes, pour violences et pour incitation à la haine après des saluts nazis."
+        },
+        {
+          "t": "vf",
+          "q": "L’OM a perdu son match de Ligue Europa contre le Levski Sofia.",
+          "a": false,
+          "x": "L’OM l’a emporté 1-0, selon France 24."
+        },
+        {
+          "t": "qcm",
+          "q": "Avec quel artiste Jean-Claude Vannier a-t-il créé l’album « Histoire de Melody Nelson » ?",
+          "c": [
+            "Serge Gainsbourg",
+            "Alain Bashung",
+            "Johnny Hallyday",
+            "Jacques Higelin"
+          ],
+          "a": 0,
+          "x": "Le Monde, Libération et RFI le présentent comme l’arrangeur de Serge Gainsbourg."
+        },
+        {
+          "t": "write",
+          "max": 80,
+          "q": "🏷️ Titre",
+          "src": "Dépêche :\n\nMarine Le Pen a annoncé vendredi que, si elle était élue, elle voudrait obliger les journalistes à respecter le secret de l’instruction. Elle a jugé « scandaleuses » les méthodes des médias qui enquêtent sur le RN.",
+          "model": "**Titre possible :** Marine Le Pen veut obliger les journalistes à respecter le secret de l’instruction",
+          "crit": [
+            "On comprend le fait (qui, quoi)",
+            "Il contient un verbe et reste sous 80 signes",
+            "Il ne promet rien que le texte ne donne pas",
+            "Il évite les adjectifs de jugement"
+          ]
+        }
+      ]
+    }  ],
+  "updates": [{ "at": "11:00", "stories": [13, 14] }, { "at": "14:00", "stories": [15, 16, 17] }]
 };
