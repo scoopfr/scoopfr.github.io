@@ -278,6 +278,60 @@ window.SCOOP_DAYS['2026-11-27'] = {
           "name": "Al Jazeera",
           "url": "https://www.aljazeera.com/video/newsfeed/2026/11/27/new-zealands-opportunity-party-poised-to-become-election-kingmaker?traffic_source=rss", titre: 'New Zealand’s Opportunity Party poised to become election kingmaker', extrait: 'The newly-elected Opportunity party is now in a position to swing New Zealand’s next parliament to the left or right.' }
       ]
+    },
+    {
+      "tag": "Économie",
+      "title": "La France entre en récession : le PIB recule de 0,2 % au troisième trimestre",
+      "sujet": "L’Insee révise à la baisse la croissance et confirme deux trimestres de recul",
+      "text": "Le produit intérieur brut (PIB) de la France a reculé de **0,2 %** au troisième trimestre 2026, selon l’**Insee**, qui avait d’abord estimé une baisse de 0,1 %. Avec un léger recul d’activité au deuxième trimestre, le pays est techniquement **en récession**. Selon Le Figaro, l’« acquis de croissance » à la fin du troisième trimestre est de 0,1 %, ce qui rend difficile d’atteindre le taux de 0,5 % toujours pronostiqué par le gouvernement. L’Insee a aussi publié l’inflation provisoire de novembre : **2,9 %** sur un an.",
+      "why": "On parle de récession (définition courante) après deux trimestres consécutifs de recul du PIB ; l’acquis de croissance est la croissance annuelle déjà « acquise » si l’activité stagnait ensuite.",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/economie/article/2026/11/27/la-france-entre-en-recession-apres-deux-trimestres-de-recul-du-pib_6815824_3234.html",
+          "titre": "La France entre en récession après deux trimestres de recul du PIB",
+          "extrait": "Le produit intérieur brut a reculé de 0,2 % au troisième trimestre 2026, selon l’Insee, alors qu’il avait été initialement estimé en baisse de 0,1 %."
+        },
+        {
+          "name": "Le Figaro",
+          "url": "https://www.lefigaro.fr/conjoncture/la-france-est-en-legere-recession-depuis-le-deuxieme-trimestre-selon-l-insee-20261127",
+          "titre": "La France est en récession depuis le deuxième trimestre, selon l’Insee",
+          "extrait": "«L’acquis de croissance» à la fin du troisième trimestre est de 0,1%, rendant difficile d’atteindre le taux de 0,5% toujours pronostiqué par le gouvernement."
+        },
+        {
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/economie/croissance/le-pib-recule-de-0-2-en-france-au-troisieme-trimestre-apres-une-revision-a-la-baisse-de-l-insee_8302671.html",
+          "titre": "Le PIB recule de 0,2% en France au troisième trimestre, après une révision à la baisse de l'Insee",
+          "extrait": "L'Insee a également publié les chiffres provisoires de l'inflation, qui a ralenti à 2,9% sur un an en novembre."
+        }
+      ]
+    },
+    {
+      "tag": "Société",
+      "title": "Attentat de Trappes : les parties civiles veulent réentendre un collègue du suspect",
+      "sujet": "L’enquête sur l’attentat raciste des Yvelines se poursuit",
+      "text": "L’avocat des parties civiles, Me **Yassine Bouzrou**, a demandé jeudi 26 novembre au juge d’instruction de réentendre en urgence **Gontran F.**, 38 ans, collègue de **Kevin Tessier**, principal suspect de l’attentat raciste de Trappes et La Verrière. Selon l’avocat, plusieurs éléments laissent penser qu’il connaissait le projet d’attentat et aurait poussé le suspect à passer à l’acte. Le Figaro le décrit comme un « potentiel mentor radicalisé » qui se revendique de l’extrême droite ; il a déjà été entendu par les enquêteurs.",
+      "why": "Les parties civiles (victimes et proches) peuvent demander au juge d’instruction des actes d’enquête, comme une nouvelle audition ; c’est lui qui décide d’y donner suite ou non.",
+      "sources": [
+        {
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/faits-divers/terrorisme/attentat-raciste-a-trappes/attentat-raciste-dans-les-yvelines-des-proches-de-victimes-demandent-a-la-justice-de-reentendre-un-collegue-du-principal-suspect_8302476.html",
+          "titre": "Attentat raciste dans les Yvelines : des proches de victimes demandent à la justice de réentendre un collègue du principal suspect",
+          "extrait": "Selon l'avocat des parties civiles, de nombreux éléments prouvant que ce collègue de Kevin Tessier, âgé de 38 ans, connaissait le projet d'attentat du suspect et qu'il l'a poussé à passer à l'acte."
+        },
+        {
+          "name": "Le Figaro",
+          "url": "https://www.lefigaro.fr/faits-divers/attentat-de-trappes-un-avocat-de-parties-civiles-demande-a-entendre-en-urgence-un-ami-de-kevin-tessier-un-potentiel-mentor-radicalise-20261127",
+          "titre": "Attentat de Trappes : Gontran F., ce proche de Kevin Tessier et potentiel «mentor radicalisé»",
+          "extrait": "L’avocat de parties civiles Me Yassine Bouzrou a adressé une demande au juge d’instruction afin d’interroger «en urgence» un proche de Kevin Tessier."
+        },
+        {
+          "name": "Ouest-France",
+          "url": "https://www.ouest-france.fr/faits-divers/attentat/attentat-raciste-de-trappes-et-la-verriere-un-avocat-des-parties-civiles-reclame-une-nouvelle-audition-dun-collegue-du-suspect-7df2ac48-ea3a-11f1-bb2d-c71dc7920c2a",
+          "titre": "Attentat raciste de Trappes et La Verrière : un avocat des parties civiles réclame une nouvelle audition d’un collègue du suspect",
+          "extrait": "L’avocat des parties civiles dans l’attentat de Trappes et de La Verrière, Me Yassine Bouzrou, a réclamé à la justice, jeudi 26 novembre, de réentendre l’un des collègues de Kévin Tessier."
+        }
+      ]
     }
   ],
   "shorts": [
@@ -942,6 +996,63 @@ window.SCOOP_DAYS['2026-11-27'] = {
           ]
         }
       ]
+    },
+    {
+      "title": "⚡ Flash de 11 h",
+      "icon": "⚡",
+      "desc": "Mise à jour",
+      "exercises": [
+        {
+          "t": "qcm",
+          "q": "De combien le PIB français a-t-il reculé au troisième trimestre 2026, selon l’Insee ?",
+          "c": [
+            "0,2 %",
+            "0,1 %",
+            "0,5 %",
+            "2,9 %"
+          ],
+          "a": 0,
+          "x": "Le Monde et franceinfo : -0,2 %, après une première estimation à -0,1 %."
+        },
+        {
+          "t": "vf",
+          "q": "La France est techniquement en récession après deux trimestres consécutifs de recul du PIB.",
+          "a": true,
+          "x": "Le PIB a reculé aux deuxième et troisième trimestres, selon l’Insee."
+        },
+        {
+          "t": "qcm",
+          "q": "À quel niveau l’inflation sur un an a-t-elle ralenti en novembre, selon l’Insee ?",
+          "c": [
+            "2,9 %",
+            "0,7 %",
+            "0,2 %",
+            "0,5 %"
+          ],
+          "a": 0,
+          "x": "Euronews et franceinfo : +2,9 % sur un an en novembre."
+        },
+        {
+          "t": "vf",
+          "q": "Me Yassine Bouzrou, avocat des parties civiles, demande au juge de réentendre un collègue du suspect de l’attentat de Trappes.",
+          "a": true,
+          "x": "Franceinfo, Le Figaro et Ouest-France rapportent cette demande."
+        },
+        {
+          "t": "write",
+          "max": 80,
+          "q": "🏷️ Titre",
+          "src": "Dépêche :\n\nLe produit intérieur brut de la France a reculé de 0,2 % au troisième trimestre 2026, selon l’Insee, qui avait d’abord estimé une baisse de 0,1 %. Avec un léger recul au deuxième trimestre, le pays est en récession.",
+          "model": "**Titre possible :** La France entre en récession, le PIB recule de 0,2 % au troisième trimestre",
+          "crit": [
+            "On comprend le fait (qui, quoi)",
+            "Il contient un verbe et reste sous 80 signes",
+            "Il ne promet rien que le texte ne donne pas",
+            "Il évite les adjectifs de jugement"
+          ]
+        }
+      ]
     }
-  ]
+  ],
+  "updates": [{ "at": "11:00", "stories": [13, 14] }]
 };
