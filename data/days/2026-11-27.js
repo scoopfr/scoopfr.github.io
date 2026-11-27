@@ -414,6 +414,42 @@ window.SCOOP_DAYS['2026-11-27'] = {
           "extrait": "Souvent dans l’ombre, humble et talentueux, le compositeur et arrangeur Jean-Claude Vannier mettait en lumière les plus grands avec finesse."
         }
       ]
+    },
+    {
+      "tag": "Société",
+      "title": "Féminicide de Chahinez Daoud : l’ex-mari condamné en appel à la perpétuité",
+      "sujet": "Le verdict du procès en appel pour le féminicide de Mérignac est tombé",
+      "text": "La cour d’assises d’appel de la Dordogne a condamné vendredi 27 novembre l’ex-mari de **Chahinez Daoud**, **Mounir Boutaa**, 50 ans, à la **réclusion criminelle à perpétuité**, assortie d’une période de sûreté de 22 ans, selon Ouest-France. Il comparaissait depuis lundi pour avoir tué par le feu son ex-compagne à Mérignac, en Gironde, en 2021. Le verdict confirme la peine prononcée en première instance.",
+      "why": "Une cour d’assises d’appel rejuge l’affaire en entier après un premier procès : elle peut confirmer, alléger ou aggraver la peine. Ici, elle confirme.",
+      "sources": [
+        {
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/faits-divers/justice-proces/la-reclusion-criminelle-a-perpetuite-requise-contre-l-accuse-lors-du-proces-en-appel-pour-le-feminicide-de-chahinez-daoud_8303238.html", titre: 'L\'ex-mari de Chahinez Daoud condamné une nouvelle fois en appel à la perpétuité pour le féminicide de son épouse', extrait: 'L\'homme était jugé pour avoir tué par le feu son ex-compagne Chahinez Daoud à Mérignac en 2021. Le verdict confirme une nouvelle fois la peine prononcée en première instance pour ce féminicide.' },
+        {
+          "name": "Libération",
+          "url": "https://www.liberation.fr/societe/droits-des-femmes/feminicide-de-chahinez-daoud-son-ex-mari-condamne-en-appel-a-la-perpetuite-20261127_AK5LKBJAURGIBGRZSOUKDSVZ6Q/", titre: 'Féminicide de Chahinez Daoud : son ex-mari condamné en appel à la perpétuité', extrait: 'Mounir Boutaa, 50 ans, comparaissait depuis lundi devant la cour d’assises d’appel de Dordogne, qui a confirmé la peine prononcée en première instance pour le meurtre de son épouse, brûlée vive en 2021.' },
+        {
+          "name": "Ouest-France",
+          "url": "https://www.ouest-france.fr/societe/justice/lex-mari-de-chahinez-daoud-brulee-vive-en-2021-en-gironde-a-nouveau-condamne-a-la-perpetuite-a05aa6d0-ea46-11f1-bb2d-c71dc7920c2a", titre: 'L’ex-mari de Chahinez Daoud, brûlée vive en 2021 en Gironde, à nouveau condamné à la perpétuité', extrait: 'L’ex-mari de Chahinez Daoud a été condamné vendredi 27 novembre 2026 à la prison à perpétuité assortie d’une période de sûreté de 22 ans par la cour d’assises d’appel de Dordogne pour l’assassinat de son épouse, brûlée vive en 2021 près de ...' }
+      ]
+    },
+    {
+      "tag": "Monde",
+      "title": "Québec : la Cour suprême du Canada valide presque toute la loi sur la laïcité",
+      "sujet": "Une décision très attendue sur la loi québécoise sur la laïcité",
+      "text": "La **Cour suprême du Canada** a validé, vendredi 27 novembre, la presque totalité de la **Loi sur la laïcité de l’État** du Québec (loi 21), selon Radio-Canada, la BBC et The Guardian. Le texte interdit à des agents publics, comme les enseignants et les policiers, de porter des symboles religieux (hijab, turban…) dans l’exercice de leurs fonctions. Le tribunal confirme aussi que la **disposition de dérogation** peut être invoquée de manière préventive.",
+      "why": "La disposition de dérogation permet à un gouvernement de faire adopter une loi malgré certains droits garantis par la Charte canadienne : c’est l’enjeu central de cette décision très suivie.",
+      "sources": [
+        {
+          "name": "Radio-Canada",
+          "url": "https://ici.radio-canada.ca/article/info/2303429/loi-21-cour-supreme-jugement", titre: 'La Cour suprême valide la presque totalité de la Loi sur la laïcité de l’État du Québec', extrait: 'La disposition de dérogation peut être invoquée préventivement, confirme le tribunal.' },
+        {
+          "name": "BBC News",
+          "url": "https://www.bbc.co.uk/news/articles/cq3dgpy9lem3o", titre: 'Canada\'s top court largely upholds Quebec ban on religious symbols for public servants', extrait: 'The law faced legal challenges from a range of groups, including female Muslim, Sikh and Catholic teachers, who argued it violated their funadamental rights.' },
+        {
+          "name": "The Guardian",
+          "url": "https://www.theguardian.com/world/2026/nov/27/canadas-top-court-upholds-quebec-law-barring-public-sector-workers-from-wearing-religious-symbols", titre: 'Canada’s top court upholds Quebec law barring public sector workers from wearing religious symbols', extrait: 'Closely watched decision exposes tensions between minority rights and the power of government to override those rights Canada’s top court has largely upheld a controversial secularism law in the province of Quebec barring public sector work...' }
+      ]
     }  ],
   "shorts": [
     {
@@ -1202,6 +1238,75 @@ window.SCOOP_DAYS['2026-11-27'] = {
           ]
         }
       ]
+    }
+,
+    {
+      "title": "⚡ Flash de 18 h",
+      "icon": "⚡",
+      "desc": "Mise à jour",
+      "exercises": [
+        {
+          "t": "qcm",
+          "q": "Quelle peine la cour d’assises d’appel a-t-elle prononcée contre l’ex-mari de Chahinez Daoud ?",
+          "c": [
+            "La réclusion criminelle à perpétuité",
+            "20 ans de réclusion",
+            "Un acquittement",
+            "10 ans de prison"
+          ],
+          "a": 0,
+          "x": "Franceinfo, Libération et Ouest-France : perpétuité, avec 22 ans de période de sûreté selon Ouest-France."
+        },
+        {
+          "t": "vf",
+          "q": "La cour d’assises d’appel a confirmé la peine prononcée en première instance.",
+          "a": true,
+          "x": "Franceinfo et Libération : le verdict confirme la peine du premier procès."
+        },
+        {
+          "t": "qcm",
+          "q": "Quelle juridiction a validé presque toute la loi 21 sur la laïcité au Québec ?",
+          "c": [
+            "La Cour suprême du Canada",
+            "Le Conseil constitutionnel",
+            "La Cour de cassation",
+            "Le Parlement du Québec"
+          ],
+          "a": 0,
+          "x": "Radio-Canada, BBC et The Guardian parlent de la Cour suprême du Canada."
+        },
+        {
+          "t": "qcm",
+          "q": "Qui la loi québécoise empêche-t-elle de porter des symboles religieux au travail ?",
+          "c": [
+            "Certains agents publics, comme les enseignants et les policiers",
+            "Tous les habitants du Québec",
+            "Les seuls élèves",
+            "Les commerçants"
+          ],
+          "a": 0,
+          "x": "Al Jazeera et NYT citent les enseignants et les policiers."
+        },
+        {
+          "t": "vf",
+          "q": "Selon Radio-Canada, la disposition de dérogation peut être invoquée de façon préventive.",
+          "a": true,
+          "x": "Le tribunal le confirme, d’après Radio-Canada."
+        },
+        {
+          "t": "write",
+          "max": 80,
+          "q": "🏷️ Titre",
+          "src": "Dépêche :\n\nLa cour d’assises d’appel de la Dordogne a condamné vendredi l’ex-mari de Chahinez Daoud à la réclusion criminelle à perpétuité pour l’avoir tuée par le feu en 2021 à Mérignac. La peine de première instance est confirmée.",
+          "model": "**Titre possible :** L’ex-mari de Chahinez Daoud condamné en appel à la perpétuité",
+          "crit": [
+            "On comprend le fait (qui, quoi)",
+            "Il contient un verbe et reste sous 80 signes",
+            "Il ne promet rien que le texte ne donne pas",
+            "Il évite les adjectifs de jugement"
+          ]
+        }
+      ]
     }  ],
-  "updates": [{ "at": "11:00", "stories": [13, 14] }, { "at": "14:00", "stories": [15, 16, 17] }]
+  "updates": [{ "at": "11:00", "stories": [13, 14] }, { "at": "14:00", "stories": [15, 16, 17] }, { "at": "18:00", "stories": [18, 19] }]
 };
