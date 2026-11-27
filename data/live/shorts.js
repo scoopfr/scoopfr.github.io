@@ -1,12 +1,12 @@
 /* Scoop — vidéos du fil, mises à jour automatiquement (scripts/update-live.mjs). Ne pas modifier à la main. */
-window.SCOOP_LIVE = Object.assign({ updated: '2026-11-27T14:41:31.208Z' }, /*DATA*/{
+window.SCOOP_LIVE = Object.assign({ updated: '2026-11-27T23:13:26.296Z' }, /*DATA*/{
  "date": "2026-11-27",
  "videos": [
   {
    "id": "HGRQYEYTmRU",
    "source": "franceinfo",
    "title": "E. Macron fustige \"la drôle d'arrogance\" de M. Le Pen",
-   "published": "2026-11-26T22:30:40+00:00",
+   "published": null,
    "story": 0,
    "curated": true
   },
@@ -59,6 +59,14 @@ window.SCOOP_LIVE = Object.assign({ updated: '2026-11-27T14:41:31.208Z' }, /*DAT
    "curated": true
   },
   {
+   "id": "mddv9LlW1Gc",
+   "source": "euronews",
+   "title": "Législatives en Nouvelle-Zélande : le parti centriste Opportunity faiseur de roi",
+   "published": "2026-11-27T19:12:24+00:00",
+   "story": 12,
+   "curated": false
+  },
+  {
    "id": "E7zWdgJ-g18",
    "source": "Brut",
    "title": "Elle a 38 ans et est mère de deux enfants, une première au concours de Miss France.",
@@ -67,258 +75,250 @@ window.SCOOP_LIVE = Object.assign({ updated: '2026-11-27T14:41:31.208Z' }, /*DAT
    "curated": false
   },
   {
-   "id": "8NRC-7e9oUU",
-   "source": "Libération",
-   "title": "Attentat de Trappes : à quand la date de l'hommage national ?",
-   "published": "2026-11-25T19:54:50+00:00",
-   "story": 14,
-   "curated": false
-  },
-  {
-   "id": "1sJPXB6l1D0",
-   "source": "Brut",
-   "title": "Bagarres et saluts nazis au Vélodrome à Marseille pendant un match.",
-   "published": "2026-11-27T12:35:03+00:00",
+   "id": "GuQQ2ipsNmY",
+   "source": "France 24",
+   "title": "Ligue Europa : une banderole pro-palestinienne provoque des heurts et un incident diplomatique",
+   "published": "2026-11-27T15:41:08+00:00",
    "story": 16,
    "curated": false
   },
   {
-   "id": "6nUsj0Vu1JE",
-   "source": "RFI",
-   "title": "RDC - Ouganda : jusqu'où peut aller la crise diplomatique ? #rdc #frn #ouganda #kabila #kainerugaba",
-   "published": "2026-11-27T14:30:13+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "agY9g2cKHl8",
-   "source": "euronews",
-   "title": "Sécheresse au Royaume-Uni : construction d'un réservoir d'eau pour la première fois en trente ans",
-   "published": "2026-11-27T14:29:09+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "ADR8C_KutiM",
-   "source": "Libération",
-   "title": "La \"marque\" Lisnard par Frank Tapiro.",
-   "published": "2026-11-27T14:09:49+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "mSgF6fTGHJY",
+   "id": "7EiLPvflIAc",
    "source": "franceinfo",
-   "title": "💘 L'amour est-il une drogue ?",
-   "published": "2026-11-27T14:00:36+00:00",
+   "title": "Jodie Foster : \"J'ai toujours voulu jouer une méchante\"",
+   "published": "2026-11-27T22:00:45+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "v-EsYWnVTwE",
-   "source": "franceinfo",
-   "title": "Scènes de chaos entre supporters à Marseille",
-   "published": "2026-11-27T13:09:05+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "OO1n-T6Jrs4",
-   "source": "France 24",
-   "title": "Demander à l’intelligence artificielle pour qui voter à la présidentielle 2027, une bonne idée ?",
-   "published": "2026-11-27T13:06:06+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "uHLc-9mSeFY",
-   "source": "TF1 INFO",
-   "title": "Comment le Canada tente de réaffirmer sa souveraineté dans l'Arctique convoité",
-   "published": "2026-11-27T12:30:06+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "fMXQtRLxSeE",
-   "source": "euronews",
-   "title": "Musée de l’Acropole: une grande expo révèle l’Arménie préchrétienne et ses liens avec la Grèce",
-   "published": "2026-11-27T12:11:37+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "fDH5f1vWFQA",
-   "source": "France 24",
-   "title": "Échanges de coups, jets de projectiles, saluts nazis : soirée chaotique à Marseille contre le Levski",
-   "published": "2026-11-27T12:09:54+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "5bDYWLt_CZg",
-   "source": "Le Parisien",
-   "title": "Le (gentil) tacle d'Emmanuel Grégoire aux non-Parisiens",
-   "published": "2026-11-27T11:46:02+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "wcbeOpRgDJg",
-   "source": "TF1 INFO",
-   "title": "Les intempéries ont privé de nombreux Américains d'électricité pour la fête de Thanksgiving",
-   "published": "2026-11-27T11:45:38+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "UcDW-EedWTw",
+   "id": "ckfahHpyt98",
    "source": "France Inter",
-   "title": "Agrivoltaïque 100 fois plus efficace que la biomasse",
-   "published": "2026-11-27T11:30:30+00:00",
+   "title": "Guillaume Canet sur le métier de clown",
+   "published": "2026-11-27T21:00:20+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "GTW0VdPktUw",
+   "id": "DlkaB7jnMxs",
+   "source": "TF1 INFO",
+   "title": "Elon Musk promet d'offrir des actions de SpaceX à tous les enfants des États-Unis",
+   "published": "2026-11-27T20:45:45+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "NvSNkQOTdsc",
+   "source": "franceinfo",
+   "title": "Baisser le salaire d'un joueur malade ?",
+   "published": "2026-11-27T20:01:36+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "gYVpRrI8QZI",
+   "source": "France Inter",
+   "title": "Cybersécurité : quels risques pour la présidentielle ?",
+   "published": "2026-11-27T20:00:24+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "EueNha2egFI",
+   "source": "TF1 INFO",
+   "title": "UKRAINE : la bataille des gazoducs",
+   "published": "2026-11-27T19:52:42+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "n4_jGgW0ZUs",
+   "source": "France Inter",
+   "title": "L'histoire de \"Flower In A Hurricane\" de Justice pour GTA VI",
+   "published": "2026-11-27T19:30:20+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "3FEkOXPtFlw",
+   "source": "France Inter",
+   "title": "Le jour où (D)Juno a choisi de ne plus faire que de",
+   "published": "2026-11-27T19:15:14+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "9_mZ87yF5AQ",
+   "source": "France 24",
+   "title": "Côte d'Ivoire : 234 détenus en marge de la présidentielle de 2025 libérés",
+   "published": "2026-11-27T19:13:39+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "pLvyn6JO8sU",
+   "source": "franceinfo",
+   "title": "Ukraine, combien donne la France ?",
+   "published": "2026-11-27T19:06:48+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "wNH-Pm9ZU8c",
+   "source": "franceinfo",
+   "title": "David Lisnard, c'est Zemmour 2022 ou Macron 2017 ? \"On/Off\", épisode 11",
+   "published": "2026-11-27T19:00:39+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "UHnF8zydCPk",
    "source": "TV5MONDE Info",
-   "title": "Tunisie : ces jeunes enrôlés de force en Russie",
-   "published": "2026-11-27T11:27:40+00:00",
+   "title": "Pourquoi la RD Congo suspend l'exportation de cobalt?",
+   "published": "2026-11-27T18:56:07+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "OhG3V1fSiK8",
+   "id": "_N4thrc7700",
    "source": "France 24",
-   "title": "France : Emmanuel Macron critique la “drôle d’arrogance” de Marine Le Pen",
-   "published": "2026-11-27T11:26:15+00:00",
+   "title": "Afrique du Sud : Cyril Ramaphosa évite la destitution dans \"l'affaire Phala Phala\"",
+   "published": "2026-11-27T18:14:01+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "QRiObg2cDqQ",
+   "id": "qDu9cLtH9Ws",
    "source": "franceinfo",
-   "title": "Manon Aubry est l'invitée du 8.30 franceinfo",
-   "published": "2026-11-27T11:05:08+00:00",
+   "title": "La suspension de l'usage des grenades assourdissantes prolongée",
+   "published": "2026-11-27T18:01:00+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "lexdfww1Yus",
-   "source": "Brut",
-   "title": "Un camion dérape et finit entre deux bretelles d'autoroute aux États-Unis.",
-   "published": "2026-11-27T11:03:21+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "z-uuFcFQX8k",
-   "source": "franceinfo",
-   "title": "Un labo de drogues sous une aire de jeux pour enfants",
-   "published": "2026-11-27T10:57:02+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "lZJsaIIK084",
-   "source": "Le Parisien",
-   "title": "Lecornu imite Chirac au Congrès des maires de France",
-   "published": "2026-11-27T10:55:22+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "Xf3vaVq73Hs",
-   "source": "France Inter",
-   "title": "Guerre en Ukraine : “ce n’est pas notre guerre”, comme le dit Teddy Riner ?",
-   "published": "2026-11-27T10:32:42+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "8gQ0dwyJP-U",
-   "source": "Brut",
-   "title": "Les nouveaux Zinédine Zidane, Dimitri Payet, Steph Curry…",
-   "published": "2026-11-27T10:11:10+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "AbSjn10iL9g",
-   "source": "TF1 INFO",
-   "title": "Prix en rayon : gare aux écarts du ticket de caisse !",
-   "published": "2026-11-27T10:09:34+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "vdHL5HlVfGk",
+   "id": "kTNMvEIMkIM",
    "source": "euronews",
-   "title": "Élections espagnoles : quatre candidats, deux blocs et deux visions pour le pays",
-   "published": "2026-11-27T10:03:07+00:00",
+   "title": "Élargissement de l’UE : le Monténégro, la Moldavie et le rôle clé de la Grèce en 2027",
+   "published": "2026-11-27T17:57:07+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "ceXEiHVQ7Fk",
+   "id": "lelKCSzTgvs",
+   "source": "TF1 INFO",
+   "title": "Une IA a-t-elle réussi à finir GTA VI en seulement 12 heures ?",
+   "published": "2026-11-27T17:53:14+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "LaiFuOt-Aqk",
+   "source": "Le Figaro",
+   "title": "Relocalisations d'entreprises : «À construction équivalente avec ou sans normes, une usine en",
+   "published": "2026-11-27T17:45:38+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "JaT2v7p0EHk",
+   "source": "Le Parisien",
+   "title": "Pourquoi ce café parisien a installé des gradins de piscine",
+   "published": "2026-11-27T17:36:41+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "VafUvVgEJ2A",
    "source": "Brut",
-   "title": "Le retour d’un train géant après deux abandons dans cette région française ?",
-   "published": "2026-11-27T09:17:08+00:00",
+   "title": "Les parlementaires trouvent un accord pour supprimer la notion de \"devoir conjugal\" du Code civil.",
+   "published": "2026-11-27T17:31:46+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "0fM9Ptp-8Qg",
-   "source": "Brut",
-   "title": "Nadal : son rapport à la défaite",
-   "published": "2026-11-27T08:30:41+00:00",
-   "story": null,
-   "curated": false
-  },
-  {
-   "id": "JzUjaz4Y3iI",
+   "id": "K1T9tigVFXY",
    "source": "franceinfo",
-   "title": "Un procureur peut-il s'afficher dans les locaux d'un parti politique ?",
-   "published": "2026-11-27T08:06:20+00:00",
+   "title": "Huit députés LR préfèrent D. Lisnard à B. Retailleau pour 2027",
+   "published": "2026-11-27T17:31:35+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "B4yLaUoX_c0",
-   "source": "AFP",
-   "title": "🛰️🇺🇸 L’administration Trump a autorisé SpaceX à lancer jusqu’à un million de satellites dans le c",
-   "published": "2026-11-27T07:15:04+00:00",
+   "id": "Xmly_8LRerQ",
+   "source": "TF1 INFO",
+   "title": "Pourquoi ces deux cargos semblent flotter dans les airs ?",
+   "published": "2026-11-27T17:30:38+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "w636oFsiumo",
+   "id": "7TkMcVp9xAQ",
+   "source": "France Inter",
+   "title": "Caballero : une liste de featurings inspirants",
+   "published": "2026-11-27T17:30:31+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "gAxpK_lvqyY",
    "source": "franceinfo",
-   "title": "Les syndicats du JV interpellent les candidats",
-   "published": "2026-11-27T07:01:42+00:00",
+   "title": "La mairie de Paris annonce le retrait des panneaux directionnels",
+   "published": "2026-11-27T17:01:10+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "V5UCfmrj7vY",
+   "id": "uN-dMJeOF3g",
+   "source": "euronews",
+   "title": "Le gouvernement français pris en étau entre policiers épuisés et étudiants en colère",
+   "published": "2026-11-27T17:00:35+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "vn1jtqkpbzA",
+   "source": "TF1 INFO",
+   "title": "Elle demande à l'IA de l'aider à réparer son jacuzzi : elle manque de perdre1 500 euros !",
+   "published": "2026-11-27T17:00:31+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "5s4gGqBcUDo",
+   "source": "franceinfo",
+   "title": "Un sapin dévale la montagne et traverse un chalet",
+   "published": "2026-11-27T16:59:09+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "nN7p8OH4uoQ",
+   "source": "Le Parisien",
+   "title": "Se garer dans Paris va bientôt coûter encore plus cher",
+   "published": "2026-11-27T16:41:59+00:00",
+   "story": null,
+   "curated": false
+  },
+  {
+   "id": "qaUIUNzijCg",
    "source": "Brut",
-   "title": "À Pompéi, des archéologues ont découvert 250 kilos d’excréments figés depuis l'éruption du Vésuve.",
-   "published": "2026-11-27T06:30:42+00:00",
+   "title": "Des centaines de milliers d'Américains ont fêté Thanksgiving dans le noir.",
+   "published": "2026-11-27T16:32:46+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "6tsYu45rNIs",
-   "source": "France 24",
-   "title": "Trappes : un mois après, des mères se confient",
-   "published": "2026-11-27T06:00:34+00:00",
+   "id": "MeW3pFdeLpU",
+   "source": "TF1 INFO",
+   "title": "On est monté à bord du nouveau navire MSC World Asia !",
+   "published": "2026-11-27T16:32:35+00:00",
    "story": null,
    "curated": false
   },
   {
-   "id": "Z7u5ysmyQOU",
-   "source": "France Culture",
-   "title": "La jeunesse est-elle engagée ?",
-   "published": "2026-11-27T06:00:24+00:00",
+   "id": "_J9-01QLbdE",
+   "source": "euronews",
+   "title": "La reprise post-Brexit des relations commerciales entre l'UE et Londres \"aurait pu aller plus loin\"",
+   "published": "2026-11-27T16:31:59+00:00",
    "story": null,
    "curated": false
   }
