@@ -257,6 +257,45 @@ window.SCOOP_DAYS['2026-11-28'] = {
           "name": "France 24",
           "url": "https://www.france24.com/fr/am%C3%A9riques/20261128-l-arm%C3%A9e-am%C3%A9ricaine-affirme-que-ses-syst%C3%A8mes-informatiques-sont-s%C3%A9curis%C3%A9s-apr%C3%A8s-une-possible-cyberattaque", titre: 'L\'armée américaine affirme que ses systèmes informatiques sont sécurisés, après une possible cyberattaque', extrait: 'L’agence Reuters, puis NBC News citant un responsable anonyme, ont avancé vendredi que le cloud de l’armée de l’air avait été piraté, exposant possiblement "des informations militaires sensibles". L\'armée américaine a réagi, promettant que ...' }
       ]
+    },
+    {
+      "tag": "Société",
+      "title": "Violences faites aux femmes : nouvelle journée de manifestations dans une trentaine de villes",
+      "sujet": "Des cortèges ont lieu samedi, trois jours après la journée internationale de lutte contre les violences faites aux femmes",
+      "text": "Des manifestations sont prévues samedi 28 novembre dans **plus d'une trentaine de villes**, dont Paris, Lille, Lyon et Marseille, dans le sillage de la **journée internationale de lutte contre les violences faites aux femmes** du 25 novembre. À Paris, les associations féministes défileront dans **deux cortèges distincts**, faute d'avoir pu surmonter leurs divisions. RFI précise que la journée constitue aussi l'**acte VII** de la mobilisation contre la vie chère.",
+      "why": "Le sujet mêle mobilisation sociale et divisions du mouvement féministe : l'angle (unité, désaccords, revendications) change selon la rédaction.",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/societe/article/2026/11/27/lutte-contre-les-violences-faites-aux-femmes-les-associations-feministes-defileront-dans-deux-corteges-distincts-le-28-novembre-a-paris_6815914_3224.html", titre: 'Manifestation du 28 novembre contre les violences faites aux femmes : à Paris, les associations féministes défileront dans deux cortèges distincts', extrait: 'Alors que les collectifs et organisations féministes affichaient jusqu’ici un front uni lors de cette manifestation organisée chaque année, ils n’ont pu, cette fois, passer outre les divisions.' },
+        {
+          "name": "franceinfo",
+          "url": "https://www.franceinfo.fr/societe/manifestations/direct-manifestations-nouvelle-journee-de-mobilisation-samedi-notamment-contre-les-violences-faites-aux-femmes_8304345.html", titre: 'Manifestations : nouvelle journée de mobilisation samedi, notamment contre les violences faites aux femmes', extrait: "Prévues dans plus d'une trentaine de villes, dont Paris, Lille, Lyon et Marseille, ces manifestations sont organisées dans le sillage de la journée internationale de lutte contre les violences faites aux femmes." },
+        {
+          "name": "Libération",
+          "url": "https://www.liberation.fr/societe/droits-des-femmes/un-raz-de-maree-feministe-nouvelle-journee-de-mobilisation-en-france-sous-le-signe-des-violences-faites-aux-femmes-20261128_MDA2BP5B5RF3RMNCM3MB7G5ANQ/", titre: '«Un raz de marée féministe» : nouvelle journée de mobilisation en France, sous le signe des violences faites aux femmes', extrait: 'De multiples appels à manifester ont de nouveau été lancés pour ce samedi 28 novembre dans une trentaine de villes, trois jours après la journée internationale de lutte contre les violences faites aux femmes.' },
+        {
+          "name": "RFI",
+          "url": "https://www.rfi.fr/fr/france/20261128-france-la-lutte-contre-les-violences-sexuelles-rallie-l-acte-vii-de-la-mobilisation-sociale", titre: "France: la lutte contre les violences sexuelles rallie l'acte VII de la mobilisation sociale", extrait: "En France, journée de mobilisation ce samedi 28 novembre 2026. L'acte VII des manifestations contre la vie chère va se tenir à travers le pays." }
+      ]
+    },
+    {
+      "tag": "Politique",
+      "title": "Présidentielle 2027 : à Berlin, Mélenchon se défend de germanophobie",
+      "sujet": "Le candidat de La France insoumise s'exprime en Allemagne sur le réarmement et la Chine",
+      "text": "En visite à **Berlin** pour présenter l'un de ses ouvrages, **Jean-Luc Mélenchon**, candidat LFI à la présidentielle de 2027, a nié tout sentiment anti-allemand, tout en reprenant ses critiques contre le **réarmement** du pays et son modèle **ordolibéral**. Selon Le Figaro, il a aussi promis de « ne pas aider les Américains à faire la guerre aux Chinois » et d'entamer « immédiatement » des discussions avec **Pékin** s'il est élu.",
+      "why": "La campagne de 2027 se joue aussi à l'étranger : les propos d'un candidat en déplacement sont analysés pour sa politique européenne et internationale.",
+      "sources": [
+        {
+          "name": "Le Monde",
+          "url": "https://www.lemonde.fr/international/article/2026/11/28/a-berlin-jean-luc-melenchon-se-defend-de-germanophobie-souvent-nous-sommes-jaloux-mais-nous-ne-le-disons-pas_6816060_3210.html", titre: 'Présidentielle 2027 : Jean-Luc Mélenchon, en visite à Berlin, se défend de germanophobie : « Souvent nous sommes jaloux, mais nous ne le disons pas »', extrait: 'Venu dans la capitale allemande présenter l’un de ses ouvrages, le candidat LFI à l’élection présidentielle a nié tout sentiment anti-allemand. Tout en reprenant ses accusations contre le réarmement du pays et son modèle ordolibéral.' },
+        {
+          "name": "Le Figaro",
+          "url": "https://www.lefigaro.fr/elections/presidentielles/en-direct-presidentielle-2027-jean-luc-melenchon-promet-de-ne-pas-aider-les-americains-a-faire-la-guerre-aux-chinois-20261128", titre: 'EN DIRECT - Présidentielle 2027 : Jean-Luc Mélenchon promet de «ne pas aider les Américains à faire la guerre aux Chinois»', extrait: 'Le leader insoumis a déclaré vendredi à Berlin vouloir entamer «immédiatement» des discussions avec Pékin en cas de victoire à la présidentielle de 2027.' },
+        {
+          "name": "20 Minutes",
+          "url": "https://www.20minutes.fr/politique/4266444-20261128-direct-presidentielle-2027-plan-pen-outre-mer-melenchon-veut-nouvelle-relation-franco-allemande", titre: 'EN DIRECT Présidentielle 2027 : Le plan de Le Pen pour l’outre-mer, Mélenchon veut une nouvelle relation franco-allemande…', extrait: 'Suivez avec nous les informations de ce samedi 28 novembre concernant la campagne présidentielle 2027' }
+      ]
     }
   ],
   "shorts": [],
@@ -764,6 +803,20 @@ window.SCOOP_DAYS['2026-11-28'] = {
           ]
         }
       ]
+    },
+    {
+      "title": "⚡ Flash de 11 h",
+      "icon": "⚡",
+      "desc": "Mise à jour",
+      "exercises": [
+        {"t":"qcm","q":"Dans combien de villes des manifestations sont-elles prévues samedi 28 novembre, notamment contre les violences faites aux femmes ?","c":["Plus d'une trentaine","Une dizaine","Plus d'une centaine","Seulement Paris"],"a":0,"x":"franceinfo et Libération évoquent une trentaine de villes, dont Paris, Lille, Lyon et Marseille."},
+        {"t":"vf","q":"À Paris, les associations féministes défilent dans un cortège unique.","a":false,"x":"Le Monde : elles défileront dans deux cortèges distincts, faute d'avoir surmonté leurs divisions."},
+        {"t":"qcm","q":"Dans quelle ville Jean-Luc Mélenchon s'est-il exprimé en se défendant de germanophobie ?","c":["Berlin","Bruxelles","Vienne","Rome"],"a":0,"x":"Le Monde, Le Figaro et 20 Minutes rapportent sa visite à Berlin."},
+        {"t":"vf","q":"Selon Le Figaro, Jean-Luc Mélenchon veut entamer « immédiatement » des discussions avec Pékin s'il est élu en 2027.","a":true,"x":"Il promet aussi de « ne pas aider les Américains à faire la guerre aux Chinois »."},
+        {"t":"input","q":"Quel modèle économique allemand Jean-Luc Mélenchon critique-t-il, en plus du réarmement ? (un mot : o…)","a":["ordolibéral","ordolibéralisme"],"x":"Le Monde : il reprend ses accusations contre le réarmement et le modèle ordolibéral de l'Allemagne."},
+        {"t":"write","max":80,"q":"🏷️ Titre","src":"Dépêche :\n\nDes manifestations sont prévues samedi dans plus d'une trentaine de villes en France, dont Paris, Lille, Lyon et Marseille, notamment contre les violences faites aux femmes. À Paris, les associations féministes défileront dans deux cortèges distincts.\n\nÉcris un **titre** de 80 signes maximum.","model":"Violences faites aux femmes : manifestations dans une trentaine de villes samedi","crit":["80 signes maximum","Le sujet (violences faites aux femmes) et le moment (samedi) sont clairs","Un verbe ou un fait précis, sans opinion","Pas d'information absente de la dépêche"]}
+      ]
     }
-  ]
+  ],
+  "updates": [{ "at": "11:00", "stories": [10, 11] }]
 };
